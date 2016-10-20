@@ -24,5 +24,17 @@ namespace CaveAVin
         {
             InitializeComponent();
         }
+
+        private void initBDD()
+        {
+            // paramètres de la connexion
+            DAO.BDD.Instance.Connexion.ConnectionString =
+                "Database=WineFinder;DataSource=137.74.233.210;User Id=user; Password=user";
+
+            // crée les objets DAO. pour lire la base
+            DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
+            DAO.CasierDAO daoCasier = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
+
+        }
     }
 }
