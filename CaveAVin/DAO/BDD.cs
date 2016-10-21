@@ -10,7 +10,7 @@ namespace DAO
 {
     public class BDD
     {
-        // this is a teste
+        
         private static BDD instance;
         private BDD()
         {
