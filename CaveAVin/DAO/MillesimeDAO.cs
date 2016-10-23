@@ -1,53 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Metier;
-using System.Data;
-using System.Diagnostics;
 
 namespace DAO
 {
-    public class CasierDAO:Metier.ICasierDAO
+    class MillesimeDAO:Metier.IMillesimeDAO
     {
         private IDbConnection con;
         /// <summary>
         /// Initialise l'objet DAO
         /// </summary>
         /// <param name="c">la connexion à utiliser</param>
-        public CasierDAO(IDbConnection c)
+        public MillesimeDAO(IDbConnection c)
         {
             Debug.Assert(c != null);
             con = c;
         }
 
-        public Casier Chercher(int ID)
+        public Millesime Chercher(int ID)
         {
             throw new NotImplementedException();
         }
 
-        public void Créer(Casier p)
+        public void Créer(Millesime p)
         {
             throw new NotImplementedException();
         }
 
-        public Casiers Lister()
+        public Millesimes Lister()
         {
             throw new NotImplementedException();
         }
 
-        public void Relire(Casier p)
+        public void Relire(Millesime p)
         {
             throw new NotImplementedException();
         }
 
-        public void Sauver(Casier p)
+        public void Sauver(Millesime p)
         {
             throw new NotImplementedException();
         }
 
-        public void Supprimer(Casier p)
+        public void Supprimer(Millesime p)
         {
             throw new NotImplementedException();
         }

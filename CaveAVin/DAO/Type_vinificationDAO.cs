@@ -9,45 +9,45 @@ using System.Diagnostics;
 
 namespace DAO
 {
-    public class CasierDAO:Metier.ICasierDAO
+    class Type_vinificationDAO:Metier.IType_vinificationDAO
     {
         private IDbConnection con;
         /// <summary>
         /// Initialise l'objet DAO
         /// </summary>
         /// <param name="c">la connexion à utiliser</param>
-        public CasierDAO(IDbConnection c)
+        public Type_vinificationDAO(IDbConnection c)
         {
             Debug.Assert(c != null);
             con = c;
         }
 
-        public Casier Chercher(int ID)
+        public Type_vinification Chercher(int ID)
         {
             throw new NotImplementedException();
         }
 
-        public void Créer(Casier p)
+        public void Créer(Type_vinification p)
         {
             throw new NotImplementedException();
         }
 
-        public Casiers Lister()
+        public Type_vinifications Lister()
         {
             throw new NotImplementedException();
         }
 
-        public void Relire(Casier p)
+        public void Relire(Type_vinification p)
         {
             throw new NotImplementedException();
         }
 
-        public void Sauver(Casier p)
+        public void Sauver(Type_vinification p)
         {
             throw new NotImplementedException();
         }
 
-        public void Supprimer(Casier p)
+        public void Supprimer(Type_vinification p)
         {
             throw new NotImplementedException();
         }

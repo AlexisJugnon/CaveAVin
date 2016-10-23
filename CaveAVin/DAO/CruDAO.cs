@@ -1,53 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Metier;
-using System.Data;
-using System.Diagnostics;
 
 namespace DAO
 {
-    public class CasierDAO:Metier.ICasierDAO
+    class CruDAO:Metier.ICruDAO
     {
         private IDbConnection con;
         /// <summary>
         /// Initialise l'objet DAO
         /// </summary>
         /// <param name="c">la connexion à utiliser</param>
-        public CasierDAO(IDbConnection c)
+        public CruDAO(IDbConnection c)
         {
             Debug.Assert(c != null);
             con = c;
         }
 
-        public Casier Chercher(int ID)
+        public Cru Chercher(int ID)
         {
             throw new NotImplementedException();
         }
 
-        public void Créer(Casier p)
+        public void Créer(Cru p)
         {
             throw new NotImplementedException();
         }
 
-        public Casiers Lister()
+        public Crus Lister()
         {
             throw new NotImplementedException();
         }
 
-        public void Relire(Casier p)
+        public void Relire(Cru p)
         {
             throw new NotImplementedException();
         }
 
-        public void Sauver(Casier p)
+        public void Sauver(Cru p)
         {
             throw new NotImplementedException();
         }
 
-        public void Supprimer(Casier p)
+        public void Supprimer(Cru p)
         {
             throw new NotImplementedException();
         }

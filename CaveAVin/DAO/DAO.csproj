@@ -41,10 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppelationDAO.cs" />
     <Compile Include="BDD.cs" />
     <Compile Include="BouteilleDAO.cs" />
     <Compile Include="CasierDAO.cs" />
+    <Compile Include="CaveDAO.cs" />
+    <Compile Include="ContenanceDAO.cs" />
+    <Compile Include="CruDAO.cs" />
+    <Compile Include="DomaineDAO.cs" />
+    <Compile Include="MillesimeDAO.cs" />
+    <Compile Include="PaysDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegionDAO.cs" />
+    <Compile Include="TypeDAO.cs" />
+    <Compile Include="Type_vinificationDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Metier\Metier.csproj">

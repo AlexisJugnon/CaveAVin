@@ -55,6 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controleur.cs" />
+    <Compile Include="Modele.cs" />
+    <Compile Include="Observateur.cs" />
+    <Compile Include="Sujet.cs" />
+    <Compile Include="Vue.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

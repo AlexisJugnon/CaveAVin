@@ -9,45 +9,45 @@ using System.Diagnostics;
 
 namespace DAO
 {
-    public class CasierDAO:Metier.ICasierDAO
+    class ContenanceDAO:Metier.IContenanceDAO
     {
         private IDbConnection con;
         /// <summary>
         /// Initialise l'objet DAO
         /// </summary>
         /// <param name="c">la connexion à utiliser</param>
-        public CasierDAO(IDbConnection c)
+        public ContenanceDAO(IDbConnection c)
         {
             Debug.Assert(c != null);
             con = c;
         }
 
-        public Casier Chercher(int ID)
+        public Contenance Chercher(int ID)
         {
             throw new NotImplementedException();
         }
 
-        public void Créer(Casier p)
+        public void Créer(Contenance p)
         {
             throw new NotImplementedException();
         }
 
-        public Casiers Lister()
+        public Contenances Lister()
         {
             throw new NotImplementedException();
         }
 
-        public void Relire(Casier p)
+        public void Relire(Contenance p)
         {
             throw new NotImplementedException();
         }
 
-        public void Sauver(Casier p)
+        public void Sauver(Contenance p)
         {
             throw new NotImplementedException();
         }
 
-        public void Supprimer(Casier p)
+        public void Supprimer(Contenance p)
         {
             throw new NotImplementedException();
         }

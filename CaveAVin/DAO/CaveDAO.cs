@@ -1,53 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Metier;
-using System.Data;
-using System.Diagnostics;
 
 namespace DAO
 {
-    public class CasierDAO:Metier.ICasierDAO
+    class CaveDAO:Metier.ICaveDAO
     {
         private IDbConnection con;
         /// <summary>
         /// Initialise l'objet DAO
         /// </summary>
         /// <param name="c">la connexion à utiliser</param>
-        public CasierDAO(IDbConnection c)
+        public CaveDAO(IDbConnection c)
         {
             Debug.Assert(c != null);
             con = c;
         }
 
-        public Casier Chercher(int ID)
+        public Cave Chercher(int ID)
         {
             throw new NotImplementedException();
         }
 
-        public void Créer(Casier p)
+        public void Créer(Cave p)
         {
             throw new NotImplementedException();
         }
 
-        public Casiers Lister()
+        public Caves Lister()
         {
             throw new NotImplementedException();
         }
 
-        public void Relire(Casier p)
+        public void Relire(Cave p)
         {
             throw new NotImplementedException();
         }
 
-        public void Sauver(Casier p)
+        public void Sauver(Cave p)
         {
             throw new NotImplementedException();
         }
 
-        public void Supprimer(Casier p)
+        public void Supprimer(Cave p)
         {
             throw new NotImplementedException();
         }
