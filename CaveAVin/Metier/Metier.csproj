@@ -68,6 +68,7 @@
     <Compile Include="IType_vinificationDAO.cs" />
     <Compile Include="Millesime.cs" />
     <Compile Include="Millesimes.cs" />
+    <Compile Include="Modification.cs" />
     <Compile Include="Pays.cs" />
     <Compile Include="Pays2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
