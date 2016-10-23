@@ -10,6 +10,7 @@ namespace DAO
 {
     public class BDD
     {
+        
         private static BDD instance;
         private BDD()
         {
