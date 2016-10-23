@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaveAVin", "CaveAVin\CaveAVin.csproj", "{51A94262-EE66-48F8-8DC5-4F51E222109B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IHM", "CaveAVin\IHM.csproj", "{51A94262-EE66-48F8-8DC5-4F51E222109B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAO", "DAO\DAO.csproj", "{C4123C0E-BFC0-4557-8BD4-04F4C9C3707B}"
 EndProject

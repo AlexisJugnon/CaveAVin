@@ -9,7 +9,11 @@ using System.Diagnostics;
 
 namespace DAO
 {
-    public class BouteilleDAO
+    /// <summary>
+    /// Implémentation du DAO produit en utilisant un SGBD
+    /// </summary>
+    /// <see cref="Bouteille"/> 
+    public class BouteilleDAO : Metier.IBouteilleDAO
     {
         private IDbConnection con;
         /// <summary>
@@ -20,6 +24,36 @@ namespace DAO
         {
             Debug.Assert(c != null);
             con = c;
+        }
+
+        public Bouteille Chercher(int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Créer(Bouteille p)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Bouteille Lister()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Relire(Bouteille p)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Sauver(Bouteille p)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Supprimer(Bouteille p)
+        {
+            throw new NotImplementedException();
         }
     }
 }
