@@ -8,6 +8,7 @@ namespace Metier
 {
     public interface IAppelationDAO
     {
+
         /// <summary>
         /// Ajoute le appelation dans la base
         /// </summary>
