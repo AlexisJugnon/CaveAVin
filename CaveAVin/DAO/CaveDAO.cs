@@ -24,36 +24,126 @@ namespace DAO
 
         public Cave Chercher(int ID)
         {
-            throw new NotImplementedException();
+            Cave c = null;
+
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Cave WHERE IdCave=" + ID.ToString();
+                IDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    c = reader2Cave(reader);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return c;
+
         }
 
-        public void Créer(Cave p)
+        public void Créer(Cave c)
         {
-            throw new NotImplementedException();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "INSERT INTO Cave(NomCave) VALUES('" + c.Nom + "');";
+                com.ExecuteNonQuery();
+                com.CommandText = "SELECT LAST_INSERT_ID() FROM Cave;";
+                IDataReader reader = com.ExecuteReader();
+                int id = 1;
+                if (reader.Read())
+                    id = Convert.ToInt32(reader[0]);
+                c.Id = id;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
         public Caves Lister()
         {
-            throw new NotImplementedException();
+            Caves liste = new Caves();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Cave";
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Cave c = reader2Cave(reader);
+                    liste.Ajouter(c);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return liste;
         }
 
-        public void Relire(Cave p)
+        public void Relire(Cave c)
         {
-            throw new NotImplementedException();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Cave WHERE IdCave=" + c.Id.ToString();
+                IDataReader reader = com.ExecuteReader();
+                if (reader.Read())
+                {
+                    c.Nom = reader["NomCave"].ToString();
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
-        public void Sauver(Cave p)
+        public void Sauver(Cave c)
         {
-            throw new NotImplementedException();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "UPDATE Cave SETNomCave='" + c.Nom + "' WHERE IdCave=" + c.Id.ToString();
+                com.ExecuteNonQuery();
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
-        public void Supprimer(Cave p)
+        public void Supprimer(Cave c)
         {
-            throw new NotImplementedException();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "DELETE FROM Cave WHERE IdCave=" + c.Id.ToString();
+                com.ExecuteNonQuery();
+            }
+            finally
+            {
+                con.Close();
+            }
         }
+
         private Cave reader2Cave(IDataReader reader)
         {
-            return null;
+            Cave c = new Cave();
+            c.Id = Convert.ToInt32(reader["IdCave"]);
+            c.Nom = reader["NomCave"].ToString();
+            return c;
         }
     }
 }
