@@ -6,11 +6,39 @@ using System.Threading.Tasks;
 
 namespace Metier
 {
-    public class Contenance
+    public class Contenance : Modification
     {
         #region attributs
         private int id;
         private int valeur;
+        private List<Bouteille> bouteilles = new List<Bouteille>();
+        #endregion
+
+        #region fonctions
+
+        public void Ajouter(Bouteille b)
+        {
+            bouteilles.Add(b);
+        }
+
+        public void Ajouter(Bouteilles b)
+        {
+            foreach (Bouteille bt in b.Lister())
+            {
+                bt.Contenance = this;
+                Ajouter(bt);
+            }
+        }
+
+        public void Supprimer(Bouteille b)
+        {
+            bouteilles.Remove(b);
+        }
+
+        public Bouteille[] Lister()
+        {
+            return bouteilles.ToArray();
+        }
         #endregion
 
         #region propriétés
@@ -37,6 +65,7 @@ namespace Metier
                 valeur = value;
             }
         }
+
         #endregion
     }
 }

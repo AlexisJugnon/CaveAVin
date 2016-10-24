@@ -24,9 +24,15 @@ namespace Metier
             contenances.Add(p);
         }
 
-        public void Ajouter(Bouteille b) { }
+        public void Ajouter(Bouteille b)
+        {
+            b.Casier.Ajouter(b);
+        }
 
-        public void supprimer(Contenance p) { }
+        public void supprimer(Contenance p)
+        {
+            contenances.Remove(p);
+        }
 
         /// <summary>
         /// Fournit l'ensemble des contenances

@@ -8,7 +8,7 @@ namespace Metier
 {
     public class Pays2
     {
-        private List<Pays> payss = new List<Pays>();
+        private List<Pays> pays = new List<Pays>();
 
         #region opérations
 
@@ -19,14 +19,20 @@ namespace Metier
         /// <exception cref="Exception">Si le pays existe déjà</exception>
         public void Ajouter(Pays p)
         {
-            if (payss.Contains(p))
+            if (pays.Contains(p))
                 throw new Exception("Le pays existe déjà");
-            payss.Add(p);
+            pays.Add(p);
         }
 
-        public void Ajouter(Bouteille b) { }
+        public void Ajouter(Region r)
+        {
+            r.Pays.Ajouter(r);
+        }
 
-        public void supprimer(Pays p) { }
+        public void supprimer(Pays p)
+        {
+            pays.Remove(p);
+        }
 
         /// <summary>
         /// Fournit l'ensemble des payss
@@ -34,7 +40,7 @@ namespace Metier
         /// <returns>un tableau des payss</returns>
         public Pays[] Lister()
         {
-            return payss.ToArray();
+            return pays.ToArray();
         }
         #endregion
     }

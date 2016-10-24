@@ -43,7 +43,7 @@ namespace Metier
         /// Liste tous les payss
         /// </summary>
         /// <returns></returns>
-        Pays Lister();
+        Pays2 Lister();
 
     }
 }

@@ -11,6 +11,7 @@ namespace Metier
         #region attributs
         private int id;
         private string nomRegion;
+        private Pays pays;
         #endregion
 
         #region propriétés
@@ -36,6 +37,16 @@ namespace Metier
                 nomRegion = value;
             }
         }
-        #endregion
-    }
+        public Pays Pays
+        {
+            get
+            {
+                return pays;
+            }
+            set
+            {
+                pays = value;
+            }
+            #endregion
+        }
 }
