@@ -13,14 +13,6 @@ namespace Metier
         #region opérations
 
         /// <summary>
-        /// Supprime tous les crus
-        /// </summary>
-        public void Vider()
-        {
-            crus.Clear();
-        }
-
-        /// <summary>
         /// Ajoute un cru à la liste
         /// </summary>
         /// <param name="p"></param>
@@ -31,6 +23,10 @@ namespace Metier
                 throw new Exception("Le cru existe déjà");
             crus.Add(p);
         }
+
+        public void Ajouter(Bouteille b) { }
+
+        public void supprimer(Cru p) { }
 
         /// <summary>
         /// Fournit l'ensemble des crus

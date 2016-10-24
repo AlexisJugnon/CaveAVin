@@ -13,14 +13,6 @@ namespace Metier
         #region opérations
 
         /// <summary>
-        /// Supprime tous les contenances
-        /// </summary>
-        public void Vider()
-        {
-            contenances.Clear();
-        }
-
-        /// <summary>
         /// Ajoute un contenance à la liste
         /// </summary>
         /// <param name="p"></param>
@@ -31,6 +23,10 @@ namespace Metier
                 throw new Exception("Le contenance existe déjà");
             contenances.Add(p);
         }
+
+        public void Ajouter(Bouteille b) { }
+
+        public void supprimer(Contenance p) { }
 
         /// <summary>
         /// Fournit l'ensemble des contenances

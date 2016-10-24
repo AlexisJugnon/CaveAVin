@@ -13,14 +13,6 @@ namespace Metier
         #region opérations
 
         /// <summary>
-        /// Supprime tous les payss
-        /// </summary>
-        public void Vider()
-        {
-            payss.Clear();
-        }
-
-        /// <summary>
         /// Ajoute un pays à la liste
         /// </summary>
         /// <param name="p"></param>
@@ -31,6 +23,10 @@ namespace Metier
                 throw new Exception("Le pays existe déjà");
             payss.Add(p);
         }
+
+        public void Ajouter(Bouteille b) { }
+
+        public void supprimer(Pays p) { }
 
         /// <summary>
         /// Fournit l'ensemble des payss

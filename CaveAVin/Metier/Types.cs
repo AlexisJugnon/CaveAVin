@@ -13,14 +13,6 @@ namespace Metier
         #region opérations
 
         /// <summary>
-        /// Supprime tous les produits
-        /// </summary>
-        public void Vider()
-        {
-            types.Clear();
-        }
-
-        /// <summary>
         /// Ajoute un produit à la liste
         /// </summary>
         /// <param name="p"></param>
@@ -32,6 +24,9 @@ namespace Metier
             types.Add(p);
         }
 
+        public void Ajouter(Bouteille b) { }
+
+        public void supprimer(Type p) { }
         /// <summary>
         /// Fournit l'ensemble des produits
         /// </summary>

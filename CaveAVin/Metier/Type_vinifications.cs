@@ -13,14 +13,6 @@ namespace Metier
         #region opérations
 
         /// <summary>
-        /// Supprime tous les type_vinifications
-        /// </summary>
-        public void Vider()
-        {
-            type_vinifications.Clear();
-        }
-
-        /// <summary>
         /// Ajoute un type_vinification à la liste
         /// </summary>
         /// <param name="p"></param>
@@ -31,6 +23,13 @@ namespace Metier
                 throw new Exception("Le type_vinification existe déjà");
             type_vinifications.Add(p);
         }
+
+        public void Ajouter(Bouteille b)
+        {
+
+        }
+
+        public void supprimer(Type_vinification p) { }
 
         /// <summary>
         /// Fournit l'ensemble des type_vinifications

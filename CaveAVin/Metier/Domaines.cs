@@ -13,14 +13,6 @@ namespace Metier
         #region opérations
 
         /// <summary>
-        /// Supprime tous les domaines
-        /// </summary>
-        public void Vider()
-        {
-            domaines.Clear();
-        }
-
-        /// <summary>
         /// Ajoute un domaine à la liste
         /// </summary>
         /// <param name="p"></param>
@@ -31,6 +23,10 @@ namespace Metier
                 throw new Exception("Le domaine existe déjà");
             domaines.Add(p);
         }
+
+        public void Ajouter(Bouteille b) { }
+
+        public void supprimer(Domaine p) { }
 
         /// <summary>
         /// Fournit l'ensemble des domaines

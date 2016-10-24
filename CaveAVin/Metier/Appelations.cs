@@ -13,14 +13,6 @@ namespace Metier
         #region opérations
 
         /// <summary>
-        /// Supprime tous les appelations
-        /// </summary>
-        public void Vider()
-        {
-            appelations.Clear();
-        }
-
-        /// <summary>
         /// Ajoute un appelation à la liste
         /// </summary>
         /// <param name="p"></param>
@@ -31,6 +23,10 @@ namespace Metier
                 throw new Exception("Le appelation existe déjà");
             appelations.Add(p);
         }
+
+        public void Ajouter(Bouteille b) { }
+
+        public void supprimer(Appelation p) { }
 
         /// <summary>
         /// Fournit l'ensemble des appelations
