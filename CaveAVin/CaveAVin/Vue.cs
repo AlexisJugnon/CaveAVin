@@ -9,9 +9,9 @@ namespace CaveAVin
     public class Vue
     {
         public Vue(Controleur c, Modele m) { }
-        public void AfficherBouteille(Bouteille b) { }
-        public void AffciherCasier(Casier c) { }
+        public void AfficherBouteille(Metier.Bouteille b) { }
+        public void AffciherCasier(Metier.Casier c) { }
         public void ChercherBouteille() { }
-        public void AfficherInfoBouteille(Bouteille b) { }
+        public void AfficherInfoBouteille(Metier.Bouteille b) { }
     }
 }

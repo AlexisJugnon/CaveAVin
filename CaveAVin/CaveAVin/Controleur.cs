@@ -9,15 +9,15 @@ namespace CaveAVin
     public class Controleur
     {
         public Controleur(Modele m) { }
-        public void setBouteille(Bouteille b) { }
-        public void setCasier(Casier c) { }
-        public void setCave(Cave c) { }
-        public void newCasier(Casier c) { }
-        public void newBouteille(Bouteille b) { }
-        public void newCave(Cave c) { }
-        public void supprCasier(Casier c) { }
-        public void supprBouteille(Bouteille b) { }
-        public void supprCave(Cave c) { }
+        public void setBouteille(Metier.Bouteille b) { }
+        public void setCasier(Metier.Casier c) { }
+        public void setCave(Metier.Cave c) { }
+        public void newCasier(Metier.Casier c) { }
+        public void newBouteille(Metier.Bouteille b) { }
+        public void newCave(Metier.Cave c) { }
+        public void supprCasier(Metier.Casier c) { }
+        public void supprBouteille(Metier.Bouteille b) { }
+        public void supprCave(Metier.Cave c) { }
 
 
     }

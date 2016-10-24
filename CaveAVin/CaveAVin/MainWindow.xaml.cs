@@ -23,8 +23,12 @@ namespace CaveAVin
         public MainWindow()
         {
             InitializeComponent();
+            initBDD();
         }
 
+        /// <summary>
+        /// Initialise la connexion au SGBDR
+        /// </summary>
         private void initBDD()
         {
             // paramètres de la connexion
@@ -34,6 +38,13 @@ namespace CaveAVin
             // crée les objets DAO. pour lire la base
             DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
             DAO.CasierDAO daoCasier = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
+
+            Metier.Casiers c = daoCasier.Lister();
+            foreach(Metier.Casier ct in c.Lister())
+            {
+                Metier.Bouteilles bout = daoBouteille.Lister(ct);
+                ct.Ajouter(bout);
+            }
 
         }
     }
