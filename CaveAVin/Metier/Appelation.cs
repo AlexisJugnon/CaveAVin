@@ -8,7 +8,7 @@ namespace Metier
 {
     public class Appelation
     {
-        //teste
+        
         #region attributs
         private int id;
         private string nomAppelation;

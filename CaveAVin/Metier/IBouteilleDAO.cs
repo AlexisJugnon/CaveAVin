@@ -11,20 +11,20 @@ namespace Metier
         /// <summary>
         /// Ajoute le bouteille dans la base
         /// </summary>
-        /// <param name="p"></param>
+        /// <param name="p">La bouteille à ajouter</param>
     void Créer(Bouteille p);
 
     /// <summary>
     /// Charge le bouteille depuis la base
     /// </summary>
-    /// <param name="p"></param>
+    /// <param name="p">La bouteille</param>
     void Relire(Bouteille p);
 
         /// <summary>
         /// Cherche la bouteille à partir de son ID
         /// </summary>
-        /// <param name="ID"></param>
-        /// <returns></returns>
+        /// <param name="ID">l'identifiant</param>
+        /// <returns>La bouteille chargée, ou null si inexistante</returns>
     Bouteille Chercher(int ID);
 
     /// <summary>
@@ -42,8 +42,8 @@ namespace Metier
         /// <summary>
         /// Liste toute les bouteilles
         /// </summary>
-        /// <returns></returns>
-    Bouteille Lister();
+        /// <returns>Les Bouteilles existantes</returns>
+    Bouteilles Lister();
 
 }
 }

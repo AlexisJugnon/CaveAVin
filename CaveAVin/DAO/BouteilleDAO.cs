@@ -36,7 +36,7 @@ namespace DAO
             throw new NotImplementedException();
         }
 
-        public Bouteille Lister()
+        public Bouteilles Lister()
         {
             throw new NotImplementedException();
         }
@@ -55,5 +55,6 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
+
     }
 }

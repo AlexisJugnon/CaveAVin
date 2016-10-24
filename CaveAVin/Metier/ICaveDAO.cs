@@ -11,20 +11,20 @@ namespace Metier
         /// <summary>
         /// Ajoute le cave dans la base
         /// </summary>
-        /// <param name="p"></param>
+        /// <param name="p">La cave à ajouter</param>
         void Créer(Cave p);
 
         /// <summary>
         /// Charge le cave depuis la base
         /// </summary>
-        /// <param name="p"></param>
+        /// <param name="p">La cave</param>
         void Relire(Cave p);
 
         /// <summary>
         /// Cherche le cave à partir de son ID
         /// </summary>
-        /// <param name="ID"></param>
-        /// <returns></returns>
+        /// <param name="ID">l'identifiant</param>
+        /// <returns>la cave chargée, ou null si inexistante</returns>
         Cave Chercher(int ID);
 
         /// <summary>

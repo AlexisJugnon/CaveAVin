@@ -11,20 +11,20 @@ namespace Metier
         /// <summary>
         /// Ajoute le casier dans la base
         /// </summary>
-        /// <param name="p"></param>
+        /// <param name="p">Le casier à ajouter</param>
         void Créer(Casier p);
 
         /// <summary>
         /// Charge le casier depuis la base
         /// </summary>
-        /// <param name="p"></param>
+        /// <param name="p">Le casier</param>
         void Relire(Casier p);
 
         /// <summary>
         /// Cherche le casier à partir de son ID
         /// </summary>
-        /// <param name="ID"></param>
-        /// <returns></returns>
+        /// <param name="ID">l'identifiant</param>
+        /// <returns>Le casier chargée, ou null si inexistant</returns>
         Casier Chercher(int ID);
 
         /// <summary>
