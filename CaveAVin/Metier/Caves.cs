@@ -13,23 +13,25 @@ namespace Metier
         #region opérations
 
         /// <summary>
-        /// Supprime tous les caves
-        /// </summary>
-        public void Vider()
-        {
-            caves.Clear();
-        }
-
-        /// <summary>
         /// Ajoute un cave à la liste
         /// </summary>
         /// <param name="p"></param>
         /// <exception cref="Exception">Si le cave existe déjà</exception>
-        public void Ajouter(Cave p)
+        public void Ajouter(Cave c)
         {
-            if (caves.Contains(p))
+            if (caves.Contains(c))
                 throw new Exception("Le cave existe déjà");
-            caves.Add(p);
+            caves.Add(c);
+        }
+
+        public void Ajouter(Casier c)
+        {
+            c.Cave.Ajouter(c);
+        }
+
+        public void Supprimer(Cave c)
+        {
+            caves.Remove(c);
         }
 
         /// <summary>

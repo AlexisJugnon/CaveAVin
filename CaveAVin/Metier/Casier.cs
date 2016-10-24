@@ -6,13 +6,41 @@ using System.Threading.Tasks;
 
 namespace Metier
 {
-    public class Casier
+    public class Casier : Modification
     {
         #region attributs
         private int id;
         private string nom;
         private int largeurX;
         private int largeurY;
+        private Cave cave;
+        private List<Bouteille> bouteilles = new List<Bouteille>();
+        #endregion
+
+        #region opérations
+            public void Ajouter(Bouteille b)
+            {
+                bouteilles.Add(b);
+            }
+
+            public void Ajouter(Bouteilles b)
+            {
+                foreach(Bouteille bt in b.Lister())
+                {
+                    bt.Casier = this;
+                    Ajouter(bt);
+                }
+            }
+
+            public void Supprimer(Bouteille b)
+            {
+                bouteilles.Remove(b);
+            }
+
+            public Bouteille[] Lister()
+            {
+                return bouteilles.ToArray();
+            }
         #endregion
 
         #region proriétés
@@ -58,6 +86,18 @@ namespace Metier
             set
             {
                 largeurY = value;
+            }
+        }
+
+        public Cave Cave
+        {
+            get
+            {
+                return cave;
+            }
+            set
+            {
+                cave = value;
             }
         }
         #endregion

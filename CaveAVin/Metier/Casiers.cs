@@ -11,15 +11,6 @@ namespace Metier
         private List<Casier> casiers = new List<Casier>();
 
         #region opérations
-
-        /// <summary>
-        /// Supprime tous les casiers
-        /// </summary>
-        public void Vider()
-        {
-            casiers.Clear();
-        }
-
         /// <summary>
         /// Ajoute un casier à la liste
         /// </summary>
@@ -30,6 +21,16 @@ namespace Metier
             if (casiers.Contains(p))
                 throw new Exception("Le casier existe déjà");
             casiers.Add(p);
+        }
+
+        public void Ajouter(Bouteille b)
+        {
+            b.Casier.Ajouter(b);
+        }
+
+        public void Supprimer(Casier c)
+        {
+            casiers.Remove(c);
         }
 
         /// <summary>
