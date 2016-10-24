@@ -51,5 +51,9 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
+        private Metier.Type reader2Type(IDataReader reader)
+        {
+            return null;
+        }
     }
 }

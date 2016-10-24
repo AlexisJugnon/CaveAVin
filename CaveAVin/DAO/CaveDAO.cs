@@ -51,5 +51,9 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
+        private Cave reader2Cave(IDataReader reader)
+        {
+            return null;
+        }
     }
 }

@@ -51,5 +51,9 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
+        private Region reader2Region(IDataReader reader)
+        {
+            return null;
+        }
     }
 }

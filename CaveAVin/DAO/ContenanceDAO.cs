@@ -51,5 +51,9 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
+        private Contenance reader2Contenance(IDataReader reader)
+        {
+            return null;
+        }
     }
 }

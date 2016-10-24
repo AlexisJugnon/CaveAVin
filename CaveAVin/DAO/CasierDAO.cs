@@ -51,5 +51,9 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
+        private Casier reader2Casier(IDataReader reader)
+        {
+            return null;
+        }
     }
 }

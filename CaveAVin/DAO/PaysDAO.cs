@@ -51,5 +51,9 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
+        private Pays reader2Pays(IDataReader reader)
+        {
+            return null;
+        }
     }
 }

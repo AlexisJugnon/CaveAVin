@@ -51,5 +51,9 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
+        private Type_vinification reader2Type_vinif(IDataReader reader)
+        {
+            return null;
+        }
     }
 }

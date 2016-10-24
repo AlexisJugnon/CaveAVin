@@ -51,5 +51,9 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
+        private Millesime reader2Millesime(IDataReader reader)
+        {
+            return null;
+        }
     }
 }

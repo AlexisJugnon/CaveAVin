@@ -51,5 +51,9 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
+        private Cru reader2Cru(IDataReader reader)
+        {
+            return null;
+        }
     }
 }
