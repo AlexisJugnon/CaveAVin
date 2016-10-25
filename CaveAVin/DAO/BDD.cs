@@ -14,7 +14,7 @@ namespace DAO
         private static BDD instance;
         private BDD()
         {
-            con = new MySqlConnection();
+            con = new SqlConnection();
         }
         public static BDD Instance
         {

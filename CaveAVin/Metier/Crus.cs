@@ -24,9 +24,15 @@ namespace Metier
             crus.Add(p);
         }
 
-        public void Ajouter(Bouteille b) { }
+        public void Ajouter(Bouteille b)
+        {
+            b.Cru.Ajouter(b);
+        }
 
-        public void supprimer(Cru p) { }
+        public void supprimer(Cru p)
+        {
+            crus.Remove(p);
+        }
 
         /// <summary>
         /// Fournit l'ensemble des crus

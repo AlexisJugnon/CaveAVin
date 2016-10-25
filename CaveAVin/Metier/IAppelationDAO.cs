@@ -10,34 +10,34 @@ namespace Metier
     {
 
         /// <summary>
-        /// Ajoute le appelation dans la base
+        /// Ajoute l'appelation dans la base
         /// </summary>
-        /// <param name="p"></param>
+        /// <param name="p">l'appelation à ajouter dans la base de donées</param>
         void Créer(Appelation p);
 
         /// <summary>
-        /// Charge le appelation depuis la base
+        /// Charge l'appelation depuis la base
         /// </summary>
-        /// <param name="p"></param>
+        /// <param name="p">L'appelation à recuperer à partir de la base de données si elle existe</param>
         void Relire(Appelation p);
 
         /// <summary>
-        /// Cherche le appelation à partir de son ID
+        /// Cherche l'appelation à partir de son ID
         /// </summary>
-        /// <param name="ID"></param>
-        /// <returns></returns>
+        /// <param name="ID">l'identifieant de l'appelation recherchée</param>
+        /// <returns>Retourne l'appelation correspondante à l'Id ou null si aucun résultat</returns>
         Appelation Chercher(int ID);
 
         /// <summary>
-        /// Sauve (met à jour) le appelation dans la base
+        /// Sauve (met à jour) l'appelation dans la base
         /// </summary>
-        /// <param name="p"></param>
+        /// <param name="p">L'appelation à mettre à jour</param>
         void Sauver(Appelation p);
 
         /// <summary>
-        /// Supprime le appelation de la base
+        /// Supprime l'appelation de la base
         /// </summary>
-        /// <param name="p"></param>
+        /// <param name="p">L'appelation à retirer de la base de données</param>
         void Supprimer(Appelation p);
 
         /// <summary>

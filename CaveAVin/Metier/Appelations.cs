@@ -24,9 +24,15 @@ namespace Metier
             appelations.Add(p);
         }
 
-        public void Ajouter(Bouteille b) { }
+        public void Ajouter(Bouteille b)
+        {
+            b.Appelation.Ajouter(b);
+        }
 
-        public void supprimer(Appelation p) { }
+        public void supprimer(Appelation p)
+        {
+            appelations.Remove(p);
+        }
 
         /// <summary>
         /// Fournit l'ensemble des appelations

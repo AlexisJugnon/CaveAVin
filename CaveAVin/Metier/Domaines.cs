@@ -24,9 +24,15 @@ namespace Metier
             domaines.Add(p);
         }
 
-        public void Ajouter(Bouteille b) { }
+        public void Ajouter(Bouteille b)
+        {
+            b.Domaine.Ajouter(b);
+        }
 
-        public void supprimer(Domaine p) { }
+        public void supprimer(Domaine p)
+        {
+            domaines.Remove(p);
+        }
 
         /// <summary>
         /// Fournit l'ensemble des domaines
