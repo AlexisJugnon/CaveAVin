@@ -28,7 +28,7 @@ namespace Metier
         public void Ajouter(Bouteille p)
         {
             if (bouteilles.Contains(p))
-                throw new Exception("Le produit existe déjà");
+                throw new Exception("la bouteille existe déjà");
             bouteilles.Add(p);
         }
 

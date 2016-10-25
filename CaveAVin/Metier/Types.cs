@@ -24,10 +24,15 @@ namespace Metier
             types.Add(p);
         }
 
-        public void Ajouter(Bouteille b) { }
+        public void Ajouter(Bouteille b)
+        {
+            b.Casier.Ajouter(b);
+        }
 
-        public void supprimer(Type p) { }
-        /// <summary>
+        public void supprimer(Type p)
+        {
+            types.Remove(p);
+        }
         /// Fournit l'ensemble des produits
         /// </summary>
         /// <returns>un tableau des produits</returns>

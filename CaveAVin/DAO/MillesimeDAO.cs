@@ -31,7 +31,7 @@ namespace DAO
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM CATEGORIE WHERE IdMillesime=" + ID.ToString();
+                com.CommandText = "SELECT * FROM Millesime WHERE IdMillesime=" + ID.ToString();
                 IDataReader reader = com.ExecuteReader();
 
                 if (reader.Read())
