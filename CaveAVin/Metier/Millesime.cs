@@ -10,7 +10,7 @@ namespace Metier
     {
         #region attributs
         private int id;
-        private String nomMillesime;
+        private string nomMillesime;
         #endregion
 
         #region propriétés
@@ -25,7 +25,7 @@ namespace Metier
                 id = value;
             }
         }
-        public String NomMillesime
+        public string NomMillesime
         {
             get
             {

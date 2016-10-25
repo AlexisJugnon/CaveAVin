@@ -26,10 +26,13 @@ namespace Metier
 
         public void Ajouter(Bouteille b)
         {
-
+            b.Casier.Ajouter(b);
         }
 
-        public void supprimer(Type_vinification p) { }
+        public void Supprimer(Type_vinification p)
+        {
+            type_vinifications.Remove(p);
+        }
 
         /// <summary>
         /// Fournit l'ensemble des type_vinifications

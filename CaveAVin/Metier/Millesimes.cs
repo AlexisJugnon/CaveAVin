@@ -24,14 +24,22 @@ namespace Metier
             millesimes.Add(p);
         }
 
-        public void Ajouter(Bouteille b) { }
+        #warning IBA: voir à quoi sert cette méthode
+        public void Ajouter(Bouteille b)
+        {
+            b.Casier.Ajouter(b);
+        }
 
-        public void supprimer(Millesime p) { }
+        public void Supprimer(Millesime p)
+        {
+            millesimes.Remove(p);
+        }
 
         /// <summary>
         /// Fournit l'ensemble des millesimes
         /// </summary>
         /// <returns>un tableau des millesimes</returns>
+        #warning IBA: pourquoi transformer une liste en tableau?
         public Millesime[] Lister()
         {
             return millesimes.ToArray();

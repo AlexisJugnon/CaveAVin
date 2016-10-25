@@ -24,9 +24,15 @@ namespace Metier
             regions.Add(p);
         }
 
-        public void Ajouter(Bouteille b) { }
+        public void Ajouter(Bouteille b)
+        {
+            b.Casier.Ajouter(b);
+        }
 
-        public void supprimer(Region p) { }
+        public void Supprimer(Region p)
+        {
+            regions.Remove(p);
+        }
 
         /// <summary>
         /// Fournit l'ensemble des regions
