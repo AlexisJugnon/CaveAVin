@@ -41,6 +41,11 @@ namespace Metier
         {
             return casiers.ToArray();
         }
+
+        public void Vider()
+        {
+            casiers.Clear();
+        }
         #endregion
     }
 }

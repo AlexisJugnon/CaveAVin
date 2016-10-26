@@ -198,6 +198,97 @@ namespace Metier
                 type = value;
             }
         }
+
+        public int IdAppelation {
+            get
+            {
+                int id = 0;
+                if (appelation != null)
+                    id = appelation.Id;
+                return id;
+            }
+        }
+
+        public int IdCasier {
+            get
+            {
+                int id = 0;
+                if (casier != null)
+                    id = casier.Id;
+                return id;
+            }
+        }
+
+        public int IdContenance {
+            get
+            {
+                int id = 0;
+                if (contenance != null)
+                    id = contenance.Id;
+                return id;
+            }
+        }
+
+        public int IdCru {
+            get
+            {
+                int id = 0;
+                if (cru != null)
+                    id = cru.Id;
+                return id;
+            }
+        }
+
+        public int IdDomaine {
+            get
+            {
+                int id = 0;
+                if (domaine != null)
+                    id = domaine.Id;
+                return id;
+            }
+        }
+
+        public int IdMillesime {
+            get
+            {
+                int id = 0;
+                if (millesime != null)
+                    id = millesime.Id;
+                return id;
+            }
+        }
+
+        public int IdRegion {
+            get
+            {
+                int id = 0;
+                if (region != null)
+                    id = region.Id;
+                return id;
+            }
+        }
+
+        public int IdType {
+            get
+            {
+                int id = 0;
+                if (type != null)
+                    id = type.Id;
+                return id;
+            }
+        }
+
+        public int IdType_vinification {
+            get
+            {
+                int id = 0;
+                if (type_vinification != null)
+                    id = type_vinification.Id;
+                return id;
+            }
+        }
+
         #endregion
     }
 }
