@@ -45,5 +45,7 @@ namespace Metier
         /// <returns></returns>
         Casiers Lister();
 
+        Casiers Lister(Cave c);
+
     }
 }
