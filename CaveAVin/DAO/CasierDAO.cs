@@ -145,6 +145,8 @@ namespace DAO
             Casier c = new Casier();
             c.Id = Convert.ToInt32(reader["IdCasier"]);
             c.Nom = reader["NomCasier"].ToString();
+            c.LargeurX = Convert.ToInt32(reader["Largeur_X"]);
+            c.LargeurY = Convert.ToInt32(reader["Largeur_Y"]);
             return c;
         }
     }
