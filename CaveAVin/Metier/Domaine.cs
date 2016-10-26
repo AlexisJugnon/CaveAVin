@@ -11,6 +11,7 @@ namespace Metier
         #region attributs
         private int id;
         private string nomDomaine;
+        private List<Bouteille> bouteilles = new List<Bouteille>();
         #endregion
 
         #region propriétés
@@ -33,8 +34,22 @@ namespace Metier
             }
             set
             {
+                if (value == "")
+                    throw new Exception("Domaine vide");
                 nomDomaine = value;
             }
+        }
+        #endregion
+
+        #region opérations
+
+        /// <summary>
+        /// Créer un Domaine
+        /// </summary>
+        /// <param name="n">(facultatif) le nom du domaine</param>
+        public Domaine(string n = "")
+        {
+            nomDomaine = n;
         }
 
         /// <summary>
@@ -56,17 +71,7 @@ namespace Metier
         /// <param name="b">bouteille où l'on doit modifier le domaine</param>
         public void Ajouter(Bouteille b)
         {
-            Bouteilles liste = new Bouteilles();
-            int indexTableau = 0;
-            foreach(Bouteille bouteille in liste.Lister())
-            {
-                if(bouteille.Id == b.Id )
-                {
-                    liste.Lister().SetValue(b,indexTableau);
-                }
-                indexTableau += 1;
-            }
-           
+            bouteilles.Add(b);   
         }
 
         /// <summary>
@@ -75,8 +80,7 @@ namespace Metier
         /// <returns></returns>
         public Bouteille[] Lister()
         {
-            Bouteilles liste  = new Bouteilles();
-            return liste.Lister();
+            return bouteilles.ToArray();
         }
 
         /// <summary>
@@ -85,18 +89,7 @@ namespace Metier
         /// <param name="b"></param>
         public void Supprimer(Bouteille b)
         {
-            Bouteilles liste = new Bouteilles();
-            if (liste.Lister().Contains(b))
-            {
-                foreach (Bouteille bouteille in liste.Lister())
-                {
-                    if(bouteille.Id == b.Id)
-                    {
-                        bouteille.Domaine = null;
-                    }
-
-                }
-            }
+            bouteilles.Remove(b);
         }
         #endregion
     }
