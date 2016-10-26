@@ -24,10 +24,9 @@ namespace Metier
             millesimes.Add(p);
         }
 
-        #warning IBA: voir à quoi sert cette méthode
         public void Ajouter(Bouteille b)
         {
-            b.Casier.Ajouter(b);
+            b.Millesime.Ajouter(b);
         }
 
         public void Supprimer(Millesime p)
@@ -39,7 +38,6 @@ namespace Metier
         /// Fournit l'ensemble des millesimes
         /// </summary>
         /// <returns>un tableau des millesimes</returns>
-        #warning IBA: pourquoi transformer une liste en tableau?
         public Millesime[] Lister()
         {
             return millesimes.ToArray();
