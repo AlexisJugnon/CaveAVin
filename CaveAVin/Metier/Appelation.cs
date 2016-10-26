@@ -12,6 +12,7 @@ namespace Metier
         #region attributs
         private int id;
         private string nomAppelation;
+        private List<Bouteille> bouteilles = new List<Bouteille>();
         #endregion
 
         #region propriétés
@@ -37,6 +38,18 @@ namespace Metier
                 nomAppelation = value;
             }
         }
+        #endregion
+
+        #region opérations
+
+        /// <summary>
+        /// Créer une appelation
+        /// </summary>
+        /// <param name="n">(facultatif) le nom de l'appelation</param>
+        public Appelation(string n = "")
+        {
+            nomAppelation = n;
+        }
 
         /// <summary>
         /// attribut l'appelation au bouteilles
@@ -57,16 +70,7 @@ namespace Metier
         /// <param name="b">la bouteille à modifier</param>
         public void Ajouter(Bouteille b)
         {
-            Bouteilles liste = new Bouteilles();
-            int indexTableau = 0;
-            foreach (Bouteille bouteille in liste.Lister())
-            {
-                if (bouteille.Id == b.Id)
-                {
-                    liste.Lister().SetValue(b, indexTableau);
-                }
-                indexTableau += 1;
-            }
+            bouteilles.Add(b);
 
         }
 
@@ -77,8 +81,7 @@ namespace Metier
         /// <returns></returns>
         public Bouteille[] Lister()
         {
-            Bouteilles liste = new Bouteilles();
-            return liste.Lister();
+            return bouteilles.ToArray();
         }
 
         /// <summary>
@@ -87,17 +90,7 @@ namespace Metier
         /// <param name="b">la bouteille ou on doit retirer une appelation</param>
         public void Supprimer(Bouteille b)
         {
-            Bouteilles liste = new Bouteilles();
-            if (liste.Lister().Contains(b))
-            {
-                foreach (Bouteille bouteille in liste.Lister())
-                {
-                    if(bouteille.Id == b.Id)
-                    {
-                        bouteille.Appelation = null;
-                    }
-                }
-            }
+            bouteilles.Remove(b);
         }
         #endregion
     }

@@ -45,5 +45,15 @@ namespace Metier
         /// <returns>Les Bouteilles existantes</returns>
     Bouteilles Lister();
 
+    Bouteilles Lister(Casier c);
+        Bouteilles Lister(Appelation a);
+        Bouteilles Lister(Contenance c);
+        Bouteilles Lister(Cru c);
+        Bouteilles Lister(Domaine d);
+        Bouteilles Lister(Millesime m);
+        Bouteilles Lister(Region r);
+        Bouteilles Lister(Type t);
+        Bouteilles Lister(Type_vinification tp);
+
 }
 }

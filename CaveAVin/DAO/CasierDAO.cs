@@ -91,6 +91,28 @@ namespace DAO
             return liste;
         }
 
+        public Casiers Lister(Cave c)
+        {
+            Casiers liste = new Casiers();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Casier WHERE IdCave="+c.Id.ToString();
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Casier cd = reader2Casier(reader);
+                    liste.Ajouter(cd);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return liste;
+        }
+
         public void Relire(Casier c)
         {
             con.Open();
@@ -145,6 +167,8 @@ namespace DAO
             Casier c = new Casier();
             c.Id = Convert.ToInt32(reader["IdCasier"]);
             c.Nom = reader["NomCasier"].ToString();
+            c.LargeurX = Convert.ToInt32(reader["Largeur_X"]);
+            c.LargeurY = Convert.ToInt32(reader["Largeur_Y"]);
             return c;
         }
     }

@@ -32,6 +32,11 @@ namespace Metier
             bouteilles.Add(p);
         }
 
+        public void Supprimer(Bouteille b)
+        {
+            bouteilles.Remove(b);
+        }
+
         /// <summary>
         /// Fournit l'ensemble des bouteilles
         /// </summary>

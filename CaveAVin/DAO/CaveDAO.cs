@@ -143,6 +143,8 @@ namespace DAO
             Cave c = new Cave();
             c.Id = Convert.ToInt32(reader["IdCave"]);
             c.Nom = reader["NomCave"].ToString();
+            c.Adresse= reader["Adresse"].ToString();
+            c.Piece= reader["Piece"].ToString();
             return c;
         }
     }

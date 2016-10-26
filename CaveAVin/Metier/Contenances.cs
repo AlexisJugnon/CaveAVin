@@ -26,7 +26,7 @@ namespace Metier
 
         public void Ajouter(Bouteille b)
         {
-            b.Casier.Ajouter(b);
+            b.Contenance.Ajouter(b);
         }
 
         public void supprimer(Contenance p)

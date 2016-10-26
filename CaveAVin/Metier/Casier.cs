@@ -18,6 +18,11 @@ namespace Metier
         #endregion
 
         #region opérations
+
+            public Casier(string n= "")
+            {
+                nom = n;
+            }       
             public void Ajouter(Bouteille b)
             {
                 bouteilles.Add(b);
@@ -98,6 +103,16 @@ namespace Metier
             set
             {
                 cave = value;
+            }
+        }
+
+        public int IdCave {
+            get
+            {
+                int id = 0;
+                if (cave != null)
+                    id = cave.Id;
+                return id;
             }
         }
         #endregion
