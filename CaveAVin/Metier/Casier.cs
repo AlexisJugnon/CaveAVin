@@ -19,10 +19,10 @@ namespace Metier
 
         #region opérations
 
-            public Casier(string nom= "")
+            public Casier(string n= "")
             {
-            nom = n;
-        }
+                nom = n;
+            }       
             public void Ajouter(Bouteille b)
             {
                 bouteilles.Add(b);
