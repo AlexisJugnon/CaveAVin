@@ -93,6 +93,204 @@ namespace DAO
             return liste;
         }
 
+        public Bouteilles Lister(Casier c)
+        {
+            Bouteilles liste = new Bouteilles();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Bouteille WHERE IdCasier=" + c.Id.ToString();
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Bouteille b = reader2Bouteille(reader);
+                    liste.Ajouter(b);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return liste;
+        }
+
+        public Bouteilles Lister(Appelation a)
+        {
+            Bouteilles liste = new Bouteilles();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Bouteille WHERE IdAppelation=" +a.Id.ToString();
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Bouteille b = reader2Bouteille(reader);
+                    liste.Ajouter(b);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return liste;
+        }
+
+        public Bouteilles Lister(Metier.Type t)
+        {
+            Bouteilles liste = new Bouteilles();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Bouteille WHERE IdType="+t.Id.ToString();
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Bouteille b = reader2Bouteille(reader);
+                    liste.Ajouter(b);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return liste;
+        }
+
+        public Bouteilles Lister(Domaine d)
+        {
+            Bouteilles liste = new Bouteilles();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Bouteille WHERE IdDomaine="+d.Id.ToString();
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Bouteille b = reader2Bouteille(reader);
+                    liste.Ajouter(b);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return liste;
+        }
+
+        public Bouteilles Lister(Region r)
+        {
+            Bouteilles liste = new Bouteilles();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Bouteille WHERE IdRegion="+r.Id.ToString();
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Bouteille b = reader2Bouteille(reader);
+                    liste.Ajouter(b);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return liste;
+        }
+
+        public Bouteilles Lister(Contenance c)
+        {
+            Bouteilles liste = new Bouteilles();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Bouteille WHERE IdContenance="+c.Id.ToString();
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Bouteille b = reader2Bouteille(reader);
+                    liste.Ajouter(b);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return liste;
+        }
+
+        public Bouteilles Lister(Cru c)
+        {
+            Bouteilles liste = new Bouteilles();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Bouteille WHERE IdCru="+c.Id.ToString();
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Bouteille b = reader2Bouteille(reader);
+                    liste.Ajouter(b);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return liste;
+        }
+
+        public Bouteilles Lister(Millesime m)
+        {
+            Bouteilles liste = new Bouteilles();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Bouteille WHERE IdMillesime="+m.Id.ToString();
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Bouteille b = reader2Bouteille(reader);
+                    liste.Ajouter(b);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return liste;
+        }
+
+        public Bouteilles Lister(Type_vinification tp)
+        {
+            Bouteilles liste = new Bouteilles();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Bouteille WHERE IdVinif="+tp.Id.ToString();
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Bouteille b = reader2Bouteille(reader);
+                    liste.Ajouter(b);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return liste;
+        }
+
         public void Relire(Bouteille b)
         {
             con.Open();
