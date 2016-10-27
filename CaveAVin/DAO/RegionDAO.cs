@@ -22,38 +22,159 @@ namespace DAO
             con = c;
         }
 
+        /// <summary>
+        /// chercher une région en fonction de son identifiant
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public Region Chercher(int ID)
         {
-            throw new NotImplementedException();
+            Region r = null;
+
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Region WHERE IdRegion=" + ID.ToString();
+                IDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    r = reader2Region(reader);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return r;
+
         }
 
+        /// <summary>
+        /// Créé une nouvelle région dans la base de données
+        /// </summary>
+        /// <param name="p">Région à créér</param>
         public void Créer(Region p)
         {
-            throw new NotImplementedException();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "INSERT INTO Region(NomRegion, IdPays) VALUES('" + p.NomRegion + "', "+ p.Pays.Id +");";
+                com.ExecuteNonQuery();
+                com.CommandText = "SELECT LAST_INSERT_ID() FROM Region;";
+                IDataReader reader = com.ExecuteReader();
+                int id = 1;
+                if (reader.Read())
+                    id = Convert.ToInt32(reader[0]);
+                p.Id = id;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
+        /// <summary>
+        /// liste toutes les régions de la base de données
+        /// </summary>
+        /// <returns></returns>
         public Regions Lister()
         {
-            throw new NotImplementedException();
+            Regions liste = new Regions();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Region";
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Region r = reader2Region(reader);
+                    liste.Ajouter(r);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return liste;
         }
 
+        /// <summary>
+        /// Charge la région entré en paramètre
+        /// </summary>
+        /// <param name="p"></param>
         public void Relire(Region p)
         {
-            throw new NotImplementedException();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Region WHERE IdRegion=" + p.Id.ToString();
+                IDataReader reader = com.ExecuteReader();
+                if (reader.Read())
+                {
+                    p.NomRegion = reader["NomRegion"].ToString();
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
+        /// <summary>
+        /// met à jour la région entré en paramètre
+        /// </summary>
+        /// <param name="p"></param>
         public void Sauver(Region p)
         {
-            throw new NotImplementedException();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "UPDATE Region SET NomRegion='" + p.NomRegion + "', IdPays = " + p.Pays.Id + " WHERE IdRegion=" + p.Id.ToString();
+                com.ExecuteNonQuery();
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
+        /// <summary>
+        /// Supprime la erégion de la base de données
+        /// </summary>
+        /// <param name="p"></param>
         public void Supprimer(Region p)
         {
-            throw new NotImplementedException();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "DELETE FROM Region WHERE IdRegion=" + p.Id.ToString();
+                com.ExecuteNonQuery();
+            }
+            finally
+            {
+                con.Close();
+            }
         }
+
+        /// <summary>
+        /// Initialise Région avec les données sortie de la base de donnée
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
         private Region reader2Region(IDataReader reader)
         {
-            return null;
+            Region r = new Region();
+            r.Id = Convert.ToInt32(reader["IdRegion"]);
+            r.NomRegion = reader["NomRegion"].ToString();
+            r.Pays.Id = Convert.ToInt32(reader["IdPays"]);
+            return r;
         }
     }
 }
