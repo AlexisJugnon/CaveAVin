@@ -16,11 +16,19 @@ namespace Metier
 
         #region fonctions
 
+        /// <summary>
+        /// Ajoute une nouvelle bouteille
+        /// </summary>
+        /// <param name="b">Bouteille à ajouter</param>
         public void Ajouter(Bouteille b)
         {
             bouteilles.Add(b);
         }
 
+        /// <summary>
+        /// ajoute la contenance à une liste de bouteille
+        /// </summary>
+        /// <param name="b">liste de bouteille à modifier la contenace</param>
         public void Ajouter(Bouteilles b)
         {
             foreach (Bouteille bt in b.Lister())
@@ -30,11 +38,19 @@ namespace Metier
             }
         }
 
+        /// <summary>
+        /// retire une bouteille de la liste de bouteille
+        /// </summary>
+        /// <param name="b">Bouteille à retirer</param>
         public void Supprimer(Bouteille b)
         {
             bouteilles.Remove(b);
         }
 
+        /// <summary>
+        /// retourne la lsite de bouteille
+        /// </summary>
+        /// <returns></returns>
         public Bouteille[] Lister()
         {
             return bouteilles.ToArray();

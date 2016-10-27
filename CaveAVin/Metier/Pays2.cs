@@ -29,6 +29,10 @@ namespace Metier
             r.Pays.Ajouter(r);
         }
 
+        /// <summary>
+        /// supprime un pays de la lsite
+        /// </summary>
+        /// <param name="p">pays à supprimer</param>
         public void supprimer(Pays p)
         {
             pays.Remove(p);

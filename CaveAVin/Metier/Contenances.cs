@@ -29,6 +29,10 @@ namespace Metier
             b.Contenance.Ajouter(b);
         }
 
+        /// <summary>
+        /// retire une contenance de la liste des contenances
+        /// </summary>
+        /// <param name="p"></param>
         public void supprimer(Contenance p)
         {
             contenances.Remove(p);

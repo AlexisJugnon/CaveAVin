@@ -15,7 +15,7 @@ namespace Metier
         /// <summary>
         /// Ajoute un produit à la liste
         /// </summary>
-        /// <param name="p"></param>
+        /// <param name="p">Le produit à ajouter</param>
         /// <exception cref="Exception">Si le produit existe déjà</exception>
         public void Ajouter(Type p)
         {
@@ -24,15 +24,26 @@ namespace Metier
             types.Add(p);
         }
 
+        /// <summary>
+        /// Ajoute le type d'une bouteille à la liste de type
+        /// </summary>
+        /// <param name="b">bouteille à ajouter</param>
         public void Ajouter(Bouteille b)
         {
-            b.Casier.Ajouter(b);
+            b.Type.Ajouter(b);
         }
 
+        /// <summary>
+        /// Supprime un type de la liste de type
+        /// </summary>
+        /// <param name="p">type à supprimer</param>
         public void supprimer(Type p)
         {
             types.Remove(p);
         }
+
+
+        ///<summary>
         /// Fournit l'ensemble des produits
         /// </summary>
         /// <returns>un tableau des produits</returns>
@@ -40,6 +51,8 @@ namespace Metier
         {
             return types.ToArray();
         }
+
+       
         #endregion
     }
 }
