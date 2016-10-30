@@ -122,7 +122,7 @@ namespace DAO
                 IDataReader reader = com.ExecuteReader();
                 if (reader.Read())
                 {
-                   // c.Valeur = reader["valeur"].ToString();  //je sais pas pourquoi cette ligne ne fonctionne pas ? help ?
+                    c.Valeur = Convert.ToInt32(reader["valeur"]);
                 }
             }
             finally
@@ -165,7 +165,7 @@ namespace DAO
         {
             Contenance c = new Contenance();
             c.Id = Convert.ToInt32(reader["IdContenance"]);
-            //c.Valeur = reader["valeur"].ToString(); //je sais pas pourquoi cette ligne ne fonctionne pas ? help ?
+            c.Valeur = Convert.ToInt32(reader["valeur"]);
             return c;
         }
     }
