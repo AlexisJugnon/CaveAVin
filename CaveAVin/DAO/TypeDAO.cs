@@ -32,7 +32,7 @@ namespace DAO
         public Metier.Type Chercher(int Id)
         {
             Metier.Type type = null;
-            
+
             IDataReader reader = ExecuteQuery(String.Format(SQL_SELECT_BY_ID, Id));
 
             if (reader != null && reader.Read())
@@ -51,13 +51,12 @@ namespace DAO
 
                 var reader = ExecuteQuery(SQL_SELECT_LAST_INSERT_ID);
 
-                if(reader != null && reader.Read())
+                int id = 1;
+                if (reader != null && reader.Read())
                 {
-                    int id = 1;
-                    if (reader.Read())
-                        Int32.TryParse(reader[0].ToString(), out id);
-                    type.Id = id;
+                    Int32.TryParse(reader[0].ToString(), out id);
                 }
+                type.Id = id;
             }
         }
 
@@ -67,7 +66,7 @@ namespace DAO
 
             var reader = ExecuteQuery(SQL_SELECT_ALL);
 
-            while (reader.Read())
+            while (reader != null && reader.Read())
             {
                 var type = reader2Type(reader);
                 types.Ajouter(type);
