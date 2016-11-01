@@ -39,11 +39,16 @@ namespace CaveAVin
             DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
             DAO.CasierDAO daoCasier = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
 
-            Metier.Casiers c = daoCasier.Lister();
+            Metier.Casiers c = daoCasier.Lister(); // cette ligne pose probleme
             foreach(Metier.Casier ct in c.Lister())
             {
                 Metier.Bouteilles bout = daoBouteille.Lister(ct);
                 ct.Ajouter(bout);
+                foreach(Metier.Bouteille b in bout.Lister())
+                {
+                    b.Casier = ct;
+                    
+                }
             }
 
         }
