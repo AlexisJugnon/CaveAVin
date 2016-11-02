@@ -12,6 +12,7 @@ namespace DAO
     public class DomaineDAO:Metier.IDomaineDAO
     {
         private IDbConnection con;
+
         /// <summary>
         /// Initialise l'objet DAO
         /// </summary>
@@ -24,36 +25,149 @@ namespace DAO
 
         public Domaine Chercher(int ID)
         {
-            throw new NotImplementedException();
+            Domaine d = null;
+
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM DOMAINE WHERE IdDomaine=" + ID.ToString();
+                IDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    d = reader2Domaine(reader);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return d;
+
         }
 
-        public void Créer(Domaine p)
+        public void Créer(Domaine d)
         {
-            throw new NotImplementedException();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "INSERT INTO Domaine(NomDomaine) VALUES('" + d.NomDomaine + "');";
+                com.ExecuteNonQuery();
+                com.CommandText = "SELECT LAST_INSERT_ID() FROM Domaine;";
+                IDataReader reader = com.ExecuteReader();
+                int id = 1;
+                if (reader.Read())
+                    id = Convert.ToInt32(reader[0]);
+                d.Id = id;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
         public Domaines Lister()
         {
-            throw new NotImplementedException();
+            Domaines liste = new Domaines();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Domaine";
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Domaine d = reader2Domaine(reader);
+                    liste.Ajouter(d);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return liste;
         }
 
-        public void Relire(Domaine p)
+        public Domaines Lister(Cave c)
         {
-            throw new NotImplementedException();
+            Domaines liste = new Domaines();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Domaine WHERE IdCave="+c.Id.ToString();
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Domaine d = reader2Domaine(reader);
+                    liste.Ajouter(d);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return liste;
         }
 
-        public void Sauver(Domaine p)
+        public void Relire(Domaine d)
         {
-            throw new NotImplementedException();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Domaine WHERE IdDomaine=" + d.Id.ToString();
+                IDataReader reader = com.ExecuteReader();
+                if (reader.Read())
+                {
+                    d.NomDomaine = reader["NomDomaine"].ToString();
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
-        public void Supprimer(Domaine p)
+        public void Sauver(Domaine d)
         {
-            throw new NotImplementedException();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "UPDATE Domaine SETNomDomaine='" + d.NomDomaine + "' WHERE IdDomaine=" + d.Id.ToString();
+                com.ExecuteNonQuery();
+            }
+            finally
+            {
+                con.Close();
+            }
         }
-        private Millesime reader2Millesime(IDataReader reader)
+
+        public void Supprimer(Domaine d)
         {
-            return null;
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "DELETE FROM Domaine WHERE IdDomaine=" + d.Id.ToString();
+                com.ExecuteNonQuery();
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        private Domaine reader2Domaine(IDataReader reader)
+        {
+            Domaine d = new Domaine();
+            d.Id = Convert.ToInt32(reader["IdDomaine"]);
+            d.NomDomaine = reader["NomDomaine"].ToString();
+            return d;
         }
     }
+
 }
