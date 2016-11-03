@@ -61,7 +61,7 @@ namespace Metier
             }
             set
             {
-                texte = appelation.ToString() + " " + domaine.ToString() + " "+ region.ToString() + " " + cru.ToString() + " " + millesime.ToString() + " " + contenance.ToString();
+                texte = value ;
             }
         }
         public int PosX

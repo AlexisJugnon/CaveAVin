@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CaveAVin"
         mc:Ignorable="d"
-        Title="MainWindow" Height="988.677" Width="1457.986">
-    <ListView x:Name="listView" HorizontalAlignment="Left" Height="443" Margin="66,457,0,0" VerticalAlignment="Top" Width="1316">
+        Title="MainWindow" Height="946.677" Width="1421.986">
+    <ListView x:Name="listView" Height="805" Margin="714,51,186,0" VerticalAlignment="Top" IsSynchronizedWithCurrentItem="True">
         <ListView.View>
             <GridView>
                 <GridViewColumn/>
