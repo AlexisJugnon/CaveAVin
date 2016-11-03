@@ -25,6 +25,11 @@ namespace Metier
         private Type type;
         #endregion
 
+        public override string ToString()
+        {
+            return texte;
+        }
+
         #region propriétés
         public int Id
         {
@@ -56,7 +61,7 @@ namespace Metier
             }
             set
             {
-                texte = value;
+                texte = appelation.ToString() + " " + domaine.ToString() + " "+ region.ToString() + " " + cru.ToString() + " " + millesime.ToString() + " " + contenance.ToString();
             }
         }
         public int PosX
