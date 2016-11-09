@@ -5,15 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CaveAVin"
         mc:Ignorable="d"
-        Title="MainWindow" Height="946.677" Width="1421.986">
-    <Grid HorizontalAlignment="Left" Height="927" Margin="0,10,0,-21" VerticalAlignment="Top" Width="1412">
-        <ListView x:Name="listView" HorizontalAlignment="Left" Height="881" Margin="38,10,0,0" VerticalAlignment="Top" Width="616">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="881" Margin="692,10,0,0" VerticalAlignment="Top" Width="676"/>
+        Title="MainWindow" Height="946.677" Width="1309.486">
+    <Grid x:Name="MainWindows" HorizontalAlignment="Left" Height="927" Margin="0,10,0,-21" VerticalAlignment="Top" Width="1300">
+        <Rectangle Fill="#FF8F3977" HorizontalAlignment="Left" Height="116" Margin="10,1,0,0" Stroke="Black" VerticalAlignment="Top" Width="1300"/>
+        <Image x:Name="logo" HorizontalAlignment="Left" Height="100" Margin="141,12,0,0" VerticalAlignment="Top" Width="100" Source="logoBouteille.png" />
+        <Button x:Name="BT_rechercher" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="1184,12,0,0" Height="90" Background="#FF8F3977" BorderBrush="#FF8F3977">
+            <Image x:Name="chercher" HorizontalAlignment="Left" Height="90" VerticalAlignment="Top" Width="80" Source="chercher.png" />
+        </Button>
+        <Menu x:Name="MenuBase" HorizontalAlignment="Left" Height="116" Margin="10,0,0,810" VerticalAlignment="Bottom" Background="#FF8F3977" Width="100">
+            <MenuItem x:Name="Menu" Header="" Click="MenuItem_Click" Height="116" Width="100">
+                <MenuItem.Background>
+                    <ImageBrush ImageSource="Menu.png"/>
+                </MenuItem.Background>
+            </MenuItem>
+
+        </Menu>
+        <Grid x:Name="Faux_menu" Margin="0,134,1171,707" Visibility="Hidden" MouseLeave="part">
+            <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="25,18,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="button2" Content="Button" HorizontalAlignment="Left" Margin="25,37,0,0" VerticalAlignment="Top" Width="75"/>
+        </Grid>
+        <Grid x:Name="Accueil" Margin="166,220,179,213">
+
+            <Rectangle Fill="#FF8F3977" HorizontalAlignment="Left" Height="54" Stroke="Black" VerticalAlignment="Top" Width="955"/>
+            <Label x:Name="Label1" FontSize="20" Content="Le saviez-vous ?" HorizontalAlignment="Left" Margin="410,10,0,0" Foreground="White" VerticalAlignment="Top" Height="33"/>
+            <TextBox Background="white" x:Name="TB_SaviezVous" HorizontalAlignment="Left" Height="260" Margin="0,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="955" VerticalScrollBarVisibility="Auto" IsEnabled="False"/>
+            
+            <Button x:Name="BT_VoirBouteille" HorizontalAlignment="Left" Margin="666,350,0,0" VerticalAlignment="Top" Width="74" Height="86" Background="White" BorderBrush="White" Click="BT_VoirBouteille_Click">
+                <Button.Content>
+                    <Image Source="VoirBouteille.png" Height="86" Width="74"/>
+                </Button.Content>  
+            </Button>
+            <Button x:Name="BT_VoirCave"  HorizontalAlignment="Left" Margin="438,352,0,0" VerticalAlignment="Top" Width="74" Height="86" Background="white" BorderBrush="White">
+                <Button.Content>
+                    <Image Source="VoirCave.png" Height="86" Width=" 74"/>
+                </Button.Content>
+            </Button>
+            <Button x:Name="BT_GererCave" HorizontalAlignment="Left" Margin="220,350,661,60" VerticalAlignment="Top" Width="74" Height="85" Background="White" BorderBrush="White">
+                <Button.Content>
+                    <Image  Source="GérerCave.png" Height="86" Width="74"/>
+                </Button.Content>
+            </Button>
+
+        </Grid>
     </Grid>
 </Window>

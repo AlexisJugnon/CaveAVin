@@ -111,6 +111,42 @@
       <Name>Metier</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Menu.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Chercher.png" />
+    <Resource Include="GérerCave.png" />
+    <Resource Include="VoirBouteille.png" />
+    <Resource Include="VoirCave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Alcool.png" />
+    <Resource Include="Blanc.png" />
+    <Resource Include="bouteilleCouché.png" />
+    <Resource Include="Pétillant.png" />
+    <Resource Include="Rosé.png" />
+    <Resource Include="Rouge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="AlcoolCasier.png" />
+    <Resource Include="BlancCasier.png" />
+    <Resource Include="CaseVide.png" />
+    <Resource Include="CuAlcool.png" />
+    <Resource Include="CuBlanc.png" />
+    <Resource Include="CuPétillant.png" />
+    <Resource Include="CuRosé.png" />
+    <Resource Include="CuRouge.png" />
+    <Resource Include="PétillantCasier.png" />
+    <Resource Include="RoséCasier.png" />
+    <Resource Include="RougeCasier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logoBouteille.png" />
+    <Resource Include="LogoComplet.png" />
+    <Resource Include="logoReduit.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
