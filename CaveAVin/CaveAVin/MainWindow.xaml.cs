@@ -60,13 +60,6 @@ namespace CaveAVin
            
         }
 
-        /// <summary>
-        /// cache les composants de l'accueil et affiche ceux d'ajouter bouteille
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        
-
         
         /// <summary>
         /// Cache le "sous_menu" quand on quitte les boutons le constituant.
@@ -87,8 +80,45 @@ namespace CaveAVin
         private void BT_VoirBouteille_Click(object sender, RoutedEventArgs e)
         {
             Accueil.Visibility = Visibility.Hidden;
+            nouvelleBout(sender, e);
         }
 
+        /// <summary>
+        /// Crée une nouvelle bouteille
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void nouvelleBout(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Metier.Bouteille b = new Metier.Bouteille();
+
+                DAO.RegionDAO reg = new DAO.RegionDAO(DAO.BDD.Instance.Connexion);
+                Metier.Regions regions = reg.Lister();
+
+                DAO.AppelationDAO app = new DAO.AppelationDAO(DAO.BDD.Instance.Connexion);
+                Metier.Appelations apps = app.Lister();
+
+                DAO.PaysDAO pay = new DAO.PaysDAO(DAO.BDD.Instance.Connexion);
+                Metier.Pays2 payss = pay.Lister();
+
+                DAO.ContenanceDAO cont = new DAO.ContenanceDAO(DAO.BDD.Instance.Connexion);
+                Metier.Contenances conts = cont.Lister();
+
+                ajouteBouteille f = new ajouteBouteille(b, regions,apps,payss,conts);
+                if (f.ShowDialog() == true)
+                {
+                    DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
+                    daoBouteille.Créer(b); // ajoute la bouteille dans la base                    
+                    //; // et dans l'IHM
+                }
+            }
+            catch (Exception x)
+            {
+                MessageBox.Show(x.Message);
+            }
+        }
 
         /// <summary>
         /// Initialise la connexion au SGBDR

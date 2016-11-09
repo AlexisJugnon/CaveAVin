@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace DAO
 {
-    class ContenanceDAO:Metier.IContenanceDAO
+    public class ContenanceDAO:Metier.IContenanceDAO
     {
         private IDbConnection con;
 

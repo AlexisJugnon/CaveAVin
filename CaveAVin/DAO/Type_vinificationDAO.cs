@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace DAO
 {
-    class Type_vinificationDAO : Metier.IType_vinificationDAO
+    public class Type_vinificationDAO : Metier.IType_vinificationDAO
     {
         private IDbConnection con;
         /// <summary>

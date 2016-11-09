@@ -9,7 +9,7 @@ using Metier;
 
 namespace DAO
 {
-    class AppelationDAO:Metier.IAppelationDAO
+    public class AppelationDAO:Metier.IAppelationDAO
     {
         private IDbConnection con;
 

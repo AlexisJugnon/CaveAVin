@@ -9,7 +9,7 @@ using Metier;
 
 namespace DAO
 {
-    class CaveDAO:Metier.ICaveDAO
+    public class CaveDAO:Metier.ICaveDAO
     {
         private IDbConnection con;
         /// <summary>

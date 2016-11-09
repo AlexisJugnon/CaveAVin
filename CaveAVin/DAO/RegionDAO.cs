@@ -9,7 +9,7 @@ using Metier;
 
 namespace DAO
 {
-    class RegionDAO:Metier.IRegionDAO
+    public class RegionDAO:Metier.IRegionDAO
     {
         private IDbConnection con;
         /// <summary>

@@ -9,7 +9,7 @@ using Metier;
 
 namespace DAO
 {
-    class PaysDAO:Metier.IPaysDAO
+    public class PaysDAO:Metier.IPaysDAO
     {
         private IDbConnection con;
         /// <summary>

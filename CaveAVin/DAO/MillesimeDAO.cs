@@ -9,7 +9,7 @@ using Metier;
 
 namespace DAO
 {
-    class MillesimeDAO : Metier.IMillesimeDAO
+    public class MillesimeDAO : Metier.IMillesimeDAO
     {
         private IDbConnection con;
 

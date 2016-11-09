@@ -29,11 +29,11 @@
             <Rectangle Fill="#FF8F3977" HorizontalAlignment="Left" Height="54" Stroke="Black" VerticalAlignment="Top" Width="955"/>
             <Label x:Name="Label1" FontSize="20" Content="Le saviez-vous ?" HorizontalAlignment="Left" Margin="410,10,0,0" Foreground="White" VerticalAlignment="Top" Height="33"/>
             <TextBox Background="white" x:Name="TB_SaviezVous" HorizontalAlignment="Left" Height="260" Margin="0,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="955" VerticalScrollBarVisibility="Auto" IsEnabled="False"/>
-            
+
             <Button x:Name="BT_VoirBouteille" HorizontalAlignment="Left" Margin="666,350,0,0" VerticalAlignment="Top" Width="74" Height="86" Background="White" BorderBrush="White" Click="BT_VoirBouteille_Click">
                 <Button.Content>
                     <Image Source="VoirBouteille.png" Height="86" Width="74"/>
-                </Button.Content>  
+                </Button.Content>
             </Button>
             <Button x:Name="BT_VoirCave"  HorizontalAlignment="Left" Margin="438,352,0,0" VerticalAlignment="Top" Width="74" Height="86" Background="white" BorderBrush="White">
                 <Button.Content>
@@ -45,7 +45,6 @@
                     <Image  Source="GérerCave.png" Height="86" Width="74"/>
                 </Button.Content>
             </Button>
-
         </Grid>
     </Grid>
 </Window>

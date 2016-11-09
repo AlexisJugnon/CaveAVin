@@ -9,7 +9,7 @@ using Metier;
 
 namespace DAO
 {
-    class TypeDAO : Metier.ITypeDAO
+    public class TypeDAO : Metier.ITypeDAO
     {
         private const string SQL_SELECT_BY_ID = "SELECT * FROM Type WHERE IdType={0}";
         private const string SQL_SELECT_LAST_INSERT_ID = "SELECT LAST_INSERT_ID() FROM Type;";

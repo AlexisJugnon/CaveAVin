@@ -9,7 +9,7 @@ using Metier;
 
 namespace DAO
 {
-    class CruDAO : Metier.ICruDAO
+    public class CruDAO : Metier.ICruDAO
     {
         private IDbConnection con;
         /// <summary>
