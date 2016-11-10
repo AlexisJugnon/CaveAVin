@@ -147,7 +147,6 @@ namespace CaveAVin
                 foreach(Metier.Bouteille b in bout.Lister())
                 {
                     b.Casier = ct;
-                    listView.Items.Add(b.ToString());
                 }
             }*/
 
