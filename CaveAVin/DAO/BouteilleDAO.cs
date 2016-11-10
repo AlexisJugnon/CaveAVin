@@ -60,10 +60,8 @@ namespace DAO
                 com.ExecuteNonQuery();
                 com.CommandText = "SELECT LAST_INSERT_ID() FROM Bouteille;";
                 IDataReader reader = com.ExecuteReader();
-                int id = 1;
                 if (reader.Read())
-                    id = Convert.ToInt32(reader[0]);
-                b.Id = id;
+                    b.Id = Convert.ToInt32(reader[0]);
             }
             finally
             {

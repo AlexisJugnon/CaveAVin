@@ -50,7 +50,7 @@ namespace CaveAVin
         {
             InitializeComponent();
            
-            //initBDD();
+            initBDD();
         }
 
    
@@ -92,7 +92,10 @@ namespace CaveAVin
         {
             try
             {
-                Metier.Bouteille b = new Metier.Bouteille();
+                List<Metier.Bouteille> b = new List<Metier.Bouteille>();
+
+                DAO.TypeDAO typ = new DAO.TypeDAO(DAO.BDD.Instance.Connexion);
+                Metier.Types typs = typ.Lister();
 
                 DAO.RegionDAO reg = new DAO.RegionDAO(DAO.BDD.Instance.Connexion);
                 Metier.Regions regions = reg.Lister();
@@ -106,12 +109,15 @@ namespace CaveAVin
                 DAO.ContenanceDAO cont = new DAO.ContenanceDAO(DAO.BDD.Instance.Connexion);
                 Metier.Contenances conts = cont.Lister();
 
-                ajouteBouteille f = new ajouteBouteille(b, regions,apps,payss,conts);
+                ajouteBouteille f = new ajouteBouteille(b,typs, regions,apps,payss,conts);
                 if (f.ShowDialog() == true)
                 {
                     DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
-                    daoBouteille.Créer(b); // ajoute la bouteille dans la base                    
-                    //; // et dans l'IHM
+                    foreach (Metier.Bouteille bt in b)
+                    {
+                        daoBouteille.Créer(bt); // ajoute la bouteille dans la base                    
+                        // et dans l'IHM
+                    }
                 }
             }
             catch (Exception x)
@@ -123,14 +129,14 @@ namespace CaveAVin
         /// <summary>
         /// Initialise la connexion au SGBDR
         /// </summary>
-        /*private void initBDD()
+        private void initBDD()
         {
             // paramètres de la connexion
             DAO.BDD.Instance.Connexion.ConnectionString =
                 "Database=WineFinder;DataSource=137.74.233.210;User Id=user; Password=user";
 
             // crée les objets DAO. pour lire la base
-            DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
+            /*DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
             DAO.CasierDAO daoCasier = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
 
             Metier.Casiers c = daoCasier.Lister(); // cette ligne pose probleme
@@ -143,8 +149,8 @@ namespace CaveAVin
                     b.Casier = ct;
                     listView.Items.Add(b.ToString());
                 }
-            }
+            }*/
 
-        }*/
+        }
     }
 }

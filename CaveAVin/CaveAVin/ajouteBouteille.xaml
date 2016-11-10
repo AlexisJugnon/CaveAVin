@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CaveAVin"
         mc:Ignorable="d"
-        Title="ajouteBouteille" Height="457.103" Width="355.154" Background="#FFEFF0DD">
+        Title="ajouteBouteille" Height="457.103" Width="355.154" Background="#FFF4F4F4">
     <Grid Margin="0,0,-25,-21">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="312*"/>

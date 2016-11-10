@@ -50,6 +50,17 @@ namespace Metier
             }
             
         }
+
+        public int IdPays
+        {
+            get
+            {
+                int id = 0;
+                if (pays != null)
+                    id = pays.Id;
+                return id;
+            }
+        }
         #endregion
 
         #region méthodes
