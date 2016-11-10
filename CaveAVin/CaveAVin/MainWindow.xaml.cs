@@ -123,7 +123,7 @@ namespace CaveAVin
         /// <summary>
         /// Initialise la connexion au SGBDR
         /// </summary>
-        /*private void initBDD()
+        private void initBDD()
         {
             // paramètres de la connexion
             DAO.BDD.Instance.Connexion.ConnectionString =
@@ -141,10 +141,9 @@ namespace CaveAVin
                 foreach(Metier.Bouteille b in bout.Lister())
                 {
                     b.Casier = ct;
-                    listView.Items.Add(b.ToString());
                 }
             }
 
-        }*/
+        }
     }
 }

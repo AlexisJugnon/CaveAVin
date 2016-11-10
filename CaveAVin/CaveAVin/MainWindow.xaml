@@ -24,23 +24,27 @@
             <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="25,18,0,0" VerticalAlignment="Top" Width="75"/>
             <Button x:Name="button2" Content="Button" HorizontalAlignment="Left" Margin="25,37,0,0" VerticalAlignment="Top" Width="75"/>
         </Grid>
-        <Grid x:Name="Accueil" Margin="166,220,179,213">
+        <Grid x:Name="Accueil" Margin="162,223,184,210" UseLayoutRounding="False" IsHitTestVisible="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="11*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
 
-            <Rectangle Fill="#FF8F3977" HorizontalAlignment="Left" Height="54" Stroke="Black" VerticalAlignment="Top" Width="955"/>
+            <Rectangle Fill="#FF8F3977" HorizontalAlignment="Left" Height="54" Stroke="Black" VerticalAlignment="Top" Width="955" Margin="0,0,-1,0"/>
             <Label x:Name="Label1" FontSize="20" Content="Le saviez-vous ?" HorizontalAlignment="Left" Margin="410,10,0,0" Foreground="White" VerticalAlignment="Top" Height="33"/>
-            <TextBox Background="white" x:Name="TB_SaviezVous" HorizontalAlignment="Left" Height="260" Margin="0,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="955" VerticalScrollBarVisibility="Auto" IsEnabled="False"/>
+            <TextBox Background="white" x:Name="TB_SaviezVous" HorizontalAlignment="Left" Height="260" Margin="0,54,-1,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="955" VerticalScrollBarVisibility="Auto" IsEnabled="False"/>
 
-            <Button x:Name="BT_VoirBouteille" HorizontalAlignment="Left" Margin="666,350,0,0" VerticalAlignment="Top" Width="74" Height="86" Background="White" BorderBrush="White" Click="BT_VoirBouteille_Click">
+            <Button x:Name="BT_VoirBouteille" HorizontalAlignment="Left" Margin="666,350,0,0" VerticalAlignment="Top" Width="74" Height="86" Background="White" BorderBrush="White" Click="BT_VoirBouteille_Click" Grid.RowSpan="2">
                 <Button.Content>
                     <Image Source="VoirBouteille.png" Height="86" Width="74"/>
                 </Button.Content>
             </Button>
-            <Button x:Name="BT_VoirCave"  HorizontalAlignment="Left" Margin="438,352,0,0" VerticalAlignment="Top" Width="74" Height="86" Background="white" BorderBrush="White">
+            <Button x:Name="BT_VoirCave"  HorizontalAlignment="Left" Margin="438,352,0,0" VerticalAlignment="Top" Width="74" Height="86" Background="white" BorderBrush="White" Grid.RowSpan="2">
                 <Button.Content>
                     <Image Source="VoirCave.png" Height="86" Width=" 74"/>
                 </Button.Content>
             </Button>
-            <Button x:Name="BT_GererCave" HorizontalAlignment="Left" Margin="220,350,661,60" VerticalAlignment="Top" Width="74" Height="85" Background="White" BorderBrush="White">
+            <Button x:Name="BT_GererCave" HorizontalAlignment="Left" Margin="220,350,0,0" VerticalAlignment="Top" Width="74" Height="85" Background="White" BorderBrush="White" Grid.RowSpan="2">
                 <Button.Content>
                     <Image  Source="GérerCave.png" Height="86" Width="74"/>
                 </Button.Content>
