@@ -119,40 +119,86 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Menu.png" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Resource Include="Chercher.png" />
-    <Resource Include="GérerCave.png" />
-    <Resource Include="VoirBouteille.png" />
-    <Resource Include="VoirCave.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Alcool.png" />
-    <Resource Include="Blanc.png" />
-    <Resource Include="bouteilleCouché.png" />
-    <Resource Include="Pétillant.png" />
-    <Resource Include="Rosé.png" />
-    <Resource Include="Rouge.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="AlcoolCasier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Blanc.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="BlancCasier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bouteilleCouché.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="CaseVide.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Chercher.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="CuAlcool.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="CuBlanc.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="CuPétillant.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="CuRosé.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="CuRouge.png" />
-    <Resource Include="PétillantCasier.png" />
-    <Resource Include="RoséCasier.png" />
-    <Resource Include="RougeCasier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GérerCave.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="logoBouteille.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="LogoComplet.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="logoReduit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pétillant.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="PétillantCasier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Rosé.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="RoséCasier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Rouge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="RougeCasier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="VoirBouteille.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="VoirCave.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="BoutonModif.png" />
+    <Resource Include="BoutonPlus.png" />
+    <Resource Include="BoutonPrécédent.png" />
+    <Resource Include="BoutonSuivant.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

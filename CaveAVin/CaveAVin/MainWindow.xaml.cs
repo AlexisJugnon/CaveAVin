@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace CaveAVin
 {
 
@@ -46,11 +47,14 @@ namespace CaveAVin
     /// </summary>
     public partial class MainWindow : Window
     {
+        private DAO.reqSQL req = new DAO.reqSQL(DAO.BDD.Instance.Connexion);
         public MainWindow()
         {
             InitializeComponent();
            
             initBDD();
+
+            afficherBouteille();
         }
 
    
@@ -131,12 +135,8 @@ namespace CaveAVin
         /// </summary>
         private void initBDD()
         {
-            // paramètres de la connexion
-            DAO.BDD.Instance.Connexion.ConnectionString =
-                "Database=WineFinder;DataSource=137.74.233.210;User Id=user; Password=user";
-
             // crée les objets DAO. pour lire la base
-            /*DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
+            DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
             DAO.CasierDAO daoCasier = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
 
             Metier.Casiers c = daoCasier.Lister(); // cette ligne pose probleme
@@ -148,8 +148,48 @@ namespace CaveAVin
                 {
                     b.Casier = ct;
                 }
-            }*/
+            }
+        }
 
+        private void afficherBouteille()
+        {
+            int nbC = 0, nbL = 0;
+            int nbCasier = req.SelInt("Select Count(IdCasier) FROM Casier");
+            if (nbCasier <= 1)
+            {
+                MultiCasier.Visibility = Visibility.Hidden;
+            }
+
+            for (int i = 0; i < nbCasier; i++)
+            {
+                nbL = req.SelInt("Select Largeur_X FROM Casier");
+                nbC = req.SelInt("Select Largeur_Y FROM Casier");
+
+                int WidthBoutton = (int)affBout.Width / nbC;
+                int HeightBoutton = (int)affBout.Height / nbL;
+
+                string res;
+                Button[,] button = new Button[nbC+1, nbL+1];
+                for (int k = 1; k <= nbC; k++)
+                {
+                    for (int j = 1; j <= nbL; j++)
+                    {
+                        button[k, j] = new Button();
+                        button[k, j].Visibility = Visibility.Visible;
+                        button[k, j].Width = WidthBoutton;
+                        button[k, j].Height = HeightBoutton;
+
+                        res = req.SelStr1("SELECT NomType From Type natural join Bouteille where idCasier =" + i + 
+                            " and Bouteille.Position_X = "+ k%nbC +" and Bouteille.Position_Y = "+ j%nbL +";","NomType");
+                        label.Content = res;
+
+                        if(res == "blanc")
+                        {
+                            button[k, j].Content = "Blanc.png";
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -54,6 +54,7 @@
     <Compile Include="PaysDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegionDAO.cs" />
+    <Compile Include="reqSQL.cs" />
     <Compile Include="TypeDAO.cs" />
     <Compile Include="Type_vinificationDAO.cs" />
   </ItemGroup>
