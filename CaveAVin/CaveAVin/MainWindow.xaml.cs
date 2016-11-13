@@ -203,7 +203,7 @@ namespace CaveAVin
         private void chargementCasier()
         {
 
-            }
+        }
         
 
         private void casSuiva(object sender, RoutedEventArgs e)
@@ -211,6 +211,33 @@ namespace CaveAVin
             nbasier++;
             afficherBouteille();
         }
+        #endregion
+
+        #region Affichage Détail Bouteille
+
+        // A finir quand les cases du casier seront affiché
+        private void afficherDetailBouteille(Metier.Bouteille bouteille)
+        {
+            if (bouteille != null)
+            {
+                lblAppelation.Content = bouteille.Appelation?.NomAppelation;
+                lblCategorie.Content = bouteille.Type?.NomType;
+                lblContenance.Content = bouteille.Contenance?.Valeur;
+                lblCru.Content = bouteille.Cru?.NomCru;
+                lblDomaine.Content = bouteille.Domaine?.NomDomaine;
+                lblMillesime.Content = bouteille.Millesime?.NomMillesime;
+                lblPays.Content = bouteille.Region?.Pays?.NomPays;
+                lblRegion.Content = bouteille.Region?.NomRegion;
+                lblVinification.Content = bouteille.Type_vinification?.NomVinif;
+                displayFicheDetailBouteille(true);
+            }
+        } 
+
+        private void displayFicheDetailBouteille(bool rendreVisible)
+        {
+            ficheDetailBouteille.Visibility = rendreVisible ? Visibility.Visible : Visibility.Hidden;
+        }
+
         #endregion
     }
 }
