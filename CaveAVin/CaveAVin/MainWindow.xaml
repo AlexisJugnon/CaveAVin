@@ -100,7 +100,7 @@
                     <ImageBrush ImageSource="BoutonPrécédent.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="casSuiv" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="802,72,0,0" Height="88" BorderThickness="0">
+            <Button x:Name="casSuiv" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="802,72,0,0" Height="88" BorderThickness="0" Click="casSuiva">
                 <Button.Background>
                     <ImageBrush ImageSource="BoutonSuivant.png"/>
                 </Button.Background>
@@ -115,5 +115,6 @@
                 <ImageBrush ImageSource="BoutonPlus.png"/>
             </Button.Background>
         </Button>
+        <Label x:Name="lNomC" Content="" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontFamily="Cambria" FontSize="36" TextOptions.TextHintingMode="Fixed" FontWeight="Bold"/>
     </Grid>
 </Window>

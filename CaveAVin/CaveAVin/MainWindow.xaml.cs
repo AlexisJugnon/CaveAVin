@@ -151,6 +151,13 @@ namespace CaveAVin
             }
         }
 
+
+        #region affichageCasier
+
+        private int nbasier = 1;
+        private Button[,] button;
+
+
         private void afficherBouteille()
         {
             int nbC = 0, nbL = 0;
@@ -160,8 +167,6 @@ namespace CaveAVin
                 MultiCasier.Visibility = Visibility.Hidden;
             }
 
-            for (int i = 0; i < nbCasier; i++)
-            {
                 nbL = req.SelInt("Select Largeur_X FROM Casier");
                 nbC = req.SelInt("Select Largeur_Y FROM Casier");
 
@@ -169,7 +174,7 @@ namespace CaveAVin
                 int HeightBoutton = (int)affBout.Height / nbL;
 
                 string res;
-                Button[,] button = new Button[nbC+1, nbL+1];
+                button = new Button[nbC+1, nbL+1];
                 for (int k = 1; k <= nbC; k++)
                 {
                     for (int j = 1; j <= nbL; j++)
@@ -179,19 +184,33 @@ namespace CaveAVin
                         button[k, j].Width = WidthBoutton;
                         button[k, j].Height = HeightBoutton;
 
-                        res = req.SelStr1("SELECT NomType From Type natural join Bouteille where idCasier =" + i + 
+
+                        res = req.SelStr1("SELECT NomType From Type natural join Bouteille where idCasier =" + nbasier + 
                             " and Bouteille.Position_X = "+ k%nbC +" and Bouteille.Position_Y = "+ j%nbL +";","NomType");
-                        label.Content = res;
+                        lNomC.Content = req.SelStr1("Select NomCasier From Casier Where idCasier = "+ nbasier,"NomCasier");
 
                         if(res == "blanc")
                         {
                             button[k, j].Content = "Blanc.png";
+                            
+                                                        
+                        }
                         }
                     }
                 }
-            }
-        }
 
-       
+
+        private void chargementCasier()
+        {
+
+            }
+        
+
+        private void casSuiva(object sender, RoutedEventArgs e)
+        {
+            nbasier++;
+            afficherBouteille();
+        }
+        #endregion
     }
 }
