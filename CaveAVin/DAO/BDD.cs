@@ -20,10 +20,10 @@ namespace DAO
         private static BDD instance;
         private BDD()
         {
-            init();
+            Init();
         }
 
-        private void init()
+        private void Init()
         {
             con = new MySqlConnection();
             con.ConnectionString = ConnectionString;
@@ -41,7 +41,7 @@ namespace DAO
                         {
                             IFormatter formater = new BinaryFormatter();
                             instance = (BDD)formater.Deserialize(flux);
-                            instance.init();
+                            instance.Init();
                         }
                     }
                     catch
