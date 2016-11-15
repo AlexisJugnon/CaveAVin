@@ -52,11 +52,14 @@ namespace CaveAVin
         {
             InitializeComponent();
 
+            #region InitAffichage
+            // Gère les Grid à afficher au démarrage de l'application
             MainWindows.Visibility = Visibility.Visible;
             Accueil.Visibility = Visibility.Visible;
             affichBoute.Visibility = Visibility.Hidden;
             MultiCasier.Visibility = Visibility.Hidden;
             Faux_menu.Visibility = Visibility.Hidden;
+            #endregion
 
             initBDD();
 
@@ -66,8 +69,7 @@ namespace CaveAVin
    
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Faux_menu.Visibility = Visibility;
-           
+            Faux_menu.Visibility = Visibility; 
         }
 
         
@@ -107,14 +109,14 @@ namespace CaveAVin
                 DAO.TypeDAO typ = new DAO.TypeDAO(DAO.BDD.Instance.Connexion);
                 Metier.Types typs = typ.Lister();
 
+                DAO.PaysDAO pay = new DAO.PaysDAO(DAO.BDD.Instance.Connexion);
+                Metier.Pays2 payss = pay.Lister();
+
                 DAO.RegionDAO reg = new DAO.RegionDAO(DAO.BDD.Instance.Connexion);
-                Metier.Regions regions = reg.Lister();
+                Metier.Regions regions = reg.Lister(); // erreur ici
 
                 DAO.AppelationDAO app = new DAO.AppelationDAO(DAO.BDD.Instance.Connexion);
                 Metier.Appelations apps = app.Lister();
-
-                DAO.PaysDAO pay = new DAO.PaysDAO(DAO.BDD.Instance.Connexion);
-                Metier.Pays2 payss = pay.Lister();
 
                 DAO.ContenanceDAO cont = new DAO.ContenanceDAO(DAO.BDD.Instance.Connexion);
                 Metier.Contenances conts = cont.Lister();
@@ -146,7 +148,7 @@ namespace CaveAVin
             DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
             DAO.CasierDAO daoCasier = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
 
-            Metier.Casiers c = daoCasier.Lister(); // cette ligne pose probleme
+            Metier.Casiers c = daoCasier.Lister();
             foreach(Metier.Casier ct in c.Lister())
             {
                 Metier.Bouteilles bout = daoBouteille.Lister(ct);
@@ -183,6 +185,7 @@ namespace CaveAVin
             int HeightBoutton = (int)affBout.Height / nbL;
 
             #region GestionGrid
+            //Gère la création du grid nécessaire à l'affichage des boutons
             col1 = new ColumnDefinition[nbC];
             col2 = new RowDefinition[nbL];
             for (int f = 0; f < nbC; f++)
@@ -203,6 +206,7 @@ namespace CaveAVin
             #endregion
 
             #region GestionAffichBouteille
+            //Gère l'affichage des bouteilles dans le casier
             string res;
             button = new Button[nbC+1, nbL+1];
             for (int k = 0; k < nbC; k++)
