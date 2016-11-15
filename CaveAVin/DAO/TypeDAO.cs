@@ -1,24 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Metier;
+using System.Data;
+using System.Diagnostics;
 
 namespace DAO
 {
     public class TypeDAO : Metier.ITypeDAO
     {
-        private const string SQL_SELECT_BY_ID = "SELECT * FROM Type WHERE IdType={0}";
-        private const string SQL_SELECT_LAST_INSERT_ID = "SELECT LAST_INSERT_ID() FROM Type;";
-        private const string SQL_SELECT_ALL = "SELECT * FROM Type";
-        private const string SQL_INSERT = "INSERT INTO Type(NomType) VALUES('{0}');";
-        private const string SQL_UPDATE = "UPDATE Type SET NomType='{0}' WHERE IdType={1}";
-        private const string SQL_DELETE = "DELETE FROM Type WHERE IdType={0}";
-
         private IDbConnection con;
+
         /// <summary>
         /// Initialise l'objet DAO
         /// </summary>
@@ -29,129 +23,128 @@ namespace DAO
             con = c;
         }
 
-        public Metier.Type Chercher(int Id)
+        public Metier.Type Chercher(int ID)
         {
-            Metier.Type type = null;
+            Metier.Type c = null;
 
-            IDataReader reader = ExecuteQuery(String.Format(SQL_SELECT_BY_ID, Id));
-
-            if (reader != null && reader.Read())
+            con.Open();
+            try
             {
-                type = reader2Type(reader);
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Type WHERE IdType=" + ID.ToString();
+                IDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    c = reader2Type(reader);
+                }
+            }
+            finally
+            {
+                con.Close();
             }
 
-            return type;
+            return c;
         }
 
-        public void Créer(Metier.Type type)
+        public void Créer(Metier.Type p)
         {
-            if (type != null)
+            try
             {
-                ExecuteCommand(String.Format(SQL_INSERT, type.NomType));
-
-                var reader = ExecuteQuery(SQL_SELECT_LAST_INSERT_ID);
-
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "INSERT INTO Type(NomType) VALUES('" + p.NomType + "');";
+                com.ExecuteNonQuery();
+                com.CommandText = "SELECT LAST_INSERT_ID() FROM Type;";
+                IDataReader reader = com.ExecuteReader();
                 int id = 1;
-                if (reader != null && reader.Read())
-                {
-                    Int32.TryParse(reader[0].ToString(), out id);
-                }
-                type.Id = id;
+                if (reader.Read())
+                    id = Convert.ToInt32(reader[0]);
+                p.Id = id;
+            }
+            finally
+            {
+                con.Close();
             }
         }
 
         public Types Lister()
         {
-            var types = new Types();
-
-            var reader = ExecuteQuery(SQL_SELECT_ALL);
-
-            while (reader != null && reader.Read())
+            Types liste = new Types();
+            con.Open();
+            try
             {
-                var type = reader2Type(reader);
-                types.Ajouter(type);
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Type";
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Metier.Type d = reader2Type(reader);
+                    liste.Ajouter(d);
+                }
             }
-
-            return types;
-        }
-
-        public void Relire(Metier.Type type)
-        {
-            var reader = ExecuteQuery(String.Format(SQL_SELECT_BY_ID, type.Id));
-
-            if (reader != null && reader.Read())
+            finally
             {
-                type = reader2Type(reader);
+                con.Close();
+            }
+            return liste;
+        }
+
+        public void Relire(Metier.Type p)
+        {
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Type WHERE IdType=" + p.Id.ToString();
+                IDataReader reader = com.ExecuteReader();
+                if (reader.Read())
+                {
+                    p.NomType = reader["NomType"].ToString();
+                }
+            }
+            finally
+            {
+                con.Close();
             }
         }
 
-        public void Sauver(Metier.Type type)
+        public void Sauver(Metier.Type p)
         {
-            ExecuteCommand(String.Format(SQL_UPDATE, type.NomType, type.Id));
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "UPDATE Type SET NomType='" + p.NomType + "' WHERE IdType=" + p.Id.ToString();
+                com.ExecuteNonQuery();
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
-        public void Supprimer(Metier.Type type)
+        public void Supprimer(Metier.Type p)
         {
-            ExecuteCommand(String.Format(SQL_DELETE, type.Id));
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "DELETE FROM Type WHERE IdType=" + p.Id.ToString();
+                com.ExecuteNonQuery();
+            }
+            finally
+            {
+                con.Close();
+            }
         }
+
         private Metier.Type reader2Type(IDataReader reader)
         {
-            var type = new Metier.Type();
-            int id;
-            if (Int32.TryParse(reader["IdType"].ToString(), out id))
-            {
-                type.Id = id;
-            }
-            type.NomType = reader["NomType"].ToString();
-            return type;
-        }
-
-        private IDataReader ExecuteQuery(string sql)
-        {
-            IDataReader reader = null;
-
-            if (con != null)
-            {
-                if (con.State != ConnectionState.Open)
-                {
-                    con.Open();
-                }
-
-                try
-                {
-                    var command = con.CreateCommand();
-                    command.CommandText = sql;
-                    reader = command.ExecuteReader();
-                }
-                finally
-                {
-                    con.Close();
-                }
-            }
-
-            return reader;
-        }
-
-        private void ExecuteCommand(string sql)
-        {
-            if (con != null)
-            {
-                if (con.State != ConnectionState.Open)
-                {
-                    con.Open();
-                }
-
-                try
-                {
-                    var command = con.CreateCommand();
-                    command.CommandText = sql;
-                    command.ExecuteNonQuery();
-                }
-                finally
-                {
-                    con.Close();
-                }
-            }
+            Metier.Type d = new Metier.Type();
+            d.Id = Convert.ToInt32(reader["IdType"]);
+            d.NomType = reader["NomType"].ToString();
+            return d;
         }
     }
 }
+
