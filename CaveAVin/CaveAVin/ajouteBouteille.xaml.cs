@@ -22,9 +22,9 @@ namespace CaveAVin
         private List<Metier.Bouteille> bouteilles;
         private Metier.Bouteille bouteille;
         private int nbBouteille;
-        public ajouteBouteille(List<Metier.Bouteille> b,Metier.Types typs, Metier.Appelations apps,Metier.Pays2 pays,Metier.Contenances conts)
+        public ajouteBouteille()
         {
-            bouteilles = b;
+            //bouteilles = b;
             bouteille = new Metier.Bouteille();
             nbBouteille = 1;
 
@@ -33,55 +33,55 @@ namespace CaveAVin
             button.IsEnabled = false;
 
             // initialisation des listes dans les comboBox
-            int index = -1, i = 0;
-            foreach (Metier.Type c in typs.Lister())
-            {
-                comboBox.Items.Add(c);
-                if (c.Id == bouteille.IdType)
-                    index = i;
-                ++i;
-            }
-            comboBox.SelectedIndex = index;
-
-            //index = -1;i = 0;
-            //foreach (Metier.Region c in regs.Lister())
+            //int index = -1, i = 0;
+            //foreach (Metier.Type c in typs.Lister())
             //{
-            //    comboBox1.Items.Add(c);
-            //    if (c.Id == bouteille.IdRegion)
+            //    comboBox.Items.Add(c);
+            //    if (c.Id == bouteille.IdType)
             //        index = i;
             //    ++i;
             //}
-            //comboBox1.SelectedIndex = index;
+            //comboBox.SelectedIndex = index;
 
-            index = -1; i = 0;
-            foreach (Metier.Appelation c in apps.Lister())
-            {
-                comboBox2.Items.Add(c);
-                if (c.Id == bouteille.IdAppelation)
-                    index = i;
-                ++i;
-            }
-            comboBox2.SelectedIndex = index;
+            ////index = -1;i = 0;
+            ////foreach (Metier.Region c in regs.Lister())
+            ////{
+            ////    comboBox1.Items.Add(c);
+            ////    if (c.Id == bouteille.IdRegion)
+            ////        index = i;
+            ////    ++i;
+            ////}
+            ////comboBox1.SelectedIndex = index;
 
-            index = -1; i = 0;
-            foreach (Metier.Pays c in pays.Lister())
-            {
-                comboBox3.Items.Add(c);
-                if (c.Id == bouteille.Region.IdPays)
-                    index = i;
-                ++i;
-            }
-            comboBox3.SelectedIndex = index;
+            //index = -1; i = 0;
+            //foreach (Metier.Appelation c in apps.Lister())
+            //{
+            //    comboBox2.Items.Add(c);
+            //    if (c.Id == bouteille.IdAppelation)
+            //        index = i;
+            //    ++i;
+            //}
+            //comboBox2.SelectedIndex = index;
 
-            index = -1; i = 0;
-            foreach (Metier.Contenance c in conts.Lister())
-            {
-                comboBox4.Items.Add(c);
-                if (c.Id == bouteille.IdContenance)
-                    index = i;
-                ++i;
-            }
-            comboBox4.SelectedIndex = index;
+            //index = -1; i = 0;
+            //foreach (Metier.Pays c in pays.Lister())
+            //{
+            //    comboBox3.Items.Add(c);
+            //    if (c.Id == bouteille.Region.IdPays)
+            //        index = i;
+            //    ++i;
+            //}
+            //comboBox3.SelectedIndex = index;
+
+            //index = -1; i = 0;
+            //foreach (Metier.Contenance c in conts.Lister())
+            //{
+            //    comboBox4.Items.Add(c);
+            //    if (c.Id == bouteille.IdContenance)
+            //        index = i;
+            //    ++i;
+            //}
+            //comboBox4.SelectedIndex = index;
         }
 
         // appuyer sur le bouton annuler
