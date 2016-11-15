@@ -220,10 +220,15 @@ namespace CaveAVin
                     button[k, j].Height = HeightBoutton;
                     Grid.SetRow(button[k, j], k);
                     Grid.SetColumn(button[k, j], j);
+                    res = "";
+                    try
+                    {
+                        res = req.SelStr1("SELECT NomType From Type natural join Bouteille where idCasier =" + nbasier +
+                        " and Bouteille.Position_X = " + k + " and Bouteille.Position_Y = " + j + ";", "NomType");
+                    }catch
+                    {
 
-
-                    res = req.SelStr1("SELECT NomType From Type natural join Bouteille where idCasier =" + nbasier + 
-                        " and Bouteille.Position_X = "+ k +" and Bouteille.Position_Y = "+ j +";","NomType");
+                    }
                      lNomC.Content = req.SelStr1("Select NomCasier From Casier Where idCasier = "+ nbasier,"NomCasier");
 
                     if(res == "Blanc")
