@@ -112,7 +112,7 @@ namespace CaveAVin
                 DAO.PaysDAO pay = new DAO.PaysDAO(DAO.BDD.Instance.Connexion);
                 Metier.Pays2 payss = pay.Lister();
 
-                //DAO.RegionDAO reg = new DAO.RegionDAO(DAO.BDD.Instance.Connexion);
+                DAO.RegionDAO reg = new DAO.RegionDAO(DAO.BDD.Instance.Connexion);
                 //Metier.Regions regions = reg.Lister();
 
                 DAO.AppelationDAO app = new DAO.AppelationDAO(DAO.BDD.Instance.Connexion);
@@ -121,16 +121,16 @@ namespace CaveAVin
                 DAO.ContenanceDAO cont = new DAO.ContenanceDAO(DAO.BDD.Instance.Connexion);
                 Metier.Contenances conts = cont.Lister();
 
-                ajouteBouteille f = new ajouteBouteille(b, typs, apps, payss, conts);
-                //if (f.ShowDialog() == true)
-                //{
-                //    DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
-                //    foreach (Metier.Bouteille bt in b)
-                //    {
-                //        daoBouteille.Créer(bt); // ajoute la bouteille dans la base                    
-                //        // et dans l'IHM
-                //    }
-                //}
+                ajouteBouteille f = new ajouteBouteille();
+                if (f.ShowDialog() == true)
+                {
+                    DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
+                    foreach (Metier.Bouteille bt in b)
+                    {
+                        daoBouteille.Créer(bt); // ajoute la bouteille dans la base                    
+                        // et dans l'IHM
+                    }
+                }
             }
             catch (Exception x)
             {
@@ -302,6 +302,12 @@ namespace CaveAVin
         {
             Accueil.Visibility = Visibility.Hidden;
             affichBoute.Visibility = Visibility.Visible;
+        }
+
+        private void BT_Menu1_Click(object sender, RoutedEventArgs e)
+        {
+            Accueil.Visibility = Visibility.Visible;
+            affichBoute.Visibility = Visibility.Hidden;
         }
     }
 }
