@@ -102,6 +102,28 @@ namespace DAO
             return liste;
         }
 
+        public Regions Lister(Pays c)
+        {
+            Regions liste = new Regions();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Regions WHERE IdPays=" + c.Id.ToString();
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Region cd = reader2Region(reader);
+                    liste.Ajouter(cd);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return liste;
+        }
+
         /// <summary>
         /// Charge la région entré en paramètre
         /// </summary>

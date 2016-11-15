@@ -49,7 +49,7 @@
                 </MenuItem.Background>
             </MenuItem>
         </Menu>
-        <Grid x:Name="affichBoute" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,133,0,0" Width="1635" Height="794" Grid.RowSpan="2" Visibility="Visible">
+        <Grid x:Name="affichBoute" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,126,0,7" Width="1635" Height="794" Grid.RowSpan="2" Visibility="Visible">
             <Border x:Name="ficheDetailBouteille" Visibility="Hidden" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Left" Height="659" Margin="965,83,-104,0" VerticalAlignment="Top" Width="429" Background="#FFFCF4E3">
                 <Grid >
                     <Grid.ColumnDefinitions>
@@ -125,9 +125,14 @@
                 <Label x:Name="lNomC" Content="&#xA;" HorizontalAlignment="Left" Margin="424,0,0,0" VerticalAlignment="Top" Width="270"/>
             </Grid>
         </Grid>
-        <Grid x:Name="Faux_menu" Margin="0,126,1469,1" Visibility="hidden" MouseLeave="part" Background="#FF661141" Grid.RowSpan="2">
-            <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="25,18,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="button2" Content="Button" HorizontalAlignment="Left" Margin="25,37,0,0" VerticalAlignment="Top" Width="75"/>
+        <Grid x:Name="Faux_menu" Margin="0,126,1481,0" Visibility="Visible" MouseLeave="part" Background="#FF661141" Grid.RowSpan="2" Height="800" VerticalAlignment="Top">
+            <Button x:Name="BT_Menu1" Content="Button" HorizontalAlignment="Left" Margin="5,11,0,0" VerticalAlignment="Top" Width="144" Background="#FF661141" BorderBrush="#FF661141" Height="51"/>
+            <Button x:Name="BT_Menu2" Content="Button" HorizontalAlignment="Left" Margin="5,74,0,0" VerticalAlignment="Top" Width="149" Background="#FF661141" BorderBrush="#FF661141" Height="51"/>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="0,67,0,0" VerticalAlignment="Top" Width="166"/>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="0,194,0,0" VerticalAlignment="Top" Width="166"/>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="0,130,0,0" VerticalAlignment="Top" Width="166"/>
+            <Button x:Name="BT_Menu3" Content="Button" HorizontalAlignment="Left" Margin="5,137,0,0" VerticalAlignment="Top" Width="146" Background="#FF661141" BorderBrush="#FF661141" Height="52"/>
+            <Button x:Name="BT_Menu4" Content="Button" HorizontalAlignment="Left" Margin="5,201,0,0" VerticalAlignment="Top" Width="146" Background="#FF661141" BorderBrush="#FF661141" Height="49"/>
         </Grid>
     </Grid>
 </Window>

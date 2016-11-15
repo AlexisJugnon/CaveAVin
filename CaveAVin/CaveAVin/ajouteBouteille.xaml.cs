@@ -22,7 +22,7 @@ namespace CaveAVin
         private List<Metier.Bouteille> bouteilles;
         private Metier.Bouteille bouteille;
         private int nbBouteille;
-        public ajouteBouteille(List<Metier.Bouteille> b,Metier.Types typs,Metier.Regions regs,Metier.Appelations apps,Metier.Pays2 pays,Metier.Contenances conts)
+        public ajouteBouteille(List<Metier.Bouteille> b,Metier.Types typs, Metier.Appelations apps,Metier.Pays2 pays,Metier.Contenances conts)
         {
             bouteilles = b;
             bouteille = new Metier.Bouteille();
@@ -43,15 +43,15 @@ namespace CaveAVin
             }
             comboBox.SelectedIndex = index;
 
-            index = -1;i = 0;
-            foreach (Metier.Region c in regs.Lister())
-            {
-                comboBox1.Items.Add(c);
-                if (c.Id == bouteille.IdRegion)
-                    index = i;
-                ++i;
-            }
-            comboBox1.SelectedIndex = index;
+            //index = -1;i = 0;
+            //foreach (Metier.Region c in regs.Lister())
+            //{
+            //    comboBox1.Items.Add(c);
+            //    if (c.Id == bouteille.IdRegion)
+            //        index = i;
+            //    ++i;
+            //}
+            //comboBox1.SelectedIndex = index;
 
             index = -1; i = 0;
             foreach (Metier.Appelation c in apps.Lister())
