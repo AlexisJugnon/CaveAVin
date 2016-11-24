@@ -109,7 +109,7 @@
                 </Grid.ColumnDefinitions>
             </Grid>
             <Grid x:Name="aDecal" HorizontalAlignment="Left" Height="740" Margin="292,27,0,0" VerticalAlignment="Top" Width="946">
-                <Button x:Name="casPrec" Content="&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="54,323,0,0" Height="88" BorderThickness="0">
+                <Button x:Name="casPrec" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="54,323,0,0" Height="88" BorderThickness="0" Click="casPrec_Click">
                     <Button.Background>
                         <ImageBrush ImageSource="BoutonPrécédent.png"/>
                     </Button.Background>
