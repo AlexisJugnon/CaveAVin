@@ -17,6 +17,8 @@ using System.Windows.Shapes;
 
 namespace CaveAVin
 {
+
+
     ///Noms des différents éléments graphiques composant le MainWindows
     ///
     ///Le grid global de la fenêtre s'appelle MainWindows
@@ -37,8 +39,6 @@ namespace CaveAVin
     ///inclus une scroll bar quand le nombre de ligne dépassent la taille du textBox et l'utilisateur ne peut écrire dedans
     ///
     ///le grid qui contient les objets de l'accueil s'appelle Accueil
-    ///
-    ///Le bouton supprimer pour le casier s'appelle BT_Supprimer
 
 
 
@@ -48,11 +48,7 @@ namespace CaveAVin
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Metier.Bouteille boissonAsupprimer = new Metier.Bouteille(); // va contenir toutes les informations de la bouteille à suprimer visuellement
         private DAO.reqSQL req = new DAO.reqSQL(DAO.BDD.Instance.Connexion);
-        /// <summary>
-        /// Initialise les composants de la fenêtre
-        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -68,14 +64,11 @@ namespace CaveAVin
 
             initBDD();
 
+            initGridCasier();
             afficherBouteille();
         }
 
-        /// <summary>
-        /// Affiche le menu
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+   
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             Faux_menu.Visibility = Visibility; 
@@ -156,7 +149,6 @@ namespace CaveAVin
             // crée les objets DAO. pour lire la base
             DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
             DAO.CasierDAO daoCasier = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
-
             // crée une instance DAO.citation + l'affiche dans accueil
             DAO.CitationDAO daoCitation = new DAO.CitationDAO(DAO.BDD.Instance.Connexion);
             ChoixTexte(daoCitation);
@@ -177,60 +169,67 @@ namespace CaveAVin
         #region affichageCasier
 
         private int nbasier = 1;
+        private int nbCasier = 1;
         private Button[,] button;
+        private Grid[] gestionCasier;
         private ColumnDefinition[] col1;
         private RowDefinition[] col2;
 
-        /// <summary>
-        /// Affiche toutes les bouteilles dans la base de données dans un grid
-        /// </summary>
-        private void afficherBouteille()
+
+        private void initGridCasier()
         {
-            int nbC = 0, nbL = 0;
-            int nbCasier = req.SelInt("Select Count(IdCasier) FROM Casier");
-            if (nbCasier > 1)
+            nbCasier = req.SelInt("Select Count(IdCasier) FROM Casier");
+            gestionCasier = new Grid[nbCasier+1];
+            
+            int nbC, nbL;
+            int HeightBoutton, WidthBoutton;
+
+
+            for (int i = 1; i < nbCasier+1; i++)
             {
-                MultiCasier.Visibility = Visibility.Visible;
-            }
+                gestionCasier[i] = new Grid();
+                test.Children.Add(gestionCasier[i]);
+                gestionCasier[i].Visibility = Visibility.Hidden;
 
-            nbL = req.SelInt("Select Largeur_X FROM Casier");
-            nbC = req.SelInt("Select Largeur_Y FROM Casier");
+                nbC = 0; nbL = 0;
+                nbL = req.SelInt("Select Largeur_X FROM Casier where idCasier = " + i);
+                nbC = req.SelInt("Select Largeur_Y FROM Casier where idCasier = " + i);
 
-            int WidthBoutton = (int)affBout.Width / nbC;
-            int HeightBoutton = (int)affBout.Height / nbL;
+                WidthBoutton = (int)affBout.Width / nbC;
+                HeightBoutton = (int)affBout.Height / nbL;
 
-            #region GestionGrid
-            //Gère la création du grid nécessaire à l'affichage des boutons
-            col1 = new ColumnDefinition[nbC];
-            col2 = new RowDefinition[nbL];
-            for (int f = 0; f < nbC; f++)
-            {
-                col1[f] = new ColumnDefinition();
-                col1[f].Width = GridLength.Auto;
+                col1 = new ColumnDefinition[nbC];
+                col2 = new RowDefinition[nbL];
 
-                test.ColumnDefinitions.Add(col1[f]);
-            }
-            for (int f = 0; f < nbL; f++)
-            {
-                col2[f] = new RowDefinition();
-                col2[f].Height = GridLength.Auto;
+                for (int f = 0; f < nbC; f++)
+                {
+                    col1[f] = new ColumnDefinition();
+                    col1[f].Width = GridLength.Auto;
 
-                test.RowDefinitions.Add(col2[f]);
-            }
+                    gestionCasier[i].ColumnDefinitions.Add(col1[f]);
+                }
 
-            #endregion
+                for (int f = 0; f < nbL; f++)
+                {
+                    col2[f] = new RowDefinition();
+                    col2[f].Height = GridLength.Auto;
 
+                    gestionCasier[i].RowDefinitions.Add(col2[f]);
+
+                }
             #region GestionAffichBouteille
             //Gère l'affichage des bouteilles dans le casier
             string res;
-            button = new Button[nbC+1, nbL+1];
+            button = new Button[nbC + 1, nbL + 1];
             for (int k = 0; k < nbC; k++)
             {
                 for (int j = 0; j < nbL; j++)
                 {
                     button[k, j] = new Button();
-                    test.Children.Add(button[k, j]);
+                    
+                    gestionCasier[i].Children.Add(button[k, j]);
                     button[k, j].Visibility = Visibility.Visible;
+                    button[k, j].Content = k + ", " + j;
                     button[k, j].Width = WidthBoutton;
                     button[k, j].Height = HeightBoutton;
                     Grid.SetRow(button[k, j], k);
@@ -238,15 +237,15 @@ namespace CaveAVin
                     res = "";
                     try
                     {
-                        res = req.SelStr1("SELECT NomType From Type natural join Bouteille where idCasier =" + nbasier +
-                        " and Bouteille.Position_X = " + k + " and Bouteille.Position_Y = " + j + "AND Bouteille.Bue = 0;", "NomType"); // J'ai rajouté le fait que la bouteille doit être non bu
-                    }catch
+                        res = req.SelStr1("SELECT NomType From Type natural join Bouteille where idCasier =" + i +
+                        " and Bouteille.Position_X = " + k + " and Bouteille.Position_Y = " + j + ";", "NomType");
+                    }
+                    catch
                     {
 
                     }
-                     lNomC.Content = req.SelStr1("Select NomCasier From Casier Where idCasier = "+ nbasier,"NomCasier");
 
-                    if(res == "Blanc")
+                    if (res == "Blanc")
                     {
                         var brush = new ImageBrush();
                         brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/BlancCasier.png", UriKind.Relative));
@@ -268,19 +267,61 @@ namespace CaveAVin
                         button[k, j].Click += nouvelleBout;
                     }
                 }
+                    }
+
             }
 
             #endregion
+        }
+        private void afficherBouteille()
+        {
+
+            #region GestionFleche
+
+            if (nbCasier > 1)
+            {
+                MultiCasier.Visibility = Visibility.Visible;
+            }
+
+            if (nbasier == 1)
+            {
+                casPrec.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                casPrec.Visibility = Visibility.Visible;
+            }
+
+            if (nbasier < nbCasier)
+            {
+                casSuiv.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                casSuiv.Visibility = Visibility.Hidden;
+            }
+            #endregion
+
+            lNomC.Content = req.SelStr1("Select NomCasier From Casier Where idCasier = " + nbasier, "NomCasier");
+
+            gestionCasier[nbasier].Visibility = Visibility.Visible;
+
         }
 
         private void selectionBouteille(Object sender, EventArgs e)
         {
             Decaler();
+
+            //récupération des coordonnées de la bouteille + select idBouteille en fonction des coordonnées et du casier
+            int ligne = Int32.Parse(sender.ToString().Substring(32,1));
+            int col = Int32.Parse(sender.ToString().Substring(35, 1));
+
             displayFicheDetailBouteille(true);
         }
 
         private void casSuiva(object sender, RoutedEventArgs e)
         {
+            gestionCasier[nbasier].Visibility = Visibility.Hidden;
             nbasier++;
             afficherBouteille();
         }
@@ -289,20 +330,25 @@ namespace CaveAVin
         {
             aDecal.Margin = new Thickness(0, 30, 0, 50);
         }
+
+        private void casPrec_Click(object sender, RoutedEventArgs e)
+        {
+            gestionCasier[nbasier].Visibility = Visibility.Hidden;
+            nbasier--;
+            afficherBouteille();
+        }
         #endregion
 
         #region Affichage Détail Bouteille
 
-        // A finir quand les cases du casier seront affiché
+        // A refaire avec en passage en parametre num de la colonne et num de la ligne
         private void afficherDetailBouteille(Metier.Bouteille bouteille)
         {
             if (bouteille != null)
             {
-                boissonAsupprimer = bouteille;
                 lblAppelation.Content = bouteille.Appelation?.NomAppelation;
                 lblCategorie.Content = bouteille.Type?.NomType;
                 lblContenance.Content = bouteille.Contenance?.Valeur;
-                bouteille.Bue.ToString();
                 lblCru.Content = bouteille.Cru?.NomCru;
                 lblDomaine.Content = bouteille.Domaine?.NomDomaine;
                 lblMillesime.Content = bouteille.Millesime?.NomMillesime;
@@ -311,7 +357,6 @@ namespace CaveAVin
                 lblVinification.Content = bouteille.Type_vinification?.NomVinif;
                 displayFicheDetailBouteille(true);
             }
-            
         } 
 
         private void displayFicheDetailBouteille(bool rendreVisible)
@@ -321,11 +366,6 @@ namespace CaveAVin
 
         #endregion
 
-        /// <summary>
-        /// Affiche le casier et les bouteiles contenues à l'intérieur
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void BT_VoirCave_Click(object sender, RoutedEventArgs e)
         {
             Accueil.Visibility = Visibility.Hidden;
@@ -349,18 +389,6 @@ namespace CaveAVin
             TB_SaviezVous.Text = c.chercher(r.Next(1, 11));
         }
 
-        /// <summary>
-        /// Supprime une bouteille du casier
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BT_Supprimer_Click(object sender, RoutedEventArgs e)
-        {
-            DAO.BDD.Instance.Connexion.ConnectionString = "Database=WineFinder;DataSource=137.74.233.210;User Id=user; Password=user";
-            DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
-            daoBouteille.RetirerBue(boissonAsupprimer);
-            affichBoute.Visibility = Visibility.Hidden;
-            BT_VoirCave_Click(sender, e);// ça devrait recharger la fenêtre du casier
-        }
+      
     }
 }
