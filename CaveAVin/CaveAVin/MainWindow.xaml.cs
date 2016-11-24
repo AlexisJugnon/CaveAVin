@@ -104,6 +104,11 @@ namespace CaveAVin
         /// <param name="e"></param>
         private void nouvelleBout(object sender, RoutedEventArgs e)
         {
+            //récupération des coordonnées de la bouteille + select idBouteille en fonction des coordonnées et du casier
+            int ligne = Int32.Parse(sender.ToString().Substring(32, 1));
+            int col = Int32.Parse(sender.ToString().Substring(35, 1));
+
+            int casier = nbasier;
             try
             {
                 List<Metier.Bouteille> b = new List<Metier.Bouteille>();
@@ -149,7 +154,9 @@ namespace CaveAVin
         private ColumnDefinition[] col1;
         private RowDefinition[] col2;
 
-
+        /// <summary>
+        /// Permet d'initialiser tous les casiers sous forme de grid pour pouvoir les afficher plus tard
+        /// </summary>
         private void initGridCasier()
         {
             nbCasier = req.SelInt("Select Count(IdCasier) FROM Casier");
@@ -247,6 +254,10 @@ namespace CaveAVin
 
             #endregion
         }
+
+        /// <summary>
+        /// Permet de gérer l'affichage des flêches pour la gestion des casiers et afficher le casier suivant 
+        /// </summary>
         private void afficherBouteille()
         {
 
@@ -283,7 +294,7 @@ namespace CaveAVin
         }
 
         /// <summary>
-        /// Permet de gérer le click sur une boueille
+        /// Permet de gérer le click sur une bouteille
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -395,9 +406,6 @@ namespace CaveAVin
             TB_SaviezVous.Text = c.chercher(r.Next(1, 11));
         }
 
-
-
-    
         /// <summary>
         /// Initialise la connexion au SGBDR
         /// </summary>
@@ -426,6 +434,16 @@ namespace CaveAVin
                     b.Casier = ct;
                 }
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BT_Supprimer_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
