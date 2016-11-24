@@ -17,8 +17,6 @@ using System.Windows.Shapes;
 
 namespace CaveAVin
 {
-
-
     ///Noms des différents éléments graphiques composant le MainWindows
     ///
     ///Le grid global de la fenêtre s'appelle MainWindows
@@ -39,6 +37,8 @@ namespace CaveAVin
     ///inclus une scroll bar quand le nombre de ligne dépassent la taille du textBox et l'utilisateur ne peut écrire dedans
     ///
     ///le grid qui contient les objets de l'accueil s'appelle Accueil
+    ///
+    ///Le bouton supprimer pour le casier s'appelle BT_Supprimer
 
 
 
@@ -48,7 +48,11 @@ namespace CaveAVin
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Metier.Bouteille boissonAsupprimer = new Metier.Bouteille(); // va contenir toutes les informations de la bouteille à suprimer visuellement
         private DAO.reqSQL req = new DAO.reqSQL(DAO.BDD.Instance.Connexion);
+        /// <summary>
+        /// Initialise les composants de la fenêtre
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -67,7 +71,11 @@ namespace CaveAVin
             afficherBouteille();
         }
 
-   
+        /// <summary>
+        /// Affiche le menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             Faux_menu.Visibility = Visibility; 
@@ -148,6 +156,7 @@ namespace CaveAVin
             // crée les objets DAO. pour lire la base
             DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
             DAO.CasierDAO daoCasier = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
+
             // crée une instance DAO.citation + l'affiche dans accueil
             DAO.CitationDAO daoCitation = new DAO.CitationDAO(DAO.BDD.Instance.Connexion);
             ChoixTexte(daoCitation);
@@ -172,7 +181,9 @@ namespace CaveAVin
         private ColumnDefinition[] col1;
         private RowDefinition[] col2;
 
-
+        /// <summary>
+        /// Affiche toutes les bouteilles dans la base de données dans un grid
+        /// </summary>
         private void afficherBouteille()
         {
             int nbC = 0, nbL = 0;
@@ -228,7 +239,7 @@ namespace CaveAVin
                     try
                     {
                         res = req.SelStr1("SELECT NomType From Type natural join Bouteille where idCasier =" + nbasier +
-                        " and Bouteille.Position_X = " + k + " and Bouteille.Position_Y = " + j + ";", "NomType");
+                        " and Bouteille.Position_X = " + k + " and Bouteille.Position_Y = " + j + "AND Bouteille.Bue = 0;", "NomType"); // J'ai rajouté le fait que la bouteille doit être non bu
                     }catch
                     {
 
@@ -287,9 +298,11 @@ namespace CaveAVin
         {
             if (bouteille != null)
             {
+                boissonAsupprimer = bouteille;
                 lblAppelation.Content = bouteille.Appelation?.NomAppelation;
                 lblCategorie.Content = bouteille.Type?.NomType;
                 lblContenance.Content = bouteille.Contenance?.Valeur;
+                bouteille.Bue.ToString();
                 lblCru.Content = bouteille.Cru?.NomCru;
                 lblDomaine.Content = bouteille.Domaine?.NomDomaine;
                 lblMillesime.Content = bouteille.Millesime?.NomMillesime;
@@ -298,6 +311,7 @@ namespace CaveAVin
                 lblVinification.Content = bouteille.Type_vinification?.NomVinif;
                 displayFicheDetailBouteille(true);
             }
+            
         } 
 
         private void displayFicheDetailBouteille(bool rendreVisible)
@@ -307,6 +321,11 @@ namespace CaveAVin
 
         #endregion
 
+        /// <summary>
+        /// Affiche le casier et les bouteiles contenues à l'intérieur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BT_VoirCave_Click(object sender, RoutedEventArgs e)
         {
             Accueil.Visibility = Visibility.Hidden;
@@ -330,6 +349,18 @@ namespace CaveAVin
             TB_SaviezVous.Text = c.chercher(r.Next(1, 11));
         }
 
-      
+        /// <summary>
+        /// Supprime une bouteille du casier
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BT_Supprimer_Click(object sender, RoutedEventArgs e)
+        {
+            DAO.BDD.Instance.Connexion.ConnectionString = "Database=WineFinder;DataSource=137.74.233.210;User Id=user; Password=user";
+            DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
+            daoBouteille.RetirerBue(boissonAsupprimer);
+            affichBoute.Visibility = Visibility.Hidden;
+            BT_VoirCave_Click(sender, e);// ça devrait recharger la fenêtre du casier
+        }
     }
 }
