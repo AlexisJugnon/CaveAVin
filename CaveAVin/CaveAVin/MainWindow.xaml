@@ -7,10 +7,7 @@
         mc:Ignorable="d"
         
         Title="WineFinder" Height="946.677" Width="1642.9">
-    <Grid x:Name="MainWindows" HorizontalAlignment="Stretch" Height="927" Margin="0,0,0,-21" VerticalAlignment="Top">
-        <Grid.Background>
-            <ImageBrush/>
-        </Grid.Background>
+    <Grid x:Name="MainWindows" HorizontalAlignment="Stretch" Height="927" Margin="0,0,0,-21" VerticalAlignment="Top" Background="#FFF4F4F4">
         <Grid.RowDefinitions>
             <RowDefinition Height="101*"/>
             <RowDefinition Height="208*"/>
@@ -22,14 +19,14 @@
             </Grid.RowDefinitions>
             <Rectangle Fill="#FF661141" HorizontalAlignment="Left" Height="89" Stroke="Black" VerticalAlignment="Top" Width="1312" Margin="150,70,0,0"/>
             <Label x:Name="Label1" FontSize="20" Content="Le saviez-vous ?" HorizontalAlignment="Left" Margin="713,86,0,0" Foreground="White" VerticalAlignment="Top" Height="54" Width="206"/>
-            <TextBox FontSize="30" Background="white" x:Name="TB_SaviezVous" HorizontalAlignment="Left" Height="427" TextWrapping="Wrap" VerticalAlignment="Top" Width="1312" VerticalScrollBarVisibility="Auto" IsEnabled="True" AcceptsReturn="True" Margin="150,159,0,0" Focusable="False"/>
+            <TextBox FontSize="30" Background="white" x:Name="TB_SaviezVous" HorizontalAlignment="Left" Height="427" TextWrapping="Wrap" VerticalAlignment="Top" Width="1312" VerticalScrollBarVisibility="Auto" IsEnabled="True" AcceptsReturn="True" Margin="150,159,0,0"/>
 
             <Button x:Name="BT_VoirBouteille" HorizontalAlignment="Left" Margin="1388,606,0,0" VerticalAlignment="Top" Width="74" Height="86" BorderBrush="White" Click="BT_VoirBouteille_Click" Grid.RowSpan="2">
                 <Button.Background>
                     <ImageBrush ImageSource="VoirBouteille.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="BT_VoirCave"  HorizontalAlignment="Left" Margin="763,606,0,0" VerticalAlignment="Top" Width="74" Height="86" BorderBrush="White" Grid.RowSpan="2" Click="BT_VoirCave_Click">
+            <Button x:Name="BT_VoirCave"  HorizontalAlignment="Left" Margin="763,74,0,0" VerticalAlignment="Top" Width="74" Height="86" BorderBrush="White" Click="BT_VoirCave_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="VoirCave.png"/>
                 </Button.Background>
@@ -98,6 +95,7 @@
                     <Label x:Name="lblMillesime" HorizontalAlignment="Left" Height="23" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="7"/>
                     <Label x:Name="lblContenance" HorizontalAlignment="Left" Height="23" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="8"/>
                     <Label x:Name="lblNbBouteille" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="29" Grid.Column="2" Grid.Row="9"/>
+                    <Button x:Name="BT_Supprimer" Content="Supprimer" HorizontalAlignment="Left" Margin="90,22,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="BT_Supprimer_Click"/>
                 </Grid>
             </Border>
             <Button x:Name="boutPlus" Content="&#xA;" HorizontalAlignment="Right" Height="88" Margin="0,645,39,0" VerticalAlignment="Top" Width="94" BorderThickness="0" Click="nouvelleBout">

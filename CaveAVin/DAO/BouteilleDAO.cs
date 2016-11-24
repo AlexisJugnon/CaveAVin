@@ -308,6 +308,27 @@ namespace DAO
             }
         }
 
+        /// <summary>
+        /// Met bue à 1 pour une bouteille précise
+        /// </summary>
+        /// <param name="p">La bouteille où il faut mettre la bouteille à bue</param>
+        public void RetirerBue(Bouteille p)
+        {
+           
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "UPDATE Bouteille SET Bue = 1 WHERE IdBouteille=" + p.Id.ToString();
+                com.ExecuteNonQuery();
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+
         public void Sauver(Bouteille b)
         {
             con.Open();

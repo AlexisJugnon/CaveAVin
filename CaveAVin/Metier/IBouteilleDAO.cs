@@ -38,6 +38,12 @@ namespace Metier
     /// </summary>
     /// <param name="p"></param>
     void Supprimer(Bouteille p);
+    
+    /// <summary>
+    /// Met le paramètre bue à 1 pour spécifier qu'elle est bue
+    /// </summary>
+    /// <param name="p"></param>
+    void RetirerBue(Bouteille p);
 
         /// <summary>
         /// Liste toute les bouteilles
