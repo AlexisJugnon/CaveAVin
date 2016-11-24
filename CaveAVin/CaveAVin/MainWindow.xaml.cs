@@ -140,32 +140,6 @@ namespace CaveAVin
             }
         }
 
-        /// <summary>
-        /// Initialise la connexion au SGBDR
-        /// </summary>
-        private void initBDD()
-        {
-            DAO.BDD.Instance.Connexion.ConnectionString = "Database=WineFinder;DataSource=137.74.233.210;User Id=user; Password=user";
-            // crée les objets DAO. pour lire la base
-            DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
-            DAO.CasierDAO daoCasier = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
-            // crée une instance DAO.citation + l'affiche dans accueil
-            DAO.CitationDAO daoCitation = new DAO.CitationDAO(DAO.BDD.Instance.Connexion);
-            ChoixTexte(daoCitation);
-
-            Metier.Casiers c = daoCasier.Lister();
-            foreach(Metier.Casier ct in c.Lister())
-            {
-                Metier.Bouteilles bout = daoBouteille.Lister(ct);
-                ct.Ajouter(bout);
-                foreach(Metier.Bouteille b in bout.Lister())
-                {
-                    b.Casier = ct;
-                }
-            }
-        }
-
-
         #region affichageCasier
 
         private int nbasier = 1;
@@ -308,17 +282,29 @@ namespace CaveAVin
 
         }
 
+        /// <summary>
+        /// Permet de gérer le click sur une boueille
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void selectionBouteille(Object sender, EventArgs e)
         {
             Decaler();
-
+            
             //récupération des coordonnées de la bouteille + select idBouteille en fonction des coordonnées et du casier
             int ligne = Int32.Parse(sender.ToString().Substring(32,1));
             int col = Int32.Parse(sender.ToString().Substring(35, 1));
 
+            int idBout = Int32.Parse(req.SelStr1("Select IdBouteille From Bouteille Where IdCasier = " + nbasier + " AND Position_X = " + col + " And Position_Y = " + ligne, "IdBouteille"));
+            Console.WriteLine(idBout);
             displayFicheDetailBouteille(true);
         }
 
+        /// <summary>
+        /// Permet de gérer le click sur le bouton suivant dans l'affichage des casiers
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void casSuiva(object sender, RoutedEventArgs e)
         {
             gestionCasier[nbasier].Visibility = Visibility.Hidden;
@@ -326,17 +312,26 @@ namespace CaveAVin
             afficherBouteille();
         }
 
+        /// <summary>
+        /// Permet de décaler l'affichage du casier pour pouvoir afficher la fiche bouteille
+        /// </summary>
         private void Decaler()
         {
             aDecal.Margin = new Thickness(0, 30, 0, 50);
         }
 
+        /// <summary>
+        /// Permet de gérer le click sur le bouton précedent dans l'affichage des casiers
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void casPrec_Click(object sender, RoutedEventArgs e)
         {
             gestionCasier[nbasier].Visibility = Visibility.Hidden;
             nbasier--;
             afficherBouteille();
         }
+
         #endregion
 
         #region Affichage Détail Bouteille
@@ -366,12 +361,23 @@ namespace CaveAVin
 
         #endregion
 
+
+        /// <summary>
+        /// Affiche la page des casier et cache l'accueil lorsque on appuie sur le bouton du milieu de l'accueil
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BT_VoirCave_Click(object sender, RoutedEventArgs e)
         {
             Accueil.Visibility = Visibility.Hidden;
             affichBoute.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Affiche la page d'accueil et cache les casiers lorsque on appuie sur le 1er bouton du menu déroulant
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BT_Menu1_Click(object sender, RoutedEventArgs e)
         {
             Accueil.Visibility = Visibility.Visible;
@@ -389,6 +395,37 @@ namespace CaveAVin
             TB_SaviezVous.Text = c.chercher(r.Next(1, 11));
         }
 
-      
+
+
+    
+        /// <summary>
+        /// Initialise la connexion au SGBDR
+        /// </summary>
+        private void initBDD()
+        {
+            DAO.BDD.Instance.Connexion.ConnectionString = "Database=WineFinder;DataSource=137.74.233.210;User Id=user; Password=user";
+
+            // crée les objets DAO. pour lire la base
+            DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
+            DAO.CasierDAO daoCasier = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
+
+            // crée une instance DAO.citation + l'affiche dans accueil
+            DAO.CitationDAO daoCitation = new DAO.CitationDAO(DAO.BDD.Instance.Connexion);
+
+            ChoixTexte(daoCitation);
+
+            Metier.Casiers c = daoCasier.Lister();
+
+            foreach (Metier.Casier ct in c.Lister())
+            {
+                Metier.Bouteilles bout = daoBouteille.Lister(ct);
+                ct.Ajouter(bout);
+
+                foreach (Metier.Bouteille b in bout.Lister())
+                {
+                    b.Casier = ct;
+                }
+            }
+        }
     }
 }

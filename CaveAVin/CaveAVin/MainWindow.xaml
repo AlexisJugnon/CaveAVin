@@ -7,7 +7,10 @@
         mc:Ignorable="d"
         
         Title="WineFinder" Height="946.677" Width="1642.9">
-    <Grid x:Name="MainWindows" HorizontalAlignment="Stretch" Height="927" Margin="0,0,0,-21" VerticalAlignment="Top" Background="#FFF4F4F4">
+    <Grid x:Name="MainWindows" HorizontalAlignment="Stretch" Height="927" Margin="0,0,0,-21" VerticalAlignment="Top">
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="101*"/>
             <RowDefinition Height="208*"/>
@@ -19,8 +22,8 @@
             </Grid.RowDefinitions>
             <Rectangle Fill="#FF661141" HorizontalAlignment="Left" Height="89" Stroke="Black" VerticalAlignment="Top" Width="1312" Margin="150,70,0,0"/>
             <Label x:Name="Label1" FontSize="20" Content="Le saviez-vous ?" HorizontalAlignment="Left" Margin="713,86,0,0" Foreground="White" VerticalAlignment="Top" Height="54" Width="206"/>
-            <TextBox FontSize="30" Background="white" x:Name="TB_SaviezVous" HorizontalAlignment="Left" Height="427" TextWrapping="Wrap" VerticalAlignment="Top" Width="1312" VerticalScrollBarVisibility="Auto" IsEnabled="True" AcceptsReturn="True" Margin="150,159,0,0"/>
-            
+            <TextBox FontSize="30" Background="white" x:Name="TB_SaviezVous" HorizontalAlignment="Left" Height="427" TextWrapping="Wrap" VerticalAlignment="Top" Width="1312" VerticalScrollBarVisibility="Auto" IsEnabled="True" AcceptsReturn="True" Margin="150,159,0,0" Focusable="False"/>
+
             <Button x:Name="BT_VoirBouteille" HorizontalAlignment="Left" Margin="1388,606,0,0" VerticalAlignment="Top" Width="74" Height="86" BorderBrush="White" Click="BT_VoirBouteille_Click" Grid.RowSpan="2">
                 <Button.Background>
                     <ImageBrush ImageSource="VoirBouteille.png"/>
