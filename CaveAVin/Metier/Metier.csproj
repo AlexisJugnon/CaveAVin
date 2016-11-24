@@ -59,6 +59,7 @@
     <Compile Include="IBouteilleDAO.cs" />
     <Compile Include="ICasierDAO.cs" />
     <Compile Include="ICaveDAO.cs" />
+    <Compile Include="ICitationDAO.cs" />
     <Compile Include="IContenanceDAO.cs" />
     <Compile Include="ICruDAO.cs" />
     <Compile Include="IDomaineDAO.cs" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -148,6 +149,9 @@ namespace CaveAVin
             // crée les objets DAO. pour lire la base
             DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
             DAO.CasierDAO daoCasier = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
+            // crée une instance DAO.citation + l'affiche dans accueil
+            DAO.CitationDAO daoCitation = new DAO.CitationDAO(DAO.BDD.Instance.Connexion);
+            ChoixTexte(daoCitation);
 
             Metier.Casiers c = daoCasier.Lister();
             foreach(Metier.Casier ct in c.Lister())
@@ -373,5 +377,18 @@ namespace CaveAVin
             Accueil.Visibility = Visibility.Visible;
             affichBoute.Visibility = Visibility.Hidden;
         }
+
+        /// <summary>
+        /// affiche le texte pour le saviez-vous
+        /// </summary>
+        /// <param name="c"></param>
+        private void ChoixTexte(DAO.CitationDAO c)
+        {
+
+            Random r = new Random();
+            TB_SaviezVous.Text = c.chercher(r.Next(1, 11));
+        }
+
+      
     }
 }
