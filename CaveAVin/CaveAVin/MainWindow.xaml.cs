@@ -53,8 +53,8 @@ namespace CaveAVin
         {
             InitializeComponent();
 
-            #region InitAffichage
             // Gère les Grid à afficher au démarrage de l'application
+            #region InitAffichage
             MainWindows.Visibility = Visibility.Visible;
             Accueil.Visibility = Visibility.Visible;
             affichBoute.Visibility = Visibility.Hidden;
@@ -68,7 +68,11 @@ namespace CaveAVin
             afficherBouteille();
         }
 
-   
+        /// <summary>
+        /// Affiche le menu latéral
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             Faux_menu.Visibility = Visibility; 
@@ -256,11 +260,11 @@ namespace CaveAVin
         }
 
         /// <summary>
-        /// Permet de gérer l'affichage des flêches pour la gestion des casiers et afficher le casier suivant 
+        /// permet d'afficher le casier suivant ou précedent
         /// </summary>
         private void afficherBouteille()
         {
-
+            // Permet de gérer l'affichage des flêches pour la gestion des casiers
             #region GestionFleche
 
             if (nbCasier > 1)
@@ -307,6 +311,7 @@ namespace CaveAVin
             int col = Int32.Parse(sender.ToString().Substring(35, 1));
 
             int idBout = Int32.Parse(req.SelStr1("Select IdBouteille From Bouteille Where IdCasier = " + nbasier + " AND Position_X = " + col + " And Position_Y = " + ligne, "IdBouteille"));
+
             Console.WriteLine(idBout);
             displayFicheDetailBouteille(true);
         }

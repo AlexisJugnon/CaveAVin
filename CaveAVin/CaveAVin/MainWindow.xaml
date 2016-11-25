@@ -15,26 +15,26 @@
             <RowDefinition Height="101*"/>
             <RowDefinition Height="208*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="Accueil" Margin="0,139,0,9" UseLayoutRounding="False" IsHitTestVisible="True" Visibility="Hidden" Grid.RowSpan="2">
+        <Grid x:Name="Accueil" Margin="0,139,0,9" UseLayoutRounding="False" IsHitTestVisible="True" Visibility="Visible" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="11*"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <Rectangle Fill="#FF661141" HorizontalAlignment="Left" Height="89" Stroke="Black" VerticalAlignment="Top" Width="1312" Margin="150,70,0,0"/>
             <Label x:Name="Label1" FontSize="20" Content="Le saviez-vous ?" HorizontalAlignment="Left" Margin="713,86,0,0" Foreground="White" VerticalAlignment="Top" Height="54" Width="206"/>
-            <TextBox FontSize="30" Background="white" x:Name="TB_SaviezVous" HorizontalAlignment="Left" Height="427" TextWrapping="Wrap" VerticalAlignment="Top" Width="1312" VerticalScrollBarVisibility="Auto" IsEnabled="True" AcceptsReturn="True" Margin="150,159,0,0"/>
-            
-            <Button x:Name="BT_VoirBouteille" HorizontalAlignment="Left" Margin="1388,606,0,0" VerticalAlignment="Top" Width="74" Height="86" BorderBrush="White" Click="BT_VoirBouteille_Click" Grid.RowSpan="2">
+            <TextBox FontSize="30" Background="white" x:Name="TB_SaviezVous" HorizontalAlignment="Left" Height="427" TextWrapping="Wrap" VerticalAlignment="Top" Width="1312" VerticalScrollBarVisibility="Auto" IsEnabled="True" AcceptsReturn="True" Margin="150,159,0,0" Focusable="False"/>
+
+            <Button x:Name="BT_VoirBouteille" Margin="1330,606,231,0" VerticalAlignment="Top" Height="86" BorderBrush="White" Click="BT_VoirBouteille_Click" Grid.RowSpan="2">
                 <Button.Background>
                     <ImageBrush ImageSource="VoirBouteille.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="BT_VoirCave"  HorizontalAlignment="Left" Margin="763,74,0,0" VerticalAlignment="Top" Width="74" Height="86" BorderBrush="White" Click="BT_VoirCave_Click">
+            <Button x:Name="BT_VoirCave"  HorizontalAlignment="Left" Margin="798,606,0,0" VerticalAlignment="Top" Width="74" Height="86" BorderBrush="White" Click="BT_VoirCave_Click" Grid.RowSpan="2">
                 <Button.Background>
                     <ImageBrush ImageSource="VoirCave.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="BT_GererCave" HorizontalAlignment="Left" Margin="150,606,0,0" VerticalAlignment="Top" Width="74" Height="86" BorderBrush="White" Grid.RowSpan="2">
+            <Button x:Name="BT_GererCave" HorizontalAlignment="Left" Margin="230,606,0,0" VerticalAlignment="Top" Width="74" Height="86" BorderBrush="White" Grid.RowSpan="2">
                 <Button.Background>
                     <ImageBrush ImageSource="GérerCave.png"/>
                 </Button.Background>
@@ -52,7 +52,7 @@
                 </MenuItem.Background>
             </MenuItem>
         </Menu>
-        <Grid Visibility="Visible" x:Name="affichBoute" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,126,0,7" Width="1635" Height="794" Grid.RowSpan="2">
+        <Grid Visibility="Hidden" x:Name="affichBoute" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,126,0,7" Width="1635" Height="794" Grid.RowSpan="2">
             <Border x:Name="ficheDetailBouteille" Visibility="Hidden" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Left" Height="659" Margin="965,83,-104,0" VerticalAlignment="Top" Width="429" Background="#FFFCF4E3">
                 <Grid >
                     <Grid.ColumnDefinitions>
