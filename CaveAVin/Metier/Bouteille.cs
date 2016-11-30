@@ -30,6 +30,7 @@ namespace Metier
             return texte;
         }
 
+
         #region propriétés
         public int Id
         {

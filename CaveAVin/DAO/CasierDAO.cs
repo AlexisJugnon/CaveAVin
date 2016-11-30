@@ -113,6 +113,27 @@ namespace DAO
             return liste;
         }
 
+        public int Nombre()
+        {
+            int nb = 0;
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Casier;";
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    nb++;
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return nb;
+        }
+
         public void Relire(Casier c)
         {
             con.Open();
