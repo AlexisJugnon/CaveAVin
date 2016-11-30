@@ -48,6 +48,13 @@ namespace CaveAVin
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        #region attributAjoutSuppr
+        Boolean supprimer; // faux si on a cliquer sur le bouton supprimer (pour la selection des bouteilles à supprimer)
+        List<Metier.Position> listeBouteilleAjout = new List<Metier.Position>(); //liste  des emplacements ou new bouteille
+        List<Metier.Bouteille> listeBouteilleSuppr = new List<Metier.Bouteille>();
+        #endregion
+
         private DAO.reqSQL req = new DAO.reqSQL(DAO.BDD.Instance.Connexion);
         public MainWindow()
         {
@@ -62,6 +69,7 @@ namespace CaveAVin
             Faux_menu.Visibility = Visibility.Hidden;
             #endregion
 
+            supprimer = false;
             initBDD();
 
             initGridCasier();
@@ -249,7 +257,7 @@ namespace CaveAVin
                         var brush = new ImageBrush();
                         brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
                         button[k, j].Background = brush;
-                        button[k, j].Click += nouvelleBout;
+                        button[k, j].Click += selectBouteille;
                     }
                 }
                     }
@@ -257,6 +265,34 @@ namespace CaveAVin
             }
 
             #endregion
+        }
+
+        /// <summary>
+        /// selection d'un emplacement d'un casier vide
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void selectBouteille(object sender, RoutedEventArgs e)
+        {
+            int ligne = Int32.Parse(sender.ToString().Substring(32, 1));
+            int col = Int32.Parse(sender.ToString().Substring(35, 1));
+            Metier.Position posi = new Metier.Position(ligne, col);
+
+            if (listeBouteilleAjout.Contains(posi))
+            {
+                listeBouteilleAjout.Remove(posi);
+                var brush = new ImageBrush();
+                brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
+                button[ligne, col].Background = brush;
+
+            }
+            else
+            {
+                listeBouteilleAjout.Add(posi);
+                var brush = new ImageBrush();
+                brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Chercher.png", UriKind.Relative));
+                button[ligne, col].Background = brush;
+            }
         }
 
         /// <summary>
@@ -304,16 +340,16 @@ namespace CaveAVin
         /// <param name="e"></param>
         private void selectionBouteille(Object sender, EventArgs e)
         {
-            Decaler();
-            
-            //récupération des coordonnées de la bouteille + select idBouteille en fonction des coordonnées et du casier
-            int ligne = Int32.Parse(sender.ToString().Substring(32,1));
-            int col = Int32.Parse(sender.ToString().Substring(35, 1));
+            if (!supprimer)
+            {
+                Decaler();
+                displayFicheDetailBouteille(true);
 
-            int idBout = Int32.Parse(req.SelStr1("Select IdBouteille From Bouteille Where IdCasier = " + nbasier + " AND Position_X = " + col + " And Position_Y = " + ligne, "IdBouteille"));
-
-            Console.WriteLine(idBout);
-            displayFicheDetailBouteille(true);
+            }else
+            {
+                int ligne = Int32.Parse(sender.ToString().Substring(32, 1));
+                int col = Int32.Parse(sender.ToString().Substring(35, 1));
+            }
         }
 
         /// <summary>
