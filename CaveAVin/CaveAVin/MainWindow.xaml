@@ -20,33 +20,27 @@
                 <RowDefinition Height="11*"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <Rectangle Fill="#FF661141" HorizontalAlignment="Left" Height="89" Stroke="Black" VerticalAlignment="Top" Width="1312" Margin="150,70,0,0"/>
-            <Label x:Name="Label1" FontSize="20" Content="Le saviez-vous ?" HorizontalAlignment="Left" Margin="713,86,0,0" Foreground="White" VerticalAlignment="Top" Height="54" Width="206"/>
-            <TextBox FontSize="30" Background="white" x:Name="TB_SaviezVous" HorizontalAlignment="Left" Height="427" TextWrapping="Wrap" VerticalAlignment="Top" Width="1312" VerticalScrollBarVisibility="Auto" IsEnabled="True" AcceptsReturn="True" Margin="150,159,0,0" Focusable="False"/>
+            <Rectangle Fill="#FF661141" HorizontalAlignment="Center" Height="89" Stroke="Black" VerticalAlignment="Top" Width="1312" Margin="0,70,0,0"/>
+            <Label x:Name="Label1" FontSize="20" Content="Le saviez-vous ?" HorizontalAlignment="Stretch" Margin="0,86,0,0" Foreground="White" VerticalAlignment="Top" Height="54" Width="153"/>
+            <TextBox FontSize="30" Background="white" x:Name="TB_SaviezVous" HorizontalAlignment="Stretch" Height="427" TextWrapping="Wrap" VerticalAlignment="Top" Width="1312" VerticalScrollBarVisibility="Auto" IsEnabled="True" AcceptsReturn="True" Margin="0,159,0,0" Focusable="False"/>
 
-            <Button x:Name="BT_VoirBouteille" Margin="1330,606,231,0" VerticalAlignment="Top" Height="86" BorderBrush="White" Click="BT_VoirBouteille_Click" Grid.RowSpan="2">
-                <Button.Background>
-                    <ImageBrush ImageSource="VoirBouteille.png"/>
-                </Button.Background>
+            <Button x:Name="BT_VoirBouteille" Margin="0,606,231,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="86" Height="86" BorderBrush="#FF661141" Click="BT_VoirBouteille_Click" Grid.RowSpan="2" Background="#FF661141" Foreground="#FF661141">
+                <Image Source=".\Images\VoirBouteille.png"/>
             </Button>
-            <Button x:Name="BT_VoirCave"  HorizontalAlignment="Left" Margin="798,606,0,0" VerticalAlignment="Top" Width="74" Height="86" BorderBrush="White" Click="BT_VoirCave_Click" Grid.RowSpan="2">
-                <Button.Background>
-                    <ImageBrush ImageSource="VoirCave.png"/>
-                </Button.Background>
+            <Button x:Name="BT_VoirCave"  HorizontalAlignment="Center" Margin="0,606,0,0" VerticalAlignment="Top" Width="86" Height="86" BorderBrush="#FF661141" Click="BT_VoirCave_Click" Grid.RowSpan="2" Background="#FF661141" Foreground="#FF661141">
+                <Image Source=".\Images\VoirCave.png" HorizontalAlignment="Center"/>
             </Button>
-            <Button x:Name="BT_GererCave" HorizontalAlignment="Left" Margin="230,606,0,0" VerticalAlignment="Top" Width="74" Height="86" BorderBrush="White" Grid.RowSpan="2">
-                <Button.Background>
-                    <ImageBrush ImageSource="GérerCave.png"/>
-                </Button.Background>
+            <Button x:Name="BT_GererCave" HorizontalAlignment="Left" Margin="230,606,0,0" VerticalAlignment="Top" Width="86" Height="86" BorderBrush="#FF661141" Grid.RowSpan="2" Background="#FF661141" Foreground="#FF661141">
+                <Image Source=".\Images\GererCave.png"/>
             </Button>
         </Grid>
         <Rectangle Fill="#FF661141" HorizontalAlignment="Stretch" Height="133" Margin="0,0,0,0" VerticalAlignment="Top" />
         <Image x:Name="logo" HorizontalAlignment="Left" Height="133" Margin="166,0,0,0" VerticalAlignment="Top" Width="176" Source="logoBouteille.png" />
-        <Button x:Name="BT_rechercher" HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Margin="0,12,30,0" Height="90" Background="#FF661141" BorderBrush="#FF8F3977">
-            <Image x:Name="chercher" HorizontalAlignment="Right" Height="90" VerticalAlignment="Top" Width="80" Source="chercher.png" />
+        <Button x:Name="BT_rechercher" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="0,30,30,0" Height="75" Background="#FF661141" BorderBrush="#FF661141">
+            <Image x:Name="chercher" HorizontalAlignment="Center"  VerticalAlignment="Center"  Source="chercher.png" />
         </Button>
-        <Menu x:Name="MenuBase" HorizontalAlignment="Left" Height="116" Margin="30,0,0,186" VerticalAlignment="Bottom" Background="#FF661141" Width="100">
-            <MenuItem x:Name="Menu" Header="" Click="MenuItem_Click" Height="116" Width="100">
+        <Menu x:Name="MenuBase" HorizontalAlignment="Left" Height="116" Margin="30,10,0,0" VerticalAlignment="Top" Background="#FF661141" Width="100" Foreground="#FF661141">
+            <MenuItem x:Name="Menu" Header="" Click="MenuItem_Click" Height="75" Width="75" Margin="13,20,0,0">
                 <MenuItem.Background>
                     <ImageBrush ImageSource="Menu.png"/>
                 </MenuItem.Background>

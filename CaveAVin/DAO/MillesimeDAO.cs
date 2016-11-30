@@ -27,7 +27,8 @@ namespace DAO
         {
             Millesime m = null;
 
-            con.Open();
+            if (con.State != ConnectionState.Open)
+                con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();

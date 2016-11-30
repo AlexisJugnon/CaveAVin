@@ -31,7 +31,7 @@ namespace DAO
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM APELATION WHERE IdAppelation=" + ID.ToString();
+                com.CommandText = "SELECT * FROM Appelation WHERE IdAppelation=" + ID.ToString();
                 IDataReader reader = com.ExecuteReader();
 
                 if (reader.Read())

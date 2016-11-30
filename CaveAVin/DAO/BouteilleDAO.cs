@@ -30,7 +30,8 @@ namespace DAO
         {
             Bouteille b = null;
 
-            con.Open();
+            if (con.State != ConnectionState.Open)
+                con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
@@ -49,6 +50,32 @@ namespace DAO
 
             return b;
         }
+
+        public Bouteille Chercher(int ligneIndex, int colonneIndex, Casier casier)
+        {
+            Bouteille b = null;
+
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = String.Format("SELECT * FROM Bouteille WHERE Position_X={0} and Position_X={1} and IdCasier={2}", ligneIndex, colonneIndex, casier.Id);
+                IDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    b = reader2BouteilleFull(reader);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return b;
+        }
+
+
 
         public void Créer(Bouteille b)
         {
@@ -365,15 +392,71 @@ namespace DAO
             }
         }
 
+
         private Bouteille reader2Bouteille(IDataReader reader)
         {
             Bouteille b = new Bouteille();
             b.Texte = reader["Texte"].ToString();
             b.Id = Convert.ToInt32(reader["IdBouteille"]);
-            b.PosX= Convert.ToInt32(reader["Position_X"]);
-            b.PosY= Convert.ToInt32(reader["Position_Y"]);
+            b.PosX = Convert.ToInt32(reader["Position_X"]);
+            b.PosY = Convert.ToInt32(reader["Position_Y"]);
             b.Bue = Convert.ToBoolean(reader["Bue"]);
+
             return b;
+        }
+
+        /// <summary>
+        /// Converti un date reader en une bouteille pleinement intilialisé.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <remarks>Ne marche que dans le cas d'une recherche sur un élément (méthode Chercher(...) )</remarks>
+        /// <returns></returns>
+        private Bouteille reader2BouteilleFull(IDataReader reader)
+        {
+            Bouteille bouteille = new Bouteille();
+            bouteille.Texte = reader["Texte"].ToString();
+            bouteille.Id = Convert.ToInt32(reader["IdBouteille"]);
+            bouteille.PosX= Convert.ToInt32(reader["Position_X"]);
+            bouteille.PosY= Convert.ToInt32(reader["Position_Y"]);
+            bouteille.Bue = Convert.ToBoolean(reader["Bue"]);
+
+            //On lit les ids des foreign key
+            int idCasier = (Convert.ToInt32(reader["IdCasier"]));
+            int idType = (Convert.ToInt32(reader["IdType"]));
+            int idRegion = (Convert.ToInt32(reader["IdRegion"]));
+            int idDomaine = (Convert.ToInt32(reader["IdDomaine"]));
+            int idContenance = (Convert.ToInt32(reader["IdContenance"]));
+            int idCru = (Convert.ToInt32(reader["IdCru"]));
+            int idMillesime = (Convert.ToInt32(reader["IdMillesime"]));
+            int idType_vinification = (Convert.ToInt32(reader["IdVinif"]));
+            int idAppelation = (Convert.ToInt32(reader["IdAppelation"]));
+
+            // Cloture du reader pour pouvoir utiliser les méthodes "Chercher". Sinon exception "Data reader already exist"
+            reader.Close();
+
+            //Instanciation des DAOS
+            var casierDao = new CasierDAO(BDD.Instance.Connexion);
+            var typeDao = new TypeDAO(BDD.Instance.Connexion);
+            var regionDao = new RegionDAO(BDD.Instance.Connexion);
+            var domaineDao = new DomaineDAO(BDD.Instance.Connexion);
+            var contenanceDao = new ContenanceDAO(BDD.Instance.Connexion);
+            var cruDao = new CruDAO(BDD.Instance.Connexion);
+            var millesimeDao = new MillesimeDAO(BDD.Instance.Connexion);
+            var vinificationDao = new Type_vinificationDAO(BDD.Instance.Connexion);
+            var appelationDao = new AppelationDAO(BDD.Instance.Connexion);
+
+            //Population de la bouteille avec les objets liés
+            bouteille.Casier = casierDao.Chercher(idCasier);
+            bouteille.Type = typeDao.Chercher(idType);
+            bouteille.Region = regionDao.Chercher(idRegion);
+            bouteille.Domaine = domaineDao.Chercher(idDomaine);
+            bouteille.Contenance = contenanceDao.Chercher(idContenance);
+            bouteille.Cru = cruDao.Chercher(idCru);
+            bouteille.Millesime = millesimeDao.Chercher(idMillesime);
+#warning Chercher sort en erreur. La table Type_vinification n'existe pas
+            //bouteille.Type_vinification = vinificationDao.Chercher(idType_vinification);
+            bouteille.Appelation = appelationDao.Chercher(idAppelation);
+            return bouteille;
         }
 
     }

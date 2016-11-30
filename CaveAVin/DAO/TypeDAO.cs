@@ -23,11 +23,17 @@ namespace DAO
             con = c;
         }
 
+        /// <summary>
+        /// Cherche un type en fonction de son id
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public Metier.Type Chercher(int ID)
         {
             Metier.Type c = null;
 
-            con.Open();
+            if (con.State != ConnectionState.Open)
+                con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
@@ -47,6 +53,10 @@ namespace DAO
             return c;
         }
 
+        /// <summary>
+        /// Insert un nouveau type
+        /// </summary>
+        /// <param name="p">Type à insérer en base</param>
         public void Créer(Metier.Type p)
         {
             try
@@ -67,6 +77,10 @@ namespace DAO
             }
         }
 
+        /// <summary>
+        /// Liste tous les types de la base
+        /// </summary>
+        /// <returns>Types contenu en base</returns>
         public Types Lister()
         {
             Types liste = new Types();
@@ -89,6 +103,10 @@ namespace DAO
             return liste;
         }
 
+        /// <summary>
+        /// Reprend les données d'un type en base
+        /// </summary>
+        /// <param name="p">Type à reprendre</param>
         public void Relire(Metier.Type p)
         {
             con.Open();
@@ -108,6 +126,10 @@ namespace DAO
             }
         }
 
+        /// <summary>
+        /// Sauvegarde un type déjà existant en base
+        /// </summary>
+        /// <param name="p">Type à sauvegarder</param>
         public void Sauver(Metier.Type p)
         {
             con.Open();
@@ -123,6 +145,10 @@ namespace DAO
             }
         }
 
+        /// <summary>
+        /// Retire un type de la base
+        /// </summary>
+        /// <param name="p">Type à supprimer</param>
         public void Supprimer(Metier.Type p)
         {
             con.Open();
@@ -138,6 +164,11 @@ namespace DAO
             }
         }
 
+        /// <summary>
+        /// Converti une ligne de retour de requête en un type
+        /// </summary>
+        /// <param name="reader">Reader representant une ligne de réponse</param>
+        /// <returns>Type initialisé</returns>
         private Metier.Type reader2Type(IDataReader reader)
         {
             Metier.Type d = new Metier.Type();

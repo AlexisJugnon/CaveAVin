@@ -22,6 +22,11 @@ namespace DAO
             con = c;
         }
 
+        /// <summary>
+        /// Cherche un cru en fonction de son id
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public Cru Chercher(int Id)
         {
             Cru cru = null;
@@ -54,6 +59,10 @@ namespace DAO
 
         }
 
+        /// <summary>
+        /// Insert un nouveau cru
+        /// </summary>
+        /// <param name="cru">Cru à insérer en base</param>
         public void Créer(Cru cru)
         {
             if (con != null)
@@ -82,6 +91,10 @@ namespace DAO
             }
         }
 
+        /// <summary>
+        /// Liste tous les crus de la base
+        /// </summary>
+        /// <returns>Crus contenu en base</returns>
         public Crus Lister()
         {
             var crus = new Crus();
@@ -114,6 +127,10 @@ namespace DAO
             return crus;
         }
 
+        /// <summary>
+        /// Reprend les données d'un cru en base
+        /// </summary>
+        /// <param name="cru">Cru à reprendre</param>
         public void Relire(Cru cru)
         {
             if (con != null)
@@ -141,6 +158,10 @@ namespace DAO
             }
         }
 
+        /// <summary>
+        /// Sauvegarde un cru déjà existant en base
+        /// </summary>
+        /// <param name="cru">Cru à sauvegarder</param>
         public void Sauver(Cru cru)
         {
             if (con != null)
@@ -163,6 +184,10 @@ namespace DAO
             }
         }
 
+        /// <summary>
+        /// Retire un cru de la base
+        /// </summary>
+        /// <param name="p">Cru à supprimer</param>
         public void Supprimer(Cru p)
         {
             if (con != null)
@@ -184,6 +209,12 @@ namespace DAO
                 } 
             }
         }
+
+        /// <summary>
+        /// Converti une ligne de retour de requête en un cru
+        /// </summary>
+        /// <param name="reader">Reader representant une ligne de réponse</param>
+        /// <returns>Cru initialisé</returns>
         private Cru reader2Cru(IDataReader reader)
         {
             var cru = new Cru();

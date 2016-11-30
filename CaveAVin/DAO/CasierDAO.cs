@@ -28,11 +28,12 @@ namespace DAO
         {
             Casier c = null;
 
-            con.Open();
+            if(con.State != ConnectionState.Open)
+                con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM CASIER WHERE IdCasier=" + ID.ToString();
+                com.CommandText = "SELECT * FROM Casier WHERE IdCasier=" + ID.ToString();
                 IDataReader reader = com.ExecuteReader();
 
                 if (reader.Read())
