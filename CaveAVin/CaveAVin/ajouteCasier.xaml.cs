@@ -27,6 +27,8 @@ namespace CaveAVin
         public ajouteCasier()
         {
             InitializeComponent();
+            nbhauteurCasier = 1;
+            nblargeurCasier = 1;
         }
 
         private void buttonAnnuler_Click(object sender, RoutedEventArgs e)
@@ -55,6 +57,9 @@ namespace CaveAVin
                     if (nbhauteurCasier == 1)
                     {
                         buttonMoinsHauteur.IsEnabled = false;
+                    }else
+                    {
+                        buttonMoinsHauteur.IsEnabled = true;
                     }
                 }
                 else
@@ -90,6 +95,9 @@ namespace CaveAVin
                     if (nblargeurCasier == 1)
                     {
                         buttonMoinsLargeur.IsEnabled = false;
+                    }else
+                    {
+                        buttonMoinsLargeur.IsEnabled = true;
                     }
                 }
                 else
