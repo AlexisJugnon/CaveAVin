@@ -157,6 +157,8 @@ namespace CaveAVin
 
         private int nbasier = 1;
         private int nbCasier = 1;
+        //private Button[][,] but;
+        private List<Button[,]> but = new List<Button[,]>();
         private Button[,] button;
         private Grid[] gestionCasier;
         private ColumnDefinition[] col1;
@@ -209,7 +211,7 @@ namespace CaveAVin
                 #region GestionAffichBouteille
                 //Gère l'affichage des bouteilles dans le casier
                 string res;
-                button = new Button[nbC + 1, nbL + 1];
+                button = new Button[nbC, nbL];
                 for (int k = 0; k < nbC; k++)
                 {
                     for (int j = 0; j < nbL; j++)
@@ -257,7 +259,7 @@ namespace CaveAVin
                         }
                     }
                 }
-
+                but.Add(button);
             }
 
             #endregion
@@ -279,7 +281,7 @@ namespace CaveAVin
                 listeBouteilleAjout.Remove(posi);
                 var brush = new ImageBrush();
                 brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
-                button[ligne, col].Background = brush;
+                ((Button) but[nbasier].GetValue(ligne, col)).Background = brush;
 
             }
             else
@@ -287,7 +289,17 @@ namespace CaveAVin
                 listeBouteilleAjout.Add(posi);
                 var brush = new ImageBrush();
                 brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Chercher.png", UriKind.Relative));
-                button[ligne, col].Background = brush;
+                try
+                {
+                    Console.WriteLine(((Button)but[nbasier-1].GetValue(ligne, col)).ToString());
+                    ((Button)but[nbasier-1].GetValue(ligne, col)).Background = brush;
+
+                }
+                catch(Exception x)
+                {
+                    Console.WriteLine(x);
+                }
+
             }
         }
 
