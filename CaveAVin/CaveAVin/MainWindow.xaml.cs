@@ -490,6 +490,7 @@ namespace CaveAVin
             
             //DAO.BouteilleDAO b = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
             //b.RetirerBue(b);
+            //test
         }
     }
 }
