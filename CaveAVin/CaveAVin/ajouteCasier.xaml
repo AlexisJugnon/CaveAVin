@@ -1,0 +1,24 @@
+﻿<Window x:Class="CaveAVin.ajouteCasier"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CaveAVin"
+        mc:Ignorable="d"
+        Title="ajouteCasier" Height="300" Width="300">
+    <Grid>
+        <Label x:Name="label_nom" Content="Nom du casier" HorizontalAlignment="Left" Margin="22,37,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="nomCasier" HorizontalAlignment="Left" Height="23" Margin="141,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="hauteurCasier" HorizontalAlignment="Left" Height="23" Margin="179,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" TextChanged="textBox_TextChanged"/>
+        <TextBox x:Name="largeurCasier" HorizontalAlignment="Left" Height="23" Margin="179,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" TextChanged="textBox_Copy_TextChanged"/>
+        <Label x:Name="label_largeur" Content="Largeur" HorizontalAlignment="Left" Margin="22,128,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_hauteur" Content="Hauteur" HorizontalAlignment="Left" Margin="22,86,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="buttonMoinsHauteur" Content="-" HorizontalAlignment="Left" Margin="133,92,0,0" VerticalAlignment="Top" Width="30" Click="buttonMoinsHauteur_Click"/>
+        <Button x:Name="buttonPlusLargeur" Content="+" HorizontalAlignment="Left" Margin="231,131,0,0" VerticalAlignment="Top" Width="30" Click="buttonPlusLargeur_Click"/>
+        <Button x:Name="buttonPlusHauteur" Content="+" HorizontalAlignment="Left" Margin="231,92,0,0" VerticalAlignment="Top" Width="30" Click="buttonPlusHauteur_Click"/>
+        <Button x:Name="buttonMoinsLargeur" Content="-" HorizontalAlignment="Left" Margin="133,128,0,0" VerticalAlignment="Top" Width="30" Click="buttonMoinsLargeur_Click"/>
+        <Button x:Name="buttonAnnuler" Content="Annuler" HorizontalAlignment="Left" Margin="210,197,0,0" VerticalAlignment="Top" Width="64" Click="buttonAnnuler_Click"/>
+        <Button x:Name="buttonValider" Content="Valider" HorizontalAlignment="Left" Margin="133,197,0,0" VerticalAlignment="Top" Width="63" Click="buttonValider_Click"/>
+
+    </Grid>
+</Window>

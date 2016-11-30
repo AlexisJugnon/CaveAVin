@@ -41,14 +41,11 @@ namespace CaveAVin
     ///le grid qui contient les objets de l'accueil s'appelle Accueil
 
 
-
-
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-
         #region attributAjoutSuppr
         Boolean supprimer; // faux si on a cliquer sur le bouton supprimer (pour la selection des bouteilles à supprimer)
         List<Metier.Position> listeBouteilleAjout = new List<Metier.Position>(); //liste  des emplacements ou new bouteille
@@ -69,7 +66,6 @@ namespace CaveAVin
             Faux_menu.Visibility = Visibility.Hidden;
             #endregion
 
-            supprimer = false;
             initBDD();
 
             initGridCasier();
@@ -83,10 +79,10 @@ namespace CaveAVin
         /// <param name="e"></param>
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Faux_menu.Visibility = Visibility; 
+            Faux_menu.Visibility = Visibility;
         }
 
-        
+
         /// <summary>
         /// Cache le "sous_menu" quand on quitte les boutons le constituant.
         /// ATTENTION : Il faut que les boutons soient collées sinon l'objet disparaitra après avoir quitter le bouton
@@ -172,13 +168,13 @@ namespace CaveAVin
         private void initGridCasier()
         {
             nbCasier = req.SelInt("Select Count(IdCasier) FROM Casier");
-            gestionCasier = new Grid[nbCasier+1];
-            
+            gestionCasier = new Grid[nbCasier + 1];
+
             int nbC, nbL;
             int HeightBoutton, WidthBoutton;
 
 
-            for (int i = 1; i < nbCasier+1; i++)
+            for (int i = 1; i < nbCasier + 1; i++)
             {
                 gestionCasier[i] = new Grid();
                 test.Children.Add(gestionCasier[i]);
@@ -210,57 +206,57 @@ namespace CaveAVin
                     gestionCasier[i].RowDefinitions.Add(col2[f]);
 
                 }
-            #region GestionAffichBouteille
-            //Gère l'affichage des bouteilles dans le casier
-            string res;
-            button = new Button[nbC + 1, nbL + 1];
-            for (int k = 0; k < nbC; k++)
-            {
-                for (int j = 0; j < nbL; j++)
+                #region GestionAffichBouteille
+                //Gère l'affichage des bouteilles dans le casier
+                string res;
+                button = new Button[nbC + 1, nbL + 1];
+                for (int k = 0; k < nbC; k++)
                 {
-                    button[k, j] = new Button();
-                    
-                    gestionCasier[i].Children.Add(button[k, j]);
-                    button[k, j].Visibility = Visibility.Visible;
+                    for (int j = 0; j < nbL; j++)
+                    {
+                        button[k, j] = new Button();
+
+                        gestionCasier[i].Children.Add(button[k, j]);
+                        button[k, j].Visibility = Visibility.Visible;
                         button[k, j].Content = k + ", " + j;
                         button[k, j].Width = WidthBoutton;
                         button[k, j].Height = HeightBoutton;
-                    Grid.SetRow(button[k, j], k);
-                    Grid.SetColumn(button[k, j], j);
-                    res = "";
-                    try
-                    {
-                        res = req.SelStr1("SELECT NomType From Type natural join Bouteille where idCasier =" + i +
-                        " and Bouteille.Position_X = " + k + " and Bouteille.Position_Y = " + j + ";", "NomType");
-                    }
-                    catch
-                    {
+                        Grid.SetRow(button[k, j], k);
+                        Grid.SetColumn(button[k, j], j);
+                        res = "";
+                        try
+                        {
+                            res = req.SelStr1("SELECT NomType From Type natural join Bouteille where idCasier =" + i +
+                            " and Bouteille.Position_X = " + k + " and Bouteille.Position_Y = " + j + ";", "NomType");
+                        }
+                        catch
+                        {
 
-                    }
+                        }
 
-                    if (res == "Blanc")
-                    {
-                        var brush = new ImageBrush();
-                        brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/BlancCasier.png", UriKind.Relative));
-                        button[k, j].Background = brush;
-                        button[k, j].Click += selectionBouteille;
-                    }
-                    else if (res == "Rouge")
-                    {
-                        var brush = new ImageBrush();
-                        brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/RougeCasier.png", UriKind.Relative));
-                        button[k, j].Background = brush;
-                        button[k, j].Click += selectionBouteille;
-                    }
-                    else
-                    {
-                        var brush = new ImageBrush();
-                        brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
-                        button[k, j].Background = brush;
-                        button[k, j].Click += selectBouteille;
+                        if (res == "Blanc")
+                        {
+                            var brush = new ImageBrush();
+                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/BlancCasier.png", UriKind.Relative));
+                            button[k, j].Background = brush;
+                            button[k, j].Click += selectionBouteille;
+                        }
+                        else if (res == "Rouge")
+                        {
+                            var brush = new ImageBrush();
+                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/RougeCasier.png", UriKind.Relative));
+                            button[k, j].Background = brush;
+                            button[k, j].Click += selectionBouteille;
+                        }
+                        else
+                        {
+                            var brush = new ImageBrush();
+                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
+                            button[k, j].Background = brush;
+                            button[k, j].Click += selectBouteille;
+                        }
                     }
                 }
-                    }
 
             }
 
@@ -345,7 +341,8 @@ namespace CaveAVin
                 Decaler();
                 displayFicheDetailBouteille(true);
 
-            }else
+            }
+            else
             {
                 int ligne = Int32.Parse(sender.ToString().Substring(32, 1));
                 int col = Int32.Parse(sender.ToString().Substring(35, 1));
@@ -404,7 +401,7 @@ namespace CaveAVin
                 lblVinification.Content = bouteille.Type_vinification?.NomVinif;
                 displayFicheDetailBouteille(true);
             }
-        } 
+        }
 
         private void displayFicheDetailBouteille(bool rendreVisible)
         {
@@ -484,13 +481,18 @@ namespace CaveAVin
         /// <param name="e"></param>
         private void BT_Supprimer_Click(object sender, RoutedEventArgs e)
         {
-            //int ligne = Int32.Parse(sender.ToString().Substring(32, 1));
-            //int col = Int32.Parse(sender.ToString().Substring(35, 1));
 
-            
-            //DAO.BouteilleDAO b = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
-            //b.RetirerBue(b);
-            //test
+        }
+
+        /// <summary>
+        /// Affichage de la fenêtre pour ajouter un casier
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BT_Menu2_Click(object sender, RoutedEventArgs e)
+        {
+            ajouteCasier addCasier = new ajouteCasier();
+            addCasier.Visibility = Visibility.Visible;
         }
     }
 }
