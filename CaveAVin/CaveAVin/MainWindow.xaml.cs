@@ -214,9 +214,9 @@ namespace CaveAVin
                     
                     gestionCasier[i].Children.Add(button[k, j]);
                     button[k, j].Visibility = Visibility.Visible;
-                    button[k, j].Content = k + ", " + j;
-                    button[k, j].Width = WidthBoutton;
-                    button[k, j].Height = HeightBoutton;
+                        button[k, j].Content = k + ", " + j;
+                        button[k, j].Width = WidthBoutton;
+                        button[k, j].Height = HeightBoutton;
                     Grid.SetRow(button[k, j], k);
                     Grid.SetColumn(button[k, j], j);
                     res = "";
@@ -448,7 +448,12 @@ namespace CaveAVin
         /// <param name="e"></param>
         private void BT_Supprimer_Click(object sender, RoutedEventArgs e)
         {
+            //int ligne = Int32.Parse(sender.ToString().Substring(32, 1));
+            //int col = Int32.Parse(sender.ToString().Substring(35, 1));
 
+            
+            //DAO.BouteilleDAO b = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
+            //b.RetirerBue(b);
         }
     }
 }
