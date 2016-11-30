@@ -29,11 +29,16 @@ namespace CaveAVin
             InitializeComponent();
             nbhauteurCasier = 1;
             nblargeurCasier = 1;
+            hauteurCasier.Text = nbhauteurCasier.ToString();
+            largeurCasier.Text = nblargeurCasier.ToString();
+
+            buttonMoinsHauteur.IsEnabled = false;
+            buttonMoinsLargeur.IsEnabled = false;
         }
 
         private void buttonAnnuler_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
+            Close();
         }
 
         private void buttonPlusHauteur_Click(object sender, RoutedEventArgs e)
