@@ -281,7 +281,7 @@ namespace CaveAVin
                 listeBouteilleAjout.Remove(posi);
                 var brush = new ImageBrush();
                 brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
-                ((Button)but[nbasier].GetValue(ligne, col)).Background = brush;
+                ((Button) but[nbasier].GetValue(ligne, col)).Background = brush;
 
             }
             else
@@ -291,11 +291,11 @@ namespace CaveAVin
                 brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Chercher.png", UriKind.Relative));
                 try
                 {
-                    Console.WriteLine(((Button)but[nbasier - 1].GetValue(ligne, col)).ToString());
-                    ((Button)but[nbasier - 1].GetValue(ligne, col)).Background = brush;
+                    Console.WriteLine(((Button)but[nbasier-1].GetValue(ligne, col)).ToString());
+                    ((Button)but[nbasier-1].GetValue(ligne, col)).Background = brush;
 
                 }
-                catch (Exception x)
+                catch(Exception x)
                 {
                     Console.WriteLine(x);
                 }
@@ -362,7 +362,7 @@ namespace CaveAVin
                     var bouteilleDao = new BouteilleDAO(DAO.BDD.Instance.Connexion);
                     var casier = casierDao.Chercher(nbasier);
                     var bouteille = bouteilleDao.Chercher(ligneIndex, colonneIndex, casier);
-
+                    
                     AfficherDetailBouteille(bouteille);
                 }
             }

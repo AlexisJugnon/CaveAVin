@@ -196,7 +196,15 @@
   <ItemGroup>
     <Resource Include="VoirCave.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\GererCave.png" />
+    <Content Include="Images\GererCave.svg" />
+    <Resource Include="Images\Menu.png" />
+    <Resource Include="Images\VoirBouteille.png" />
+    <Content Include="Images\VoirCasier.svg" />
+    <Resource Include="Images\VoirCave.png" />
+    <Content Include="Images\VoirCave.svg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="BoutonModif.png" />
     <Resource Include="BoutonPlus.png" />

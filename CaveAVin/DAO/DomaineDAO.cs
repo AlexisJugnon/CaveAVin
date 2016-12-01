@@ -26,12 +26,12 @@ namespace DAO
         public Domaine Chercher(int ID)
         {
             Domaine d = null;
-
-            con.Open();
+            if (con.State != ConnectionState.Open)
+                con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM DOMAINE WHERE IdDomaine=" + ID.ToString();
+                com.CommandText = "SELECT * FROM Domaine WHERE IdDomaine=" + ID.ToString();
                 IDataReader reader = com.ExecuteReader();
 
                 if (reader.Read())

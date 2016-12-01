@@ -31,7 +31,8 @@ namespace DAO
         {
             Region r = null;
 
-            con.Open();
+            if (con.State != ConnectionState.Open)
+                con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
@@ -195,7 +196,8 @@ namespace DAO
             Region r = new Region();
             r.Id = Convert.ToInt32(reader["IdRegion"]);
             r.NomRegion = reader["NomRegion"].ToString();
-            r.Pays.Id = Convert.ToInt32(reader["IdPays"]);
+#warning Null ref : le pays n'est pas initialisé.
+            //r.Pays.Id = Convert.ToInt32(reader["IdPays"]);
             return r;
         }
     }

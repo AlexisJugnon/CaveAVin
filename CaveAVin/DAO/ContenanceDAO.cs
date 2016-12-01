@@ -31,7 +31,7 @@ namespace DAO
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM CONTENANCE WHERE IdContenance=" + ID.ToString();
+                com.CommandText = "SELECT * FROM Contenance WHERE IdContenance=" + ID.ToString();
                 IDataReader reader = com.ExecuteReader();
 
                 if (reader.Read())
