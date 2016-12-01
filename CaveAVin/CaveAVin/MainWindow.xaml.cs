@@ -113,9 +113,6 @@ namespace CaveAVin
         private void nouvelleBout(object sender, RoutedEventArgs e)
         {
             //récupération des coordonnées de la bouteille + select idBouteille en fonction des coordonnées et du casier
-            int ligne = Int32.Parse(sender.ToString().Substring(32, 1));
-            int col = Int32.Parse(sender.ToString().Substring(35, 1));
-
             int casier = nbasier;
             try
             {
@@ -250,6 +247,20 @@ namespace CaveAVin
                             button[k, j].Background = brush;
                             button[k, j].Click += selectionBouteille;
                         }
+                        else if (res == "Rosé")
+                        {
+                            var brush = new ImageBrush();
+                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/RoséCasier.png", UriKind.Relative));
+                            button[k, j].Background = brush;
+                            button[k, j].Click += selectionBouteille;
+                        }
+                        else if (res == "Pétillant")
+                        {
+                            var brush = new ImageBrush();
+                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/PétillantCasier.png", UriKind.Relative));
+                            button[k, j].Background = brush;
+                            button[k, j].Click += selectionBouteille;
+                        }
                         else
                         {
                             var brush = new ImageBrush();
@@ -341,6 +352,8 @@ namespace CaveAVin
 
         }
 
+        private int l_ligne;
+        private int l_col;
         /// <summary>
         /// Permet de gérer le click sur une bouteille
         /// </summary>
@@ -350,6 +363,10 @@ namespace CaveAVin
         {
             if (!supprimer)
             {
+                l_ligne = Int32.Parse(sender.ToString().Substring(32, 1));
+                l_col = Int32.Parse(sender.ToString().Substring(35, 1));
+
+
                 Decaler();
                 var button = (Button)sender;
                 var textContent = button.Content.ToString();
@@ -368,8 +385,7 @@ namespace CaveAVin
             }
             else
             {
-                int ligne = Int32.Parse(sender.ToString().Substring(32, 1));
-                int col = Int32.Parse(sender.ToString().Substring(35, 1));
+
             }
         }
 
@@ -513,7 +529,10 @@ namespace CaveAVin
         /// <param name="e"></param>
         private void BT_Supprimer_Click(object sender, RoutedEventArgs e)
         {
-
+            var brush = new ImageBrush();
+            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
+            ((Button)but[nbasier].GetValue(l_ligne, l_col)).Background = brush;
+            req.delete(l_ligne, l_col, nbasier);
         }
 
         /// <summary>
