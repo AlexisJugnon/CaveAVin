@@ -100,6 +100,8 @@
                     <ImageBrush ImageSource="BoutonPlus.png"/>
                 </Button.Background>
             </Button>
+            <Button x:Name="boutSuppr" Content="supprimerAll" HorizontalAlignment="Right" Height="88" Margin="0,645,150,0" VerticalAlignment="Top" Width="94" BorderThickness="0" Click="supprimerAll">
+            </Button>
             <Grid x:Name="MultiCasier" Margin="352,0,374,290" Height="220" VerticalAlignment="Bottom">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="319*"/>

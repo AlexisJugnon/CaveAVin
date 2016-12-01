@@ -49,7 +49,7 @@ namespace CaveAVin
         #region attributAjoutSuppr
         Boolean supprimer; // faux si on a cliquer sur le bouton supprimer (pour la selection des bouteilles à supprimer)
         List<Metier.Position> listeBouteilleAjout = new List<Metier.Position>(); //liste  des emplacements ou new bouteille
-        List<Metier.Bouteille> listeBouteilleSuppr = new List<Metier.Bouteille>();
+        List<Metier.Position> listeBouteilleSuppr = new List<Metier.Position>();
         #endregion
 
         private DAO.reqSQL req = new DAO.reqSQL(DAO.BDD.Instance.Connexion);
@@ -67,7 +67,7 @@ namespace CaveAVin
             #endregion
 
             initBDD();
-
+            supprimer = false;
             initGridCasier();
             afficherBouteille();
         }
@@ -288,11 +288,12 @@ namespace CaveAVin
             Metier.Position posi = new Metier.Position(ligne, col);
 
             bool existe = false;
-            foreach(Metier.Position pos in listeBouteilleAjout){
+            foreach(Metier.Position pos in listeBouteilleSuppr)
+            {
                 if (pos.X == ligne && pos.Y==col)
                 {
                     existe = true;
-                    listeBouteilleAjout.Remove(pos);
+                    listeBouteilleSuppr.Remove(pos);
                     break;
                 }
             }
@@ -306,7 +307,7 @@ namespace CaveAVin
             else
             {
                 posi.Casier = nbasier - 1;
-                listeBouteilleAjout.Add(posi);
+                listeBouteilleSuppr.Add(posi);
                 var brush = new ImageBrush();
                 brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Chercher.png", UriKind.Relative));
                 ((Button)but[nbasier-1].GetValue(ligne, col)).Background = brush;
@@ -386,7 +387,38 @@ namespace CaveAVin
             }
             else
             {
+                int ligne = Int32.Parse(sender.ToString().Substring(32, 1));
+                int col = Int32.Parse(sender.ToString().Substring(35, 1));
+                Metier.Position posi = new Metier.Position(ligne, col);
 
+                bool existe = false;
+                foreach (Metier.Position pos in listeBouteilleAjout)
+                {
+                    if (pos.X == ligne && pos.Y == col)
+                    {
+                        existe = true;
+                        listeBouteilleAjout.Remove(pos);
+                        break;
+                    }
+                }
+                if (existe)
+                {
+                    var brush = new ImageBrush();
+                    brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
+                    ((Button)but[nbasier - 1].GetValue(ligne, col)).Background = brush;
+                    
+
+                }
+                else
+                {
+                    posi.Casier = nbasier - 1;
+                    listeBouteilleAjout.Add(posi);
+                    var brush = new ImageBrush();
+                    brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Chercher.png", UriKind.Relative));
+                    ((Button)but[nbasier - 1].GetValue(ligne, col)).Background = brush;
+
+
+                }
             }
         }
 
@@ -547,6 +579,41 @@ namespace CaveAVin
         {
             ajouteCasier addCasier = new ajouteCasier();
             addCasier.Visibility = Visibility.Visible;
+        }
+
+        /// <summary>
+        /// supprimer toutes les bouteilles selectionner ou lancer la selection des boutteiles a supprimer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void supprimerAll(object sender, RoutedEventArgs e)
+        {
+            if (supprimer)
+            {
+                int ligne;
+                int col;
+                int cas;
+                var brush = new ImageBrush();
+                foreach (Metier.Position pos in listeBouteilleSuppr)
+                {
+                    ligne = pos.X;
+                    col = pos.Y;
+                    cas = pos.Casier;                 
+                    req.delete(ligne, col, cas);
+
+                    brush = new ImageBrush();
+                    brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
+                    ((Button)but[cas - 1].GetValue(ligne, col)).Background = brush;
+                    ((Button)but[cas - 1].GetValue(ligne, col)).Click += selectBouteille;
+                }
+
+                listeBouteilleSuppr.Clear();
+                supprimer = false;
+            }
+            else
+            {
+                supprimer = true;
+            }
         }
     }
 }

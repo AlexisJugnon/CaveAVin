@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+
 
 namespace Metier
 {
@@ -12,6 +16,7 @@ namespace Metier
         private int x;
         private int y;
         private int casier;
+       // private ImageBrush source;
 
         public Position(int x2 = -1,int y2 = -1)
         {
