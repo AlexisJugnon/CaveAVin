@@ -288,12 +288,12 @@ namespace CaveAVin
             Metier.Position posi = new Metier.Position(ligne, col);
 
             bool existe = false;
-            foreach(Metier.Position pos in listeBouteilleSuppr)
+            foreach(Metier.Position pos in listeBouteilleAjout)
             {
-                if (pos.X == ligne && pos.Y==col)
+                if (pos.X == ligne && pos.Y==col && pos.Casier==nbasier)
                 {
                     existe = true;
-                    listeBouteilleSuppr.Remove(pos);
+                    listeBouteilleAjout.Remove(pos);
                     break;
                 }
             }
@@ -306,8 +306,8 @@ namespace CaveAVin
             }
             else
             {
-                posi.Casier = nbasier - 1;
-                listeBouteilleSuppr.Add(posi);
+                posi.Casier = nbasier;
+                listeBouteilleAjout.Add(posi);
                 var brush = new ImageBrush();
                 brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Chercher.png", UriKind.Relative));
                 ((Button)but[nbasier-1].GetValue(ligne, col)).Background = brush;
@@ -392,12 +392,12 @@ namespace CaveAVin
                 Metier.Position posi = new Metier.Position(ligne, col);
 
                 bool existe = false;
-                foreach (Metier.Position pos in listeBouteilleAjout)
+                foreach (Metier.Position pos in listeBouteilleSuppr)
                 {
-                    if (pos.X == ligne && pos.Y == col)
+                    if (pos.X == ligne && pos.Y == col  && pos.Casier==nbasier)
                     {
                         existe = true;
-                        listeBouteilleAjout.Remove(pos);
+                        listeBouteilleSuppr.Remove(pos);
                         break;
                     }
                 }
@@ -411,8 +411,8 @@ namespace CaveAVin
                 }
                 else
                 {
-                    posi.Casier = nbasier - 1;
-                    listeBouteilleAjout.Add(posi);
+                    posi.Casier = nbasier;
+                    listeBouteilleSuppr.Add(posi);
                     var brush = new ImageBrush();
                     brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Chercher.png", UriKind.Relative));
                     ((Button)but[nbasier - 1].GetValue(ligne, col)).Background = brush;
@@ -603,8 +603,9 @@ namespace CaveAVin
 
                     brush = new ImageBrush();
                     brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
-                    ((Button)but[cas - 1].GetValue(ligne, col)).Background = brush;
-                    ((Button)but[cas - 1].GetValue(ligne, col)).Click += selectBouteille;
+                    ((Button)but[cas-1].GetValue(ligne, col)).Background = brush;
+                    ((Button)but[cas-1].GetValue(ligne, col)).Click -= selectionBouteille;
+                    ((Button)but[cas-1].GetValue(ligne, col)).Click += selectBouteille;
                 }
 
                 listeBouteilleSuppr.Clear();
