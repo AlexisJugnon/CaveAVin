@@ -26,6 +26,31 @@ namespace DAO
             con = c;
         }
 
+
+        public Bouteille Chercher(int ligne, int col)
+        {
+            Bouteille b = null;
+
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Bouteille WHERE Position_X= '" + ligne.ToString() +"' AND Position_Y = '" + col.ToString()+"'";
+                IDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    b = reader2Bouteille(reader);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return b;
+        }
+
         public Bouteille Chercher(int ID)
         {
             Bouteille b = null;
@@ -124,7 +149,7 @@ namespace DAO
                 IDataReader reader = com.ExecuteReader();
                 while (reader.Read())
                 {
-                    Bouteille b = reader2Bouteille(reader);
+                    Bouteille b = reader2BouteilleComplet(reader);
                     liste.Ajouter(b);
                 }
             }
@@ -375,6 +400,23 @@ namespace DAO
             b.Bue = Convert.ToBoolean(reader["Bue"]);
             return b;
         }
+
+
+        private Bouteille reader2BouteilleComplet(IDataReader reader)
+        {
+            Bouteille b = new Bouteille();
+            return b;
+        }
+
+        //lblAppelation.Content = daoBouteille.;
+        //    lblCategorie.Content = ;
+        //    lblContenance.Content = ;
+        //    lblCru.Content = ;
+        //    lblDomaine.Content = ;
+        //    lblMillesime.Content = ;
+        //    lblPays.Content = ;
+        //    lblRegion.Content = ;
+        //    lblVinification.Content = ;
 
     }
 }

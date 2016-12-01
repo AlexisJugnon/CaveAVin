@@ -15,7 +15,7 @@
             <RowDefinition Height="101*"/>
             <RowDefinition Height="208*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="Accueil" Margin="0,139,0,9" UseLayoutRounding="False" IsHitTestVisible="True" Visibility="Visible" Grid.RowSpan="2">
+        <Grid x:Name="Accueil" Margin="0,139,0,9" UseLayoutRounding="False" IsHitTestVisible="True" Visibility="Hidden" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="11*"/>
                 <RowDefinition Height="2*"/>
@@ -52,8 +52,8 @@
                 </MenuItem.Background>
             </MenuItem>
         </Menu>
-        <Grid Visibility="Hidden" x:Name="affichBoute" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,126,0,7" Width="1635" Height="794" Grid.RowSpan="2">
-            <Border x:Name="ficheDetailBouteille" Visibility="Hidden" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Left" Height="659" Margin="965,83,-104,0" VerticalAlignment="Top" Width="429" Background="#FFFCF4E3">
+        <Grid Visibility="Visible" x:Name="affichBoute" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,126,0,7" Width="1635" Height="794" Grid.RowSpan="2">
+            <Border x:Name="ficheDetailBouteille" Visibility="Hidden" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Left" Height="659" Margin="967,83,0,0" VerticalAlignment="Top" Width="429" Background="#FFFCF4E3">
                 <Grid >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="59*"/>
@@ -130,8 +130,8 @@
             </Grid>
         </Grid>
         <Grid x:Name="Faux_menu" Margin="0,126,1481,0" Visibility="Visible" MouseLeave="part" Background="#FF661141" Grid.RowSpan="2" Height="800" VerticalAlignment="Top">
-            <Button x:Name="BT_Menu1" Content="Button" HorizontalAlignment="Left" Margin="5,11,0,0" VerticalAlignment="Top" Width="144" Background="#FF661141" BorderBrush="#FF661141" Height="51" Click="BT_Menu1_Click"/>
-            <Button x:Name="BT_Menu2" Content="Button" HorizontalAlignment="Left" Margin="5,74,0,0" VerticalAlignment="Top" Width="149" Background="#FF661141" BorderBrush="#FF661141" Height="51" Click="BT_Menu2_Click"/>
+            <Button x:Name="BT_Menu1" Content="Accueil" HorizontalAlignment="Left" Margin="5,11,0,0" VerticalAlignment="Top" Width="144" Background="#FF661141" BorderBrush="#FF661141" Height="51" Click="BT_Menu1_Click"/>
+            <Button x:Name="BT_Menu2" Content="Ajouter un casier" HorizontalAlignment="Left" Margin="5,74,0,0" VerticalAlignment="Top" Width="149" Background="#FF661141" BorderBrush="#FF661141" Height="51" Click="BT_Menu2_Click"/>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="0,67,0,0" VerticalAlignment="Top" Width="166"/>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="0,194,0,0" VerticalAlignment="Top" Width="166"/>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="0,130,0,0" VerticalAlignment="Top" Width="166"/>

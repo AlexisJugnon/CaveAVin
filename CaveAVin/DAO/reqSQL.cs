@@ -72,6 +72,21 @@ namespace DAO
             return res;
         }
 
+        public void delete(int ligne, int col, int nbasier)
+        {
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "DELETE FROM Bouteille WHERE Position_X = '" + ligne.ToString() + "' AND Position_Y = '" + col.ToString() + "' AND idCasier = '" + nbasier.ToString()+"'";
+                com.ExecuteNonQuery();
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         private Bouteille reader2Bouteille(IDataReader reader)
         {
             Bouteille b = new Bouteille();

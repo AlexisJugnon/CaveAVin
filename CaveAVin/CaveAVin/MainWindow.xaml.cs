@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DAO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -281,7 +281,7 @@ namespace CaveAVin
                 listeBouteilleAjout.Remove(posi);
                 var brush = new ImageBrush();
                 brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
-                ((Button) but[nbasier].GetValue(ligne, col)).Background = brush;
+                ((Button)but[nbasier].GetValue(ligne, col)).Background = brush;
 
             }
             else
@@ -291,11 +291,11 @@ namespace CaveAVin
                 brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Chercher.png", UriKind.Relative));
                 try
                 {
-                    Console.WriteLine(((Button)but[nbasier-1].GetValue(ligne, col)).ToString());
-                    ((Button)but[nbasier-1].GetValue(ligne, col)).Background = brush;
+                    Console.WriteLine(((Button)but[nbasier - 1].GetValue(ligne, col)).ToString());
+                    ((Button)but[nbasier - 1].GetValue(ligne, col)).Background = brush;
 
                 }
-                catch(Exception x)
+                catch (Exception x)
                 {
                     Console.WriteLine(x);
                 }
@@ -351,8 +351,20 @@ namespace CaveAVin
             if (!supprimer)
             {
                 Decaler();
-                displayFicheDetailBouteille(true);
+                var button = (Button)sender;
+                var textContent = button.Content.ToString();
+                var coordonee = textContent.Split(',');
+                int ligneIndex;
+                int colonneIndex;
+                if (Int32.TryParse(coordonee[0], out ligneIndex) && Int32.TryParse(coordonee[1], out colonneIndex))
+                {
+                    var casierDao = new CasierDAO(DAO.BDD.Instance.Connexion);
+                    var bouteilleDao = new BouteilleDAO(DAO.BDD.Instance.Connexion);
+                    var casier = casierDao.Chercher(nbasier);
+                    var bouteille = bouteilleDao.Chercher(ligneIndex, colonneIndex, casier);
 
+                    AfficherDetailBouteille(bouteille);
+                }
             }
             else
             {
@@ -398,7 +410,11 @@ namespace CaveAVin
         #region Affichage Détail Bouteille
 
         // A refaire avec en passage en parametre num de la colonne et num de la ligne
-        private void afficherDetailBouteille(Metier.Bouteille bouteille)
+        /// <summary>
+        /// Affiche les détail d'une bouteille
+        /// </summary>
+        /// <param name="bouteille"></param>
+        private void AfficherDetailBouteille(Metier.Bouteille bouteille)
         {
             if (bouteille != null)
             {
@@ -411,11 +427,15 @@ namespace CaveAVin
                 lblPays.Content = bouteille.Region?.Pays?.NomPays;
                 lblRegion.Content = bouteille.Region?.NomRegion;
                 lblVinification.Content = bouteille.Type_vinification?.NomVinif;
-                displayFicheDetailBouteille(true);
+                DisplayFicheDetailBouteille(true);
             }
         }
 
-        private void displayFicheDetailBouteille(bool rendreVisible)
+        /// <summary>
+        /// Affiche ou masque la fiche du détail de la bouteille
+        /// </summary>
+        /// <param name="rendreVisible">Vrai si l'on doit afficher la fiche; sinon faux</param>
+        private void DisplayFicheDetailBouteille(bool rendreVisible)
         {
             ficheDetailBouteille.Visibility = rendreVisible ? Visibility.Visible : Visibility.Hidden;
         }
