@@ -287,29 +287,30 @@ namespace CaveAVin
             int col = Int32.Parse(sender.ToString().Substring(35, 1));
             Metier.Position posi = new Metier.Position(ligne, col);
 
-            if (listeBouteilleAjout.Contains(posi))
-            {
-                listeBouteilleAjout.Remove(posi);
+            bool existe = false;
+            foreach(Metier.Position pos in listeBouteilleAjout){
+                if (pos.X == ligne && pos.Y==col)
+                {
+                    existe = true;
+                    listeBouteilleAjout.Remove(pos);
+                    break;
+                }
+            }
+            if (existe)
+            {            
                 var brush = new ImageBrush();
                 brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
-                ((Button) but[nbasier].GetValue(ligne, col)).Background = brush;
+                ((Button) but[nbasier-1].GetValue(ligne, col)).Background = brush;
 
             }
             else
             {
+                posi.Casier = nbasier - 1;
                 listeBouteilleAjout.Add(posi);
                 var brush = new ImageBrush();
                 brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Chercher.png", UriKind.Relative));
-                try
-                {
-                    Console.WriteLine(((Button)but[nbasier-1].GetValue(ligne, col)).ToString());
-                    ((Button)but[nbasier-1].GetValue(ligne, col)).Background = brush;
+                ((Button)but[nbasier-1].GetValue(ligne, col)).Background = brush;
 
-                }
-                catch(Exception x)
-                {
-                    Console.WriteLine(x);
-                }
 
             }
         }
@@ -531,7 +532,9 @@ namespace CaveAVin
         {
             var brush = new ImageBrush();
             brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
-            ((Button)but[nbasier].GetValue(l_ligne, l_col)).Background = brush;
+            ((Button)but[nbasier-1].GetValue(l_ligne, l_col)).Background = brush;
+            ((Button)but[nbasier - 1].GetValue(l_ligne, l_col)).Click += selectBouteille;
+
             req.delete(l_ligne, l_col, nbasier);
         }
 

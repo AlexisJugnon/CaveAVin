@@ -11,6 +11,7 @@ namespace Metier
 
         private int x;
         private int y;
+        private int casier;
 
         public Position(int x2 = -1,int y2 = -1)
         {
@@ -41,6 +42,19 @@ namespace Metier
             set
             {
                 y = value;
+            }
+        }
+
+        public int Casier
+        {
+            get
+            {
+                return casier;
+            }
+
+            set
+            {
+                casier = value;
             }
         }
     }
