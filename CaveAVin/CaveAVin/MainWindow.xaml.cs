@@ -299,19 +299,14 @@ namespace CaveAVin
             }
             if (existe)
             {            
-                var brush = new ImageBrush();
-                brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
-                ((Button) but[nbasier-1].GetValue(ligne, col)).Background = brush;
+                ((Button)but[nbasier - 1].GetValue(ligne, col)).Opacity = 1.0;
 
             }
             else
             {
                 posi.Casier = nbasier;
                 listeBouteilleAjout.Add(posi);
-                var brush = new ImageBrush();
-                brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Chercher.png", UriKind.Relative));
-                ((Button)but[nbasier-1].GetValue(ligne, col)).Background = brush;
-
+                ((Button)but[nbasier - 1].GetValue(ligne, col)).Opacity = 0.5;
 
             }
         }
@@ -403,9 +398,7 @@ namespace CaveAVin
                 }
                 if (existe)
                 {
-                    var brush = new ImageBrush();
-                    brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
-                    ((Button)but[nbasier - 1].GetValue(ligne, col)).Background = brush;
+                    ((Button)but[nbasier - 1].GetValue(ligne, col)).Opacity = 1.0;
                     
 
                 }
@@ -413,9 +406,7 @@ namespace CaveAVin
                 {
                     posi.Casier = nbasier;
                     listeBouteilleSuppr.Add(posi);
-                    var brush = new ImageBrush();
-                    brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Chercher.png", UriKind.Relative));
-                    ((Button)but[nbasier - 1].GetValue(ligne, col)).Background = brush;
+                    ((Button)but[nbasier - 1].GetValue(ligne, col)).Opacity = 0.5;
 
 
                 }
@@ -562,6 +553,9 @@ namespace CaveAVin
         /// <param name="e"></param>
         private void BT_Supprimer_Click(object sender, RoutedEventArgs e)
         {
+
+            ((Button)but[nbasier - 1].GetValue(l_ligne, l_col)).Opacity = 1.0;
+
             var brush = new ImageBrush();
             brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
             ((Button)but[nbasier-1].GetValue(l_ligne, l_col)).Background = brush;
@@ -600,6 +594,8 @@ namespace CaveAVin
                     col = pos.Y;
                     cas = pos.Casier;                 
                     req.delete(ligne, col, cas);
+
+                    ((Button)but[cas - 1].GetValue(ligne, col)).Opacity = 1.0;
 
                     brush = new ImageBrush();
                     brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
