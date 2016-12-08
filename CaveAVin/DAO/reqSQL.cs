@@ -78,8 +78,9 @@ namespace DAO
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "DELETE FROM Bouteille WHERE Position_X = '" + ligne.ToString() + "' AND Position_Y = '" + col.ToString() + "' AND idCasier = '" + nbasier.ToString()+"'";
+                com.CommandText = "UPDATE Bouteille set Bue = true WHERE Position_X = '" + ligne.ToString() + "' AND Position_Y = '" + col.ToString() + "' AND idCasier = '" + nbasier.ToString()+"'";
                 com.ExecuteNonQuery();
+                
             }
             finally
             {
