@@ -84,7 +84,7 @@ namespace DAO
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Type_vignification";
+                com.CommandText = "SELECT * FROM Type_vinification";
                 IDataReader reader = com.ExecuteReader();
                 while (reader.Read())
                 {

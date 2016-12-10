@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -64,6 +65,7 @@ namespace CaveAVin
             affichBoute.Visibility = Visibility.Hidden;
             MultiCasier.Visibility = Visibility.Hidden;
             Faux_menu.Visibility = Visibility.Hidden;
+            ajoutB.Visibility = Visibility.Hidden;
             #endregion
 
             initBDD();
@@ -81,7 +83,6 @@ namespace CaveAVin
         {
             Faux_menu.Visibility = Visibility;
         }
-
 
         /// <summary>
         /// Cache le "sous_menu" quand on quitte les boutons le constituant.
@@ -112,49 +113,13 @@ namespace CaveAVin
         /// <param name="e"></param>
         private void nouvelleBout(object sender, RoutedEventArgs e)
         {
-            //récupération des coordonnées de la bouteille + select idBouteille en fonction des coordonnées et du casier
-            int casier = nbasier;
-            try
-            {
-                List<Metier.Bouteille> b = new List<Metier.Bouteille>();
-
-                DAO.TypeDAO typ = new DAO.TypeDAO(DAO.BDD.Instance.Connexion);
-                Metier.Types typs = typ.Lister();
-
-                DAO.PaysDAO pay = new DAO.PaysDAO(DAO.BDD.Instance.Connexion);
-                Metier.Pays2 payss = pay.Lister();
-
-                DAO.RegionDAO reg = new DAO.RegionDAO(DAO.BDD.Instance.Connexion);
-                //Metier.Regions regions = reg.Lister();
-
-                DAO.AppelationDAO app = new DAO.AppelationDAO(DAO.BDD.Instance.Connexion);
-                Metier.Appelations apps = app.Lister();
-
-                DAO.ContenanceDAO cont = new DAO.ContenanceDAO(DAO.BDD.Instance.Connexion);
-                Metier.Contenances conts = cont.Lister();
-
-                ajouteBouteille f = new ajouteBouteille();
-                if (f.ShowDialog() == true)
-                {
-                    DAO.BouteilleDAO daoBouteille = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
-                    foreach (Metier.Bouteille bt in b)
-                    {
-                        daoBouteille.Créer(bt); // ajoute la bouteille dans la base                    
-                        // et dans l'IHM
-                    }
-                }
-            }
-            catch (Exception x)
-            {
-                MessageBox.Show(x.Message);
-            }
+            initAjoutBouteille();
         }
 
         #region affichageCasier
 
         private int nbasier = 1;
         private int nbCasier = 1;
-        //private Button[][,] but;
         private List<Button[,]> but = new List<Button[,]>();
         private Button[,] button;
         private Grid[] gestionCasier;
@@ -479,6 +444,7 @@ namespace CaveAVin
         /// <param name="rendreVisible">Vrai si l'on doit afficher la fiche; sinon faux</param>
         private void DisplayFicheDetailBouteille(bool rendreVisible)
         {
+            ajoutB.Visibility = Visibility.Hidden;
             ficheDetailBouteille.Visibility = rendreVisible ? Visibility.Visible : Visibility.Hidden;
         }
 
@@ -613,6 +579,98 @@ namespace CaveAVin
             {
                 supprimer = true;
             }
+        }
+
+
+
+        private void initAjoutBouteille()
+        {
+            Decaler();
+            MainWindows.Visibility = Visibility.Visible;
+            Accueil.Visibility = Visibility.Hidden;
+            affichBoute.Visibility = Visibility.Visible;
+            MultiCasier.Visibility = Visibility.Hidden;
+            Faux_menu.Visibility = Visibility.Hidden;
+            ajoutB.Visibility = Visibility.Visible;
+            ficheDetailBouteille.Visibility = Visibility.Hidden;
+
+            cb_Type_Ajout.Items.Clear();
+            cb_Region_Ajout.Items.Clear();
+            cb_Domaine_Ajout.Items.Clear();
+            cb_Contenance_Ajout.Items.Clear();
+            cb_Millesime_Ajout.Items.Clear();
+            cb_Cru_Ajout.Items.Clear();
+            cb_Vinification_Ajout.Items.Clear();
+            cb_Appelation_Ajout.Items.Clear();
+
+            DAO.TypeDAO daoTyp = new DAO.TypeDAO(DAO.BDD.Instance.Connexion);
+            Metier.Types listeTyp = daoTyp.Lister();
+            foreach (Metier.Type t in listeTyp.Lister())
+            {
+                cb_Type_Ajout.Items.Add(t.NomType);
+            }
+
+            DAO.RegionDAO daoReg = new DAO.RegionDAO(DAO.BDD.Instance.Connexion);
+            Metier.Regions listeReg = daoReg.Lister();
+            foreach (Metier.Region r in listeReg.Lister())
+            {
+                cb_Region_Ajout.Items.Add(r.NomRegion);
+            }
+
+            DAO.DomaineDAO daoDom = new DAO.DomaineDAO(DAO.BDD.Instance.Connexion);
+            Metier.Domaines listeDom = daoDom.Lister();
+            foreach (Metier.Domaine d in listeDom.Lister())
+            {
+                cb_Domaine_Ajout.Items.Add(d.NomDomaine);
+            }
+
+            DAO.ContenanceDAO daoCon = new DAO.ContenanceDAO(DAO.BDD.Instance.Connexion);
+            Metier.Contenances listeCon = daoCon.Lister();
+            foreach (Metier.Contenance c in listeCon.Lister())
+            {
+                cb_Contenance_Ajout.Items.Add(c.Valeur);
+            }
+
+            DAO.MillesimeDAO daoMil = new DAO.MillesimeDAO(DAO.BDD.Instance.Connexion);
+            Metier.Millesimes listeMil = daoMil.Lister();
+            foreach (Metier.Millesime m in listeMil.Lister())
+            {
+                cb_Millesime_Ajout.Items.Add(m.NomMillesime);
+            }
+
+            DAO.CruDAO daoCru = new DAO.CruDAO(DAO.BDD.Instance.Connexion);
+            Metier.Crus listeCru = daoCru.Lister();
+            foreach (Metier.Cru c in listeCru.Lister())
+            {
+                cb_Cru_Ajout.Items.Add(c.NomCru);
+            }
+
+            DAO.Type_vinificationDAO daoVinif = new DAO.Type_vinificationDAO(DAO.BDD.Instance.Connexion);
+            Metier.Type_vinifications listeVinif = daoVinif.Lister();
+            foreach (Metier.Type_vinification v in listeVinif.Lister())
+            {
+                cb_Vinification_Ajout.Items.Add(v.NomVinif);
+            }
+
+            DAO.AppelationDAO daoApp = new DAO.AppelationDAO(DAO.BDD.Instance.Connexion);
+            Metier.Appelations listeApp = daoApp.Lister();
+            foreach (Metier.Appelation a in listeApp.Lister())
+            {
+                cb_Appelation_Ajout.Items.Add(a.NomAppelation);
+            }
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            //Type t = (Type) cb_Type_Ajout.SelectedValue;
+            Console.WriteLine(cb_Type_Ajout.SelectedValue);
+            cb_Region_Ajout.Items.Clear();
+            cb_Domaine_Ajout.Items.Clear();
+            cb_Contenance_Ajout.Items.Clear();
+            cb_Millesime_Ajout.Items.Clear();
+            cb_Cru_Ajout.Items.Clear();
+            cb_Vinification_Ajout.Items.Clear();
+            cb_Appelation_Ajout.Items.Clear();
         }
     }
 }
