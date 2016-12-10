@@ -226,7 +226,7 @@ namespace CaveAVin
                         try
                         {
                             res = req.SelStr1("SELECT NomType From Type natural join Bouteille where idCasier =" + i +
-                            " and Bouteille.Position_X = " + k + " and Bouteille.Position_Y = " + j + ";", "NomType");
+                            " and Bouteille.Position_X = " + k + " and Bouteille.Position_Y = " + j + " and Bue = 0;", "NomType");
                         }
                         catch
                         {
@@ -368,17 +368,19 @@ namespace CaveAVin
                 var button = (Button)sender;
                 var textContent = button.Content.ToString();
                 var coordonee = textContent.Split(',');
-                int ligneIndex;
-                int colonneIndex;
-                if (Int32.TryParse(coordonee[0], out ligneIndex) && Int32.TryParse(coordonee[1], out colonneIndex))
-                {
-                    var casierDao = new CasierDAO(DAO.BDD.Instance.Connexion);
-                    var bouteilleDao = new BouteilleDAO(DAO.BDD.Instance.Connexion);
-                    var casier = casierDao.Chercher(nbasier);
-                    var bouteille = bouteilleDao.Chercher(ligneIndex, colonneIndex, casier);
-                    
+
+                    Metier.Position posi = new Metier.Position(l_ligne, l_col);
+                    posi.Casier = nbasier;
+
+// if (Int32.TryParse(coordonee[0], out ligneIndex) && Int32.TryParse(coordonee[1], out colonneIndex))
+//{
+                var casierDao = new CasierDAO(DAO.BDD.Instance.Connexion);
+                var bouteilleDao = new BouteilleDAO(DAO.BDD.Instance.Connexion);
+                var casier = casierDao.Chercher(nbasier);
+                var bouteille = bouteilleDao.Chercher(posi.X, posi.Y, posi.Casier);
+                Console.WriteLine(bouteille.IdDomaine);
                     AfficherDetailBouteille(bouteille);
-                }
+// }
             }
             else
             {
