@@ -7,47 +7,58 @@
         mc:Ignorable="d"
         
         Title="WineFinder" Height="946.677" Width="1642.9">
-    <Grid x:Name="MainWindows" HorizontalAlignment="Stretch" Height="927" Margin="0,0,0,-21" VerticalAlignment="Top">
-        <Grid.Background>
-            <ImageBrush/>
-        </Grid.Background>
+
+    <Grid x:Name="AffichagePrincipal" HorizontalAlignment="Stretch" Height="927" Margin="0,0,0,-21" VerticalAlignment="Top">
         <Grid.RowDefinitions>
             <RowDefinition Height="101*"/>
             <RowDefinition Height="208*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="Accueil" Margin="0,139,0,9" UseLayoutRounding="False" IsHitTestVisible="True" Visibility="Hidden" Grid.RowSpan="2">
+
+
+        <Rectangle Fill="#FF661141" HorizontalAlignment="Stretch" Height="133" Margin="0,0,0,0" VerticalAlignment="Top" />
+
+        <Image x:Name="logo" HorizontalAlignment="Left" Height="133" Margin="166,0,0,0" VerticalAlignment="Top" Width="176" Source=".\Images\logoBouteille.png" />
+
+        <Button x:Name="BT_rechercher" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="0,30,30,0" Height="75" Background="#FF661141" BorderBrush="#FF661141" Click="BT_rechercher_Click">
+            <Image x:Name="chercher" HorizontalAlignment="Center"  VerticalAlignment="Center"  Source=".\Images\Chercher.png" />
+        </Button>
+
+
+        <Menu x:Name="MenuBase" HorizontalAlignment="Left" Height="116" Margin="30,10,0,0" VerticalAlignment="Top" Background="#FF661141" Width="100" Foreground="#FF661141">
+            <MenuItem x:Name="Menu" Header="" Click="AffichageMenu_Click" Height="75" Width="75" Margin="13,20,0,0">
+                <MenuItem.Background>
+                    <ImageBrush ImageSource=".\Images\Menu.png"/>
+                </MenuItem.Background>
+            </MenuItem>
+        </Menu>
+
+
+        <Grid x:Name="AffichageAccueil" Visibility="Hidden" Margin="0,139,0,9" UseLayoutRounding="False" IsHitTestVisible="True" Grid.RowSpan="2">
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="11*"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
+
             <Rectangle Fill="#FF661141" HorizontalAlignment="Center" Height="89" Stroke="Black" VerticalAlignment="Top" Width="1312" Margin="0,70,0,0"/>
-            <Label x:Name="Label1" FontSize="20" Content="Le saviez-vous ?" HorizontalAlignment="Stretch" Margin="0,86,0,0" Foreground="White" VerticalAlignment="Top" Height="54" Width="153"/>
+            <Label x:Name="LeSaviezVous" FontSize="20" Content="Le saviez-vous ?" HorizontalAlignment="Stretch" Margin="0,86,0,0" Foreground="White" VerticalAlignment="Top" Height="54" Width="153"/>
             <TextBox FontSize="30" Background="white" x:Name="TB_SaviezVous" HorizontalAlignment="Stretch" Height="427" TextWrapping="Wrap" VerticalAlignment="Top" Width="1312" VerticalScrollBarVisibility="Auto" IsEnabled="True" AcceptsReturn="True" Margin="0,159,0,0" Focusable="False"/>
 
-            <Button x:Name="BT_VoirBouteille" Margin="0,606,231,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="86" Height="86" BorderBrush="#FF661141" Click="BT_VoirBouteille_Click" Grid.RowSpan="2" Background="#FF661141" Foreground="#FF661141">
+            <Button x:Name="BT_VoirCasier" Margin="0,606,231,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="86" Height="86" BorderBrush="#FF661141" Click="BT_VoirCasier_Click" Grid.RowSpan="2" Background="#FF661141" Foreground="#FF661141">
                 <Image Source=".\Images\VoirBouteille.png"/>
             </Button>
-            <Button x:Name="BT_VoirCave"  HorizontalAlignment="Center" Margin="0,606,0,0" VerticalAlignment="Top" Width="86" Height="86" BorderBrush="#FF661141" Click="BT_VoirCave_Click" Grid.RowSpan="2" Background="#FF661141" Foreground="#FF661141">
+            <Button x:Name="BT_VoirCave"  HorizontalAlignment="Center" Margin="0,606,0,0" VerticalAlignment="Top" Width="86" Height="86" BorderBrush="#FF661141" Grid.RowSpan="2" Background="#FF661141" Foreground="#FF661141">
                 <Image Source=".\Images\VoirCave.png" HorizontalAlignment="Center"/>
             </Button>
             <Button x:Name="BT_GererCave" HorizontalAlignment="Left" Margin="230,606,0,0" VerticalAlignment="Top" Width="86" Height="86" BorderBrush="#FF661141" Grid.RowSpan="2" Background="#FF661141" Foreground="#FF661141">
                 <Image Source=".\Images\GererCave.png"/>
             </Button>
         </Grid>
-        <Rectangle Fill="#FF661141" HorizontalAlignment="Stretch" Height="133" Margin="0,0,0,0" VerticalAlignment="Top" />
-        <Image x:Name="logo" HorizontalAlignment="Left" Height="133" Margin="166,0,0,0" VerticalAlignment="Top" Width="176" Source="logoBouteille.png" />
-        <Button x:Name="BT_rechercher" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="0,30,30,0" Height="75" Background="#FF661141" BorderBrush="#FF661141">
-            <Image x:Name="chercher" HorizontalAlignment="Center"  VerticalAlignment="Center"  Source="chercher.png" />
-        </Button>
-        <Menu x:Name="MenuBase" HorizontalAlignment="Left" Height="116" Margin="30,10,0,0" VerticalAlignment="Top" Background="#FF661141" Width="100" Foreground="#FF661141">
-            <MenuItem x:Name="Menu" Header="" Click="MenuItem_Click" Height="75" Width="75" Margin="13,20,0,0">
-                <MenuItem.Background>
-                    <ImageBrush ImageSource="Menu.png"/>
-                </MenuItem.Background>
-            </MenuItem>
-        </Menu>
-        <Grid Visibility="Visible" x:Name="affichBoute" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,126,0,7" Width="1635" Height="794" Grid.RowSpan="2">
-            <Border x:Name="ficheDetailBouteille" Visibility="Hidden" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Left" Height="659" Margin="933,74,0,0" VerticalAlignment="Top" Width="429" Background="#FFFCF4E3">
+
+
+        <Grid x:Name="AffichageInterfaceCasier" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,126,0,7" Width="1635" Height="794" Grid.RowSpan="2">
+            <Border x:Name="AfficheDetailBouteille" Visibility="Hidden" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Left" Height="659" Margin="933,74,0,0" VerticalAlignment="Top" Width="429" Background="#FFFCF4E3">
+
                 <Grid >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="59*"/>
@@ -71,95 +82,132 @@
                         <RowDefinition Height="40*" />
                     </Grid.RowDefinitions>
 
-                    <Label Content="Catégorie*" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
-                    <Label Content="Région*" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
+                    <Label Content="Catégorie" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
+                    <Label Content="Région" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
                     <Label Content="Appelation" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"/>
                     <Label Content="Domaine" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"/>
                     <Label Content="Pays" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="4"/>
                     <Label Content="Vinification" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2"/>
                     <Label Content="Cru" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="6"/>
-                    <Label Content="Millésime*" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2"/>
+                    <Label Content="Millésime" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2"/>
                     <Label Content="Contenance" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2"/>
-                    <Label Content="Nombre de bouteille*" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2"/>
-                    <Label Content="* champs obligatoire" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2"/>
-                    <Label x:Name="lblCategorie" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="0"/>
-                    <Label x:Name="lblRegion" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="1"/>
-                    <Label x:Name="lblAppelation" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="2"/>
-                    <Label x:Name="lblDomaine" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="3"/>
-                    <Label x:Name="lblPays" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="4"/>
-                    <Label x:Name="lblVinification" HorizontalAlignment="Left" Height="23" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="5"/>
-                    <Label x:Name="lblCru" HorizontalAlignment="Left" Height="23" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="6"/>
-                    <Label x:Name="lblMillesime" HorizontalAlignment="Left" Height="23" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="7"/>
-                    <Label x:Name="lblContenance" HorizontalAlignment="Left" Height="23" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="8"/>
-                    <Label x:Name="lblNbBouteille" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="29" Grid.Column="2" Grid.Row="9"/>
+
+                    <Label x:Name="lbl_Categorie" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="0"/>
+                    <Label x:Name="lbl_Region" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="1"/>
+                    <Label x:Name="lbl_Appelation" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="2"/>
+                    <Label x:Name="lbl_Domaine" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="3"/>
+                    <Label x:Name="lbl_Pays" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="4"/>
+                    <Label x:Name="lbl_Vinification" HorizontalAlignment="Left" Height="23" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="5"/>
+                    <Label x:Name="lbl_Cru" HorizontalAlignment="Left" Height="23" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="6"/>
+                    <Label x:Name="lbl_Millesime" HorizontalAlignment="Left" Height="23" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="7"/>
+                    <Label x:Name="lbl_Contenance" HorizontalAlignment="Left" Height="23" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="8"/>
+                    <Label x:Name="lbl_NbBouteille" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="29" Grid.Column="2" Grid.Row="9"/>
+
                     <Button x:Name="BT_Supprimer" Content="Supprimer" HorizontalAlignment="Left" Margin="90,22,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="BT_Supprimer_Click"/>
+
                 </Grid>
             </Border>
-            <Button x:Name="boutPlus" Content="&#xA;" HorizontalAlignment="Right" Height="88" Margin="0,645,39,0" VerticalAlignment="Top" Width="94" BorderThickness="0" Click="nouvelleBout">
+
+            <Button x:Name="BT_Plus" Content="&#xA;" HorizontalAlignment="Right" Height="88" Margin="0,645,39,0" VerticalAlignment="Top" Width="94" BorderThickness="0" Click="AjoutBouteille_Click">
                 <Button.Background>
-                    <ImageBrush ImageSource="BoutonPlus.png"/>
+                    <ImageBrush ImageSource=".\Images\BoutonPlus.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="boutSuppr" Content="supprimerAll" HorizontalAlignment="Right" Height="88" Margin="0,645,156,0" VerticalAlignment="Top" Width="94" BorderThickness="0" Click="supprimerAll">
+
+            <Button x:Name="BT_Suppr" Content="supprimerAll" HorizontalAlignment="Right" Height="88" Margin="0,645,156,0" VerticalAlignment="Top" Width="94" BorderThickness="0" Click="ToutSupprimer_Click">
+
             </Button>
-            <Grid x:Name="MultiCasier" Margin="352,0,374,290" Height="220" VerticalAlignment="Bottom" Visibility="Hidden">
+
+            <Grid x:Name="MultiCasier" Visibility="Hidden" Margin="352,0,374,290" Height="220" VerticalAlignment="Bottom">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="319*"/>
                     <ColumnDefinition Width="590*"/>
                 </Grid.ColumnDefinitions>
             </Grid>
-            <Grid x:Name="aDecal" Visibility="Visible"  HorizontalAlignment="Left" Height="740" Margin="292,27,0,0" VerticalAlignment="Top" Width="946">
-                <Button x:Name="casPrec" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="54,323,0,0" Height="88" BorderThickness="0" Click="casPrec_Click">
+
+            <Grid x:Name="AffichageCasier" Visibility="Visible"  HorizontalAlignment="Left" Height="740" Margin="292,27,0,0" VerticalAlignment="Top" Width="946">
+
+                <Button x:Name="CasierPrecedent" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="54,323,0,0" Height="88" BorderThickness="0" Click="CasierPrecedent_Click">
                     <Button.Background>
-                        <ImageBrush ImageSource="BoutonPrécédent.png"/>
+                        <ImageBrush ImageSource=".\Images\BoutonPrécédent.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:Name="casSuiv" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="856,321,0,0" Height="88" BorderThickness="0" Click="casSuiva">
+
+                <Button x:Name="CasierSuivant" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="856,321,0,0" Height="88" BorderThickness="0" Click="CasierSuivant_Click">
                     <Button.Background>
-                        <ImageBrush ImageSource="BoutonSuivant.png"/>
+                        <ImageBrush ImageSource=".\Images\BoutonSuivant.png"/>
                     </Button.Background>
                 </Button>
-                <Border x:Name="affBout" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="650" Margin="135,48,0,0" VerticalAlignment="Top" Width="700">
-                    <Grid x:Name="test" Margin="-1,1,1,-1"/>
+
+                <Border x:Name="AffichageBordureCasier" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="650" Margin="135,48,0,0" VerticalAlignment="Top" Width="700">
+                    <Grid x:Name="GridAffichageBouteille" Margin="-1,1,1,-1"/>
                 </Border>
-                <Label x:Name="lNomC" Content="&#xA;" HorizontalAlignment="Left" Margin="424,0,0,0" VerticalAlignment="Top" Width="270"/>
+
+                <Label x:Name="lblNomCasier" Content="&#xA;" HorizontalAlignment="Left" Margin="424,0,0,0" VerticalAlignment="Top" Width="270"/>
             </Grid>
-        </Grid>
-        <Grid x:Name="ajoutB" HorizontalAlignment="Left" Height="794" VerticalAlignment="Top" Width="1635" Margin="0,123,0,0" Grid.RowSpan="2" Visibility="Visible">
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="658" Margin="934,76,0,0" VerticalAlignment="Top" Width="430" Background="#FFFCF4E3">
-                <Grid Margin="-1,-1,1,1">
-                    <Label x:Name="label" Content="Ajouter des bouteilles" HorizontalAlignment="Left" Margin="144,10,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label1" Content="Type :" HorizontalAlignment="Left" Margin="10,87,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.539,0.731"/>
-                    <Label x:Name="label2" Content="Région :" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label3" Content="Millésime :" HorizontalAlignment="Left" Margin="10,309,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label4" Content="Contenance :" HorizontalAlignment="Left" Margin="10,261,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label5" Content="Domaine :" HorizontalAlignment="Left" Margin="10,212,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label6" Content="Cru :" HorizontalAlignment="Left" Margin="10,362,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label7" Content="Vinification :" HorizontalAlignment="Left" Margin="10,414,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label8" Content="Appellation :" HorizontalAlignment="Left" Margin="10,468,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="cb_Appelation_Ajout" HorizontalAlignment="Left" Margin="108,468,0,0" VerticalAlignment="Top" Width="263"/>
-                    <ComboBox x:Name="cb_Vinification_Ajout" HorizontalAlignment="Left" Margin="108,418,0,0" VerticalAlignment="Top" Width="263"/>
-                    <ComboBox x:Name="cb_Cru_Ajout" HorizontalAlignment="Left" Margin="108,366,0,0" VerticalAlignment="Top" Width="263"/>
-                    <ComboBox x:Name="cb_Contenance_Ajout" HorizontalAlignment="Left" Margin="108,265,0,0" VerticalAlignment="Top" Width="263"/>
-                    <ComboBox x:Name="cb_Millesime_Ajout" HorizontalAlignment="Left" Margin="108,313,0,0" VerticalAlignment="Top" Width="263"/>
-                    <ComboBox x:Name="cb_Domaine_Ajout" HorizontalAlignment="Left" Margin="108,216,0,0" VerticalAlignment="Top" Width="263"/>
-                    <ComboBox x:Name="cb_Type_Ajout" HorizontalAlignment="Left" Margin="108,91,0,0" VerticalAlignment="Top" Width="263" IsEditable="True"/>
-                    <ComboBox x:Name="cb_Region_Ajout" HorizontalAlignment="Left" Margin="108,135,0,0" VerticalAlignment="Top" Width="263"/>
-                    <Button x:Name="valid_ajout" Content="Ajouter" HorizontalAlignment="Left" Margin="328,590,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-                    <Label x:Name="label9" Content="Pays :" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="cb_Pays_Ajout" HorizontalAlignment="Left" Margin="108,176,0,0" VerticalAlignment="Top" Width="263"/>
-                </Grid>
-            </Border>
+
         </Grid>
 
-        <Grid x:Name="Faux_menu" Margin="0,126,1481,0" Visibility="Visible" MouseLeave="part" Background="#FF661141" Grid.RowSpan="2" Height="800" VerticalAlignment="Top">
-            <Button x:Name="BT_Menu1" Content="Accueil" HorizontalAlignment="Left" Margin="5,11,0,0" VerticalAlignment="Top" Width="144" Background="#FF661141" BorderBrush="#FF661141" Height="51" Click="BT_Menu1_Click"/>
-            <Button x:Name="BT_Menu2" Content="Ajouter un casier" HorizontalAlignment="Left" Margin="5,74,0,0" VerticalAlignment="Top" Width="149" Background="#FF661141" BorderBrush="#FF661141" Height="51" Click="BT_Menu2_Click"/>
+
+        <Grid x:Name="AffichageFicheAjoutBouteille" Visibility="Hidden" HorizontalAlignment="Left" Height="794" VerticalAlignment="Top" Width="1635" Margin="0,125,0,0" Grid.RowSpan="2">
+
+            <Grid Margin="934,76,271,60">
+
+                <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="658" VerticalAlignment="Top" Width="430" Background="#FFFCF4E3">
+
+                    <Grid Margin="-1,-1,1,1">
+                        <Label x:Name="lbl_Titre" Content="Ajouter des bouteilles" HorizontalAlignment="Left" Margin="144,10,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="lbl_Info1" Content="Type :" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.539,0.731"/>
+                        <Label x:Name="lbl_Info2" Content="Région :" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="lbl_Info3" Content="Millésime :" HorizontalAlignment="Left" Margin="10,325,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="lbl_Info4" Content="Contenance :" HorizontalAlignment="Left" Margin="10,279,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="lbl_Info5" Content="Domaine :" HorizontalAlignment="Left" Margin="10,232,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="lbl_Info6" Content="Cru :" HorizontalAlignment="Left" Margin="10,372,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="lbl_Info7" Content="Vinification :" HorizontalAlignment="Left" Margin="10,419,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="lbl_Info" Content="Appellation :" HorizontalAlignment="Left" Margin="10,466,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="label9" Content="Pays :" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top"/>
+
+                        <ComboBox x:Name="cb_Appelation_Ajout" HorizontalAlignment="Left" Margin="108,466,0,0" VerticalAlignment="Top" Width="263" IsEditable="True"/>
+                        <ComboBox x:Name="cb_Vinification_Ajout" HorizontalAlignment="Left" Margin="108,419,0,0" VerticalAlignment="Top" Width="263" IsEditable="True"/>
+                        <ComboBox x:Name="cb_Cru_Ajout" HorizontalAlignment="Left" Margin="108,372,0,0" VerticalAlignment="Top" Width="263" IsEditable="True"/>
+                        <ComboBox x:Name="cb_Contenance_Ajout" HorizontalAlignment="Left" Margin="108,279,0,0" VerticalAlignment="Top" Width="263" IsEditable="True"/>
+                        <ComboBox x:Name="cb_Millesime_Ajout" HorizontalAlignment="Left" Margin="108,325,0,0" VerticalAlignment="Top" Width="263" IsEditable="True"/>
+                        <ComboBox x:Name="cb_Domaine_Ajout" HorizontalAlignment="Left" Margin="108,232,0,0" VerticalAlignment="Top" Width="263" IsEditable="True"/>
+                        <ComboBox x:Name="cb_Type_Ajout" HorizontalAlignment="Left" Margin="108,91,0,0" VerticalAlignment="Top" Width="263"/>
+                        <ComboBox x:Name="cb_Region_Ajout" HorizontalAlignment="Left" Margin="108,138,0,0" VerticalAlignment="Top" Width="263" IsEditable="True"/>
+                        <ComboBox x:Name="cb_Pays_Ajout" HorizontalAlignment="Left" Margin="108,185,0,0" VerticalAlignment="Top" Width="263" IsEditable="True"/>
+
+                        <Button x:Name="Validation_ajout" Content="Ajouter" HorizontalAlignment="Left" Margin="328,590,0,0" VerticalAlignment="Top" Width="75" Click="ValidationAjout_Click"/>
+
+                    </Grid>
+
+                </Border>
+
+            </Grid>
+
+            <Grid HorizontalAlignment="Left" Height="100" Margin="1535,694,0,0" VerticalAlignment="Top" Width="100"/>
+
+        </Grid>
+
+
+        <Grid x:Name="AffichageMenuLateral" Margin="0,126,1481,0" Visibility="Visible" MouseLeave="part" Background="#FF661141" Grid.RowSpan="2" Height="800" VerticalAlignment="Top">
+
+            <Button x:Name="BT_RetourAccueil" Content="Accueil" HorizontalAlignment="Left" Margin="5,11,0,0" VerticalAlignment="Top" Width="144" Background="#FF661141" BorderBrush="#FF661141" Height="51" Click="BT_RetourAccueil_Click"/>
+
+            <Button x:Name="BT_AjoutCasier" Content="Ajouter un casier" HorizontalAlignment="Left" Margin="5,74,0,0" VerticalAlignment="Top" Width="149" Background="#FF661141" BorderBrush="#FF661141" Height="51" Click="BT_AjoutCasier_Click"/>
+
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="0,67,0,0" VerticalAlignment="Top" Width="166"/>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="0,194,0,0" VerticalAlignment="Top" Width="166"/>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="0,130,0,0" VerticalAlignment="Top" Width="166"/>
+
             <Button x:Name="BT_Menu3" Content="Button" HorizontalAlignment="Left" Margin="5,137,0,0" VerticalAlignment="Top" Width="146" Background="#FF661141" BorderBrush="#FF661141" Height="52"/>
             <Button x:Name="BT_Menu4" Content="Button" HorizontalAlignment="Left" Margin="5,201,0,0" VerticalAlignment="Top" Width="146" Background="#FF661141" BorderBrush="#FF661141" Height="49"/>
         </Grid>
+
+        <Grid x:Name="AffichageRecherche" Visibility="Hidden"  HorizontalAlignment="Left" Height="791" VerticalAlignment="Top" Width="1635" Margin="0,126,0,0" Grid.RowSpan="2"/>
+        <Grid x:Name="AffichageAjoutCasier" Visibility="Visible" HorizontalAlignment="Left" Height="791" VerticalAlignment="Top" Width="1635" Margin="0,126,0,0" Grid.RowSpan="2">
+            
+        </Grid>
     </Grid>
+
 </Window>

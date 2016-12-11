@@ -59,13 +59,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ajouteBouteille.xaml.cs">
-      <DependentUpon>ajouteBouteille.xaml</DependentUpon>
-    </Compile>
-    <Page Include="ajouteBouteille.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ajouteCasier.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,94 +117,54 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Alcool.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="AlcoolCasier.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Blanc.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="BlancCasier.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="bouteilleCouché.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="CaseVide.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Chercher.png" />
+    <Resource Include="Images\Chercher.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="CuAlcool.png" />
+    <Resource Include="Images\logoBouteille.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="CuBlanc.png" />
+    <Resource Include="Images\LogoComplet.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="CuPétillant.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="CuRosé.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="CuRouge.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="GérerCave.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="logoBouteille.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="LogoComplet.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="logoReduit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Menu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Pétillant.png" />
+    <Resource Include="Images\logoReduit.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="PétillantCasier.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Rosé.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="RoséCasier.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Rouge.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="RougeCasier.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="VoirBouteille.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="VoirCave.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\GererCave.png" />
+    <Resource Include="Images\Alcool.png" />
+    <Resource Include="Images\Blanc.png" />
     <Content Include="Images\GererCave.svg" />
     <Resource Include="Images\Menu.png" />
     <Resource Include="Images\VoirBouteille.png" />
+    <Resource Include="Images\Pétillant.png" />
+    <Resource Include="Images\Rosé.png" />
+    <Resource Include="Images\Rouge.png" />
     <Content Include="Images\VoirCasier.svg" />
     <Resource Include="Images\VoirCave.png" />
     <Content Include="Images\VoirCave.svg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="BoutonModif.png" />
-    <Resource Include="BoutonPlus.png" />
-    <Resource Include="BoutonPrécédent.png" />
-    <Resource Include="BoutonSuivant.png" />
+    <Resource Include="Images\BoutonModif.png" />
+    <Resource Include="Images\BoutonPlus.png" />
+    <Resource Include="Images\BoutonPrécédent.png" />
+    <Resource Include="Images\BoutonSuivant.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
