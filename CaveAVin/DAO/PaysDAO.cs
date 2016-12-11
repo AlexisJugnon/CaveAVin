@@ -44,11 +44,35 @@ namespace DAO
             }
 
             return c;
+        }
 
+        public Pays Chercher(string nom)
+        {
+            Pays c = null;
+
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Pays WHERE NomPays='" + nom + "'";
+                IDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    c = reader2Pays(reader);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return c;
         }
 
         public void Créer(Pays c)
         {
+            con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
@@ -60,6 +84,22 @@ namespace DAO
                 if (reader.Read())
                     id = Convert.ToInt32(reader[0]);
                 c.Id = id;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+
+        public void Créer(string nom)
+        {
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "INSERT INTO Pays(NomPays) VALUES('" + nom + "');";
+                com.ExecuteNonQuery();
             }
             finally
             {

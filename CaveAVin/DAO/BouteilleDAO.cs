@@ -83,7 +83,7 @@ namespace DAO
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "INSERT INTO Bouteille(Texte,Bue,Position_X,Position_Y,IdCasier,IdType,IdRegion,IdDomaine,IdContenance,IdCru,IdMillesime,IdVinif,IdAppelation) VALUES('" + b.Texte + "','" + b.Bue.ToString() + "','" + b.PosX.ToString() + "','" + b.PosY.ToString() + "','" + b.IdCasier.ToString() + "','" + b.IdType.ToString() + "','" + b.IdRegion.ToString() + "','" + b.IdDomaine.ToString() + "','" + b.IdContenance.ToString() + "','" + b.IdCru.ToString() + "','" + b.IdMillesime.ToString() + "','" + b.IdType_vinification.ToString() + "','" + b.IdAppelation.ToString() + "');";
+                com.CommandText = "INSERT INTO `WineFinder`.`Bouteille` (`Texte`, `Bue`, `Position_X`, `Position_Y`, `IdCasier`, `IdType`, `IdRegion`, `IdDomaine`, `IdContenance`, `IdCru`, `IdMillesime`, `IdVinif`, `IdAppelation`) VALUES ('" + b.Texte + "','" + b.Bue + "','" + b.PosX + "','" + b.PosY + "','" + b.IdCasier + "','" + b.IdType + "','" + b.IdRegion + "','" + b.IdDomaine + "','" + b.IdContenance + "','" + b.IdCru + "','" + b.IdMillesime + "','" + b.IdType_vinification + "','" + b.IdAppelation + "');";
                 com.ExecuteNonQuery();
                 com.CommandText = "SELECT LAST_INSERT_ID() FROM Bouteille;";
                 IDataReader reader = com.ExecuteReader();

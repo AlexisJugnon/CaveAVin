@@ -14,7 +14,7 @@ namespace Metier
         /// Ajoute le type dans la base
         /// </summary>
         /// <param name="p">type à ajouter</param>
-        void Créer(Type p);
+        void Créer(string nom);
 
         /// <summary>
         /// Charge le type depuis la base

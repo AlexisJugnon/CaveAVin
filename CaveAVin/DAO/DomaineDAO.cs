@@ -48,6 +48,31 @@ namespace DAO
 
         }
 
+        public Domaine Chercher(string nom)
+        {
+            Domaine d = null;
+            if (con.State != ConnectionState.Open)
+                con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Domaine WHERE NomDomaine='" + nom + "'";
+                IDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    d = reader2Domaine(reader);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return d;
+
+        }
+
         public void Créer(Domaine d)
         {
             try
@@ -61,6 +86,20 @@ namespace DAO
                 if (reader.Read())
                     id = Convert.ToInt32(reader[0]);
                 d.Id = id;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void Créer(string nom)
+        {
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "INSERT INTO Domaine(NomDomaine) VALUES('" + nom + "');";
+                com.ExecuteNonQuery();
             }
             finally
             {

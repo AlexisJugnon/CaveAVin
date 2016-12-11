@@ -27,6 +27,37 @@ namespace DAO
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
+        public Region Chercher(string nom)
+        {
+            Region r = null;
+
+            if (con.State != ConnectionState.Open)
+                con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Region WHERE NomRegion='" + nom + "'";
+                IDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    r = reader2Region(reader);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return r;
+
+        }
+
+        /// <summary>
+        /// chercher une région en fonction de son identifiant
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public Region Chercher(int ID)
         {
             Region r = null;
@@ -64,18 +95,31 @@ namespace DAO
                 IDbCommand com = con.CreateCommand();
                 com.CommandText = "INSERT INTO Region(NomRegion, IdPays) VALUES('" + p.NomRegion + "', "+ p.Pays.Id +");";
                 com.ExecuteNonQuery();
-                com.CommandText = "SELECT LAST_INSERT_ID() FROM Region;";
-                IDataReader reader = com.ExecuteReader();
-                int id = 1;
-                if (reader.Read())
-                    id = Convert.ToInt32(reader[0]);
-                p.Id = id;
             }
             finally
             {
                 con.Close();
             }
         }
+
+        /// <summary>
+        /// Créé une nouvelle région dans la base de données
+        /// </summary>
+        /// <param name="p">Région à créér</param>
+        public void Créer(string nom, string nomPays)
+        {
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "INSERT INTO Region(NomRegion, IdPays) VALUES('" + nom + "', " + nomPays + ");";
+                com.ExecuteNonQuery();
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
 
         /// <summary>
         /// liste toutes les régions de la base de données

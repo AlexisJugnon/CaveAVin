@@ -610,6 +610,13 @@ namespace CaveAVin
                 cb_Type_Ajout.Items.Add(t.NomType);
             }
 
+            DAO.PaysDAO daoPays = new DAO.PaysDAO(DAO.BDD.Instance.Connexion);
+            Metier.Pays2 listePays = daoPays.Lister();
+            foreach (Metier.Pays p in listePays.Lister())
+            {
+                cb_Pays_Ajout.Items.Add(p.NomPays);
+            }
+
             DAO.RegionDAO daoReg = new DAO.RegionDAO(DAO.BDD.Instance.Connexion);
             Metier.Regions listeReg = daoReg.Lister();
             foreach (Metier.Region r in listeReg.Lister())
@@ -662,15 +669,170 @@ namespace CaveAVin
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            //Type t = (Type) cb_Type_Ajout.SelectedValue;
-            Console.WriteLine(cb_Type_Ajout.SelectedValue);
-            cb_Region_Ajout.Items.Clear();
-            cb_Domaine_Ajout.Items.Clear();
-            cb_Contenance_Ajout.Items.Clear();
-            cb_Millesime_Ajout.Items.Clear();
-            cb_Cru_Ajout.Items.Clear();
-            cb_Vinification_Ajout.Items.Clear();
-            cb_Appelation_Ajout.Items.Clear();
+            Metier.Type t;
+            Metier.Pays p;
+            Metier.Region r;
+            Metier.Domaine d;
+            Metier.Appelation a;
+            Metier.Contenance c;
+            Metier.Millesime m;
+            Metier.Cru cru;
+            Metier.Type_vinification tv;
+
+            #region gestion combobox
+            DAO.TypeDAO daoType = new DAO.TypeDAO(DAO.BDD.Instance.Connexion);
+            string nomType = cb_Type_Ajout.Text;
+            try
+            {
+                t = daoType.Chercher(cb_Type_Ajout.Text);
+            }
+            catch(Exception ex)
+            {
+                daoType.Créer(nomType);
+                t = daoType.Chercher(cb_Type_Ajout.Text);
+            }
+
+            DAO.PaysDAO daoPays = new DAO.PaysDAO(DAO.BDD.Instance.Connexion);
+            string nomPays = cb_Pays_Ajout.Text;
+            try
+            {
+                p = daoPays.Chercher(cb_Pays_Ajout.Text);
+            }
+            catch (Exception ex)
+            {
+
+                daoPays.Créer(nomPays);
+                p = daoPays.Chercher(cb_Pays_Ajout.Text);
+            }
+
+            DAO.RegionDAO daoReg = new DAO.RegionDAO(DAO.BDD.Instance.Connexion);
+            string nomRegion = cb_Region_Ajout.Text;
+            try
+            {
+                r = daoReg.Chercher(cb_Region_Ajout.Text);
+            }
+            catch (Exception ex)
+            {
+                daoReg.Créer(nomRegion, nomPays);
+                r = daoReg.Chercher(cb_Region_Ajout.Text);
+            }
+
+            DAO.DomaineDAO daoDom = new DAO.DomaineDAO(DAO.BDD.Instance.Connexion);
+            string nomDomaine = cb_Domaine_Ajout.Text;
+            try
+            {
+                d = daoDom.Chercher(cb_Domaine_Ajout.Text);
+            }
+            catch (Exception ex)
+            {
+                daoDom.Créer(nomDomaine);
+                d = daoDom.Chercher(cb_Domaine_Ajout.Text);
+            }
+
+            DAO.AppelationDAO daoApp = new DAO.AppelationDAO(DAO.BDD.Instance.Connexion);
+            string nomApp = cb_Appelation_Ajout.Text;
+            try
+            {
+                a = daoApp.Chercher(cb_Appelation_Ajout.Text);
+            }
+            catch (Exception ex)
+            {
+                daoApp.Créer(nomApp);
+                a = daoApp.Chercher(cb_Appelation_Ajout.Text);
+            }
+
+            DAO.ContenanceDAO daoCon = new DAO.ContenanceDAO(DAO.BDD.Instance.Connexion);
+            int nomCon = Int32.Parse(cb_Contenance_Ajout.Text);
+            try
+            {
+                c = daoCon.Chercher(nomCon,"");
+            }
+            catch (Exception ex)
+            {
+
+                daoCon.Créer(nomCon,"");
+                c = daoCon.Chercher(nomCon,"");
+            }
+
+            DAO.MillesimeDAO daoMil = new DAO.MillesimeDAO(DAO.BDD.Instance.Connexion);
+            string nomMil = cb_Millesime_Ajout.Text;
+            try
+            {
+                m = daoMil.Chercher(cb_Millesime_Ajout.Text);
+            }
+            catch (Exception ex)
+            {
+                daoMil.Créer(nomMil);
+                m = daoMil.Chercher(cb_Millesime_Ajout.Text);
+            }
+
+            DAO.CruDAO daoCru = new DAO.CruDAO(DAO.BDD.Instance.Connexion);
+            string nomCru = cb_Cru_Ajout.Text;
+            try
+            {
+                cru = daoCru.Chercher(cb_Cru_Ajout.Text);
+            }
+            catch (Exception ex)
+            {
+                daoCru.Créer(nomCru);
+                cru = daoCru.Chercher(cb_Cru_Ajout.Text);
+            }
+
+            DAO.Type_vinificationDAO daoVinif = new DAO.Type_vinificationDAO(DAO.BDD.Instance.Connexion);
+            string nomVinif = cb_Vinification_Ajout.Text;
+            try
+            {
+                tv = daoVinif.Chercher(cb_Vinification_Ajout.Text);
+            }
+            catch (Exception ex)
+            {
+                daoVinif.Créer(nomVinif);
+                tv = daoVinif.Chercher(cb_Vinification_Ajout.Text);
+            }
+
+            #endregion
+
+            DAO.CasierDAO daoCas = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
+            Metier.Casier cas;
+            DAO.BouteilleDAO daoBou = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
+
+            var brush = new ImageBrush();
+
+            foreach (Metier.Position pos in listeBouteilleAjout)
+            {
+                cas = daoCas.Chercher(pos.Casier);
+                if (cas != null)
+                {
+                    Metier.Bouteille b = new Metier.Bouteille(0, false, "", pos.X, pos.Y, cas, cru, m, c, d, r, tv, a, t);
+                    daoBou.Créer(b);
+
+                    if (nomType == "Blanc")
+                    {
+                        brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/BlancCasier.png", UriKind.Relative));
+                    }
+                    else if (nomType == "Rouge")
+                    {
+                        brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/RougeCasier.png", UriKind.Relative));
+                    }
+                    else if (nomType == "Rosé")
+                    {
+                        brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/RoséCasier.png", UriKind.Relative));
+                    }
+                    else if (nomType == "Pétillant")
+                    {
+                        brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/PétillantCasier.png", UriKind.Relative));
+                    }
+                    else
+                    {
+                        brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
+                    }
+                    ((Button)but[nbasier - 1].GetValue(pos.X, pos.Y)).Background = brush;
+                    ((Button)but[nbasier - 1].GetValue(pos.X, pos.Y)).Click += selectionBouteille;
+
+                }
+            }
+
+            ajoutB.Visibility = Visibility.Hidden;
         }
     }
 }

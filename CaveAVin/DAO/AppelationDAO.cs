@@ -48,6 +48,31 @@ namespace DAO
 
         }
 
+        public Appelation Chercher(string nom)
+        {
+            Appelation a = null;
+
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Appelation WHERE NomAppelation='" + nom + "'";
+                IDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    a = reader2Appelation(reader);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return a;
+
+        }
+
         public void Créer(Appelation a)
         {
             try
@@ -61,6 +86,20 @@ namespace DAO
                 if (reader.Read())
                     id = Convert.ToInt32(reader[0]);
                 a.Id = id;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void Créer(string nom)
+        {
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "INSERT INTO Appelation(NomAppelation) VALUES('" + nom + "');";
+                com.ExecuteNonQuery();
             }
             finally
             {

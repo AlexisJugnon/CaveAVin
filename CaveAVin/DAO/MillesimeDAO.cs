@@ -49,6 +49,32 @@ namespace DAO
 
         }
 
+        public Millesime Chercher(string nom)
+        {
+            Millesime m = null;
+
+            if (con.State != ConnectionState.Open)
+                con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Millesime WHERE NomMillesime='" + nom + "'";
+                IDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    m = reader2Millesime(reader);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return m;
+
+        }
+
         public void Créer(Millesime p)
         {
             try
@@ -62,6 +88,20 @@ namespace DAO
                 if (reader.Read())
                     id = Convert.ToInt32(reader[0]);
                 p.Id = id;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void Créer(string nom)
+        {
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "INSERT INTO Millesime(NomMillesime) VALUES('" + nom + "');";
+                com.ExecuteNonQuery();
             }
             finally
             {

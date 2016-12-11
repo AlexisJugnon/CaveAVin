@@ -35,9 +35,35 @@ namespace DAO
             {
                 con.Open();
                 IDbCommand com = con.CreateCommand();
-                com.CommandText ="SELECT idVinif FROM Type_Vinication WHERE IdVinif = " + ID.ToString();
+                com.CommandText ="SELECT idVinif FROM Type_Vinification WHERE IdVinif = " + ID.ToString();
                 IDataReader reader = com.ExecuteReader();
                 if(reader.Read())
+                {
+                    t = reader2Type_vinif(reader);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return t;
+        }
+
+        /// <summary>
+        /// chercher un type_vignifaication en fonction de son ID
+        /// </summary>
+        /// <param name="ID">Identifiant à rechercher</param>
+        /// <returns></returns>
+        public Type_vinification Chercher(string nom)
+        {
+            Type_vinification t = null;
+            try
+            {
+                con.Open();
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Type_vinification WHERE NomVinif = '" + nom + "'";
+                IDataReader reader = com.ExecuteReader();
+                if (reader.Read())
                 {
                     t = reader2Type_vinif(reader);
                 }
@@ -55,10 +81,11 @@ namespace DAO
         /// <param name="p"></param>
         public void Créer(Type_vinification p)
         {
+            con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "INSERT INTO Type_vignification(NomVinif) VALUES('" + p.NomVinif + "');";
+                com.CommandText = "INSERT INTO Type_vinification(NomVinif) VALUES('" + p.NomVinif + "');";
                 com.ExecuteNonQuery();
                 com.CommandText = "SELECT LAST_INSERT_ID() FROM Type_vignification;";
                 IDataReader reader = com.ExecuteReader();
@@ -66,6 +93,25 @@ namespace DAO
                 if (reader.Read())
                     id = Convert.ToInt32(reader[0]);
                 p.Id = id;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Créé un noveau type_vignification
+        /// </summary>
+        /// <param name="p"></param>
+        public void Créer(string nom)
+        {
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "INSERT INTO Type_vinification(NomVinif) VALUES('" + nom + "');";
+                com.ExecuteNonQuery();
             }
             finally
             {

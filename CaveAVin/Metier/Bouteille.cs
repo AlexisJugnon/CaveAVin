@@ -30,6 +30,26 @@ namespace Metier
             return texte;
         }
 
+        public Bouteille() { }
+
+        public Bouteille(int id, Boolean bue, string texte, int posX, int posY, Casier cas, Cru cru, Millesime mil, Contenance con, Domaine dom, Region reg, Type_vinification tv, Appelation app, Type type)
+        {
+            this.id = id;
+            this.bue = bue;
+            this.texte = texte;
+            this.posX = posX;
+            this.posY = posY;
+            this.casier = cas;
+            this.cru = cru;
+            this.millesime = mil;
+            this.contenance = con;
+            this.domaine = dom;
+            this.region = reg;
+            this.type_vinification = tv;
+            this.appelation = app;
+            this.type = type;
+
+        }
 
         #region propriétés
         public int Id

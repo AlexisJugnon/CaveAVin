@@ -48,6 +48,31 @@ namespace DAO
 
         }
 
+        public Contenance Chercher(int val, string name)
+        {
+            Contenance c = null;
+
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Contenance WHERE valeur='" + val + "'";
+                IDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    c = reader2Contenance(reader);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return c;
+
+        }
+
         public void Créer(Contenance c)
         {
             try
@@ -61,6 +86,20 @@ namespace DAO
                 if (reader.Read())
                     id = Convert.ToInt32(reader[0]);
                 c.Id = id;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void Créer(int val, string name)
+        {
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "INSERT INTO Contenance(valeur) VALUES('" + val + "');";
+                com.ExecuteNonQuery();
             }
             finally
             {

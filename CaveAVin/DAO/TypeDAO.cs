@@ -28,6 +28,36 @@ namespace DAO
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
+        public Metier.Type Chercher(string nom)
+        {
+            Metier.Type c = null;
+
+            if (con.State != ConnectionState.Open)
+                con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Type WHERE NomType='" + nom + "'";
+                IDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    c = reader2Type(reader);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return c;
+        }
+
+        /// <summary>
+        /// Cherche un type en fonction de son id
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public Metier.Type Chercher(int ID)
         {
             Metier.Type c = null;
@@ -57,19 +87,16 @@ namespace DAO
         /// Insert un nouveau type
         /// </summary>
         /// <param name="p">Type à insérer en base</param>
-        public void Créer(Metier.Type p)
+        public void Créer(string nom)
         {
+            if (con.State != ConnectionState.Open)
+                con.Open();
+
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "INSERT INTO Type(NomType) VALUES('" + p.NomType + "');";
+                com.CommandText = "INSERT INTO Type(NomType) VALUES('" + nom + "');";
                 com.ExecuteNonQuery();
-                com.CommandText = "SELECT LAST_INSERT_ID() FROM Type;";
-                IDataReader reader = com.ExecuteReader();
-                int id = 1;
-                if (reader.Read())
-                    id = Convert.ToInt32(reader[0]);
-                p.Id = id;
             }
             finally
             {

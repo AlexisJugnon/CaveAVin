@@ -60,6 +60,43 @@ namespace DAO
         }
 
         /// <summary>
+        /// Cherche un cru en fonction de son id
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public Cru Chercher(string nom)
+        {
+            Cru cru = null;
+
+            if (con != null)
+            {
+                if (con.State != ConnectionState.Open)
+                {
+                    con.Open();
+                }
+
+                try
+                {
+                    IDbCommand com = con.CreateCommand();
+                    com.CommandText = "SELECT * FROM Cru WHERE NomCru='" + nom + "'";
+                    IDataReader reader = com.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        cru = reader2Cru(reader);
+                    }
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+
+            return cru;
+
+        }
+
+        /// <summary>
         /// Insert un nouveau cru
         /// </summary>
         /// <param name="cru">Cru à insérer en base</param>
@@ -88,6 +125,32 @@ namespace DAO
                 {
                     con.Close();
                 } 
+            }
+        }
+
+        /// <summary>
+        /// Insert un nouveau cru
+        /// </summary>
+        /// <param name="cru">Cru à insérer en base</param>
+        public void Créer(string nom)
+        {
+            if (con != null)
+            {
+                if (con.State != ConnectionState.Open)
+                {
+                    con.Open();
+                }
+
+                try
+                {
+                    var command = con.CreateCommand();
+                    command.CommandText = String.Format("INSERT INTO Cru(NomCru) VALUES('{0}');", nom);
+                    command.ExecuteNonQuery();
+                }
+                finally
+                {
+                    con.Close();
+                }
             }
         }
 
