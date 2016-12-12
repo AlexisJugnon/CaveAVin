@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CaveAVin"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         
         Title="WineFinder" Height="946.677" Width="1642.9">
@@ -57,7 +58,7 @@
 
 
         <Grid x:Name="AffichageInterfaceCasier" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,126,0,7" Width="1635" Height="794" Grid.RowSpan="2">
-            <Border x:Name="AfficheDetailBouteille" Visibility="Hidden" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Left" Height="659" Margin="933,74,0,0" VerticalAlignment="Top" Width="429" Background="#FFFCF4E3">
+            <Border x:Name="AfficheDetailBouteille" Visibility="Hidden" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Left" Height="659" Margin="933,75,0,0" VerticalAlignment="Top" Width="429" Background="#FFFCF4E3">
 
                 <Grid >
                     <Grid.ColumnDefinitions>
@@ -103,8 +104,12 @@
                     <Label x:Name="lbl_Contenance" HorizontalAlignment="Left" Height="23" Margin="0,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="8"/>
                     <Label x:Name="lbl_NbBouteille" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="29" Grid.Column="2" Grid.Row="9"/>
 
-                    <Button x:Name="BT_Supprimer" Content="Supprimer" HorizontalAlignment="Left" Margin="90,22,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="BT_Supprimer_Click"/>
-
+                    <Button x:Name="BT_Supprimer" HorizontalAlignment="Left" Margin="71,28,0,0" VerticalAlignment="Top" Height="47" Width="56" Grid.Column="2" Grid.Row="12" Grid.RowSpan="2" Background="#FF661141" BorderBrush="#FF661141" Click="BT_Supprimer_Click">
+                        <fa:ImageAwesome Icon="Minus" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="40" />
+                    </Button>
+                    <Button x:Name="btnFermerFicheDetail" HorizontalAlignment="Left" Height="47" Margin="140,28,0,0" VerticalAlignment="Top" Width="56" Background="#FF661141" BorderBrush="#FF661141" Grid.Column="2" Click="btnFermerFicheDetail_Click" Grid.Row="12" Grid.RowSpan="2">
+                        <fa:ImageAwesome Icon="Times" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="35" />
+                    </Button>
                 </Grid>
             </Border>
 
@@ -114,8 +119,8 @@
                 </Button.Background>
             </Button>
 
-            <Button x:Name="BT_Suppr" Content="supprimerAll" HorizontalAlignment="Right" Height="88" Margin="0,645,156,0" VerticalAlignment="Top" Width="94" BorderThickness="0" Click="ToutSupprimer_Click">
-
+            <Button x:Name="BT_Suppr" HorizontalAlignment="Right" Height="88" Margin="0,645,156,0" VerticalAlignment="Top" Width="94" BorderThickness="0" Background="#FF661141" BorderBrush="#FF661141" Click="ToutSupprimer_Click">
+                <fa:ImageAwesome Icon="Minus" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="70" />
             </Button>
 
             <Grid x:Name="MultiCasier" Visibility="Hidden" Margin="352,0,374,290" Height="220" VerticalAlignment="Bottom">
@@ -127,7 +132,7 @@
 
             <Grid x:Name="AffichageCasier" Visibility="Visible"  HorizontalAlignment="Left" Height="740" Margin="292,27,0,0" VerticalAlignment="Top" Width="946">
 
-                <Button x:Name="CasierPrecedent" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="54,323,0,0" Height="88" BorderThickness="0" Click="CasierPrecedent_Click">
+                <Button x:Name="CasierPrecedent" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="54,321,0,0" Height="88" BorderThickness="0" Click="CasierPrecedent_Click">
                     <Button.Background>
                         <ImageBrush ImageSource=".\Images\BoutonPrécédent.png"/>
                     </Button.Background>
@@ -206,7 +211,7 @@
 
         <Grid x:Name="AffichageRecherche" Visibility="Hidden"  HorizontalAlignment="Left" Height="791" VerticalAlignment="Top" Width="1635" Margin="0,126,0,0" Grid.RowSpan="2"/>
         <Grid x:Name="AffichageAjoutCasier" Visibility="Hidden" HorizontalAlignment="Left" Height="791" VerticalAlignment="Top" Width="1635" Margin="0,126,0,0" Grid.RowSpan="2">
-            
+
         </Grid>
     </Grid>
 

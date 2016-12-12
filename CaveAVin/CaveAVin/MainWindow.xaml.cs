@@ -418,7 +418,7 @@ namespace CaveAVin
         private void AfficherDetailBouteille(Metier.Bouteille bouteille)
         {
             if (bouteille != null)
-            {
+            {                
                 lbl_Appelation.Content = bouteille.Appelation?.NomAppelation;
                 lbl_Categorie.Content = bouteille.Type?.NomType;
                 lbl_Contenance.Content = bouteille.Contenance?.Valeur;
@@ -832,6 +832,12 @@ namespace CaveAVin
             AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
 
             #endregion
+        }
+
+        private void btnFermerFicheDetail_Click(object sender, RoutedEventArgs e)
+        {
+            DisplayFicheDetailBouteille(false);
+            ReDecaler();
         }
     }
 }
