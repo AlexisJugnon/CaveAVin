@@ -95,6 +95,7 @@ namespace DAO
 
         public void Créer(string nom)
         {
+            con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();

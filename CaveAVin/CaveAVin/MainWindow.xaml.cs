@@ -48,6 +48,8 @@ namespace CaveAVin
 
         private int l_col;
 
+        private Metier.Position courante;
+
         #endregion
 
         /// <summary>
@@ -77,6 +79,8 @@ namespace CaveAVin
             initGridCasier(); //Création des différents casiers
 
             afficherBouteille();
+
+            courante = null;
         }
 
         /// <summary>
@@ -309,9 +313,14 @@ namespace CaveAVin
         {
             if (!supprimer)
             {
+                if (courante != null)
+                    ((Button)listeBouton[courante.Casier - 1].GetValue(courante.X, courante.Y)).Opacity = 1.0;
+
                 l_ligne = Int32.Parse(sender.ToString().Substring(32, 1));
                 l_col = Int32.Parse(sender.ToString().Substring(35, 1));
 
+                courante = new Metier.Position(l_ligne,l_col);
+                courante.Casier = nCasierActuel; 
 
                 Decaler();
                 var button = (Button)sender;
@@ -325,12 +334,12 @@ namespace CaveAVin
                 var bouteilleDao = new BouteilleDAO(DAO.BDD.Instance.Connexion);
                 var casier = casierDao.Chercher(nCasierActuel);
                 var bouteille = bouteilleDao.Chercher(posi.X, posi.Y, posi.Casier);
-                Console.WriteLine(bouteille.IdDomaine);
-                    AfficherDetailBouteille(bouteille);
+                ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Opacity = 0.5;
+                AfficherDetailBouteille(bouteille);
 
             }
             else
-            {
+            {      
                 int ligne = Int32.Parse(sender.ToString().Substring(32, 1));
                 int col = Int32.Parse(sender.ToString().Substring(35, 1));
                 Metier.Position posi = new Metier.Position(ligne, col);
@@ -380,6 +389,11 @@ namespace CaveAVin
         private void Decaler()
         {
             AffichageCasier.Margin = new Thickness(0, 30, 0, 50);
+        }
+
+        private void ReDecaler()
+        {
+            AffichageCasier.Margin = new Thickness(50, 50, 50, 50);
         }
 
         /// <summary>
@@ -501,15 +515,18 @@ namespace CaveAVin
         /// <param name="e"></param>
         private void BT_Supprimer_Click(object sender, RoutedEventArgs e)
         {
-
-            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Opacity = 1.0;
-
+           
             var brush = new ImageBrush();
             brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
             ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Background = brush;
+            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Click -= selectionBouteille;
             ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Click += selectBouteille;
-
+            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Opacity = 1.0;
             req.delete(l_ligne, l_col, nCasierActuel);
+            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Opacity = 1.0;
+
+            AfficheDetailBouteille.Visibility = Visibility.Hidden;
+            ReDecaler();
         }
 
         /// <summary>
@@ -532,6 +549,7 @@ namespace CaveAVin
         {
             if (supprimer)
             {
+
                 int ligne;
                 int col;
                 int cas;
@@ -557,6 +575,10 @@ namespace CaveAVin
             }
             else
             {
+                if (courante != null)
+                    ((Button)listeBouton[courante.Casier - 1].GetValue(courante.X, courante.Y)).Opacity = 1.0;
+                AfficheDetailBouteille.Visibility = Visibility.Hidden;
+                ReDecaler();
                 supprimer = true;
             }
         }
@@ -781,10 +803,13 @@ namespace CaveAVin
                         brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
                     }
                     ((Button)listeBouton[nCasierActuel - 1].GetValue(pos.X, pos.Y)).Background = brush;
+                    ((Button)listeBouton[nCasierActuel - 1].GetValue(pos.X, pos.Y)).Click -= selectBouteille;
                     ((Button)listeBouton[nCasierActuel - 1].GetValue(pos.X, pos.Y)).Click += selectionBouteille;
+                    ((Button)listeBouton[nCasierActuel - 1].GetValue(pos.X, pos.Y)).Opacity = 1.0;
 
                 }
             }
+            listeBouteilleAjout.Clear();
 
             AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
         }
