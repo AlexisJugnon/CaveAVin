@@ -72,12 +72,15 @@ namespace DAO
             return res;
         }
 
-        public void delete(int ligne, int col, int nbasier)
+        public void delete(int ligne, int col, int nbasier, string message)
         {
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
+                com.CommandText = "UPDATE Bouteille set Texte = '"+ message +"' WHERE Position_X = '" + ligne.ToString() + "' AND Position_Y = '" + col.ToString() + "' AND idCasier = '" + nbasier.ToString() + "'";
+                com.ExecuteNonQuery();
+
                 com.CommandText = "UPDATE Bouteille set Bue = true WHERE Position_X = '" + ligne.ToString() + "' AND Position_Y = '" + col.ToString() + "' AND idCasier = '" + nbasier.ToString()+"'";
                 com.ExecuteNonQuery();
                 

@@ -52,6 +52,7 @@ namespace DAO
 
         public void Créer(Casier c)
         {
+            con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();

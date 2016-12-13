@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:CaveAVin"
         mc:Ignorable="d"
         
-        Title="WineFinder" Height="946.677" Width="1642.9">
+        Title="WineFinder" Height="946.677" Width="1642.9" ResizeMode="CanMinimize" Icon="Images/logoReduit.png" WindowStartupLocation="CenterScreen">
 
     <Grid x:Name="AffichagePrincipal" HorizontalAlignment="Stretch" Height="927" Margin="0,0,0,-21" VerticalAlignment="Top">
         <Grid.RowDefinitions>
-            <RowDefinition Height="101*"/>
-            <RowDefinition Height="208*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0*"/>
         </Grid.RowDefinitions>
 
 
@@ -33,7 +33,7 @@
         </Menu>
 
 
-        <Grid x:Name="AffichageAccueil" Visibility="Hidden" Margin="0,139,0,9" UseLayoutRounding="False" IsHitTestVisible="True" Grid.RowSpan="2">
+        <Grid x:Name="AffichageAccueil" Visibility="Hidden" Margin="0,139,0,6" UseLayoutRounding="False" IsHitTestVisible="True">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="11*"/>
@@ -47,19 +47,21 @@
             <Button x:Name="BT_VoirCasier" Margin="0,606,231,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="86" Height="86" BorderBrush="#FF661141" Click="BT_VoirCasier_Click" Grid.RowSpan="2" Background="#FF661141" Foreground="#FF661141">
                 <Image Source=".\Images\VoirBouteille.png"/>
             </Button>
+
             <Button x:Name="BT_VoirCave"  HorizontalAlignment="Center" Margin="0,606,0,0" VerticalAlignment="Top" Width="86" Height="86" BorderBrush="#FF661141" Grid.RowSpan="2" Background="#FF661141" Foreground="#FF661141">
                 <Image Source=".\Images\VoirCave.png" HorizontalAlignment="Center"/>
             </Button>
+
             <Button x:Name="BT_GererCave" HorizontalAlignment="Left" Margin="230,606,0,0" VerticalAlignment="Top" Width="86" Height="86" BorderBrush="#FF661141" Grid.RowSpan="2" Background="#FF661141" Foreground="#FF661141">
                 <Image Source=".\Images\GererCave.png"/>
             </Button>
         </Grid>
 
 
-        <Grid x:Name="AffichageInterfaceCasier" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,126,0,7" Width="1635" Height="794" Grid.RowSpan="2">
-            <Border x:Name="AfficheDetailBouteille" Visibility="Hidden" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Left" Height="659" Margin="933,74,0,0" VerticalAlignment="Top" Width="429" Background="#FFFCF4E3">
+        <Grid x:Name="AffichageInterfaceCasier" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,116,1,17" Width="1635" Height="794">
 
-                <Grid >
+            <Border x:Name="AfficheDetailBouteille" Visibility="Visible" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Left" Height="659" Margin="933,74,0,0" VerticalAlignment="Top" Width="429" Background="#FFFCF4E3">
+                <Grid x:Name="AffichageInfo">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="59*"/>
                         <ColumnDefinition Width="155*"/>
@@ -104,7 +106,7 @@
                     <Label x:Name="lbl_NbBouteille" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="29" Grid.Column="2" Grid.Row="9"/>
 
                     <Button x:Name="BT_Supprimer" Content="Supprimer" HorizontalAlignment="Left" Margin="90,22,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="BT_Supprimer_Click"/>
-
+                    <Grid Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="100" Grid.RowSpan="3" VerticalAlignment="Top" Width="100"/>
                 </Grid>
             </Border>
 
@@ -125,7 +127,7 @@
                 </Grid.ColumnDefinitions>
             </Grid>
 
-            <Grid x:Name="AffichageCasier" Visibility="Visible"  HorizontalAlignment="Left" Height="740" Margin="292,27,0,0" VerticalAlignment="Top" Width="946">
+            <Grid x:Name="AffichageCasier" Visibility="Hidden"  HorizontalAlignment="Left" Height="740" Margin="292,27,0,0" VerticalAlignment="Top" Width="946">
 
                 <Button x:Name="CasierPrecedent" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="54,323,0,0" Height="88" BorderThickness="0" Click="CasierPrecedent_Click">
                     <Button.Background>
@@ -140,7 +142,8 @@
                 </Button>
 
                 <Border x:Name="AffichageBordureCasier" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="650" Margin="135,48,0,0" VerticalAlignment="Top" Width="700">
-                    <Grid x:Name="GridAffichageBouteille" Margin="-1,1,1,-1"/>
+                    <Grid x:Name="GridAffichageBouteille" Margin="-1,1,1,-1">
+                    </Grid>
                 </Border>
 
                 <Label x:Name="lblNomCasier" Content="&#xA;" HorizontalAlignment="Left" Margin="424,0,0,0" VerticalAlignment="Top" Width="270"/>
@@ -149,7 +152,7 @@
         </Grid>
 
 
-        <Grid x:Name="AffichageFicheAjoutBouteille" Visibility="Hidden" HorizontalAlignment="Left" Height="794" VerticalAlignment="Top" Width="1635" Margin="0,125,0,0" Grid.RowSpan="2">
+        <Grid x:Name="AffichageFicheAjoutBouteille" Visibility="Hidden" HorizontalAlignment="Left" Height="794" VerticalAlignment="Top" Width="1635" Margin="0,125,0,0">
 
             <Grid Margin="934,76,271,60">
 
@@ -170,12 +173,12 @@
                         <ComboBox x:Name="cb_Appelation_Ajout" HorizontalAlignment="Left" Margin="108,466,0,0" VerticalAlignment="Top" Width="263" IsEditable="True"/>
                         <ComboBox x:Name="cb_Vinification_Ajout" HorizontalAlignment="Left" Margin="108,419,0,0" VerticalAlignment="Top" Width="263" IsEditable="True"/>
                         <ComboBox x:Name="cb_Cru_Ajout" HorizontalAlignment="Left" Margin="108,372,0,0" VerticalAlignment="Top" Width="263" IsEditable="True"/>
-                        <ComboBox x:Name="cb_Contenance_Ajout" HorizontalAlignment="Left" Margin="108,279,0,0" VerticalAlignment="Top" Width="263" IsEditable="True"/>
-                        <ComboBox x:Name="cb_Millesime_Ajout" HorizontalAlignment="Left" Margin="108,325,0,0" VerticalAlignment="Top" Width="263" IsEditable="True"/>
                         <ComboBox x:Name="cb_Domaine_Ajout" HorizontalAlignment="Left" Margin="108,232,0,0" VerticalAlignment="Top" Width="263" IsEditable="True"/>
                         <ComboBox x:Name="cb_Type_Ajout" HorizontalAlignment="Left" Margin="108,91,0,0" VerticalAlignment="Top" Width="263"/>
                         <ComboBox x:Name="cb_Region_Ajout" HorizontalAlignment="Left" Margin="108,138,0,0" VerticalAlignment="Top" Width="263" IsEditable="True"/>
                         <ComboBox x:Name="cb_Pays_Ajout" HorizontalAlignment="Left" Margin="108,185,0,0" VerticalAlignment="Top" Width="263" IsEditable="True"/>
+                        <TextBox x:Name="cb_Contenance_Ajout" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" Margin="108,282,0,0" Text="forcer le texte ici en int" TextChanged="cb_Contenance_Ajout_TextChanged"/>
+                        <TextBox x:Name="cb_Millesime_Ajout" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" Margin="108,328,0,0" Text="forcer le texte ici en int"/>
 
                         <Button x:Name="Validation_ajout" Content="Ajouter" HorizontalAlignment="Left" Margin="328,590,0,0" VerticalAlignment="Top" Width="75" Click="ValidationAjout_Click"/>
 
@@ -190,7 +193,7 @@
         </Grid>
 
 
-        <Grid x:Name="AffichageMenuLateral" Margin="0,126,1481,0" Visibility="Visible" MouseLeave="part" Background="#FF661141" Grid.RowSpan="2" Height="800" VerticalAlignment="Top">
+        <Grid x:Name="AffichageMenuLateral" Margin="0,126,1481,0" Visibility="Hidden" MouseLeave="part" Background="#FF661141" Height="800" VerticalAlignment="Top">
 
             <Button x:Name="BT_RetourAccueil" Content="Accueil" HorizontalAlignment="Left" Margin="5,11,0,0" VerticalAlignment="Top" Width="144" Background="#FF661141" BorderBrush="#FF661141" Height="51" Click="BT_RetourAccueil_Click"/>
 
@@ -204,10 +207,27 @@
             <Button x:Name="BT_Menu4" Content="Button" HorizontalAlignment="Left" Margin="5,201,0,0" VerticalAlignment="Top" Width="146" Background="#FF661141" BorderBrush="#FF661141" Height="49"/>
         </Grid>
 
-        <Grid x:Name="AffichageRecherche" Visibility="Hidden"  HorizontalAlignment="Left" Height="791" VerticalAlignment="Top" Width="1635" Margin="0,126,0,0" Grid.RowSpan="2"/>
-        <Grid x:Name="AffichageAjoutCasier" Visibility="Hidden" HorizontalAlignment="Left" Height="791" VerticalAlignment="Top" Width="1635" Margin="0,126,0,0" Grid.RowSpan="2">
-            
+        <Grid x:Name="AffichageRecherche" Visibility="Hidden"  HorizontalAlignment="Left" Height="791" VerticalAlignment="Top" Width="1635" Margin="0,126,0,0"/>
+
+        <Grid x:Name="AffichageAjoutCasier" Visibility="Visible" HorizontalAlignment="Left" Height="791" VerticalAlignment="Top" Width="1635" Margin="0,126,0,0">
+            <Label x:Name="label1" Content="  Ajout d'un casier :" VerticalAlignment="Top" Margin="651,86,652,0" FontSize="36"/>
+            <Label x:Name="label2" Content="Nom du casier :" HorizontalAlignment="Left" Margin="435,250,0,0" VerticalAlignment="Top" FontSize="20"/>
+            <Label x:Name="label3" Content="Hauteur :" HorizontalAlignment="Left" Margin="435,350,0,0" VerticalAlignment="Top" FontSize="20"/>
+            <Label x:Name="label4" Content="Largeur :" HorizontalAlignment="Left" Margin="435,450,0,0" VerticalAlignment="Top" FontSize="20"/>
+            <Button x:Name="BT_AjouterCasier" Content="Ajouter" HorizontalAlignment="Left" Margin="864,582,0,0" VerticalAlignment="Top" Width="220" Height="44" FontSize="24" Click="AjoutCasier_Click"/>
+            <Button x:Name="BT_AnnulerAjoutCasier" Content="Annuler" HorizontalAlignment="Left" Margin="616,582,0,0" VerticalAlignment="Top" Width="220" Height="44" FontSize="24" Click="annulAjoutCasier_Click"/>
+            <TextBox x:Name="nomCasierAjout" HorizontalAlignment="Left" Height="37" Margin="651,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="433"/>
+            <TextBox x:Name="hauteurCasierAjout" HorizontalAlignment="Left" Height="37" Margin="651,350,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="433"/>
+            <TextBox x:Name="largeurCasierAjout" HorizontalAlignment="Left" Height="37" Margin="651,450,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="433"/>
         </Grid>
+
+        <Grid x:Name="AjoutCommentaireSupression" Visibility="Hidden" HorizontalAlignment="Left" Height="661" Margin="936,190,0,0" VerticalAlignment="Top" Width="426">
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="661" VerticalAlignment="Top" Width="426" Background="#FFFCF4E3"/>
+            <Label x:Name="label" Content=" Un commentaire sur cette bouteille ? " HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Width="406" Height="44" FontSize="22" FontWeight="Bold"/>
+            <Button x:Name="validerAjoutComm" Content="Valider" HorizontalAlignment="Left" Margin="10,614,0,0" VerticalAlignment="Top" Width="406" Height="37" Click="validerAjoutComm_Click"/>
+            <TextBox x:Name="commentaireBouteille" HorizontalAlignment="Left" Height="482" Margin="10,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="406"/>
+        </Grid>
+
     </Grid>
 
 </Window>

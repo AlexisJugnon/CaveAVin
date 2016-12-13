@@ -49,7 +49,7 @@ namespace DAO
 
         }
 
-        public Millesime Chercher(string nom)
+        public Millesime Chercher(int nom, string car)
         {
             Millesime m = null;
 
@@ -77,6 +77,7 @@ namespace DAO
 
         public void Créer(Millesime p)
         {
+            con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
@@ -95,12 +96,13 @@ namespace DAO
             }
         }
 
-        public void Créer(string nom)
+        public void Créer(int val)
         {
+            con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "INSERT INTO Millesime(NomMillesime) VALUES('" + nom + "');";
+                com.CommandText = "INSERT INTO Millesime(NomMillesime) VALUES('" + val + "');";
                 com.ExecuteNonQuery();
             }
             finally

@@ -106,13 +106,13 @@ namespace DAO
         /// Créé une nouvelle région dans la base de données
         /// </summary>
         /// <param name="p">Région à créér</param>
-        public void Créer(string nom, string nomPays)
+        public void Créer(string nom, int idPays)
         {
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "INSERT INTO Region(NomRegion, NomPays) VALUES('" + nom + "', " + nomPays + ");";
+                com.CommandText = "INSERT INTO Region(NomRegion, IdPays) VALUES('" + nom + "', " + idPays + ");";
                 com.ExecuteNonQuery();
             }
             finally

@@ -62,13 +62,16 @@ namespace CaveAVin
             // Gère les affichages à montrer lors du lancement du programme
             #region Initialisation Affichage
 
-            AffichagePrincipal.Visibility = Visibility.Visible;
             AffichageAccueil.Visibility = Visibility.Visible;
             AffichageInterfaceCasier.Visibility = Visibility.Hidden;
-            MultiCasier.Visibility = Visibility.Hidden;
-            AffichageMenuLateral.Visibility = Visibility.Hidden;
+                AfficheDetailBouteille.Visibility = Visibility.Hidden;
+                MultiCasier.Visibility = Visibility.Hidden;
+                AffichageMenuLateral.Visibility = Visibility.Hidden;
             AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
+            AffichageMenuLateral.Visibility = Visibility.Hidden;
             AffichageRecherche.Visibility = Visibility.Hidden;
+            AffichageAjoutCasier.Visibility = Visibility.Hidden;
+            AjoutCommentaireSupression.Visibility = Visibility.Hidden;
 
             #endregion
 
@@ -391,9 +394,12 @@ namespace CaveAVin
             AffichageCasier.Margin = new Thickness(0, 30, 0, 50);
         }
 
+        /// <summary>
+        /// Permet de réinitialiser l'affichage du casier
+        /// </summary>
         private void ReDecaler()
         {
-            AffichageCasier.Margin = new Thickness(50, 50, 50, 50);
+            AffichageCasier.Margin = new Thickness(300, 30, 0, 0);
         }
 
         /// <summary>
@@ -407,8 +413,6 @@ namespace CaveAVin
             nCasierActuel--;
             afficherBouteille();
         }
-
-        #region Affichage Détail Bouteille
 
         // A refaire avec en passage en parametre num de la colonne et num de la ligne
         /// <summary>
@@ -442,9 +446,6 @@ namespace CaveAVin
             AfficheDetailBouteille.Visibility = rendreVisible ? Visibility.Visible : Visibility.Hidden;
         }
 
-        #endregion
-
-
         /// <summary>
         /// Affiche la page des casier et cache l'accueil lorsque on appuie sur le bouton du milieu de l'accueil
         /// </summary>
@@ -454,6 +455,7 @@ namespace CaveAVin
         {
             AffichageAccueil.Visibility = Visibility.Hidden;
             AffichageInterfaceCasier.Visibility = Visibility.Visible;
+            AffichageCasier.Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -515,18 +517,8 @@ namespace CaveAVin
         /// <param name="e"></param>
         private void BT_Supprimer_Click(object sender, RoutedEventArgs e)
         {
-           
-            var brush = new ImageBrush();
-            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
-            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Background = brush;
-            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Click -= selectionBouteille;
-            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Click += selectBouteille;
-            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Opacity = 1.0;
-            req.delete(l_ligne, l_col, nCasierActuel);
-            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Opacity = 1.0;
-
             AfficheDetailBouteille.Visibility = Visibility.Hidden;
-            ReDecaler();
+            AjoutCommentaireSupression.Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -536,8 +528,17 @@ namespace CaveAVin
         /// <param name="e"></param>
         private void BT_AjoutCasier_Click(object sender, RoutedEventArgs e)
         {
-            ajouteCasier addCasier = new ajouteCasier();
-            addCasier.Visibility = Visibility.Visible;
+
+            AffichageAccueil.Visibility = Visibility.Hidden;
+            AffichageInterfaceCasier.Visibility = Visibility.Hidden;
+            AfficheDetailBouteille.Visibility = Visibility.Hidden;
+            MultiCasier.Visibility = Visibility.Hidden;
+            AffichageMenuLateral.Visibility = Visibility.Hidden;
+            AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
+            AffichageMenuLateral.Visibility = Visibility.Hidden;
+            AffichageRecherche.Visibility = Visibility.Hidden;
+            AffichageAjoutCasier.Visibility = Visibility.Visible;
+            AjoutCommentaireSupression.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -559,7 +560,7 @@ namespace CaveAVin
                     ligne = pos.X;
                     col = pos.Y;
                     cas = pos.Casier;                 
-                    req.delete(ligne, col, cas);
+                    req.delete(ligne, col, cas, "");
 
                     ((Button)listeBouton[cas - 1].GetValue(ligne, col)).Opacity = 1.0;
 
@@ -596,8 +597,6 @@ namespace CaveAVin
             cb_Type_Ajout.Items.Clear();
             cb_Region_Ajout.Items.Clear();
             cb_Domaine_Ajout.Items.Clear();
-            cb_Contenance_Ajout.Items.Clear();
-            cb_Millesime_Ajout.Items.Clear();
             cb_Cru_Ajout.Items.Clear();
             cb_Vinification_Ajout.Items.Clear();
             cb_Appelation_Ajout.Items.Clear();
@@ -630,20 +629,6 @@ namespace CaveAVin
                 cb_Domaine_Ajout.Items.Add(d.NomDomaine);
             }
 
-            DAO.ContenanceDAO daoCon = new DAO.ContenanceDAO(DAO.BDD.Instance.Connexion);
-            Metier.Contenances listeCon = daoCon.Lister();
-            foreach (Metier.Contenance c in listeCon.Lister())
-            {
-                cb_Contenance_Ajout.Items.Add(c.Valeur);
-            }
-
-            DAO.MillesimeDAO daoMil = new DAO.MillesimeDAO(DAO.BDD.Instance.Connexion);
-            Metier.Millesimes listeMil = daoMil.Lister();
-            foreach (Metier.Millesime m in listeMil.Lister())
-            {
-                cb_Millesime_Ajout.Items.Add(m.NomMillesime);
-            }
-
             DAO.CruDAO daoCru = new DAO.CruDAO(DAO.BDD.Instance.Connexion);
             Metier.Crus listeCru = daoCru.Lister();
             foreach (Metier.Cru c in listeCru.Lister())
@@ -673,6 +658,7 @@ namespace CaveAVin
         /// <param name="e"></param>
         private void ValidationAjout_Click(object sender, RoutedEventArgs e)
         {
+            ReDecaler();
             Metier.Type t;
             Metier.Pays p;
             Metier.Region r;
@@ -708,7 +694,7 @@ namespace CaveAVin
             r = daoReg.Chercher(cb_Region_Ajout.Text);
             if (r == null)
             {
-                daoReg.Créer(nomRegion, nomPays);
+                daoReg.Créer(nomRegion, p.Id);
                 r = daoReg.Chercher(cb_Region_Ajout.Text);
             }
 
@@ -740,12 +726,12 @@ namespace CaveAVin
             }
 
             DAO.MillesimeDAO daoMil = new DAO.MillesimeDAO(DAO.BDD.Instance.Connexion);
-            string nomMil = cb_Millesime_Ajout.Text;
-            m = daoMil.Chercher(cb_Millesime_Ajout.Text);
+            int nomMil = Int32.Parse(cb_Millesime_Ajout.Text);
+            m = daoMil.Chercher(nomMil,"");
             if(m == null)
             {
                 daoMil.Créer(nomMil);
-                m = daoMil.Chercher(cb_Millesime_Ajout.Text);
+                m = daoMil.Chercher(nomMil,"");
             }
 
             DAO.CruDAO daoCru = new DAO.CruDAO(DAO.BDD.Instance.Connexion);
@@ -832,6 +818,70 @@ namespace CaveAVin
             AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
 
             #endregion
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cb_Contenance_Ajout_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void validerAjoutComm_Click(object sender, RoutedEventArgs e)
+        {
+            AjoutCommentaireSupression.Visibility = Visibility.Hidden;
+            ReDecaler();
+            var brush = new ImageBrush();
+            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
+            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Background = brush;
+            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Click -= selectionBouteille;
+            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Click += selectBouteille;
+            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Opacity = 1.0;
+
+            req.delete(l_ligne, l_col, nCasierActuel, commentaireBouteille.Text);
+
+            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Opacity = 1.0;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AjoutCasier_Click(object sender, RoutedEventArgs e)
+        {
+            DAO.CasierDAO daoCas = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
+            Metier.Casier cas = new Metier.Casier();
+
+            cas.Nom = nomCasierAjout.Text;
+            cas.LargeurX = Int32.Parse(hauteurCasierAjout.Text);
+            cas.LargeurY = Int32.Parse(largeurCasierAjout.Text);
+
+            daoCas.Créer(cas);
+
+            //initGridCasier();
+
+            AffichageAjoutCasier.Visibility = Visibility.Hidden;
+            AffichageAccueil.Visibility = Visibility.Visible;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void annulAjoutCasier_Click(object sender, RoutedEventArgs e)
+        {
+            AffichageAjoutCasier.Visibility = Visibility.Hidden;
+            AffichageAccueil.Visibility = Visibility.Visible;
         }
     }
 }
