@@ -35,7 +35,7 @@ namespace DAO
             {
                 IDbCommand com = con.CreateCommand();
                 com.CommandText = req;
-                val = int.Parse(com.ExecuteScalar() + "");
+                val = int.Parse(com.ExecuteScalar() + ""); ;
 
             }
             finally

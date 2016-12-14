@@ -34,7 +34,7 @@ namespace CaveAVin
 
         private DAO.reqSQL req = new DAO.reqSQL(DAO.BDD.Instance.Connexion); //Permet d'utiliser certaines requêtes SQL facilement
 
-        private int nCasierActuel = 0;
+        private int nCasierActuel = 1;
 
         private int nbCasierTotal = 1;
 
@@ -126,15 +126,11 @@ namespace CaveAVin
 
             int nombreColonne, nombreLigne;
             int HeightBoutton, WidthBoutton;
-
-            int longueurMax = 648;
-            int largeurMax = longueurMax;
-
             ColumnDefinition[] colonne;
             RowDefinition[] ligne;
 
 
-            for (int i = 0; i < nbCasierTotal; i++)
+            for (int i = 1; i < nbCasierTotal + 1; i++)
             {
                 gestionCasier[i] = new Grid();
                 GridAffichageBouteille.Children.Add(gestionCasier[i]);
@@ -146,18 +142,18 @@ namespace CaveAVin
 
                 if (nombreColonne > nombreLigne)
                 {
-                    WidthBoutton = (int)((longueurMax)) / nombreColonne;
+                    WidthBoutton = (int)((GridAffichageBouteille.Width)) / nombreColonne;
                     HeightBoutton = WidthBoutton;
                 }
                 else if (nombreColonne < nombreLigne)
                 {
-                    HeightBoutton = (int)((longueurMax)) / nombreLigne;
+                    HeightBoutton = (int)((GridAffichageBouteille.Height)) / nombreLigne;
                     WidthBoutton = HeightBoutton;
                 }
                 else
                 {
-                    WidthBoutton = (int)((longueurMax)) / nombreColonne;
-                    HeightBoutton = (int)((longueurMax)) / nombreLigne;
+                    WidthBoutton = (int)((GridAffichageBouteille.Width)) / nombreColonne;
+                    HeightBoutton = (int)((GridAffichageBouteille.Height)) / nombreLigne;
                 }
 
                     colonne = new ColumnDefinition[nombreColonne];
@@ -292,12 +288,12 @@ namespace CaveAVin
             // Permet de gérer l'affichage des flêches pour la gestion des casiers
             #region GestionFleche
 
-            if (nbCasierTotal > 0)
+            if (nbCasierTotal > 1)
             {
                 MultiCasier.Visibility = Visibility.Visible;
             }
 
-            if (nCasierActuel == 0)
+            if (nCasierActuel == 1)
             {
                 CasierPrecedent.Visibility = Visibility.Hidden;
             }
@@ -306,7 +302,7 @@ namespace CaveAVin
                 CasierPrecedent.Visibility = Visibility.Visible;
             }
 
-            if (nCasierActuel < nbCasierTotal-1)
+            if (nCasierActuel < nbCasierTotal)
             {
                 CasierSuivant.Visibility = Visibility.Visible;
             }
@@ -877,17 +873,13 @@ namespace CaveAVin
             Metier.Casier cas = new Metier.Casier();
 
             cas.Nom = nomCasierAjout.Text;
-            cas.LargeurY = Int32.Parse(hauteurCasierAjout.Text);
-            cas.LargeurX = Int32.Parse(largeurCasierAjout.Text);
+            cas.LargeurX = Int32.Parse(hauteurCasierAjout.Text);
+            cas.LargeurY = Int32.Parse(largeurCasierAjout.Text);
 
             daoCas.Créer(cas);
 
-            gestionCasier[nCasierActuel].Visibility = Visibility.Hidden;
+            //initGridCasier();
 
-            initGridCasier();
-
-            nCasierActuel = 0;
-            afficherBouteille();
             AffichageAjoutCasier.Visibility = Visibility.Hidden;
             AffichageAccueil.Visibility = Visibility.Visible;
         }

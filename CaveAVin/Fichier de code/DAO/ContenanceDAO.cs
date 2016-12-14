@@ -9,36 +9,34 @@ using System.Diagnostics;
 
 namespace DAO
 {
-    public class CasierDAO : Metier.ICasierDAO
+    public class ContenanceDAO:Metier.IContenanceDAO
     {
-
         private IDbConnection con;
 
         /// <summary>
         /// Initialise l'objet DAO
         /// </summary>
         /// <param name="c">la connexion à utiliser</param>
-        public CasierDAO(IDbConnection c)
+        public ContenanceDAO(IDbConnection c)
         {
             Debug.Assert(c != null);
             con = c;
         }
 
-        public Casier Chercher(int ID)
+        public Contenance Chercher(int ID)
         {
-            Casier c = null;
+            Contenance c = null;
 
-            if(con.State != ConnectionState.Open)
-                con.Open();
+            con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier WHERE IdCasier=" + ID.ToString();
+                com.CommandText = "SELECT * FROM Contenance WHERE IdContenance=" + ID.ToString();
                 IDataReader reader = com.ExecuteReader();
 
                 if (reader.Read())
                 {
-                    c = reader2Casier(reader);
+                    c = reader2Contenance(reader);
                 }
             }
             finally
@@ -50,25 +48,44 @@ namespace DAO
 
         }
 
-        public void Créer(Casier c)
+        public Contenance Chercher(int val, string name)
         {
+            Contenance c = null;
+
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Contenance WHERE valeur='" + val + "'";
+                IDataReader reader = com.ExecuteReader();
 
-                com.CommandText = "SELECT Max(IdCasier) FROM Casier;";
+                if (reader.Read())
+                {
+                    c = reader2Contenance(reader);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
 
+            return c;
+
+        }
+
+        public void Créer(Contenance c)
+        {
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "INSERT INTO Contenance(valeur) VALUES('" + c.Valeur + "');";
+                com.ExecuteNonQuery();
+                com.CommandText = "SELECT LAST_INSERT_ID() FROM Contenance;";
                 IDataReader reader = com.ExecuteReader();
                 int id = 1;
                 if (reader.Read())
                     id = Convert.ToInt32(reader[0]);
                 c.Id = id;
-                con.Close();
-                con.Open();
-                com.CommandText = "INSERT INTO Casier(IdCasier,NomCasier, Largeur_X, Largeur_Y) VALUES('" + (id+1) + "', '" +c.Nom+ "', '" + c.LargeurX +"', '" + c.LargeurY + "')";
-                com.ExecuteNonQuery();
-
             }
             finally
             {
@@ -76,18 +93,33 @@ namespace DAO
             }
         }
 
-        public Casiers Lister()
+        public void Créer(int val, string name)
         {
-            Casiers liste = new Casiers();
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier";
+                com.CommandText = "INSERT INTO Contenance(valeur) VALUES('" + val + "');";
+                com.ExecuteNonQuery();
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public Contenances Lister()
+        {
+            Contenances liste = new Contenances();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Contenance";
                 IDataReader reader = com.ExecuteReader();
                 while (reader.Read())
                 {
-                    Casier c = reader2Casier(reader);
+                    Contenance c = reader2Contenance(reader);
                     liste.Ajouter(c);
                 }
             }
@@ -98,18 +130,18 @@ namespace DAO
             return liste;
         }
 
-        public Casiers Lister(Cave c)
+        public Contenances Lister(Cave c)
         {
-            Casiers liste = new Casiers();
+            Contenances liste = new Contenances();
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier WHERE IdCave="+c.Id.ToString();
+                com.CommandText = "SELECT * FROM Contenance WHERE IdContenance=" + c.Id.ToString();
                 IDataReader reader = com.ExecuteReader();
                 while (reader.Read())
                 {
-                    Casier cd = reader2Casier(reader);
+                    Contenance cd = reader2Contenance(reader);
                     liste.Ajouter(cd);
                 }
             }
@@ -120,38 +152,17 @@ namespace DAO
             return liste;
         }
 
-        public int Nombre()
-        {
-            int nb = 0;
-            con.Open();
-            try
-            {
-                IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier;";
-                IDataReader reader = com.ExecuteReader();
-                while (reader.Read())
-                {
-                    nb++;
-                }
-            }
-            finally
-            {
-                con.Close();
-            }
-            return nb;
-        }
-
-        public void Relire(Casier c)
+        public void Relire(Contenance c)
         {
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier WHERE IdCasier=" + c.Id.ToString();
+                com.CommandText = "SELECT * FROM Contenance WHERE IdContenance=" + c.Id.ToString();
                 IDataReader reader = com.ExecuteReader();
                 if (reader.Read())
                 {
-                    c.Nom = reader["NomCasier"].ToString();
+                    c.Valeur = Convert.ToInt32(reader["valeur"]);
                 }
             }
             finally
@@ -160,13 +171,13 @@ namespace DAO
             }
         }
 
-        public void Sauver(Casier c)
+        public void Sauver(Contenance c)
         {
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "UPDATE Casier SETNomCasier='" + c.Nom + "' WHERE IdCasier=" + c.Id.ToString();
+                com.CommandText = "UPDATE Contenance SETvaleur='" + c.Valeur + "' WHERE IdContenance=" + c.Id.ToString();
                 com.ExecuteNonQuery();
             }
             finally
@@ -175,13 +186,13 @@ namespace DAO
             }
         }
 
-        public void Supprimer(Casier c)
+        public void Supprimer(Contenance c)
         {
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "DELETE FROM Casier WHERE IdCasier=" + c.Id.ToString();
+                com.CommandText = "DELETE FROM Contenance WHERE IdContenance=" + c.Id.ToString();
                 com.ExecuteNonQuery();
             }
             finally
@@ -190,13 +201,11 @@ namespace DAO
             }
         }
 
-        private Casier reader2Casier(IDataReader reader)
+        private Contenance reader2Contenance(IDataReader reader)
         {
-            Casier c = new Casier();
-            c.Id = Convert.ToInt32(reader["IdCasier"]);
-            c.Nom = reader["NomCasier"].ToString();
-            c.LargeurX = Convert.ToInt32(reader["Largeur_X"]);
-            c.LargeurY = Convert.ToInt32(reader["Largeur_Y"]);
+            Contenance c = new Contenance();
+            c.Id = Convert.ToInt32(reader["IdContenance"]);
+            c.Valeur = Convert.ToInt32(reader["valeur"]);
             return c;
         }
     }

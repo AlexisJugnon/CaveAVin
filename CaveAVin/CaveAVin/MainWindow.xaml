@@ -58,7 +58,7 @@
         </Grid>
 
 
-        <Grid x:Name="AffichageInterfaceCasier" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,116,1,17" Width="1635" Height="794">
+        <Grid x:Name="AffichageInterfaceCasier" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,116,1,17" Width="1635" Height="794">
 
             <Border x:Name="AfficheDetailBouteille" Visibility="Visible" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Left" Height="659" Margin="933,74,0,0" VerticalAlignment="Top" Width="429" Background="#FFFCF4E3">
                 <Grid x:Name="AffichageInfo">
@@ -127,25 +127,22 @@
                 </Grid.ColumnDefinitions>
             </Grid>
 
-            <Grid x:Name="AffichageCasier" Visibility="Hidden"  HorizontalAlignment="Left" Height="740" Margin="292,27,0,0" VerticalAlignment="Top" Width="946">
+            <Grid x:Name="AffichageCasier" Visibility="Visible"  HorizontalAlignment="Left" Height="740" Margin="290,27,0,0" VerticalAlignment="Top" Width="946">
 
-                <Button x:Name="CasierPrecedent" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="54,323,0,0" Height="88" BorderThickness="0" Click="CasierPrecedent_Click">
+                <Button x:Name="CasierPrecedent" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="60,323,0,0" Height="88" BorderThickness="0" Click="CasierPrecedent_Click">
                     <Button.Background>
                         <ImageBrush ImageSource=".\Images\BoutonPrécédent.png"/>
                     </Button.Background>
                 </Button>
 
-                <Button x:Name="CasierSuivant" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="856,321,0,0" Height="88" BorderThickness="0" Click="CasierSuivant_Click">
+                <Button x:Name="CasierSuivant" Content="" VerticalAlignment="Top" Margin="826,321,60,0" Height="88" BorderThickness="0" Click="CasierSuivant_Click">
                     <Button.Background>
                         <ImageBrush ImageSource=".\Images\BoutonSuivant.png"/>
                     </Button.Background>
                 </Button>
 
-                <Border x:Name="AffichageBordureCasier" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="650" Margin="135,48,0,0" VerticalAlignment="Top" Width="700">
-                    <Grid x:Name="GridAffichageBouteille" Margin="-1,1,1,-1">
-                    </Grid>
-                </Border>
-
+                <Grid x:Name="GridAffichageBouteille" Margin="149,46" Height="648" Width="648" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                </Grid>
                 <Label x:Name="lblNomCasier" Content="&#xA;" HorizontalAlignment="Left" Margin="424,0,0,0" VerticalAlignment="Top" Width="270"/>
             </Grid>
 
@@ -209,7 +206,7 @@
 
         <Grid x:Name="AffichageRecherche" Visibility="Hidden"  HorizontalAlignment="Left" Height="791" VerticalAlignment="Top" Width="1635" Margin="0,126,0,0"/>
 
-        <Grid x:Name="AffichageAjoutCasier" Visibility="Visible" HorizontalAlignment="Left" Height="791" VerticalAlignment="Top" Width="1635" Margin="0,126,0,0">
+        <Grid x:Name="AffichageAjoutCasier" Visibility="Hidden" HorizontalAlignment="Left" Height="791" VerticalAlignment="Top" Width="1635" Margin="0,126,0,0">
             <Label x:Name="label1" Content="  Ajout d'un casier :" VerticalAlignment="Top" Margin="651,86,652,0" FontSize="36"/>
             <Label x:Name="label2" Content="Nom du casier :" HorizontalAlignment="Left" Margin="435,250,0,0" VerticalAlignment="Top" FontSize="20"/>
             <Label x:Name="label3" Content="Hauteur :" HorizontalAlignment="Left" Margin="435,350,0,0" VerticalAlignment="Top" FontSize="20"/>

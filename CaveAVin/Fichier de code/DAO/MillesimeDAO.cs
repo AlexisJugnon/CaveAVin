@@ -1,44 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Metier;
-using System.Data;
-using System.Diagnostics;
 
 namespace DAO
 {
-    public class CasierDAO : Metier.ICasierDAO
+    public class MillesimeDAO : Metier.IMillesimeDAO
     {
-
         private IDbConnection con;
 
         /// <summary>
         /// Initialise l'objet DAO
         /// </summary>
         /// <param name="c">la connexion à utiliser</param>
-        public CasierDAO(IDbConnection c)
+        public MillesimeDAO(IDbConnection c)
         {
             Debug.Assert(c != null);
             con = c;
         }
 
-        public Casier Chercher(int ID)
+        public Millesime Chercher(int ID)
         {
-            Casier c = null;
+            Millesime m = null;
 
-            if(con.State != ConnectionState.Open)
+            if (con.State != ConnectionState.Open)
                 con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier WHERE IdCasier=" + ID.ToString();
+                com.CommandText = "SELECT * FROM Millesime WHERE IdMillesime=" + ID.ToString();
                 IDataReader reader = com.ExecuteReader();
 
                 if (reader.Read())
                 {
-                    c = reader2Casier(reader);
+                    m = reader2Millesime(reader);
                 }
             }
             finally
@@ -46,29 +45,65 @@ namespace DAO
                 con.Close();
             }
 
-            return c;
+            return m;
 
         }
 
-        public void Créer(Casier c)
+        public Millesime Chercher(int nom, string car)
+        {
+            Millesime m = null;
+
+            if (con.State != ConnectionState.Open)
+                con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Millesime WHERE NomMillesime='" + nom + "'";
+                IDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    m = reader2Millesime(reader);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return m;
+
+        }
+
+        public void Créer(Millesime p)
         {
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-
-                com.CommandText = "SELECT Max(IdCasier) FROM Casier;";
-
+                com.CommandText = "INSERT INTO Millesime(NomMillesime) VALUES('" + p.NomMillesime + "');";
+                com.ExecuteNonQuery();
+                com.CommandText = "SELECT LAST_INSERT_ID() FROM Millesime;";
                 IDataReader reader = com.ExecuteReader();
                 int id = 1;
                 if (reader.Read())
                     id = Convert.ToInt32(reader[0]);
-                c.Id = id;
+                p.Id = id;
+            }
+            finally
+            {
                 con.Close();
-                con.Open();
-                com.CommandText = "INSERT INTO Casier(IdCasier,NomCasier, Largeur_X, Largeur_Y) VALUES('" + (id+1) + "', '" +c.Nom+ "', '" + c.LargeurX +"', '" + c.LargeurY + "')";
+            }
+        }
+
+        public void Créer(int val)
+        {
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "INSERT INTO Millesime(NomMillesime) VALUES('" + val + "');";
                 com.ExecuteNonQuery();
-
             }
             finally
             {
@@ -76,19 +111,19 @@ namespace DAO
             }
         }
 
-        public Casiers Lister()
+        public Millesimes Lister()
         {
-            Casiers liste = new Casiers();
+            Millesimes liste = new Millesimes();
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier";
+                com.CommandText = "SELECT * FROM Millesime";
                 IDataReader reader = com.ExecuteReader();
                 while (reader.Read())
                 {
-                    Casier c = reader2Casier(reader);
-                    liste.Ajouter(c);
+                    Millesime m = reader2Millesime(reader);
+                    liste.Ajouter(m);
                 }
             }
             finally
@@ -98,60 +133,17 @@ namespace DAO
             return liste;
         }
 
-        public Casiers Lister(Cave c)
-        {
-            Casiers liste = new Casiers();
-            con.Open();
-            try
-            {
-                IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier WHERE IdCave="+c.Id.ToString();
-                IDataReader reader = com.ExecuteReader();
-                while (reader.Read())
-                {
-                    Casier cd = reader2Casier(reader);
-                    liste.Ajouter(cd);
-                }
-            }
-            finally
-            {
-                con.Close();
-            }
-            return liste;
-        }
-
-        public int Nombre()
-        {
-            int nb = 0;
-            con.Open();
-            try
-            {
-                IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier;";
-                IDataReader reader = com.ExecuteReader();
-                while (reader.Read())
-                {
-                    nb++;
-                }
-            }
-            finally
-            {
-                con.Close();
-            }
-            return nb;
-        }
-
-        public void Relire(Casier c)
+        public void Relire(Millesime p)
         {
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier WHERE IdCasier=" + c.Id.ToString();
+                com.CommandText = "SELECT * FROM Millesime WHERE IdMillesime=" + p.Id.ToString();
                 IDataReader reader = com.ExecuteReader();
                 if (reader.Read())
                 {
-                    c.Nom = reader["NomCasier"].ToString();
+                    p.NomMillesime = reader["NomMillesime"].ToString();
                 }
             }
             finally
@@ -160,13 +152,13 @@ namespace DAO
             }
         }
 
-        public void Sauver(Casier c)
+        public void Sauver(Millesime p)
         {
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "UPDATE Casier SETNomCasier='" + c.Nom + "' WHERE IdCasier=" + c.Id.ToString();
+                com.CommandText = "UPDATE Millesime SETNomMillesime='" + p.NomMillesime + "' WHERE IdMillesime=" + p.Id.ToString();
                 com.ExecuteNonQuery();
             }
             finally
@@ -175,13 +167,13 @@ namespace DAO
             }
         }
 
-        public void Supprimer(Casier c)
+        public void Supprimer(Millesime p)
         {
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "DELETE FROM Casier WHERE IdCasier=" + c.Id.ToString();
+                com.CommandText = "DELETE FROM Millesime WHERE IdMillesime=" + p.Id.ToString();
                 com.ExecuteNonQuery();
             }
             finally
@@ -190,15 +182,12 @@ namespace DAO
             }
         }
 
-        private Casier reader2Casier(IDataReader reader)
+        private Millesime reader2Millesime(IDataReader reader)
         {
-            Casier c = new Casier();
-            c.Id = Convert.ToInt32(reader["IdCasier"]);
-            c.Nom = reader["NomCasier"].ToString();
-            c.LargeurX = Convert.ToInt32(reader["Largeur_X"]);
-            c.LargeurY = Convert.ToInt32(reader["Largeur_Y"]);
-            return c;
+            Millesime m = new Millesime();
+            m.Id = Convert.ToInt32(reader["IdMillesime"]);
+            m.NomMillesime = reader["NomMillesime"].ToString();
+            return m;
         }
     }
-
 }

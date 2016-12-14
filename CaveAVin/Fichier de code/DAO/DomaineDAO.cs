@@ -1,44 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Metier;
-using System.Data;
-using System.Diagnostics;
 
 namespace DAO
 {
-    public class CasierDAO : Metier.ICasierDAO
+    public class DomaineDAO:Metier.IDomaineDAO
     {
-
         private IDbConnection con;
 
         /// <summary>
         /// Initialise l'objet DAO
         /// </summary>
         /// <param name="c">la connexion à utiliser</param>
-        public CasierDAO(IDbConnection c)
+        public DomaineDAO(IDbConnection c)
         {
             Debug.Assert(c != null);
             con = c;
         }
 
-        public Casier Chercher(int ID)
+        public Domaine Chercher(int ID)
         {
-            Casier c = null;
-
-            if(con.State != ConnectionState.Open)
+            Domaine d = null;
+            if (con.State != ConnectionState.Open)
                 con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier WHERE IdCasier=" + ID.ToString();
+                com.CommandText = "SELECT * FROM Domaine WHERE IdDomaine=" + ID.ToString();
                 IDataReader reader = com.ExecuteReader();
 
                 if (reader.Read())
                 {
-                    c = reader2Casier(reader);
+                    d = reader2Domaine(reader);
                 }
             }
             finally
@@ -46,29 +44,63 @@ namespace DAO
                 con.Close();
             }
 
-            return c;
+            return d;
 
         }
 
-        public void Créer(Casier c)
+        public Domaine Chercher(string nom)
         {
-            con.Open();
+            Domaine d = null;
+            if (con.State != ConnectionState.Open)
+                con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Domaine WHERE NomDomaine='" + nom + "'";
+                IDataReader reader = com.ExecuteReader();
 
-                com.CommandText = "SELECT Max(IdCasier) FROM Casier;";
+                if (reader.Read())
+                {
+                    d = reader2Domaine(reader);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
 
+            return d;
+
+        }
+
+        public void Créer(Domaine d)
+        {
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "INSERT INTO Domaine(NomDomaine) VALUES('" + d.NomDomaine + "');";
+                com.ExecuteNonQuery();
+                com.CommandText = "SELECT LAST_INSERT_ID() FROM Domaine;";
                 IDataReader reader = com.ExecuteReader();
                 int id = 1;
                 if (reader.Read())
                     id = Convert.ToInt32(reader[0]);
-                c.Id = id;
+                d.Id = id;
+            }
+            finally
+            {
                 con.Close();
-                con.Open();
-                com.CommandText = "INSERT INTO Casier(IdCasier,NomCasier, Largeur_X, Largeur_Y) VALUES('" + (id+1) + "', '" +c.Nom+ "', '" + c.LargeurX +"', '" + c.LargeurY + "')";
+            }
+        }
+
+        public void Créer(string nom)
+        {
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "INSERT INTO Domaine(NomDomaine) VALUES('" + nom + "');";
                 com.ExecuteNonQuery();
-
             }
             finally
             {
@@ -76,19 +108,19 @@ namespace DAO
             }
         }
 
-        public Casiers Lister()
+        public Domaines Lister()
         {
-            Casiers liste = new Casiers();
+            Domaines liste = new Domaines();
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier";
+                com.CommandText = "SELECT * FROM Domaine";
                 IDataReader reader = com.ExecuteReader();
                 while (reader.Read())
                 {
-                    Casier c = reader2Casier(reader);
-                    liste.Ajouter(c);
+                    Domaine d = reader2Domaine(reader);
+                    liste.Ajouter(d);
                 }
             }
             finally
@@ -98,19 +130,19 @@ namespace DAO
             return liste;
         }
 
-        public Casiers Lister(Cave c)
+        public Domaines Lister(Cave c)
         {
-            Casiers liste = new Casiers();
+            Domaines liste = new Domaines();
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier WHERE IdCave="+c.Id.ToString();
+                com.CommandText = "SELECT * FROM Domaine WHERE IdCave="+c.Id.ToString();
                 IDataReader reader = com.ExecuteReader();
                 while (reader.Read())
                 {
-                    Casier cd = reader2Casier(reader);
-                    liste.Ajouter(cd);
+                    Domaine d = reader2Domaine(reader);
+                    liste.Ajouter(d);
                 }
             }
             finally
@@ -120,38 +152,17 @@ namespace DAO
             return liste;
         }
 
-        public int Nombre()
-        {
-            int nb = 0;
-            con.Open();
-            try
-            {
-                IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier;";
-                IDataReader reader = com.ExecuteReader();
-                while (reader.Read())
-                {
-                    nb++;
-                }
-            }
-            finally
-            {
-                con.Close();
-            }
-            return nb;
-        }
-
-        public void Relire(Casier c)
+        public void Relire(Domaine d)
         {
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier WHERE IdCasier=" + c.Id.ToString();
+                com.CommandText = "SELECT * FROM Domaine WHERE IdDomaine=" + d.Id.ToString();
                 IDataReader reader = com.ExecuteReader();
                 if (reader.Read())
                 {
-                    c.Nom = reader["NomCasier"].ToString();
+                    d.NomDomaine = reader["NomDomaine"].ToString();
                 }
             }
             finally
@@ -160,13 +171,13 @@ namespace DAO
             }
         }
 
-        public void Sauver(Casier c)
+        public void Sauver(Domaine d)
         {
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "UPDATE Casier SETNomCasier='" + c.Nom + "' WHERE IdCasier=" + c.Id.ToString();
+                com.CommandText = "UPDATE Domaine SETNomDomaine='" + d.NomDomaine + "' WHERE IdDomaine=" + d.Id.ToString();
                 com.ExecuteNonQuery();
             }
             finally
@@ -175,13 +186,13 @@ namespace DAO
             }
         }
 
-        public void Supprimer(Casier c)
+        public void Supprimer(Domaine d)
         {
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "DELETE FROM Casier WHERE IdCasier=" + c.Id.ToString();
+                com.CommandText = "DELETE FROM Domaine WHERE IdDomaine=" + d.Id.ToString();
                 com.ExecuteNonQuery();
             }
             finally
@@ -190,14 +201,12 @@ namespace DAO
             }
         }
 
-        private Casier reader2Casier(IDataReader reader)
+        private Domaine reader2Domaine(IDataReader reader)
         {
-            Casier c = new Casier();
-            c.Id = Convert.ToInt32(reader["IdCasier"]);
-            c.Nom = reader["NomCasier"].ToString();
-            c.LargeurX = Convert.ToInt32(reader["Largeur_X"]);
-            c.LargeurY = Convert.ToInt32(reader["Largeur_Y"]);
-            return c;
+            Domaine d = new Domaine();
+            d.Id = Convert.ToInt32(reader["IdDomaine"]);
+            d.NomDomaine = reader["NomDomaine"].ToString();
+            return d;
         }
     }
 

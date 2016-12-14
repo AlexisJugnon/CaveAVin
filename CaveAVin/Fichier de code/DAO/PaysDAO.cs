@@ -1,44 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Metier;
-using System.Data;
-using System.Diagnostics;
 
 namespace DAO
 {
-    public class CasierDAO : Metier.ICasierDAO
+    public class PaysDAO:Metier.IPaysDAO
     {
-
         private IDbConnection con;
-
         /// <summary>
         /// Initialise l'objet DAO
         /// </summary>
         /// <param name="c">la connexion à utiliser</param>
-        public CasierDAO(IDbConnection c)
+        public PaysDAO(IDbConnection c)
         {
             Debug.Assert(c != null);
             con = c;
         }
 
-        public Casier Chercher(int ID)
+        public Pays Chercher(int ID)
         {
-            Casier c = null;
+            Pays c = null;
 
-            if(con.State != ConnectionState.Open)
-                con.Open();
+            con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier WHERE IdCasier=" + ID.ToString();
+                com.CommandText = "SELECT * FROM PAYS WHERE IdPays=" + ID.ToString();
                 IDataReader reader = com.ExecuteReader();
 
                 if (reader.Read())
                 {
-                    c = reader2Casier(reader);
+                    c = reader2Pays(reader);
                 }
             }
             finally
@@ -47,28 +44,46 @@ namespace DAO
             }
 
             return c;
-
         }
 
-        public void Créer(Casier c)
+        public Pays Chercher(string nom)
+        {
+            Pays c = null;
+
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Pays WHERE NomPays='" + nom + "'";
+                IDataReader reader = com.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    c = reader2Pays(reader);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return c;
+        }
+
+        public void Créer(Pays c)
         {
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-
-                com.CommandText = "SELECT Max(IdCasier) FROM Casier;";
-
+                com.CommandText = "INSERT INTO Pays(NomPays) VALUES('" + c.NomPays + "');";
+                com.ExecuteNonQuery();
+                com.CommandText = "SELECT LAST_INSERT_ID() FROM Pays;";
                 IDataReader reader = com.ExecuteReader();
                 int id = 1;
                 if (reader.Read())
                     id = Convert.ToInt32(reader[0]);
                 c.Id = id;
-                con.Close();
-                con.Open();
-                com.CommandText = "INSERT INTO Casier(IdCasier,NomCasier, Largeur_X, Largeur_Y) VALUES('" + (id+1) + "', '" +c.Nom+ "', '" + c.LargeurX +"', '" + c.LargeurY + "')";
-                com.ExecuteNonQuery();
-
             }
             finally
             {
@@ -76,18 +91,34 @@ namespace DAO
             }
         }
 
-        public Casiers Lister()
+
+        public void Créer(string nom)
         {
-            Casiers liste = new Casiers();
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier";
+                com.CommandText = "INSERT INTO Pays(NomPays) VALUES('" + nom + "');";
+                com.ExecuteNonQuery();
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public Pays2 Lister()
+        {
+            Pays2 liste = new Pays2();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Pays";
                 IDataReader reader = com.ExecuteReader();
                 while (reader.Read())
                 {
-                    Casier c = reader2Casier(reader);
+                    Pays c = reader2Pays(reader);
                     liste.Ajouter(c);
                 }
             }
@@ -98,60 +129,17 @@ namespace DAO
             return liste;
         }
 
-        public Casiers Lister(Cave c)
-        {
-            Casiers liste = new Casiers();
-            con.Open();
-            try
-            {
-                IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier WHERE IdCave="+c.Id.ToString();
-                IDataReader reader = com.ExecuteReader();
-                while (reader.Read())
-                {
-                    Casier cd = reader2Casier(reader);
-                    liste.Ajouter(cd);
-                }
-            }
-            finally
-            {
-                con.Close();
-            }
-            return liste;
-        }
-
-        public int Nombre()
-        {
-            int nb = 0;
-            con.Open();
-            try
-            {
-                IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier;";
-                IDataReader reader = com.ExecuteReader();
-                while (reader.Read())
-                {
-                    nb++;
-                }
-            }
-            finally
-            {
-                con.Close();
-            }
-            return nb;
-        }
-
-        public void Relire(Casier c)
+        public void Relire(Pays c)
         {
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Casier WHERE IdCasier=" + c.Id.ToString();
+                com.CommandText = "SELECT * FROM Pays WHERE IdPays=" + c.Id.ToString();
                 IDataReader reader = com.ExecuteReader();
                 if (reader.Read())
                 {
-                    c.Nom = reader["NomCasier"].ToString();
+                    c.NomPays = reader["NomPays"].ToString();
                 }
             }
             finally
@@ -160,13 +148,13 @@ namespace DAO
             }
         }
 
-        public void Sauver(Casier c)
+        public void Sauver(Pays c)
         {
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "UPDATE Casier SETNomCasier='" + c.Nom + "' WHERE IdCasier=" + c.Id.ToString();
+                com.CommandText = "UPDATE Pays SETNomPays='" + c.NomPays + "' WHERE IdPays=" + c.Id.ToString();
                 com.ExecuteNonQuery();
             }
             finally
@@ -175,13 +163,13 @@ namespace DAO
             }
         }
 
-        public void Supprimer(Casier c)
+        public void Supprimer(Pays c)
         {
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "DELETE FROM Casier WHERE IdCasier=" + c.Id.ToString();
+                com.CommandText = "DELETE FROM Pays WHERE IdPays=" + c.Id.ToString();
                 com.ExecuteNonQuery();
             }
             finally
@@ -190,15 +178,12 @@ namespace DAO
             }
         }
 
-        private Casier reader2Casier(IDataReader reader)
+        private Pays reader2Pays(IDataReader reader)
         {
-            Casier c = new Casier();
-            c.Id = Convert.ToInt32(reader["IdCasier"]);
-            c.Nom = reader["NomCasier"].ToString();
-            c.LargeurX = Convert.ToInt32(reader["Largeur_X"]);
-            c.LargeurY = Convert.ToInt32(reader["Largeur_Y"]);
+            Pays c = new Pays();
+            c.Id = Convert.ToInt32(reader["IdPays"]);
+            c.NomPays = reader["NomPays"].ToString();
             return c;
         }
     }
-
 }

@@ -1,10 +1,9 @@
-Mettre textbox afin de mettre un commentaire lorsque l'on supprime plusieurs bouteille
+Mettre textbox afin de mettre un commentaire lorsque l'on 
+	supprime plusieurs bouteille
 
 les 3 boutons de acceuils à faire
 
 les 2 boutons dans la listes en cliquant en haut a gauche
-
-Affichage bizarre du casier quand il est en 9*3
 
 parametrage de la base de donnée
 
@@ -13,8 +12,8 @@ Fonction recherche
 ordre des casiers pouvant etre choisi
 	ou liste déroulante de casier pour y acceder
 
-modif bouton accueil mid: afficher cave
-
 modifier bouteille
 
 Portage sur windowPhone
+
+Finir ajout casier
