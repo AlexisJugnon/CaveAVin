@@ -60,9 +60,13 @@ namespace DAO
                 com.CommandText = "SELECT Max(IdCasier) FROM Casier;";
 
                 IDataReader reader = com.ExecuteReader();
-                int id = 1;
-                if (reader.Read())
-                    id = Convert.ToInt32(reader[0]);
+                int id = 0;
+                try
+                {
+                    if (reader.Read())
+                        id = Convert.ToInt32(reader[0]);
+                }
+                catch { }
                 c.Id = id;
                 con.Close();
                 con.Open();

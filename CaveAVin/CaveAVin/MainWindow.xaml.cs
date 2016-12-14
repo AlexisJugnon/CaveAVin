@@ -34,7 +34,7 @@ namespace CaveAVin
 
         private DAO.reqSQL req = new DAO.reqSQL(DAO.BDD.Instance.Connexion); //Permet d'utiliser certaines requêtes SQL facilement
 
-        private int nCasierActuel = 0;
+        private int nCasierActuel = 1;
 
         private int nbCasierTotal = 1;
 
@@ -134,7 +134,7 @@ namespace CaveAVin
             RowDefinition[] ligne;
 
 
-            for (int i = 0; i < nbCasierTotal; i++)
+            for (int i = 1; i <= nbCasierTotal; i++)
             {
                 gestionCasier[i] = new Grid();
                 GridAffichageBouteille.Children.Add(gestionCasier[i]);
@@ -292,12 +292,12 @@ namespace CaveAVin
             // Permet de gérer l'affichage des flêches pour la gestion des casiers
             #region GestionFleche
 
-            if (nbCasierTotal > 0)
+            if (nbCasierTotal > 1)
             {
                 MultiCasier.Visibility = Visibility.Visible;
             }
 
-            if (nCasierActuel == 0)
+            if (nCasierActuel == 1)
             {
                 CasierPrecedent.Visibility = Visibility.Hidden;
             }
@@ -306,7 +306,7 @@ namespace CaveAVin
                 CasierPrecedent.Visibility = Visibility.Visible;
             }
 
-            if (nCasierActuel < nbCasierTotal-1)
+            if (nCasierActuel < nbCasierTotal)
             {
                 CasierSuivant.Visibility = Visibility.Visible;
             }
@@ -842,7 +842,15 @@ namespace CaveAVin
         /// <param name="e"></param>
         private void cb_Contenance_Ajout_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+            int res;
+            if (Int32.TryParse(cb_Contenance_Ajout.Text, out res))
+            {
+
+            }
+            else
+            {
+                cb_Contenance_Ajout.Text = "";
+            }
         }
 
         /// <summary>
@@ -886,7 +894,7 @@ namespace CaveAVin
 
             initGridCasier();
 
-            nCasierActuel = 0;
+            nCasierActuel = 1;
             afficherBouteille();
             AffichageAjoutCasier.Visibility = Visibility.Hidden;
             AffichageAccueil.Visibility = Visibility.Visible;
@@ -901,6 +909,46 @@ namespace CaveAVin
         {
             AffichageAjoutCasier.Visibility = Visibility.Hidden;
             AffichageAccueil.Visibility = Visibility.Visible;
+        }
+
+        private void largeurCasierAjout_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int res;
+            if(Int32.TryParse(largeurCasierAjout.Text,out res))
+            {
+
+            }
+            else
+            {
+                largeurCasierAjout.Text = "";
+            }
+
+        }
+
+        private void hauteurCasierAjout_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int res;
+            if (Int32.TryParse(hauteurCasierAjout.Text, out res))
+            {
+
+            }
+            else
+            {
+                hauteurCasierAjout.Text = "";
+            }
+        }
+
+        private void cb_Millesime_Ajout_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int res;
+            if (Int32.TryParse(cb_Millesime_Ajout.Text, out res))
+            {
+
+            }
+            else
+            {
+                cb_Millesime_Ajout.Text = "";
+            }
         }
     }
 }
