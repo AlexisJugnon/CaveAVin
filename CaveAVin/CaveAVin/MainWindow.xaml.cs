@@ -483,7 +483,8 @@ namespace CaveAVin
         {
             MasquerEcran();
             AffichageAccueil.Visibility = Visibility.Visible;
-            
+            AffichageInterfaceCasier.Visibility = Visibility.Hidden;
+            AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -672,96 +673,121 @@ namespace CaveAVin
         {
             ReDecaler();
             Metier.Type t;
-            Metier.Pays p;
-            Metier.Region r;
-            Metier.Domaine d;
-            Metier.Appelation a;
-            Metier.Contenance c;
-            Metier.Millesime m;
-            Metier.Cru cru;
-            Metier.Type_vinification tv;
+            Metier.Pays p = null;
+            Metier.Region r = null;
+            Metier.Domaine d = null;
+            Metier.Appelation a = null;
+            Metier.Contenance c = null;
+            Metier.Millesime m = null;
+            Metier.Cru cru = null;
+            Metier.Type_vinification tv = null;
 
             #region gestion combobox
-            DAO.TypeDAO daoType = new DAO.TypeDAO(DAO.BDD.Instance.Connexion);
-            string nomType = cb_Type_Ajout.Text;
-            t = daoType.Chercher(cb_Type_Ajout.Text);
-            if (t == null)
-            {
-                daoType.Créer(nomType);
+
+                DAO.TypeDAO daoType = new DAO.TypeDAO(DAO.BDD.Instance.Connexion);
+                string nomType = cb_Type_Ajout.Text;
                 t = daoType.Chercher(cb_Type_Ajout.Text);
-            }
+                if (t == null)
+                {
+                    daoType.Créer(nomType);
+                    t = daoType.Chercher(cb_Type_Ajout.Text);
+                }
 
-
-            DAO.PaysDAO daoPays = new DAO.PaysDAO(DAO.BDD.Instance.Connexion);
-            string nomPays = cb_Pays_Ajout.Text;
-            p = daoPays.Chercher(cb_Pays_Ajout.Text);
-            if (p == null)
+            if (cb_Pays_Ajout.Text != "")
             {
-                daoPays.Créer(nomPays);
+                DAO.PaysDAO daoPays = new DAO.PaysDAO(DAO.BDD.Instance.Connexion);
+                string nomPays = cb_Pays_Ajout.Text;
                 p = daoPays.Chercher(cb_Pays_Ajout.Text);
+                if (p == null)
+                {
+                    daoPays.Créer(nomPays);
+                    p = daoPays.Chercher(cb_Pays_Ajout.Text);
+                }
             }
 
-            DAO.RegionDAO daoReg = new DAO.RegionDAO(DAO.BDD.Instance.Connexion);
-            string nomRegion = cb_Region_Ajout.Text;
-            r = daoReg.Chercher(cb_Region_Ajout.Text);
-            if (r == null)
+
+            if (cb_Region_Ajout.Text != "")
             {
-                daoReg.Créer(nomRegion, p.Id);
+                DAO.RegionDAO daoReg = new DAO.RegionDAO(DAO.BDD.Instance.Connexion);
+                string nomRegion = cb_Region_Ajout.Text;
                 r = daoReg.Chercher(cb_Region_Ajout.Text);
+                if (r == null)
+                {
+                    daoReg.Créer(nomRegion, p.Id);
+                    r = daoReg.Chercher(cb_Region_Ajout.Text);
+                }
             }
 
-            DAO.DomaineDAO daoDom = new DAO.DomaineDAO(DAO.BDD.Instance.Connexion);
-            string nomDomaine = cb_Domaine_Ajout.Text;
-            d = daoDom.Chercher(cb_Domaine_Ajout.Text);
-            if (d == null)
+            if (cb_Domaine_Ajout.Text != "")
             {
-                daoDom.Créer(nomDomaine);
+                DAO.DomaineDAO daoDom = new DAO.DomaineDAO(DAO.BDD.Instance.Connexion);
+                string nomDomaine = cb_Domaine_Ajout.Text;
                 d = daoDom.Chercher(cb_Domaine_Ajout.Text);
+                if (d == null)
+                {
+                    daoDom.Créer(nomDomaine);
+                    d = daoDom.Chercher(cb_Domaine_Ajout.Text);
+                }
             }
 
-            DAO.AppelationDAO daoApp = new DAO.AppelationDAO(DAO.BDD.Instance.Connexion);
-            string nomApp = cb_Appelation_Ajout.Text;
-            a = daoApp.Chercher(cb_Appelation_Ajout.Text);
-            if(a == null)
+            if (cb_Appelation_Ajout.Text != "")
             {
-                daoApp.Créer(nomApp);
+                DAO.AppelationDAO daoApp = new DAO.AppelationDAO(DAO.BDD.Instance.Connexion);
+                string nomApp = cb_Appelation_Ajout.Text;
                 a = daoApp.Chercher(cb_Appelation_Ajout.Text);
+                if (a == null)
+                {
+                    daoApp.Créer(nomApp);
+                    a = daoApp.Chercher(cb_Appelation_Ajout.Text);
+                }
             }
 
-            DAO.ContenanceDAO daoCon = new DAO.ContenanceDAO(DAO.BDD.Instance.Connexion);
-            int nomCon = Int32.Parse(cb_Contenance_Ajout.Text);
-            c = daoCon.Chercher(nomCon,"");
-            if(c == null)
-            { 
-                daoCon.Créer(nomCon,"");
-                c = daoCon.Chercher(nomCon,"");
-            }
-
-            DAO.MillesimeDAO daoMil = new DAO.MillesimeDAO(DAO.BDD.Instance.Connexion);
-            int nomMil = Int32.Parse(cb_Millesime_Ajout.Text);
-            m = daoMil.Chercher(nomMil,"");
-            if(m == null)
+            if (cb_Contenance_Ajout.Text != "")
             {
-                daoMil.Créer(nomMil);
-                m = daoMil.Chercher(nomMil,"");
+                DAO.ContenanceDAO daoCon = new DAO.ContenanceDAO(DAO.BDD.Instance.Connexion);
+                int nomCon = Int32.Parse(cb_Contenance_Ajout.Text);
+                c = daoCon.Chercher(nomCon, "");
+                if (c == null)
+                {
+                    daoCon.Créer(nomCon, "");
+                    c = daoCon.Chercher(nomCon, "");
+                }
             }
 
-            DAO.CruDAO daoCru = new DAO.CruDAO(DAO.BDD.Instance.Connexion);
-            string nomCru = cb_Cru_Ajout.Text;
-            cru = daoCru.Chercher(cb_Cru_Ajout.Text);
-            if(cru == null)
+            if (cb_Millesime_Ajout.Text != "")
             {
-                daoCru.Créer(nomCru);
+                DAO.MillesimeDAO daoMil = new DAO.MillesimeDAO(DAO.BDD.Instance.Connexion);
+                int nomMil = Int32.Parse(cb_Millesime_Ajout.Text);
+                m = daoMil.Chercher(nomMil, "");
+                if (m == null)
+                {
+                    daoMil.Créer(nomMil);
+                    m = daoMil.Chercher(nomMil, "");
+                }
+            }
+
+            if (cb_Cru_Ajout.Text != "")
+            {
+                DAO.CruDAO daoCru = new DAO.CruDAO(DAO.BDD.Instance.Connexion);
+                string nomCru = cb_Cru_Ajout.Text;
                 cru = daoCru.Chercher(cb_Cru_Ajout.Text);
+                if (cru == null)
+                {
+                    daoCru.Créer(nomCru);
+                    cru = daoCru.Chercher(cb_Cru_Ajout.Text);
+                }
             }
 
-            DAO.Type_vinificationDAO daoVinif = new DAO.Type_vinificationDAO(DAO.BDD.Instance.Connexion);
-            string nomVinif = cb_Vinification_Ajout.Text;
-            tv = daoVinif.Chercher(cb_Vinification_Ajout.Text);
-            if(tv == null)
+            if (cb_Vinification_Ajout.Text != "")
             {
-                daoVinif.Créer(nomVinif);
+                DAO.Type_vinificationDAO daoVinif = new DAO.Type_vinificationDAO(DAO.BDD.Instance.Connexion);
+                string nomVinif = cb_Vinification_Ajout.Text;
                 tv = daoVinif.Chercher(cb_Vinification_Ajout.Text);
+                if (tv == null)
+                {
+                    daoVinif.Créer(nomVinif);
+                    tv = daoVinif.Chercher(cb_Vinification_Ajout.Text);
+                }
             }
 
             #endregion

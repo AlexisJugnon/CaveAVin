@@ -54,9 +54,9 @@
 			</Button>
 
 			<Button x:Name="BT_GererCave" HorizontalAlignment="Left" Margin="230,606,0,0" VerticalAlignment="Top" Width="86" Height="86" BorderBrush="#FF661141" Grid.RowSpan="2" Background="#FF661141" Foreground="#FF661141" Click="Bt_GererCave_Click">
-				<Image Source=".\Images\GererCave.png"/>
-			</Button>
-		</Grid>
+                <Image Source=".\Images\GererCave.png"/>
+            </Button>
+        </Grid>
 
 
 		<Grid x:Name="AffichageInterfaceCasier" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,116,1,17" Width="1635" Height="794">
