@@ -46,6 +46,11 @@ namespace Metier
             {
                 return bouteilles.ToArray();
             }
+
+        public override string ToString()
+        {
+            return nom;
+        }
         #endregion
 
         #region proriétés

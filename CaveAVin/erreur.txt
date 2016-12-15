@@ -1,9 +1,5 @@
-Mettre textbox afin de mettre un commentaire lorsque l'on 
+ --Mettre textbox afin de mettre un commentaire lorsque l'on 
 	supprime plusieurs bouteille
-
-les 2 boutons de acceuils à faire
-
-les 2 boutons dans la listes en cliquant en haut a gauche
 
 Fonction recherche
 
@@ -15,3 +11,21 @@ modifier bouteille
 Portage sur windowPhone
 
 optimiser ajout casier en créant liste ou tableau
+
+ajouter gérer 2 ou 4 chiffres années
+
+ajout commentaire plus tard : liste enlevé sans comm
+
+Type
+Pays
+Region
+Appelation
+Domaine
+Cru
+Contenance
+Millesime
+Vinification
+
+bouton retour accueil
+
+doc bdd

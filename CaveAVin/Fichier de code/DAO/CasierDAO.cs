@@ -56,14 +56,23 @@ namespace DAO
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "INSERT INTO Casier(NomCasier) VALUES('" + c.Nom + "');";
-                com.ExecuteNonQuery();
-                com.CommandText = "SELECT LAST_INSERT_ID() FROM Casier;";
+
+                com.CommandText = "SELECT Max(IdCasier) FROM Casier;";
+
                 IDataReader reader = com.ExecuteReader();
-                int id = 1;
-                if (reader.Read())
-                    id = Convert.ToInt32(reader[0]);
+                int id = 0;
+                try
+                {
+                    if (reader.Read())
+                        id = Convert.ToInt32(reader[0]);
+                }
+                catch { }
                 c.Id = id;
+                con.Close();
+                con.Open();
+                com.CommandText = "INSERT INTO Casier(IdCasier,NomCasier, Largeur_X, Largeur_Y) VALUES('" + (id+1) + "', '" +c.Nom+ "', '" + c.LargeurX +"', '" + c.LargeurY + "')";
+                com.ExecuteNonQuery();
+
             }
             finally
             {
