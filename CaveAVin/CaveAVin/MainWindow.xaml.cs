@@ -482,6 +482,7 @@ namespace CaveAVin
         {
             AffichageAccueil.Visibility = Visibility.Visible;
             AffichageInterfaceCasier.Visibility = Visibility.Hidden;
+            AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
