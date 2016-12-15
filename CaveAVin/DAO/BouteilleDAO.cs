@@ -82,8 +82,40 @@ namespace DAO
             con.Open();
             try
             {
+                String IdRegion = null;
+                if(b.IdRegion != 0) { IdRegion = b.IdRegion.ToString(); }
+                String IdDomaine = null;
+                if (b.IdDomaine != 0) { IdDomaine = b.IdDomaine.ToString(); }
+                String IdContenance = null;
+                if (b.IdContenance != 0) { IdContenance = b.IdContenance.ToString(); }
+                String IdCru = null;
+                if (b.IdCru != 0) { IdCru = b.IdCru.ToString(); }
+                String IdMillesime = null;
+                if (b.IdMillesime != 0) { IdMillesime = b.IdMillesime.ToString(); }
+                String IdType_vinification = null;
+                if (b.IdType_vinification != 0) { IdType_vinification = b.IdType_vinification.ToString(); }
+                String IdAppelation = null;
+                if (b.IdAppelation != 0) { IdAppelation = b.IdAppelation.ToString(); }
+
+
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "INSERT INTO `WineFinder`.`Bouteille` (`Texte`, `Bue`, `Position_X`, `Position_Y`, `IdCasier`, `IdType`, `IdRegion`, `IdDomaine`, `IdContenance`, `IdCru`, `IdMillesime`, `IdVinif`, `IdAppelation`) VALUES ('" + b.Texte + "','" + b.Bue + "','" + b.PosX + "','" + b.PosY + "','" + b.IdCasier + "','" + b.IdType + "','" + b.IdRegion + "','" + b.IdDomaine + "','" + b.IdContenance + "','" + b.IdCru + "','" + b.IdMillesime + "','" + b.IdType_vinification + "','" + b.IdAppelation + "');";
+                com.CommandText = "INSERT INTO `WineFinder`.`Bouteille` (`Texte`, `Bue`, `Position_X`, `Position_Y`, `IdCasier`, `IdType`";
+                if (b.IdRegion != 0) com.CommandText += ", `IdRegion`";
+                if (b.IdDomaine != 0) com.CommandText += ", `IdDomaine`";
+                if (b.IdContenance != 0) com.CommandText += ", `IdContenance`";
+                if (b.IdCru != 0) com.CommandText += ", `IdCru`";
+                if (b.IdMillesime != 0) com.CommandText += ", `IdMillesime`";
+                if (b.IdType_vinification != 0) com.CommandText += ", `IdVinif`";
+                if (b.IdAppelation != 0) com.CommandText += ", `IdAppelation`";
+                com.CommandText += ") VALUES ('" + b.Texte + "','" + b.Bue + "','" + b.PosX + "','" + b.PosY + "','" + b.IdCasier + "','" + b.IdType;
+                if (b.IdRegion != 0) com.CommandText += "','" + IdRegion;
+                if (b.IdDomaine != 0) com.CommandText += "','" + IdDomaine;
+                if (b.IdContenance != 0) com.CommandText += "','" + IdContenance;
+                if (b.IdCru != 0) com.CommandText += "','" + IdCru;
+                if (b.IdMillesime != 0) com.CommandText += "','" + IdMillesime;
+                if (b.IdType_vinification != 0) com.CommandText += "','" + IdType_vinification;
+                if (b.IdAppelation != 0) com.CommandText += "','" + IdAppelation;
+                com.CommandText += "');";
                 com.ExecuteNonQuery();
                 com.CommandText = "SELECT LAST_INSERT_ID() FROM Bouteille;";
                 IDataReader reader = com.ExecuteReader();
@@ -423,13 +455,20 @@ namespace DAO
             //On lit les ids des foreign key
             int idCasier = (Convert.ToInt32(reader["IdCasier"]));
             int idType = (Convert.ToInt32(reader["IdType"]));
-            int idRegion = (Convert.ToInt32(reader["IdRegion"]));
-            int idDomaine = (Convert.ToInt32(reader["IdDomaine"]));
-            int idContenance = (Convert.ToInt32(reader["IdContenance"]));
-            int idCru = (Convert.ToInt32(reader["IdCru"]));
-            int idMillesime = (Convert.ToInt32(reader["IdMillesime"]));
-            int idType_vinification = (Convert.ToInt32(reader["IdVinif"]));
-            int idAppelation = (Convert.ToInt32(reader["IdAppelation"]));
+            int idRegion = 0;
+            int idDomaine = 0;
+            int idContenance = 0;
+            int idCru = 0;
+            int idMillesime = 0;
+            int idType_vinification = 0;
+            int idAppelation = 0;
+            try { idRegion = (Convert.ToInt32(reader["IdRegion"])); } catch { }
+            try { idDomaine = (Convert.ToInt32(reader["IdDomaine"])); } catch { }
+            try { idContenance = (Convert.ToInt32(reader["IdContenance"])); } catch { }
+            try { idCru = (Convert.ToInt32(reader["IdCru"])); } catch { }
+            try { idMillesime = (Convert.ToInt32(reader["IdMillesime"])); } catch { }
+            try { idType_vinification = (Convert.ToInt32(reader["IdVinif"])); } catch { }
+            try { idAppelation = (Convert.ToInt32(reader["IdAppelation"])); } catch { }
 
             // Cloture du reader pour pouvoir utiliser les méthodes "Chercher". Sinon exception "Data reader already exist"
             reader.Close();

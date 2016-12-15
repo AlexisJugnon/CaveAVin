@@ -33,7 +33,7 @@
         </Menu>
 
 
-        <Grid x:Name="AffichageAccueil" Visibility="Hidden" Margin="0,139,0,6" UseLayoutRounding="False" IsHitTestVisible="True">
+        <Grid x:Name="AffichageAccueil" Visibility="Visible" Margin="0,139,0,6" UseLayoutRounding="False" IsHitTestVisible="True">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="11*"/>
@@ -52,13 +52,16 @@
                 <Image Source=".\Images\VoirCave.png" HorizontalAlignment="Center"/>
             </Button>
 
-            <Button x:Name="BT_GererCave" HorizontalAlignment="Left" Margin="230,606,0,0" VerticalAlignment="Top" Width="86" Height="86" BorderBrush="#FF661141" Grid.RowSpan="2" Background="#FF661141" Foreground="#FF661141">
+            <Button x:Name="BT_GererCave" HorizontalAlignment="Left" Margin="230,606,0,0" VerticalAlignment="Top" Width="86" Height="86" Grid.RowSpan="2" Background="#FF661141" Foreground="#FF661141">
+                <Button.BorderBrush>
+                    <SolidColorBrush Color="#FF742A54"/>
+                </Button.BorderBrush>
                 <Image Source=".\Images\GererCave.png"/>
             </Button>
         </Grid>
 
 
-        <Grid x:Name="AffichageInterfaceCasier" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,116,1,17" Width="1635" Height="794">
+        <Grid x:Name="AffichageInterfaceCasier" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,116,1,17" Width="1635" Height="794">
 
             <Border x:Name="AfficheDetailBouteille" Visibility="Hidden" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Left" Height="659" Margin="933,74,0,0" VerticalAlignment="Top" Width="429" Background="#FFFCF4E3">
                 <Grid x:Name="AffichageInfo">
@@ -190,14 +193,13 @@
         </Grid>
 
 
-        <Grid x:Name="AffichageMenuLateral" Margin="0,126,1481,0" Visibility="Visible" MouseLeave="part" Background="#FF661141" Height="800" VerticalAlignment="Top">
+        <Grid x:Name="AffichageMenuLateral" Margin="-440,516,1921,-389" Visibility="Visible" MouseLeave="part" Background="#FF661141" Height="800" VerticalAlignment="Top" Grid.RowSpan="2">
 
             <Button x:Name="BT_RetourAccueil" Content="Accueil" HorizontalAlignment="Left" Margin="0,11,0,0" VerticalAlignment="Top" Width="151" Background="#FF661141" BorderBrush="#FF661141" Height="51" Click="BT_RetourAccueil_Click" Foreground="#FFFDFDFD"/>
 
             <Button x:Name="BT_AjoutCasier" Content="Ajouter un casier" HorizontalAlignment="Left" Margin="5,74,0,0" VerticalAlignment="Top" Width="149" Background="#FF661141" BorderBrush="#FF661141" Height="51" Click="BT_AjoutCasier_Click" Foreground="#FFFDFDFD"/>
 
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="0,67,0,0" VerticalAlignment="Top" Width="166"/>
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="0,194,0,0" VerticalAlignment="Top" Width="166"/>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="0,130,0,0" VerticalAlignment="Top" Width="166"/>
 
         </Grid>

@@ -5,8 +5,6 @@ les 2 boutons de acceuils à faire
 
 les 2 boutons dans la listes en cliquant en haut a gauche
 
-parametrage de la base de donnée
-
 Fonction recherche
 
 ordre des casiers pouvant etre choisi
