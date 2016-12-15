@@ -72,6 +72,7 @@ namespace CaveAVin
             AffichageRecherche.Visibility = Visibility.Hidden;
             AffichageAjoutCasier.Visibility = Visibility.Hidden;
             AjoutCommentaireSupression.Visibility = Visibility.Hidden;
+            AffichageListeCasier.Visibility = Visibility.Hidden;
 
             #endregion
 
@@ -480,8 +481,9 @@ namespace CaveAVin
         /// <param name="e"></param>
         private void BT_RetourAccueil_Click(object sender, RoutedEventArgs e)
         {
+            MasquerEcran();
             AffichageAccueil.Visibility = Visibility.Visible;
-            AffichageInterfaceCasier.Visibility = Visibility.Hidden;
+            
         }
 
         /// <summary>
@@ -543,17 +545,12 @@ namespace CaveAVin
         /// <param name="e"></param>
         private void BT_AjoutCasier_Click(object sender, RoutedEventArgs e)
         {
-
-            AffichageAccueil.Visibility = Visibility.Hidden;
-            AffichageInterfaceCasier.Visibility = Visibility.Hidden;
-            AfficheDetailBouteille.Visibility = Visibility.Hidden;
+            MasquerEcran();
             MultiCasier.Visibility = Visibility.Hidden;
-            AffichageMenuLateral.Visibility = Visibility.Hidden;
             AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
             AffichageMenuLateral.Visibility = Visibility.Hidden;
-            AffichageRecherche.Visibility = Visibility.Hidden;
             AffichageAjoutCasier.Visibility = Visibility.Visible;
-            AjoutCommentaireSupression.Visibility = Visibility.Hidden;
+            
         }
 
         /// <summary>
@@ -949,6 +946,128 @@ namespace CaveAVin
             {
                 cb_Millesime_Ajout.Text = "";
             }
+        }
+
+        private void btnFermerFicheDetail_Click(object sender, EventArgs e)
+        {
+            DisplayFicheDetailBouteille(false);
+            ReDecaler();
+        }
+
+        private void InitialiseListeCasier()
+        {
+            DAO.CasierDAO daoCasier = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
+
+            var casiers = daoCasier.Lister();
+            var nbLignes = casiers.Lister().Length/3;
+            grdListeCasier.RowDefinitions.Clear();
+
+            for (int i = 0; i < nbLignes; i++)
+            {
+                RowDefinition rowDefinition = new RowDefinition();
+                rowDefinition.Height = new GridLength(1, GridUnitType.Star);
+                grdListeCasier.RowDefinitions.Add(rowDefinition);
+            }
+
+            int index = 0;
+
+            var converterColor = new BrushConverter();
+            Brush couleur = (Brush)converterColor.ConvertFrom("#FF661141");
+            double largeurElement = grdListeCasier.Width / 3 - 20;
+            double hauteurElement = grdListeCasier.Height / nbLignes - 20;
+
+            foreach (var casier in casiers.Lister())
+            {
+                int idColonne = index % 3;
+                int idLigne = index / 3;
+                
+
+                var nomCasier = new Button();
+                nomCasier.Click += CasierSelectione;
+                nomCasier.Content = casier;
+                nomCasier.Width = largeurElement;
+                nomCasier.Height = hauteurElement;
+                nomCasier.Margin = new Thickness(10);
+                nomCasier.VerticalAlignment = VerticalAlignment.Stretch;
+                nomCasier.HorizontalAlignment = HorizontalAlignment.Stretch;
+                nomCasier.HorizontalContentAlignment = HorizontalAlignment.Center;
+                nomCasier.VerticalContentAlignment = VerticalAlignment.Center;
+                nomCasier.FontSize = 30;
+                nomCasier.FontFamily = new FontFamily("CalifornianFB");
+                nomCasier.Foreground = Brushes.White;
+                nomCasier.Background = couleur;
+                Grid.SetColumn(nomCasier, idColonne);
+                Grid.SetRow(nomCasier, idLigne);
+                grdListeCasier.Children.Add(nomCasier);
+                index++;
+            }
+
+
+        }
+
+        public void AfficherListeCasier()
+        {
+            MasquerEcran();
+
+            InitialiseListeCasier();
+
+            AffichageListeCasier.Visibility = Visibility.Visible;
+        }
+
+        private void BT_Menu3_Click(object sender, RoutedEventArgs e)
+        {
+            AfficherListeCasier();
+        }
+
+        private void CasierSelectione(object sender, RoutedEventArgs e)
+        {
+            var casierBouton = (Button)sender;
+            var idColonne = Grid.GetColumn(casierBouton);
+            var idLigne = Grid.GetRow(casierBouton);
+            nCasierActuel = idLigne * 3 + idColonne + 1;
+            AffichageListeCasier.Visibility = Visibility.Hidden;
+            AffichageInterfaceCasier.Visibility = Visibility.Visible;
+            AffichageCasier.Visibility = Visibility.Visible;
+           
+            for (int i = 0; i < gestionCasier.Length; i++)
+            {
+                var casier = gestionCasier[i];
+
+                if(casier != null)
+                {
+                    casier.Visibility = Visibility.Hidden;
+                }
+            }
+
+            gestionCasier[nCasierActuel].Visibility = Visibility.Visible;
+            afficherBouteille();
+        }
+
+        private void MasquerEcran()
+        {
+            AffichageAccueil.Visibility = Visibility.Hidden;
+            AffichageInterfaceCasier.Visibility = Visibility.Hidden;
+            AffichageCasier.Visibility = Visibility.Hidden;
+            AffichageListeCasier.Visibility = Visibility.Hidden;
+            AffichageGestionCave.Visibility = Visibility.Hidden;
+            AjoutCommentaireSupression.Visibility = Visibility.Hidden;
+            AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
+            AffichageAjoutCasier.Visibility = Visibility.Hidden;
+            AffichageRecherche.Visibility = Visibility.Hidden;
+            AffichageMenuLateral.Visibility = Visibility.Hidden;
+        }
+
+        private void BT_VoirCave_Click(object sender, RoutedEventArgs e)
+        {
+            AfficherListeCasier();
+        }
+
+        private void Bt_GererCave_Click(object sender, RoutedEventArgs e)
+        {
+            MasquerEcran();
+            MultiCasier.Visibility = Visibility.Hidden;
+            AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
+            AffichageAjoutCasier.Visibility = Visibility.Visible;
         }
     }
 }
