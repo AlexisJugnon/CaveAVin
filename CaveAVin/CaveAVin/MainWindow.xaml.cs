@@ -859,7 +859,7 @@ namespace CaveAVin
         }
 
         /// <summary>
-        /// 
+        /// Empeche la saisie de lettre dans le textbox de contenance
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
