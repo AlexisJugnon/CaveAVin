@@ -135,7 +135,7 @@ namespace CaveAVin
             RowDefinition[] ligne;
 
 
-            for (int i = 1; i <= nbCasierTotal; i++)
+            for (int i = 1; i < nbCasierTotal; i++)
             {
                 gestionCasier[i] = new Grid();
                 GridAffichageBouteille.Children.Add(gestionCasier[i]);
