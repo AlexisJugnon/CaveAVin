@@ -34,7 +34,7 @@ namespace CaveAVin
 
         private DAO.reqSQL req = new DAO.reqSQL(DAO.BDD.Instance.Connexion); //Permet d'utiliser certaines requêtes SQL facilement
 
-        private int nCasierActuel = 1;
+        private int nCasierActuel = 0;
 
         private int nbCasierTotal = 1;
 
@@ -122,8 +122,14 @@ namespace CaveAVin
         /// </summary>
         private void initGridCasier()
         {
-            nbCasierTotal = req.SelInt("Select Count(IdCasier) FROM Casier");
-            gestionCasier = new Grid[nbCasierTotal + 1];
+            //nbCasierTotal = req.SelInt("Select Count(IdCasier) FROM Casier");
+            DAO.CasierDAO daoCasier = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
+
+            var casiers = daoCasier.Lister().Lister();
+
+            nbCasierTotal = casiers.Count();
+
+            gestionCasier = new Grid[nbCasierTotal];
 
             int nombreColonne, nombreLigne;
             int HeightBoutton, WidthBoutton;
@@ -135,15 +141,19 @@ namespace CaveAVin
             RowDefinition[] ligne;
 
 
-            for (int i = 1; i < nbCasierTotal; i++)
+            for (int i = 0; i < nbCasierTotal; i++)
             {
+                var casier = casiers[i];
                 gestionCasier[i] = new Grid();
                 GridAffichageBouteille.Children.Add(gestionCasier[i]);
                 gestionCasier[i].VerticalAlignment = VerticalAlignment.Center;
                 gestionCasier[i].Visibility = Visibility.Hidden;
 
-                nombreLigne = req.SelInt("Select Largeur_X FROM Casier where idCasier = " + i);
-                nombreColonne = req.SelInt("Select Largeur_Y FROM Casier where idCasier = " + i);
+                nombreLigne = casier.LargeurX;
+                nombreColonne = casier.LargeurY;
+
+                //nombreLigne = req.SelInt("Select Largeur_X FROM Casier where idCasier = " + i);
+                //nombreColonne = req.SelInt("Select Largeur_Y FROM Casier where idCasier = " + i);
 
                 if (nombreColonne > nombreLigne)
                 {
@@ -161,7 +171,7 @@ namespace CaveAVin
                     HeightBoutton = (int)((longueurMax)) / nombreLigne;
                 }
 
-                    colonne = new ColumnDefinition[nombreColonne];
+                colonne = new ColumnDefinition[nombreColonne];
                 ligne = new RowDefinition[nombreLigne];
 
                 for (int f = 0; f < nombreColonne; f++)
@@ -200,7 +210,7 @@ namespace CaveAVin
                         res = "";
                         try
                         {
-                            res = req.SelStr1("SELECT NomType From Type natural join Bouteille where idCasier =" + i +
+                            res = req.SelStr1("SELECT NomType From Type natural join Bouteille where idCasier =" + casier.Id +
                             " and Bouteille.Position_X = " + k + " and Bouteille.Position_Y = " + j + " and Bue = 0;", "NomType");
                         }
                         catch
@@ -273,14 +283,14 @@ namespace CaveAVin
             }
             if (existe)
             {            
-                ((Button)listeBouton[nCasierActuel - 1].GetValue(ligne, col)).Opacity = 1.0;
+                ((Button)listeBouton[nCasierActuel].GetValue(ligne, col)).Opacity = 1.0;
 
             }
             else
             {
                 posi.Casier = nCasierActuel;
                 listeBouteilleAjout.Add(posi);
-                ((Button)listeBouton[nCasierActuel - 1].GetValue(ligne, col)).Opacity = 0.5;
+                ((Button)listeBouton[nCasierActuel].GetValue(ligne, col)).Opacity = 0.5;
 
             }
         }
@@ -298,7 +308,7 @@ namespace CaveAVin
                 MultiCasier.Visibility = Visibility.Visible;
             }
 
-            if (nCasierActuel == 1)
+            if (nCasierActuel == 0)
             {
                 CasierPrecedent.Visibility = Visibility.Hidden;
             }
@@ -307,7 +317,7 @@ namespace CaveAVin
                 CasierPrecedent.Visibility = Visibility.Visible;
             }
 
-            if (nCasierActuel < nbCasierTotal)
+            if (nCasierActuel < nbCasierTotal-1)
             {
                 CasierSuivant.Visibility = Visibility.Visible;
             }
@@ -353,7 +363,7 @@ namespace CaveAVin
                 var bouteilleDao = new BouteilleDAO(DAO.BDD.Instance.Connexion);
                 var casier = casierDao.Chercher(nCasierActuel);
                 var bouteille = bouteilleDao.Chercher(posi.X, posi.Y, posi.Casier);
-                ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Opacity = 0.5;
+                ((Button)listeBouton[nCasierActuel].GetValue(l_ligne, l_col)).Opacity = 0.5;
                 AfficherDetailBouteille(bouteille);
 
             }
@@ -375,7 +385,7 @@ namespace CaveAVin
                 }
                 if (existe)
                 {
-                    ((Button)listeBouton[nCasierActuel - 1].GetValue(ligne, col)).Opacity = 1.0;
+                    ((Button)listeBouton[nCasierActuel].GetValue(ligne, col)).Opacity = 1.0;
                     
 
                 }
@@ -383,7 +393,7 @@ namespace CaveAVin
                 {
                     posi.Casier = nCasierActuel;
                     listeBouteilleSuppr.Add(posi);
-                    ((Button)listeBouton[nCasierActuel - 1].GetValue(ligne, col)).Opacity = 0.5;
+                    ((Button)listeBouton[nCasierActuel].GetValue(ligne, col)).Opacity = 0.5;
 
 
                 }
@@ -483,8 +493,6 @@ namespace CaveAVin
         {
             MasquerEcran();
             AffichageAccueil.Visibility = Visibility.Visible;
-            AffichageInterfaceCasier.Visibility = Visibility.Hidden;
-            AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -826,10 +834,10 @@ namespace CaveAVin
                     {
                         brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
                     }
-                    ((Button)listeBouton[nCasierActuel - 1].GetValue(pos.X, pos.Y)).Background = brush;
-                    ((Button)listeBouton[nCasierActuel - 1].GetValue(pos.X, pos.Y)).Click -= selectBouteille;
-                    ((Button)listeBouton[nCasierActuel - 1].GetValue(pos.X, pos.Y)).Click += selectionBouteille;
-                    ((Button)listeBouton[nCasierActuel - 1].GetValue(pos.X, pos.Y)).Opacity = 1.0;
+                    ((Button)listeBouton[nCasierActuel].GetValue(pos.X, pos.Y)).Background = brush;
+                    ((Button)listeBouton[nCasierActuel].GetValue(pos.X, pos.Y)).Click -= selectBouteille;
+                    ((Button)listeBouton[nCasierActuel].GetValue(pos.X, pos.Y)).Click += selectionBouteille;
+                    ((Button)listeBouton[nCasierActuel].GetValue(pos.X, pos.Y)).Opacity = 1.0;
 
                 }
             }
@@ -887,14 +895,14 @@ namespace CaveAVin
             ReDecaler();
             var brush = new ImageBrush();
             brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
-            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Background = brush;
-            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Click -= selectionBouteille;
-            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Click += selectBouteille;
-            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Opacity = 1.0;
+            ((Button)listeBouton[nCasierActuel].GetValue(l_ligne, l_col)).Background = brush;
+            ((Button)listeBouton[nCasierActuel].GetValue(l_ligne, l_col)).Click -= selectionBouteille;
+            ((Button)listeBouton[nCasierActuel].GetValue(l_ligne, l_col)).Click += selectBouteille;
+            ((Button)listeBouton[nCasierActuel].GetValue(l_ligne, l_col)).Opacity = 1.0;
 
             req.delete(l_ligne, l_col, nCasierActuel, commentaireBouteille.Text);
 
-            ((Button)listeBouton[nCasierActuel - 1].GetValue(l_ligne, l_col)).Opacity = 1.0;
+            ((Button)listeBouton[nCasierActuel].GetValue(l_ligne, l_col)).Opacity = 1.0;
         }
 
         /// <summary>
@@ -917,7 +925,7 @@ namespace CaveAVin
 
             initGridCasier();
 
-            nCasierActuel = 1;
+            nCasierActuel = 0;
             afficherBouteille();
             AffichageAjoutCasier.Visibility = Visibility.Hidden;
             AffichageAccueil.Visibility = Visibility.Visible;
@@ -985,7 +993,7 @@ namespace CaveAVin
             DAO.CasierDAO daoCasier = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
 
             var casiers = daoCasier.Lister();
-            var nbLignes = casiers.Lister().Length/3;
+            var nbLignes = (casiers.Lister().Length/3)+1;
             grdListeCasier.RowDefinitions.Clear();
 
             for (int i = 0; i < nbLignes; i++)
@@ -1050,7 +1058,7 @@ namespace CaveAVin
             var casierBouton = (Button)sender;
             var idColonne = Grid.GetColumn(casierBouton);
             var idLigne = Grid.GetRow(casierBouton);
-            nCasierActuel = idLigne * 3 + idColonne + 1;
+            nCasierActuel = idLigne * 3 + idColonne;
             AffichageListeCasier.Visibility = Visibility.Hidden;
             AffichageInterfaceCasier.Visibility = Visibility.Visible;
             AffichageCasier.Visibility = Visibility.Visible;
@@ -1065,7 +1073,10 @@ namespace CaveAVin
                 }
             }
 
-            gestionCasier[nCasierActuel].Visibility = Visibility.Visible;
+            var casierCourant = gestionCasier[nCasierActuel];
+            if (casierCourant != null) { 
+                casierCourant.Visibility = Visibility.Visible;
+            }
             afficherBouteille();
         }
 
@@ -1094,6 +1105,12 @@ namespace CaveAVin
             MultiCasier.Visibility = Visibility.Hidden;
             AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
             AffichageAjoutCasier.Visibility = Visibility.Visible;
+        }
+
+        private void btnLogo_Click(object sender, RoutedEventArgs e)
+        {
+            MasquerEcran();
+            AffichageAccueil.Visibility = Visibility.Visible;
         }
     }
 }

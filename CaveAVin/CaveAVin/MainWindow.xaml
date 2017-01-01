@@ -18,7 +18,10 @@
 
 		<Rectangle Fill="#FF661141" HorizontalAlignment="Stretch" Height="133" Margin="0,0,0,0" VerticalAlignment="Top" />
 
-		<Image x:Name="logo" HorizontalAlignment="Left" Height="133" Margin="166,0,0,0" VerticalAlignment="Top" Width="176" Source=".\Images\logoBouteille.png" />
+		<Button x:Name="btnLogo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="176" Margin="166,0,0,0"  Height="133" Background="#FF661141" BorderBrush="#FF661141" Click="btnLogo_Click">
+			<Image x:Name="logo" HorizontalAlignment="Center"  VerticalAlignment="Center"  Source=".\Images\logoBouteille.png" />
+		</Button>
+	   
 
 		<Button x:Name="BT_rechercher" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="0,30,30,0" Height="75" Background="#FF661141" BorderBrush="#FF661141" Click="BT_rechercher_Click">
 			<Image x:Name="chercher" HorizontalAlignment="Center"  VerticalAlignment="Center"  Source=".\Images\Chercher.png" />
@@ -54,9 +57,9 @@
 			</Button>
 
 			<Button x:Name="BT_GererCave" HorizontalAlignment="Left" Margin="230,606,0,0" VerticalAlignment="Top" Width="86" Height="86" BorderBrush="#FF661141" Grid.RowSpan="2" Background="#FF661141" Foreground="#FF661141" Click="Bt_GererCave_Click">
-                <Image Source=".\Images\GererCave.png"/>
-            </Button>
-        </Grid>
+				<Image Source=".\Images\GererCave.png"/>
+			</Button>
+		</Grid>
 
 
 		<Grid x:Name="AffichageInterfaceCasier" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,116,1,17" Width="1635" Height="794">
