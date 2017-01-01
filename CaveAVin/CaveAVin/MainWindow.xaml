@@ -7,7 +7,7 @@
 		xmlns:fa="http://schemas.fontawesome.io/icons/"
 		mc:Ignorable="d"
 		
-		Title="WineFinder" Height="946.677" Width="1642.9" ResizeMode="CanMinimize" Icon="Images/logoReduit.png" WindowStartupLocation="CenterScreen">
+		Title="WineFinder" Height="946.677" Width="1642.9" ResizeMode="CanResize" Icon="Images/logoReduit.png" WindowStartupLocation="CenterScreen">
 
 	<Grid x:Name="AffichagePrincipal" HorizontalAlignment="Stretch" Height="927" Margin="0,0,0,-21" VerticalAlignment="Top">
 		<Grid.RowDefinitions>
@@ -37,7 +37,7 @@
 		</Menu>
 
 
-		<Grid x:Name="AffichageAccueil" Visibility="Visible" Margin="0,139,0,6" UseLayoutRounding="False" IsHitTestVisible="True">
+		<Grid x:Name="AffichageAccueil" Visibility="Hidden" Margin="0,139,0,6" UseLayoutRounding="False" IsHitTestVisible="True">
 
 			<Grid.RowDefinitions>
 				<RowDefinition Height="11*"/>

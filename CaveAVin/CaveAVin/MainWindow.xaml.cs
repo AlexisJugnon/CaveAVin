@@ -218,41 +218,31 @@ namespace CaveAVin
 
                         }
 
+                        var brush = new ImageBrush();
+
                         if (res == "Blanc")
                         {
-                            var brush = new ImageBrush();
-                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/BlancCasier.png", UriKind.Relative));
-                            button[k, j].Background = brush;
-                            button[k, j].Click += selectionBouteille;
+                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/BlancCasier.png", UriKind.Relative));
                         }
                         else if (res == "Rouge")
                         {
-                            var brush = new ImageBrush();
-                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/RougeCasier.png", UriKind.Relative));
-                            button[k, j].Background = brush;
-                            button[k, j].Click += selectionBouteille;
+                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/RougeCasier.png", UriKind.Relative));
                         }
                         else if (res == "Rosé")
                         {
-                            var brush = new ImageBrush();
-                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/RoséCasier.png", UriKind.Relative));
-                            button[k, j].Background = brush;
-                            button[k, j].Click += selectionBouteille;
+                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/RoséCasier.png", UriKind.Relative));
                         }
                         else if (res == "Pétillant")
                         {
-                            var brush = new ImageBrush();
-                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/PétillantCasier.png", UriKind.Relative));
-                            button[k, j].Background = brush;
-                            button[k, j].Click += selectionBouteille;
+                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/PétillantCasier.png", UriKind.Relative));
                         }
                         else
                         {
-                            var brush = new ImageBrush();
-                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/CaseVide.png", UriKind.Relative));
-                            button[k, j].Background = brush;
-                            button[k, j].Click += selectBouteille;
+                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/CaseVide.png", UriKind.Relative));
                         }
+
+                        button[k, j].Background = brush;
+                        button[k, j].Click += selectionBouteille;
                     }
                 }
                 listeBouton.Add(button);
