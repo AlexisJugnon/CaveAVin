@@ -71,7 +71,6 @@ namespace DAO
             {
                 con.Close();
             }
-            Console.WriteLine(b.Contenance);
             return b;
         }
 

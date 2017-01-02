@@ -36,7 +36,7 @@ namespace CaveAVin
 
         private int nCasierActuel = 0;
 
-        private int nbCasierTotal = 1;
+        private int nbCasierTotal = 0;
 
         private List<Button[,]> listeBouton = new List<Button[,]>();
 
@@ -316,10 +316,11 @@ namespace CaveAVin
                 CasierSuivant.Visibility = Visibility.Hidden;
             }
             #endregion
-
-            lblNomCasier.Content = req.SelStr1("Select NomCasier From Casier Where idCasier = " + nCasierActuel, "NomCasier");
-
-            gestionCasier[nCasierActuel].Visibility = Visibility.Visible;
+            if (nbCasierTotal != 0)
+            {
+                lblNomCasier.Content = req.SelStr1("Select NomCasier From Casier Where idCasier = " + nCasierActuel, "NomCasier");
+                gestionCasier[nCasierActuel].Visibility = Visibility.Visible;
+            }
 
         }
 

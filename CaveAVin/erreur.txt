@@ -28,6 +28,10 @@ Vinification
 
 bouton retour accueil
 
-doc bdd
+doc création et hébergement bdd
 
-prob casier 0
+problème lorsqu'il y a 0 casier
+
+ajouter possibilité suppression casier
+
+ajouter modification casier
