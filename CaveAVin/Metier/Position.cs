@@ -17,10 +17,11 @@ namespace Metier
         private int y;
         private int casier;
 
-        public Position(int x2 = -1,int y2 = -1)
+        public Position(int x2 = -1,int y2 = -1,int casier2 = -1)
         {
             X = x2;
             Y = y2;
+            casier = casier2;
         }
 
         public int X

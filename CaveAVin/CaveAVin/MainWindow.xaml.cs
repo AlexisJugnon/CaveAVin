@@ -48,6 +48,8 @@ namespace CaveAVin
 
         private int l_col;
 
+        private int ba_ligne = 0, ba_col = 0;
+
         private Metier.Position courante;
 
         #endregion
@@ -87,6 +89,8 @@ namespace CaveAVin
             courante = null;
         }
 
+
+
         /// <summary>
         /// Affiche le menu latéral lors d'un clic sur le bouton
         /// </summary>
@@ -96,6 +100,8 @@ namespace CaveAVin
         {
             AffichageMenuLateral.Visibility = Visibility.Visible;
         }
+
+
 
         /// <summary>
         /// Cache le menu latéral lorsque l'on sort du cadre contenant les boutons
@@ -107,6 +113,8 @@ namespace CaveAVin
             AffichageMenuLateral.Visibility = Visibility.Hidden;
         }
 
+
+
         /// <summary>
         /// Affiche l'interface permettant de créer des bouteilles
         /// </summary>
@@ -116,6 +124,8 @@ namespace CaveAVin
         {
             AjoutBouteille();
         }
+
+
 
         /// <summary>
         /// Permet d'initialiser tous les casiers sous forme de grid pour pouvoir les afficher plus tard
@@ -259,6 +269,8 @@ namespace CaveAVin
 
         }
 
+
+
         /// <summary>
         /// Gestion du clic sur un emplacement vide
         /// </summary>
@@ -268,7 +280,7 @@ namespace CaveAVin
         {
             int ligne = Int32.Parse(sender.ToString().Substring(32, 1));
             int col = Int32.Parse(sender.ToString().Substring(35, 1));
-            Metier.Position posi = new Metier.Position(ligne, col);
+            Metier.Position posi = new Metier.Position(ligne, col, nCasierActuel);
 
             bool existe = false;
             foreach(Metier.Position pos in listeBouteilleAjout)
@@ -293,6 +305,8 @@ namespace CaveAVin
 
             }
         }
+
+
 
         /// <summary>
         /// permet d'afficher le casier suivant ou précedent
@@ -333,6 +347,8 @@ namespace CaveAVin
 
         }
 
+
+
         /// <summary>
         /// Permet de gérer le click sur une bouteille
         /// </summary>
@@ -345,6 +361,11 @@ namespace CaveAVin
                 l_ligne = Int32.Parse(sender.ToString().Substring(32, 1));
                 l_col = Int32.Parse(sender.ToString().Substring(35, 1));
 
+                ((Button)listeBouton[nCasierActuel].GetValue(ba_ligne, ba_col)).Opacity = 1.0 ;
+
+                ((Button)listeBouton[nCasierActuel].GetValue(l_ligne, l_col)).Opacity = 0.5;
+
+                ba_ligne = l_ligne; ba_col = l_col;
 
                 Decaler();
                 var button = (Button)sender;
@@ -394,6 +415,8 @@ namespace CaveAVin
             }
         }
 
+
+
         /// <summary>
         /// Permet de gérer le click sur le bouton suivant dans l'affichage des casiers
         /// </summary>
@@ -406,6 +429,8 @@ namespace CaveAVin
             afficherBouteille();
         }
 
+
+
         /// <summary>
         /// Permet de décaler l'affichage du casier pour pouvoir afficher la fiche bouteille
         /// </summary>
@@ -414,6 +439,8 @@ namespace CaveAVin
             AffichageCasier.Margin = new Thickness(0, 30, 0, 50);
         }
 
+
+
         /// <summary>
         /// Permet de réinitialiser l'affichage du casier
         /// </summary>
@@ -421,6 +448,8 @@ namespace CaveAVin
         {
             AffichageCasier.Margin = new Thickness(300, 30, 0, 0);
         }
+
+
 
         /// <summary>
         /// Permet de gérer le click sur le bouton précedent dans l'affichage des casiers
@@ -434,7 +463,8 @@ namespace CaveAVin
             afficherBouteille();
         }
 
-        // A refaire avec en passage en parametre num de la colonne et num de la ligne
+
+
         /// <summary>
         /// Affiche les détail d'une bouteille
         /// </summary>
@@ -443,7 +473,7 @@ namespace CaveAVin
         {
            if (bouteille != null)
             {
-                lbl_Appelation.Content = "slt";//bouteille.Appelation?.NomAppelation;
+                lbl_Appelation.Content = bouteille.Appelation?.NomAppelation;
                 lbl_Categorie.Content = bouteille.Type?.NomType;
                 lbl_Contenance.Content = bouteille.Contenance?.Valeur;
                 lbl_Cru.Content = bouteille.Cru?.NomCru;
@@ -456,6 +486,8 @@ namespace CaveAVin
            }
         }
 
+
+
         /// <summary>
         /// Affiche ou masque la fiche du détail de la bouteille
         /// </summary>
@@ -465,6 +497,8 @@ namespace CaveAVin
             AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
             AfficheDetailBouteille.Visibility = rendreVisible ? Visibility.Visible : Visibility.Hidden;
         }
+
+
 
         /// <summary>
         /// Affiche la page des casier et cache l'accueil lorsque on appuie sur le bouton du milieu de l'accueil
@@ -478,6 +512,8 @@ namespace CaveAVin
             AffichageCasier.Visibility = Visibility.Visible;
         }
 
+
+
         /// <summary>
         /// Affiche la page d'accueil et cache les casiers lorsque on appuie sur le 1er bouton du menu déroulant
         /// </summary>
@@ -489,6 +525,8 @@ namespace CaveAVin
             AffichageAccueil.Visibility = Visibility.Visible;
         }
 
+
+
         /// <summary>
         /// affiche le texte pour le saviez-vous
         /// </summary>
@@ -499,6 +537,8 @@ namespace CaveAVin
             Random r = new Random();
             TB_SaviezVous.Text = c.chercher(r.Next(1, 11));
         }
+
+
 
         /// <summary>
         /// Initialise la connexion au SGBDR
@@ -530,6 +570,8 @@ namespace CaveAVin
             }
         }
 
+
+
         /// <summary>
         /// Gère le clic sur le bouton supprimer
         /// </summary>
@@ -540,6 +582,8 @@ namespace CaveAVin
             AfficheDetailBouteille.Visibility = Visibility.Hidden;
             AjoutCommentaireSupression.Visibility = Visibility.Visible;
         }
+
+
 
         /// <summary>
         /// Affichage de la fenêtre pour ajouter un casier
@@ -555,6 +599,8 @@ namespace CaveAVin
             AffichageAjoutCasier.Visibility = Visibility.Visible;
             
         }
+
+
 
         /// <summary>
         /// supprimer toutes les bouteilles selectionner ou lancer la selection des boutteiles a supprimer
@@ -577,13 +623,13 @@ namespace CaveAVin
                     cas = pos.Casier;                 
                     req.delete(ligne, col, cas, "");
 
-                    ((Button)listeBouton[cas - 1].GetValue(ligne, col)).Opacity = 1.0;
+                    ((Button)listeBouton[cas].GetValue(ligne, col)).Opacity = 1.0;
 
                     brush = new ImageBrush();
                     brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/CaseVide.png", UriKind.Relative));
-                    ((Button)listeBouton[cas-1].GetValue(ligne, col)).Background = brush;
-                    ((Button)listeBouton[cas-1].GetValue(ligne, col)).Click -= selectionBouteille;
-                    ((Button)listeBouton[cas-1].GetValue(ligne, col)).Click += selectBouteille;
+                    ((Button)listeBouton[cas].GetValue(ligne, col)).Background = brush;
+                    ((Button)listeBouton[cas].GetValue(ligne, col)).Click -= selectionBouteille;
+                    ((Button)listeBouton[cas].GetValue(ligne, col)).Click += selectBouteille;
                 }
 
                 listeBouteilleSuppr.Clear();
@@ -598,6 +644,8 @@ namespace CaveAVin
                 supprimer = true;
             }
         }
+
+
 
         /// <summary>
         /// Gère l'affichage de l'interface permettant d'ajouter des bouteilles
@@ -665,6 +713,8 @@ namespace CaveAVin
                 cb_Appelation_Ajout.Items.Add(a.NomAppelation);
             }
         }
+
+
 
         /// <summary>
         /// Gère l'ajout des bouteilles après validation de l'ajout
@@ -806,48 +856,46 @@ namespace CaveAVin
                     Metier.Bouteille b = new Metier.Bouteille(0, false, "", pos.X, pos.Y, cas, cru, m, c, d, r, tv, a, t);
                     daoBou.Créer(b);
 
+                ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Click -= selectBouteille;
+                ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Opacity = 1.0;
 
-                    if (nomType == "Blanc")
+                if (nomType == "Blanc")
                     {
                         brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/BlancCasier.png", UriKind.Relative));
-                        button[pos.X, pos.Y].Background = brush;
-                        button[pos.X, pos.Y].Click += selectionBouteille;
+                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Background = brush;
+                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Click += selectionBouteille;
                     }
                     else if (nomType == "Rouge")
                     {
                         brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/RougeCasier.png", UriKind.Relative));
-                        button[pos.X, pos.Y].Background = brush;
-                        button[pos.X, pos.Y].Click += selectionBouteille;
+                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Background = brush;
+                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Click += selectionBouteille;
                     }
                     else if (nomType == "Rosé")
                     {
                         brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/RoséCasier.png", UriKind.Relative));
-                        button[pos.X, pos.Y].Background = brush;
-                        button[pos.X, pos.Y].Click += selectionBouteille;
+                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Background = brush;
+                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Click += selectionBouteille;
                     }
                     else if (nomType == "Pétillant")
                     {
                         brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/PétillantCasier.png", UriKind.Relative));
-                        button[pos.X, pos.Y].Background = brush;
-                        button[pos.X, pos.Y].Click += selectionBouteille;
+                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Background = brush;
+                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Click += selectionBouteille;
                     }
                     else
                     {
                         brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/CaseVide.png", UriKind.Relative));
-                        button[pos.X, pos.Y].Background = brush;
-                        button[pos.X, pos.Y].Click += selectBouteille;
-                    }
-
-                    ((Button)listeBouton[nCasierActuel].GetValue(pos.X, pos.Y)).Click -= selectBouteille;
-                    ((Button)listeBouton[nCasierActuel].GetValue(pos.X, pos.Y)).Click += selectionBouteille;
-                    ((Button)listeBouton[nCasierActuel].GetValue(pos.X, pos.Y)).Opacity = 1.0;
-
-                
+                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Background = brush;
+                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Click += selectBouteille;
+                    }               
             }
             listeBouteilleAjout.Clear();
 
             AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
         }
+
+
 
         /// <summary>
         /// Gère le clic sur le bouton rechercher
@@ -941,6 +989,8 @@ namespace CaveAVin
             }
         }
 
+
+
         /// <summary>
         /// Empeche la saisie de lettre dans le textbox de contenance
         /// </summary>
@@ -958,6 +1008,8 @@ namespace CaveAVin
                 cb_Contenance_Ajout.Text = "";
             }
         }
+
+
 
         /// <summary>
         /// 
@@ -979,6 +1031,8 @@ namespace CaveAVin
 
             ((Button)listeBouton[nCasierActuel].GetValue(l_ligne, l_col)).Opacity = 1.0;
         }
+
+
 
         /// <summary>
         /// 
@@ -1009,6 +1063,8 @@ namespace CaveAVin
             AffichageAccueil.Visibility = Visibility.Visible;
         }
 
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -1020,6 +1076,13 @@ namespace CaveAVin
             AffichageAccueil.Visibility = Visibility.Visible;
         }
 
+
+
+        /// <summary>
+        /// Permet de tester la saisie dans le champs largeur casier pour forcer la saisie de chiffre
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void largeurCasierAjout_TextChanged(object sender, TextChangedEventArgs e)
         {
             int res;
@@ -1034,6 +1097,13 @@ namespace CaveAVin
 
         }
 
+
+
+        /// <summary>
+        /// Permet de tester la saisie dans le champs hauteur casier pour forcer la saisie de chiffre
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void hauteurCasierAjout_TextChanged(object sender, TextChangedEventArgs e)
         {
             int res;
@@ -1047,6 +1117,13 @@ namespace CaveAVin
             }
         }
 
+
+
+        /// <summary>
+        /// Permet de tester la saisie dans le champs millesime pour forcer la saisie de chiffre
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cb_Millesime_Ajout_TextChanged(object sender, TextChangedEventArgs e)
         {
             int res;
@@ -1060,12 +1137,25 @@ namespace CaveAVin
             }
         }
 
+
+
+        /// <summary>
+        /// Permet de fermer la fiche de detail d'une bouteille lorsqu'on appui sur le bouton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnFermerFicheDetail_Click(object sender, EventArgs e)
         {
             DisplayFicheDetailBouteille(false);
+            ((Button)listeBouton[nCasierActuel].GetValue(ba_ligne, ba_col)).Opacity = 1.0;
             ReDecaler();
         }
 
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitialiseListeCasier()
         {
             DAO.CasierDAO daoCasier = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
@@ -1115,6 +1205,11 @@ namespace CaveAVin
             }
         }
 
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void AfficherListeCasier()
         {
             MasquerEcran();
@@ -1124,11 +1219,25 @@ namespace CaveAVin
             AffichageListeCasier.Visibility = Visibility.Visible;
         }
 
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BT_Menu3_Click(object sender, RoutedEventArgs e)
         {
             AfficherListeCasier();
         }
 
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CasierSelectione(object sender, RoutedEventArgs e)
         {
             var casierBouton = (Button)sender;
@@ -1156,6 +1265,11 @@ namespace CaveAVin
             afficherBouteille();
         }
 
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         private void MasquerEcran()
         {
             AffichageAccueil.Visibility = Visibility.Hidden;
@@ -1171,11 +1285,25 @@ namespace CaveAVin
             OptionRecherche.Visibility = Visibility.Hidden;
         }
 
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BT_VoirCave_Click(object sender, RoutedEventArgs e)
         {
             AfficherListeCasier();
         }
 
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Bt_GererCave_Click(object sender, RoutedEventArgs e)
         {
             MasquerEcran();
@@ -1184,12 +1312,26 @@ namespace CaveAVin
             AffichageAjoutCasier.Visibility = Visibility.Visible;
         }
 
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLogo_Click(object sender, RoutedEventArgs e)
         {
             MasquerEcran();
             AffichageAccueil.Visibility = Visibility.Visible;
         }
 
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ValidationRecherche_Click(object sender, RoutedEventArgs e)
         {
             #region gère affichage

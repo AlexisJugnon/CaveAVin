@@ -62,7 +62,7 @@
         </Grid>
 
 
-        <Grid x:Name="AffichageInterfaceCasier" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,116,1,17" Width="1635" Height="794">
+        <Grid x:Name="AffichageInterfaceCasier" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,116,1,17" Width="1635" Height="794">
 
             <Border x:Name="AfficheDetailBouteille" Visibility="Visible" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Left" Height="659" Margin="933,74,0,0" VerticalAlignment="Top" Width="429" Background="#FFFCF4E3">
                 <Grid x:Name="AffichageInfo" Visibility="Visible">
