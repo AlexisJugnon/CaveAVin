@@ -7,6 +7,7 @@ using Metier;
 using System.Data;
 using System.Diagnostics;
 using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 
 namespace DAO
 {

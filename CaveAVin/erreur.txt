@@ -3,35 +3,23 @@
 
 Fonction recherche
 
-ordre des casiers pouvant etre choisi
+--ordre des casiers pouvant etre choisi
 	ou liste déroulante de casier pour y acceder
 
 modifier bouteille
+
+Déplacer bouteille
 
 Portage sur windowPhone
 
 optimiser ajout casier en créant liste ou tableau
 
-ajouter gérer 2 ou 4 chiffres années
+--ajouter gérer 2 ou 4 chiffres années
 
-ajout commentaire plus tard : liste enlevé sans comm
-
-Type
-Pays
-Region
-Appelation
-Domaine
-Cru
-Contenance
-Millesime
-Vinification
-
-bouton retour accueil
++ajout commentaire plus tard
 
 doc création et hébergement bdd
 
-problème lorsqu'il y a 0 casier
-
-ajouter possibilité suppression casier
+ajouter suppression casier
 
 ajouter modification casier

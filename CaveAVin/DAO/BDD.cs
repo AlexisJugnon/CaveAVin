@@ -3,28 +3,62 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+using MySql.Data;
 using System.Data;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace DAO
 {
     /// <summary>
     /// Connexion à la base de données
     /// </summary>
+
     public class BDD
     {
-        private static BDD instance = null;
+        private static BDD instance;
+        private string database = "WineFinder";
+        private string serveur = "137.74.233.210";
+        private string login = "user";
+        private string pass = "user";
+
         private BDD()
         {
-            con = new MySqlConnection();
+            init();
         }
+
         public static BDD Instance
         {
             get
             {
                 if (instance == null)
-                    instance = new BDD();
+                {
+                    try
+                    {
+                        instance.init();
+                    }
+                    catch
+                    {
+                        instance = new BDD();
+                    }
+                }
                 return instance;
+            }
+        }
+
+        private void init()
+        {
+            con = new MySql.Data.MySqlClient.MySqlConnection();
+            con.ConnectionString = ConnectionString;
+        }
+
+
+        public bool Connectée
+        {
+            get
+            {
+                return con != null && con.State == ConnectionState.Open;
             }
         }
 
@@ -39,6 +73,13 @@ namespace DAO
             }
         }
 
+        private string ConnectionString
+        {
+            get
+            {
+                return "Database=" + database + ";DataSource=" + serveur + ";User Id=" + login + "; Password=" + pass;
+            }
+        }
         private IDbConnection con;
 
     }

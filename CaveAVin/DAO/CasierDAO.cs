@@ -57,14 +57,24 @@ namespace DAO
             {
                 IDbCommand com = con.CreateCommand();
 
-                com.CommandText = "SELECT Max(IdCasier) FROM Casier;";
+                com.CommandText = "SELECT Max(IdCasier), COUNT(IdCasier) FROM Casier;";
 
                 IDataReader reader = com.ExecuteReader();
                 int id = 0;
+                int nbr = 0;
                 try
                 {
                     if (reader.Read())
+                    {
                         id = Convert.ToInt32(reader[0]);
+                        nbr = Convert.ToInt32(reader[1]);
+                    }
+
+                    if(nbr == 0)
+                    {
+                        id = 0;
+                    }
+
                 }
                 catch { }
                 c.Id = id;
