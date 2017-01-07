@@ -441,9 +441,9 @@ namespace CaveAVin
         /// <param name="bouteille"></param>
         private void AfficherDetailBouteille(Metier.Bouteille bouteille)
         {
-            if (bouteille != null)
+           if (bouteille != null)
             {
-                lbl_Appelation.Content = bouteille.Appelation?.NomAppelation;
+                lbl_Appelation.Content = "slt";//bouteille.Appelation?.NomAppelation;
                 lbl_Categorie.Content = bouteille.Type?.NomType;
                 lbl_Contenance.Content = bouteille.Contenance?.Valeur;
                 lbl_Cru.Content = bouteille.Cru?.NomCru;
@@ -453,7 +453,7 @@ namespace CaveAVin
                 lbl_Region.Content = bouteille.Region?.NomRegion;
                 lbl_Vinification.Content = bouteille.Type_vinification?.NomVinif;
                 DisplayFicheDetailBouteille(true);
-            }
+           }
         }
 
         /// <summary>

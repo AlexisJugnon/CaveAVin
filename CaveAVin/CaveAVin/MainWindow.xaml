@@ -65,7 +65,7 @@
         <Grid x:Name="AffichageInterfaceCasier" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,116,1,17" Width="1635" Height="794">
 
             <Border x:Name="AfficheDetailBouteille" Visibility="Visible" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Left" Height="659" Margin="933,74,0,0" VerticalAlignment="Top" Width="429" Background="#FFFCF4E3">
-                <Grid x:Name="AffichageInfo">
+                <Grid x:Name="AffichageInfo" Visibility="Visible">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="59*"/>
                         <ColumnDefinition Width="155*"/>
@@ -98,15 +98,15 @@
                     <Label Content="Millésime" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Height="26" Width="60"/>
                     <Label Content="Contenance" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Height="26" Width="73"/>
 
-                    <Label x:Name="lbl_Categorie" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="0" Height="10"/>
-                    <Label x:Name="lbl_Region" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="2" Height="10"/>
-                    <Label x:Name="lbl_Appelation" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="3" Height="10"/>
-                    <Label x:Name="lbl_Domaine" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="4" Height="10"/>
-                    <Label x:Name="lbl_Pays" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="1" Height="10"/>
-                    <Label x:Name="lbl_Vinification" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="8"/>
-                    <Label x:Name="lbl_Cru" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="5"/>
-                    <Label x:Name="lbl_Millesime" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="7"/>
-                    <Label x:Name="lbl_Contenance" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="6"/>
+                    <Label x:Name="lbl_Categorie" HorizontalAlignment="Left" Margin="2,0,0,0" VerticalAlignment="Top" Width="194" Grid.Column="2" Grid.Row="0" Height="49"/>
+                    <Label x:Name="lbl_Region" HorizontalAlignment="Left" Margin="2,0,0,0" VerticalAlignment="Top" Width="194" Grid.Column="2" Grid.Row="2" Height="49"/>
+                    <Label x:Name="lbl_Appelation" HorizontalAlignment="Left" VerticalAlignment="Top" Width="203" Grid.Column="2" Grid.Row="3" Height="45"/>
+                    <Label x:Name="lbl_Domaine" HorizontalAlignment="Left" VerticalAlignment="Top" Width="196" Grid.Column="2" Grid.Row="4" Height="45"/>
+                    <Label x:Name="lbl_Pays" HorizontalAlignment="Left" Margin="2,0,0,0" VerticalAlignment="Top" Width="194" Grid.Column="2" Grid.Row="1" Height="49"/>
+                    <Label x:Name="lbl_Vinification" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="196" Grid.Column="2" Grid.Row="8"/>
+                    <Label x:Name="lbl_Cru" HorizontalAlignment="Left" Height="49" Margin="2,0,0,0" VerticalAlignment="Top" Width="194" Grid.Column="2" Grid.Row="5"/>
+                    <Label x:Name="lbl_Millesime" HorizontalAlignment="Left" Height="46" VerticalAlignment="Top" Width="196" Grid.Column="2" Grid.Row="7"/>
+                    <Label x:Name="lbl_Contenance" HorizontalAlignment="Left" Height="47" Margin="2,0,0,0" VerticalAlignment="Top" Width="194" Grid.Column="2" Grid.Row="6"/>
 
                     <Button x:Name="BT_Supprimer" HorizontalAlignment="Left" Margin="71,28,0,0" VerticalAlignment="Top" Height="47" Width="56" Grid.Column="2" Grid.Row="12" Grid.RowSpan="2" Background="#FF661141" BorderBrush="#FF661141" Click="BT_Supprimer_Click">
                         <fa:ImageAwesome Icon="TrashOutline" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="30" />
