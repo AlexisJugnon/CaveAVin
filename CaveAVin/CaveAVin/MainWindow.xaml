@@ -62,7 +62,7 @@
         </Grid>
 
 
-        <Grid x:Name="AffichageInterfaceCasier" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,116,1,17" Width="1635" Height="794">
+        <Grid x:Name="AffichageInterfaceCasier" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,116,1,17" Width="1635" Height="794">
 
             <Border x:Name="AfficheDetailBouteille" Visibility="Visible" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Left" Height="659" Margin="933,74,0,0" VerticalAlignment="Top" Width="429" Background="#FFFCF4E3">
                 <Grid x:Name="AffichageInfo" Visibility="Visible">
@@ -211,8 +211,8 @@
             <Button x:Name="BT_Menu4" Content="Rechercher" HorizontalAlignment="Left" Margin="5,201,0,0" VerticalAlignment="Top" Width="146" Background="#FFFCF4E3" BorderBrush="{x:Null}" Height="49" FontSize="20" FontFamily="Californian FB" FontWeight="Bold"/>
         </Grid>
 
-        <Grid x:Name="AffichageRecherche" Visibility="Hidden"  HorizontalAlignment="Left" Height="791" VerticalAlignment="Top" Width="1635" Margin="0,126,0,0">
-            <Grid x:Name="OptionRecherche" Visibility="Hidden" Margin="313,44,288,45">
+        <Grid x:Name="AffichageRecherche" Visibility="Visible"  HorizontalAlignment="Left" Height="791" VerticalAlignment="Top" Width="1635" Margin="0,126,0,0">
+            <Grid x:Name="OptionRecherche" Visibility="Visible" Margin="313,44,288,45">
                 <Label x:Name="lbl_Titre1" Content="Recherche de bouteille" Margin="396,10,395,0" VerticalAlignment="Top" Height="44" FontSize="22"/>
                 <Label x:Name="lbl_Info11" Content="Type :" Margin="315,91,663,0" VerticalAlignment="Top" RenderTransformOrigin="0.539,0.731" FontSize="18"/>
                 <Label x:Name="lbl_Info21" Content="Région :" HorizontalAlignment="Left" Margin="317,185,0,0" VerticalAlignment="Top" FontSize="18"/>
@@ -238,14 +238,14 @@
                     <fa:ImageAwesome Icon="Check" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="45" RenderTransformOrigin="0.5,0.5" />
                 </Button>
             </Grid>
-            <ListView x:Name="listView" HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="712" Margin="174,36,0,0">
+            <ListView x:Name="Res_Recherche_NonBue" Visibility="Hidden" HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="712" Margin="174,36,0,0">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn/>
                     </GridView>
                 </ListView.View>
             </ListView>
-            <ListView x:Name="listView1" HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="712" Margin="174,425,0,0">
+            <ListView x:Name="Res_Recherche_Bue" Visibility="Hidden" HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="712" Margin="174,425,0,0">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn/>

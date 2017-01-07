@@ -378,7 +378,7 @@ namespace CaveAVin
                 var casierDao = new CasierDAO(DAO.BDD.Instance.Connexion);
                 var bouteilleDao = new BouteilleDAO(DAO.BDD.Instance.Connexion);
                 var casier = casierDao.Chercher(nCasierActuel);
-                var bouteille = bouteilleDao.Chercher(posi.X, posi.Y, posi.Casier);
+                var bouteille = bouteilleDao.Chercher(posi.X, posi.Y, posi.Casier,0);
                 AfficherDetailBouteille(bouteille);
 
             }
@@ -1345,6 +1345,8 @@ namespace CaveAVin
             AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
             AffichageRecherche.Visibility = Visibility.Visible;
             OptionRecherche.Visibility = Visibility.Hidden;
+            Res_Recherche_NonBue.Visibility = Visibility.Visible;
+            Res_Recherche_Bue.Visibility = Visibility.Visible;
 
             #endregion
 

@@ -51,7 +51,7 @@ namespace DAO
             return b;
         }
 
-        public Bouteille Chercher(int ligneIndex, int colonneIndex, int casier)
+        public Bouteille Chercher(int ligneIndex, int colonneIndex, int casier, int bue)
         {
             Bouteille b = null;
 
@@ -59,7 +59,7 @@ namespace DAO
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = String.Format("SELECT * FROM Bouteille WHERE Position_X={0} and Position_Y={1} and IdCasier={2}", ligneIndex, colonneIndex, casier);
+                com.CommandText = String.Format("SELECT * FROM Bouteille WHERE Position_X={0} and Position_Y={1} and IdCasier={2} and bue={3}", ligneIndex, colonneIndex, casier, bue);
                 IDataReader reader = com.ExecuteReader();
 
                 if (reader.Read())
