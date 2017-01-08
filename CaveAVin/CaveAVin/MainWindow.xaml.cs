@@ -260,7 +260,10 @@ namespace CaveAVin
                             button[k, j].Background = brush;
                             button[k, j].Click += selectBouteille;
                         }
-
+                        if (j < 10)
+                            button[k, j].Tag = k + ",0" + j;
+                        else
+                            button[k, j].Tag = k + "," + j;
                         button[k, j].Background = brush;
                     }
                 }
@@ -278,9 +281,25 @@ namespace CaveAVin
         /// <param name="e"></param>
         private void selectBouteille(object sender, RoutedEventArgs e)
         {
-            int ligne = Int32.Parse(sender.ToString().Substring(32, 1));
-            int col = Int32.Parse(sender.ToString().Substring(35, 1));
-            Metier.Position posi = new Metier.Position(ligne, col, nCasierActuel);
+            float nb = float.Parse(((Button)sender).Tag.ToString());
+            Console.WriteLine("nb: {0} ,  nb : {1}",nb, ((Button)sender).Tag.ToString());
+            int ligne = (int) nb;
+            Console.WriteLine(ligne);
+            float coln = (nb - ligne) * 100;
+            Console.WriteLine(coln);
+
+            int col = 0;
+
+            if (coln < (int)coln + 0.5)
+            {
+                col = (int)coln;
+            }
+            else
+            {
+                col = (int)coln+1;
+            }
+
+                Metier.Position posi = new Metier.Position(ligne, col, nCasierActuel);
 
             bool existe = false;
             foreach(Metier.Position pos in listeBouteilleAjout)
