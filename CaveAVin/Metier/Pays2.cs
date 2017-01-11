@@ -24,9 +24,9 @@ namespace Metier
             pays.Add(p);
         }
 
-        public void Ajouter(Region r)
+        public void Ajouter(Bouteille b)
         {
-            r.Pays.Ajouter(r);
+            b.Pays.Ajouter(b);
         }
 
         /// <summary>

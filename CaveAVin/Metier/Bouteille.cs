@@ -23,6 +23,7 @@ namespace Metier
         private Type_vinification type_vinification;
         private Appelation appelation;
         private Type type;
+        private Pays pays;
         #endregion
 
         public override string ToString()
@@ -32,7 +33,7 @@ namespace Metier
 
         public Bouteille() { }
 
-        public Bouteille(int id, Boolean bue, string texte, int posX, int posY, Casier cas, Cru cru, Millesime mil, Contenance con, Domaine dom, Region reg, Type_vinification tv, Appelation app, Type type)
+        public Bouteille(int id, Boolean bue, string texte, int posX, int posY, Casier cas, Cru cru, Millesime mil, Contenance con, Domaine dom, Region reg, Type_vinification tv, Appelation app, Type type, Pays pays)
         {
             this.id = id;
             this.bue = bue;
@@ -48,6 +49,7 @@ namespace Metier
             this.type_vinification = tv;
             this.appelation = app;
             this.type = type;
+            this.pays = pays;
 
         }
 
@@ -312,6 +314,29 @@ namespace Metier
                 if (type_vinification != null)
                     id = type_vinification.Id;
                 return id;
+            }
+        }
+
+        public int IdPays
+        {
+            get
+            {
+                int id = 0;
+                if (pays != null)
+                    id = Pays.Id;
+                return id;
+            }
+        }
+
+        public Pays Pays
+        {
+            get
+            {
+                return pays;
+            }
+            set
+            {
+                pays = value;
             }
         }
 

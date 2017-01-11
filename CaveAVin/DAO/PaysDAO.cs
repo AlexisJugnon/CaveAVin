@@ -30,7 +30,7 @@ namespace DAO
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM PAYS WHERE IdPays=" + ID.ToString();
+                com.CommandText = "SELECT * FROM Pays WHERE IdPays=" + ID.ToString();
                 IDataReader reader = com.ExecuteReader();
 
                 if (reader.Read())

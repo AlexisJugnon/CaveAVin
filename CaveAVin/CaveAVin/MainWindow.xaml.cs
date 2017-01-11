@@ -132,7 +132,10 @@ namespace CaveAVin
         /// </summary>
         private void initGridCasier()
         {
-            //nbCasierTotal = req.SelInt("Select Count(IdCasier) FROM Casier");
+
+            lancement sf = new lancement();
+            sf.Show();
+
             DAO.CasierDAO daoCasier = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
 
             var casiers = daoCasier.Lister().Lister();
@@ -269,6 +272,8 @@ namespace CaveAVin
                 }
                 listeBouton.Add(button);
             }
+            sf.Close();
+            sf = null;
 
         }
 
@@ -498,7 +503,7 @@ namespace CaveAVin
                 lbl_Cru.Content = bouteille.Cru?.NomCru;
                 lbl_Domaine.Content = bouteille.Domaine?.NomDomaine;
                 lbl_Millesime.Content = bouteille.Millesime?.NomMillesime;
-                lbl_Pays.Content = bouteille.Region?.Pays?.NomPays;
+                lbl_Pays.Content = bouteille.Pays?.NomPays;
                 lbl_Region.Content = bouteille.Region?.NomRegion;
                 lbl_Vinification.Content = bouteille.Type_vinification?.NomVinif;
                 DisplayFicheDetailBouteille(true);
@@ -784,7 +789,7 @@ namespace CaveAVin
                 r = daoReg.Chercher(cb_Region_Ajout.Text);
                 if (r == null)
                 {
-                    daoReg.Créer(nomRegion, p.Id);
+                    daoReg.Créer(nomRegion);
                     r = daoReg.Chercher(cb_Region_Ajout.Text);
                 }
             }
@@ -872,7 +877,7 @@ namespace CaveAVin
             foreach (Metier.Position pos in listeBouteilleAjout)
             {
                 cas = daoCas.Chercher(pos.Casier);
-                    Metier.Bouteille b = new Metier.Bouteille(0, false, "", pos.X, pos.Y, cas, cru, m, c, d, r, tv, a, t);
+                    Metier.Bouteille b = new Metier.Bouteille(0, false, "", pos.X, pos.Y, cas, cru, m, c, d, r, tv, a, t,p);
                     daoBou.Créer(b);
 
                 ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Click -= selectBouteille;

@@ -95,6 +95,8 @@ namespace DAO
                 if (b.IdType_vinification != 0) { IdType_vinification = b.IdType_vinification.ToString(); }
                 String IdAppelation = null;
                 if (b.IdAppelation != 0) { IdAppelation = b.IdAppelation.ToString(); }
+                String IdPays = null;
+                if (b.IdPays != 0) { IdPays = b.IdPays.ToString(); }
 
 
                 IDbCommand com = con.CreateCommand();
@@ -106,6 +108,7 @@ namespace DAO
                 if (b.IdMillesime != 0) com.CommandText += ", `IdMillesime`";
                 if (b.IdType_vinification != 0) com.CommandText += ", `IdVinif`";
                 if (b.IdAppelation != 0) com.CommandText += ", `IdAppelation`";
+                if (b.IdPays != 0) com.CommandText += ", `IdPays`";
                 com.CommandText += ") VALUES ('" + b.Texte + "','" + b.Bue + "','" + b.PosX + "','" + b.PosY + "','" + b.IdCasier + "','" + b.IdType;
                 if (b.IdRegion != 0) com.CommandText += "','" + IdRegion;
                 if (b.IdDomaine != 0) com.CommandText += "','" + IdDomaine;
@@ -114,6 +117,7 @@ namespace DAO
                 if (b.IdMillesime != 0) com.CommandText += "','" + IdMillesime;
                 if (b.IdType_vinification != 0) com.CommandText += "','" + IdType_vinification;
                 if (b.IdAppelation != 0) com.CommandText += "','" + IdAppelation;
+                if (b.IdPays != 0) com.CommandText += "','" + IdPays;
                 com.CommandText += "');";
                 com.ExecuteNonQuery();
                 com.CommandText = "SELECT LAST_INSERT_ID() FROM Bouteille;";
@@ -347,6 +351,28 @@ namespace DAO
             return liste;
         }
 
+        public Bouteilles Lister(Pays p)
+        {
+            Bouteilles liste = new Bouteilles();
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Bouteille WHERE IdCasier=" + p.Id.ToString();
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Bouteille b = reader2Bouteille(reader);
+                    liste.Ajouter(b);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return liste;
+        }
+
         public void Relire(Bouteille b)
         {
             con.Open();
@@ -460,8 +486,10 @@ namespace DAO
             int idCru = 0;
             int idMillesime = 0;
             int idType_vinification = 0;
+            int idPays = 0;
             int idAppelation = 0;
             try { idRegion = (Convert.ToInt32(reader["IdRegion"])); } catch { }
+            try { idPays = (Convert.ToInt32(reader["idPays"])); } catch { }
             try { idDomaine = (Convert.ToInt32(reader["IdDomaine"])); } catch { }
             try { idContenance = (Convert.ToInt32(reader["IdContenance"])); } catch { }
             try { idCru = (Convert.ToInt32(reader["IdCru"])); } catch { }
@@ -482,6 +510,7 @@ namespace DAO
             var millesimeDao = new MillesimeDAO(BDD.Instance.Connexion);
             var vinificationDao = new Type_vinificationDAO(BDD.Instance.Connexion);
             var appelationDao = new AppelationDAO(BDD.Instance.Connexion);
+            var paysDao = new PaysDAO(BDD.Instance.Connexion);
 
             //Population de la bouteille avec les objets liés
             bouteille.Casier = casierDao.Chercher(idCasier);
@@ -491,9 +520,9 @@ namespace DAO
             bouteille.Contenance = contenanceDao.Chercher(idContenance);
             bouteille.Cru = cruDao.Chercher(idCru);
             bouteille.Millesime = millesimeDao.Chercher(idMillesime);
-#warning Chercher sort en erreur. La table Type_vinification n'existe pas
-            //bouteille.Type_vinification = vinificationDao.Chercher(idType_vinification);
+            bouteille.Type_vinification = vinificationDao.Chercher(idType_vinification);
             bouteille.Appelation = appelationDao.Chercher(idAppelation);
+            bouteille.Pays = paysDao.Chercher(idPays);
             return bouteille;
         }
 

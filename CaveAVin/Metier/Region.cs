@@ -11,7 +11,6 @@ namespace Metier
         #region attributs
         private int id;
         private string nomRegion;
-        private Pays pays;
         private List<Bouteille> bouteilles = new List<Bouteille>();
         #endregion
 
@@ -36,29 +35,6 @@ namespace Metier
             set
             {
                 nomRegion = value;
-            }
-        }
-        public Pays Pays
-        {
-            get
-            {
-                return pays;
-            }
-            set
-            {
-                pays = value;
-            }
-            
-        }
-
-        public int IdPays
-        {
-            get
-            {
-                int id = 0;
-                if (pays != null)
-                    id = pays.Id;
-                return id;
             }
         }
         #endregion

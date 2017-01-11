@@ -11,52 +11,60 @@ namespace Metier
         #region attributs
         private int id;
         private string nomPays;
-        private List<Region> regions = new List<Region>();
+        private List<Bouteille> bouteilles = new List<Bouteille>();
         #endregion
 
         #region opérations
         /// <summary>
-        /// Ajoute une nouvelle région à la liste de région
+        /// Créer un pays
         /// </summary>
-        /// <param name="r">Région à ajouter</param>
-        public void Ajouter(Region r)
+        /// <param name="n">(facultatif) le nom du cru</param>
+        public Pays(string n = "")
         {
-            regions.Add(r);
+            nomPays = n;
         }
-
-
         /// <summary>
-        /// Ajoute un pays à une liste de region
+        /// Donne le pays au bouteille
         /// </summary>
-        /// <param name="r">Région à attribuer le pays</param>
-        public void Ajouter(Regions r)
+        /// <param name="b">liste de bouteille ayant le même pays</param>
+        public void Ajouter(Bouteilles b)
         {
-            foreach (Region cr in r.Lister())
+            foreach (Bouteille bou in b.Lister())
             {
-                cr.Pays = this;
-                Ajouter(cr);
+                bou.Pays = this;
+                Ajouter(bou);
             }
         }
 
         /// <summary>
-        /// Supprime  une région de la liste des régions
+        /// ajoute les bouteille ou le pays est modifié
         /// </summary>
-        /// <param name="r">Région à supprimer</param>
-        
-        public void Supprimer(Region r)
+        /// <param name="b">bouteille ou on change le pays</param>
+        public void Ajouter(Bouteille b)
         {
-            regions.Remove(r);
+            bouteilles.Add(b);
+
         }
+
 
         /// <summary>
-        /// retourne une liste de région
+        /// supprime le pays d'une bouteille
         /// </summary>
-        /// <returns>liste de région</returns>
-        public Region[] Lister()
+        /// <param name="b"> la bouteille où on doit retirer le pays</param>
+        public void Supprimer(Bouteille b)
         {
-            return regions.ToArray() ;
+            bouteilles.Remove(b);
         }
 
+
+        /// <summary>
+        /// Fournis la liste de bouteille possédée
+        /// </summary>
+        /// <returns></returns>
+        public Bouteille[] Lister()
+        {
+            return bouteilles.ToArray();
+        }
         #endregion
 
         #region propriétés

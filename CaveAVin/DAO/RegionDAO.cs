@@ -93,7 +93,7 @@ namespace DAO
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "INSERT INTO Region(NomRegion, IdPays) VALUES('" + p.NomRegion + "', "+ p.Pays.Id +");";
+                com.CommandText = "INSERT INTO Region(NomRegion) VALUES('" + p.NomRegion + ");";
                 com.ExecuteNonQuery();
             }
             finally
@@ -106,13 +106,13 @@ namespace DAO
         /// Créé une nouvelle région dans la base de données
         /// </summary>
         /// <param name="p">Région à créér</param>
-        public void Créer(string nom, int idPays)
+        public void Créer(string nom)
         {
             con.Open();
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "INSERT INTO Region(NomRegion, IdPays) VALUES('" + nom + "', " + idPays + ");";
+                com.CommandText = "INSERT INTO Region(NomRegion) VALUES('" + nom +"');";
                 com.ExecuteNonQuery();
             }
             finally
@@ -139,28 +139,6 @@ namespace DAO
                 {
                     Region r = reader2Region(reader);
                     liste.Ajouter(r);
-                }
-            }
-            finally
-            {
-                con.Close();
-            }
-            return liste;
-        }
-
-        public Regions Lister(Pays c)
-        {
-            Regions liste = new Regions();
-            con.Open();
-            try
-            {
-                IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Regions WHERE IdPays=" + c.Id.ToString();
-                IDataReader reader = com.ExecuteReader();
-                while (reader.Read())
-                {
-                    Region cd = reader2Region(reader);
-                    liste.Ajouter(cd);
                 }
             }
             finally
@@ -203,7 +181,7 @@ namespace DAO
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "UPDATE Region SET NomRegion='" + p.NomRegion + "', IdPays = " + p.Pays.Id + " WHERE IdRegion=" + p.Id.ToString();
+                com.CommandText = "UPDATE Region SET NomRegion='" + p.NomRegion + " WHERE IdRegion=" + p.Id.ToString();
                 com.ExecuteNonQuery();
             }
             finally
@@ -241,8 +219,6 @@ namespace DAO
             Region r = new Region();
             r.Id = Convert.ToInt32(reader["IdRegion"]);
             r.NomRegion = reader["NomRegion"].ToString();
-#warning Null ref : le pays n'est pas initialisé.
-            //r.Pays.Id = Convert.ToInt32(reader["IdPays"]);
             return r;
         }
     }

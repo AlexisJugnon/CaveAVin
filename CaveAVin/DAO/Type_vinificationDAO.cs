@@ -35,8 +35,8 @@ namespace DAO
             {
                 con.Open();
                 IDbCommand com = con.CreateCommand();
-                com.CommandText ="SELECT idVinif FROM Type_Vinification WHERE IdVinif = " + ID.ToString();
-                IDataReader reader = com.ExecuteReader();
+                com.CommandText ="SELECT * FROM Type_vinification WHERE IdVinif = " + ID;
+                 IDataReader reader = com.ExecuteReader();
                 if(reader.Read())
                 {
                     t = reader2Type_vinif(reader);
@@ -156,7 +156,7 @@ namespace DAO
                 try
                 {
                     IDbCommand com = con.CreateCommand();
-                    com.CommandText = "SELECT * FROM Type_vignification WHERE IdVinif=" + p.Id.ToString();
+                    com.CommandText = "SELECT * FROM Type_vinification WHERE IdVinif=" + p.Id.ToString();
                     IDataReader reader = com.ExecuteReader();
                     if (reader.Read())
                     {
@@ -181,7 +181,7 @@ namespace DAO
                 try
                 {
                     IDbCommand com = con.CreateCommand();
-                    com.CommandText = "UPDATE Type_vignification SET NomVinif='" + p.NomVinif + "' WHERE IdVinif=" + p.Id.ToString();
+                    com.CommandText = "UPDATE Type_vinification SET NomVinif='" + p.NomVinif + "' WHERE IdVinif=" + p.Id.ToString();
                     com.ExecuteNonQuery();
                 }
                 finally
@@ -202,7 +202,7 @@ namespace DAO
                 try
                 {
                     IDbCommand com = con.CreateCommand();
-                    com.CommandText = "DELETE FROM Type_vignification WHERE IdVinif=" + p.Id.ToString();
+                    com.CommandText = "DELETE FROM Type_vinification WHERE IdVinif=" + p.Id.ToString();
                     com.ExecuteNonQuery();
                 }
                 finally
