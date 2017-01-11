@@ -3,18 +3,9 @@
 
 Fonction recherche
 
---ordre des casiers pouvant etre choisi
-	ou liste déroulante de casier pour y acceder
-
 modifier bouteille
 
 Déplacer bouteille
-
-Portage sur windowPhone
-
-optimiser ajout casier en créant liste ou tableau
-
---ajouter gérer 2 ou 4 chiffres années
 
 +ajout commentaire plus tard
 
@@ -23,3 +14,5 @@ doc création et hébergement bdd
 ajouter suppression casier
 
 ajouter modification casier
+
+Portage sur windowPhone

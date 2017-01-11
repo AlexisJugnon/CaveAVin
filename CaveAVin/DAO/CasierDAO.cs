@@ -57,22 +57,15 @@ namespace DAO
             {
                 IDbCommand com = con.CreateCommand();
 
-                com.CommandText = "SELECT Max(IdCasier), COUNT(IdCasier) FROM Casier;";
+                com.CommandText = "SELECT Casier.IdCasier+1 FROM Casier WHERE (Casier.IdCasier + 1) NOT IN (SELECT Casier.IdCasier FROM Casier) ORDER BY IdCasier LIMIT 1";
 
                 IDataReader reader = com.ExecuteReader();
                 int id = 0;
-                int nbr = 0;
                 try
                 {
                     if (reader.Read())
                     {
                         id = Convert.ToInt32(reader[0]);
-                        nbr = Convert.ToInt32(reader[1]);
-                    }
-
-                    if(nbr == 0)
-                    {
-                        id = 0;
                     }
 
                 }
@@ -80,7 +73,7 @@ namespace DAO
                 c.Id = id;
                 con.Close();
                 con.Open();
-                com.CommandText = "INSERT INTO Casier(IdCasier,NomCasier, Largeur_X, Largeur_Y) VALUES('" + (id+1) + "', '" +c.Nom+ "', '" + c.LargeurX +"', '" + c.LargeurY + "')";
+                com.CommandText = "INSERT INTO Casier(IdCasier,NomCasier, Largeur_X, Largeur_Y) VALUES('" + (id) + "', '" +c.Nom+ "', '" + c.LargeurX +"', '" + c.LargeurY + "')";
                 com.ExecuteNonQuery();
 
             }
