@@ -38,6 +38,8 @@ namespace CaveAVin
 
         private int nbCasierTotal = 0;
 
+        private int nbCasierTotalActuel = 0;
+
         private List<Button[,]> listeBouton = new List<Button[,]>();
 
         private Button[,] button;
@@ -47,6 +49,10 @@ namespace CaveAVin
         private int l_ligne;
 
         private int l_col;
+
+        private lancement sf;
+
+        private bool lancer = false;
 
         private int ba_ligne = 0, ba_col = 0;
 
@@ -132,18 +138,19 @@ namespace CaveAVin
         /// </summary>
         private void initGridCasier()
         {
-
-            lancement sf = new lancement();
-            sf.Show();
-
             DAO.CasierDAO daoCasier = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
 
             var casiers = daoCasier.Lister().Lister();
 
             nbCasierTotal = casiers.Count();
 
-            gestionCasier = new Grid[nbCasierTotal+1];
+            if (lancer == false)
+            {
+                sf = new lancement();
+                sf.Show();
 
+                gestionCasier = new Grid[nbCasierTotal + 100];
+            }
             int nombreColonne, nombreLigne;
             int HeightBoutton, WidthBoutton;
 
@@ -152,9 +159,9 @@ namespace CaveAVin
 
             ColumnDefinition[] colonne;
             RowDefinition[] ligne;
+            
 
-
-            for (int i = 0; i < nbCasierTotal; i++)
+            for (int i = nbCasierTotalActuel; i < nbCasierTotal; i++)
             {
                 var casier = casiers[i];
                 gestionCasier[i] = new Grid();
@@ -272,9 +279,13 @@ namespace CaveAVin
                 }
                 listeBouton.Add(button);
             }
-            sf.Close();
-            sf = null;
-
+            nbCasierTotalActuel = nbCasierTotal;
+            if (lancer == false)
+            {
+                sf.Close();
+                sf = null;
+                lancer = true;
+            }
         }
 
 
