@@ -9,8 +9,8 @@ Déplacer bouteille
 
 doc création et hébergement bdd
 
-ajouter suppression casier
+suppression casier
 
-ajouter modification casier
+modification casier
 
 Portage sur windowPhone

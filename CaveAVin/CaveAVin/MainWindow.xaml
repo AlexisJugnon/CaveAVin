@@ -64,7 +64,7 @@
 
         <Grid x:Name="AffichageInterfaceCasier" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,116,1,17" Width="1635" Height="794">
 
-            <Border x:Name="AfficheDetailBouteille" Visibility="Visible" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Left" Height="659" Margin="933,74,0,0" VerticalAlignment="Top" Width="429" Background="#FFFCF4E3">
+            <Border x:Name="AfficheDetailBouteille" Visibility="Hidden" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Left" Height="659" Margin="933,74,0,0" VerticalAlignment="Top" Width="429" Background="#FFFCF4E3">
                 <Grid x:Name="AffichageInfo" Visibility="Visible">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="59*"/>
@@ -98,16 +98,16 @@
                     <Label Content="Millésime" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Height="26" Width="60"/>
                     <Label Content="Contenance" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Height="26" Width="73"/>
 
-                    
-                    <TextBox x:Name="lbl_Categorie" Grid.Column="2" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Background="#FFFCF4E3" BorderBrush="#FF0E0D0D"/>
-                    <TextBox x:Name="lbl_Pays" HorizontalAlignment="Left" Margin="10,0,0,13" VerticalAlignment="Bottom" Width="186" Grid.Column="2" Grid.Row="1" Height="26" Background="#FFFCF4E3" BorderBrush="#FF0E0D0D"/>
-                    <TextBox x:Name="lbl_Region" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="186" Grid.Column="2" Grid.Row="2" Height="26" Background="#FFFCF4E3" BorderBrush="#FF0E0D0D"/>
-                    <TextBox x:Name="lbl_Appelation" HorizontalAlignment="Left" VerticalAlignment="Top" Width="186" Grid.Column="2" Grid.Row="3" Height="26" Margin="10,9,0,0" Background="#FFFCF4E3" BorderBrush="#FF0E0D0D"/>
-                    <TextBox x:Name="lbl_Domaine" HorizontalAlignment="Left" VerticalAlignment="Top" Width="186" Grid.Column="2" Grid.Row="4" Height="25" Margin="10,10,0,0" Background="#FFFCF4E3" BorderBrush="#FF0E0D0D"/>
-                    <TextBox x:Name="lbl_Cru" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="186" Grid.Column="2" Grid.Row="5" Background="#FFFCF4E3" BorderBrush="#FF0E0D0D"/>
-                    <TextBox x:Name="lbl_Contenance" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="186" Grid.Column="2" Grid.Row="6" Background="#FFFCF4E3" BorderBrush="#FF0E0D0D"/>
-                    <TextBox x:Name="lbl_Millesime" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="186" Grid.Column="2" Grid.Row="7" Margin="10,10,0,0" Background="#FFFCF4E3" BorderBrush="#FF0E0D0D"/>
-                    <TextBox x:Name="lbl_Vinification" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="186" Grid.Column="2" Grid.Row="8" Margin="10,10,0,0" Background="#FFFCF4E3" BorderBrush="#FF0E0D0D"/>
+
+                    <ComboBox x:Name="lbl_Categorie" Grid.Column="2" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="186" Background="#FFFCF4E3" BorderBrush="#FF0E0D0D" IsEditable="True"/>
+                    <ComboBox x:Name="lbl_Pays" HorizontalAlignment="Left" Margin="10,0,0,13" VerticalAlignment="Bottom" Width="186" Grid.Column="2" Grid.Row="1" Height="26" Background="#FFFCF4E3" BorderBrush="#FF0E0D0D" IsEditable="True"/>
+                    <ComboBox x:Name="lbl_Region" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="186" Grid.Column="2" Grid.Row="2" Height="26" Background="#FFFCF4E3" BorderBrush="#FF0E0D0D" IsEditable="True"/>
+                    <ComboBox x:Name="lbl_Appelation" HorizontalAlignment="Left" VerticalAlignment="Top" Width="186" Grid.Column="2" Grid.Row="3" Height="26" Margin="10,9,0,0" Background="#FFFCF4E3" BorderBrush="#FF0E0D0D" IsEditable="True"/>
+                    <ComboBox x:Name="lbl_Domaine" HorizontalAlignment="Left" VerticalAlignment="Top" Width="186" Grid.Column="2" Grid.Row="4" Height="25" Margin="10,10,0,0" Background="#FFFCF4E3" BorderBrush="#FF0E0D0D" IsEditable="True"/>
+                    <ComboBox x:Name="lbl_Cru" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="186" Grid.Column="2" Grid.Row="5" Background="Black" BorderBrush="#FF0E0D0D" IsEditable="True"/>
+                    <TextBox x:Name="lbl_Contenance" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="186" Grid.Column="2" Grid.Row="6" Background="White" BorderBrush="#FF0E0D0D"/>
+                    <TextBox x:Name="lbl_Millesime" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="186" Grid.Column="2" Grid.Row="7" Margin="10,10,0,0" Background="White" BorderBrush="#FF0E0D0D"/>
+                    <ComboBox x:Name="lbl_Vinification" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="186" Grid.Column="2" Grid.Row="8" Margin="10,10,0,0" Background="#FFFCF4E3" BorderBrush="#FF0E0D0D" IsEditable="True"/>
 
                     <Button x:Name="BT_Supprimer" HorizontalAlignment="Left" Margin="71,28,0,0" VerticalAlignment="Top" Height="47" Width="56" Grid.Column="2" Grid.Row="12" Grid.RowSpan="2" Background="#FF661141" BorderBrush="#FF661141" Click="BT_Supprimer_Click">
                         <fa:ImageAwesome Icon="TrashOutline" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="30" />
@@ -156,7 +156,7 @@
         </Grid>
 
 
-        <Grid x:Name="AffichageFicheAjoutBouteille" Visibility="Hidden" HorizontalAlignment="Left" Height="794" VerticalAlignment="Top" Width="1635" Margin="0,125,0,0">
+        <Grid x:Name="AffichageFicheAjoutBouteille" Visibility="Visible" HorizontalAlignment="Left" Height="794" VerticalAlignment="Top" Width="1635" Margin="0,125,0,0">
 
             <Grid Margin="934,76,271,60">
 
@@ -188,6 +188,9 @@
                             <fa:ImageAwesome Icon="Check" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="45" />
                         </Button>
 
+                        <Button x:Name="btnFermerFicheAjout" HorizontalAlignment="Left" Height="60" Margin="281,580,0,0" VerticalAlignment="Top" Width="60" Background="#FF661141" BorderBrush="#FF661141" Click="btnFermerFicheAjout_Click" >
+                            <fa:ImageAwesome Icon="Close" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="30" />
+                        </Button>
                     </Grid>
 
                 </Border>

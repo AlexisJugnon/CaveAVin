@@ -50,9 +50,19 @@ namespace CaveAVin
 
         private int l_col;
 
+        private int l_cas;
+
+        private int l_ligne_dep;
+
+        private int l_col_dep;
+
+        private int l_cas_dep;
+
         private lancement sf;
 
         private bool lancer = false;
+
+        private bool deplacer = false;
 
         private int ba_ligne = 0, ba_col = 0;
 
@@ -289,14 +299,11 @@ namespace CaveAVin
         private void SelectBouteille(object sender, RoutedEventArgs e)
         {
             float nb = float.Parse(((Button)sender).Tag.ToString());
-            Console.WriteLine("nb: {0} ,  nb : {1}",nb, ((Button)sender).Tag.ToString());
+
             int ligne = (int) nb;
-            Console.WriteLine(ligne);
+
             float coln = (nb - ligne) * 100;
-            Console.WriteLine(coln);
-
             int col = 0;
-
             if (coln < (int)coln + 0.5)
             {
                 col = (int)coln;
@@ -306,29 +313,40 @@ namespace CaveAVin
                 col = (int)coln+1;
             }
 
-                Metier.Position posi = new Metier.Position(ligne, col, nCasierActuel);
 
-            bool existe = false;
-            foreach(Metier.Position pos in listeBouteilleAjout)
+            if (deplacer)
             {
-                if (pos.X == ligne && pos.Y==col && pos.Casier== nCasierActuel)
-                {
-                    existe = true;
-                    listeBouteilleAjout.Remove(pos);
-                    break;
-                }
-            }
-            if (existe)
-            {            
-                ((Button)listeBouton[nCasierActuel].GetValue(ligne, col)).Opacity = 1.0;
+                ((Button)listeBouton[nCasierActuel].GetValue(ligne, col)).Opacity = 0.5;
+                l_ligne_dep = ligne;
+                l_col_dep = col;
+                l_cas_dep = nCasierActuel;
 
             }
             else
             {
-                posi.Casier = nCasierActuel;
-                listeBouteilleAjout.Add(posi);
-                ((Button)listeBouton[nCasierActuel].GetValue(ligne, col)).Opacity = 0.5;
+                Metier.Position posi = new Metier.Position(ligne, col, nCasierActuel);
 
+                bool existe = false;
+                foreach (Metier.Position pos in listeBouteilleAjout)
+                {
+                    if (pos.X == ligne && pos.Y == col && pos.Casier == nCasierActuel)
+                    {
+                        existe = true;
+                        listeBouteilleAjout.Remove(pos);
+                        break;
+                    }
+                }
+                if (existe)
+                {
+                    ((Button)listeBouton[nCasierActuel].GetValue(ligne, col)).Opacity = 1.0;
+
+                }
+                else
+                {
+                    posi.Casier = nCasierActuel;
+                    listeBouteilleAjout.Add(posi);
+                    ((Button)listeBouton[nCasierActuel].GetValue(ligne, col)).Opacity = 0.5;
+                }
             }
         }
 
@@ -497,7 +515,64 @@ namespace CaveAVin
         /// <param name="bouteille"></param>
         private void AfficherDetailBouteille(Metier.Bouteille bouteille)
         {
-           if (bouteille != null)
+            lbl_Categorie.Items.Clear();
+            lbl_Pays.Items.Clear();
+            lbl_Region.Items.Clear();
+            lbl_Domaine.Items.Clear();
+            lbl_Cru.Items.Clear();
+            lbl_Vinification.Items.Clear();
+            lbl_Appelation.Items.Clear();
+
+            DAO.TypeDAO daoTyp = new DAO.TypeDAO(DAO.BDD.Instance.Connexion);
+            Metier.Types listeTyp = daoTyp.Lister();
+            foreach (Metier.Type t in listeTyp.Lister())
+            {
+                lbl_Categorie.Items.Add(t.NomType);
+            }
+
+            DAO.PaysDAO daoPays = new DAO.PaysDAO(DAO.BDD.Instance.Connexion);
+            Metier.Pays2 listePays = daoPays.Lister();
+            foreach (Metier.Pays p in listePays.Lister())
+            {
+                lbl_Pays.Items.Add(p.NomPays);
+            }
+
+            DAO.RegionDAO daoReg = new DAO.RegionDAO(DAO.BDD.Instance.Connexion);
+            Metier.Regions listeReg = daoReg.Lister();
+            foreach (Metier.Region r in listeReg.Lister())
+            {
+                lbl_Region.Items.Add(r.NomRegion);
+            }
+
+            DAO.DomaineDAO daoDom = new DAO.DomaineDAO(DAO.BDD.Instance.Connexion);
+            Metier.Domaines listeDom = daoDom.Lister();
+            foreach (Metier.Domaine d in listeDom.Lister())
+            {
+                lbl_Domaine.Items.Add(d.NomDomaine);
+            }
+
+            DAO.CruDAO daoCru = new DAO.CruDAO(DAO.BDD.Instance.Connexion);
+            Metier.Crus listeCru = daoCru.Lister();
+            foreach (Metier.Cru c in listeCru.Lister())
+            {
+                lbl_Cru.Items.Add(c.NomCru);
+            }
+
+            DAO.Type_vinificationDAO daoVinif = new DAO.Type_vinificationDAO(DAO.BDD.Instance.Connexion);
+            Metier.Type_vinifications listeVinif = daoVinif.Lister();
+            foreach (Metier.Type_vinification v in listeVinif.Lister())
+            {
+                lbl_Vinification.Items.Add(v.NomVinif);
+            }
+
+            DAO.AppelationDAO daoApp = new DAO.AppelationDAO(DAO.BDD.Instance.Connexion);
+            Metier.Appelations listeApp = daoApp.Lister();
+            foreach (Metier.Appelation a in listeApp.Lister())
+            {
+                lbl_Appelation.Items.Add(a.NomAppelation);
+            }
+
+            if (bouteille != null)
             {
                 lbl_Appelation.Text = bouteille.Appelation?.NomAppelation;
                 lbl_Categorie.Text = bouteille.Type?.NomType;
@@ -1424,7 +1499,7 @@ namespace CaveAVin
                 }
             }
 
-            if (lbl_Contenance.Text != "")
+            if ((lbl_Contenance.Text != "") && (lbl_Contenance.Text != null))
             {
                 DAO.ContenanceDAO daoCon = new DAO.ContenanceDAO(DAO.BDD.Instance.Connexion);
                 int nomCon = Int32.Parse(lbl_Contenance.Text);
@@ -1436,7 +1511,7 @@ namespace CaveAVin
                 }
             }
 
-            if (lbl_Millesime.Text != "")
+            if ((lbl_Millesime.Text != "")&& (lbl_Millesime.Text != null))
             {
                 DAO.MillesimeDAO daoMil = new DAO.MillesimeDAO(DAO.BDD.Instance.Connexion);
                 int nomMil = Int32.Parse(lbl_Millesime.Text);
@@ -1487,7 +1562,46 @@ namespace CaveAVin
 
         private void btnDéplacerFicheDetail_Click(object sender, RoutedEventArgs e)
         {
+            if(deplacer == false)
+            {
+                deplacer = true;
+            }
+            else
+            {
+                var brush = new ImageBrush();
+                brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/CaseVide.png", UriKind.Relative));
+                ((Button)listeBouton[l_cas].GetValue(l_ligne, l_col)).Background = brush;
+                ((Button)listeBouton[l_cas].GetValue(l_ligne, l_col)).Click -= SelectionBouteille;
+                ((Button)listeBouton[l_cas].GetValue(l_ligne, l_col)).Click += SelectBouteille;
+                ((Button)listeBouton[l_cas].GetValue(l_ligne, l_col)).Opacity = 1.0;
 
+                var brush2 = new ImageBrush();
+                brush2.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/BlancCasier.png", UriKind.Relative));
+                ((Button)listeBouton[l_cas_dep].GetValue(l_ligne_dep, l_col_dep)).Background = brush2;
+                ((Button)listeBouton[l_cas_dep].GetValue(l_ligne_dep, l_col_dep)).Click += SelectionBouteille;
+                ((Button)listeBouton[l_cas_dep].GetValue(l_ligne_dep, l_col_dep)).Click -= SelectBouteille;
+                ((Button)listeBouton[l_cas_dep].GetValue(l_ligne_dep, l_col_dep)).Opacity = 0.5;
+
+                DAO.BouteilleDAO daoBout = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
+                daoBout.Deplacer(l_ligne,l_col,l_cas,l_ligne_dep,l_col_dep,l_cas_dep);
+                l_ligne = l_ligne_dep;
+                l_col = l_col_dep;
+                l_cas = l_cas_dep;
+                deplacer = false;
+            }
+        }
+
+        private void btnFermerFicheDetail_Click(object sender, RoutedEventArgs e)
+        {
+            ReDecaler();
+            AfficheDetailBouteille.Visibility = Visibility.Hidden;
+        }
+
+        private void btnFermerFicheAjout_Click(object sender, RoutedEventArgs e)
+        {
+            ReDecaler();
+            AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
+            ((Button)listeBouton[l_cas].GetValue(l_ligne, l_col)).Opacity = 1.0;
         }
 
 

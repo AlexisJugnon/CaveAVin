@@ -34,8 +34,6 @@ namespace Metier
             }
             set
             {
-                if (value == "")
-                    throw new Exception("Domaine vide");
                 nomDomaine = value;
             }
         }

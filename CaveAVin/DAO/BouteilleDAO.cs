@@ -169,6 +169,21 @@ namespace DAO
                     
         }
 
+        public void Deplacer(int ligne_act, int col_act, int cas_act, int ligne_pro, int col_pro, int cas_pro)
+        {
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = String.Format("UPDATE `Bouteille` SET `Position_X`={0},`Position_Y`={1},`IdCasier`={2} WHERE Position_X = {3} AND Position_Y = {4} AND IdCasier={5};", ligne_pro, col_pro, cas_pro, ligne_act, col_act, cas_act);
+                com.ExecuteNonQuery();
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
 
         public Bouteilles Lister()
         {
