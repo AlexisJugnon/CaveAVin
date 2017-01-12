@@ -131,6 +131,45 @@ namespace DAO
             }
         }
 
+        public void Modifier(Bouteille b)
+        {
+            con.Open();
+
+            try
+            {
+                String IdType = "NULL";
+                if (b.IdType != 0) { IdType = b.IdType.ToString(); }
+                String IdRegion = "NULL";
+                if (b.IdRegion != 0) { IdRegion = b.IdRegion.ToString(); }
+                String IdDomaine = "NULL";
+                if (b.IdDomaine != 0) { IdDomaine = b.IdDomaine.ToString(); }
+                String IdContenance = "NULL";
+                if (b.IdContenance != 0) { IdContenance = b.IdContenance.ToString(); }
+                String IdCru = "NULL";
+                if (b.IdCru != 0) { IdCru = b.IdCru.ToString(); }
+                String IdMillesime = "NULL";
+                if (b.IdMillesime != 0) { IdMillesime = b.IdMillesime.ToString(); }
+                String IdType_vinification = "NULL";
+                if (b.IdType_vinification != 0) { IdType_vinification = b.IdType_vinification.ToString(); }
+                String IdAppelation = "NULL";
+                if (b.IdAppelation != 0) { IdAppelation = b.IdAppelation.ToString(); }
+                String IdPays = "NULL";
+                if (b.IdPays != 0) { IdPays = b.IdPays.ToString(); }
+
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = String.Format("UPDATE `Bouteille` SET `IdType`={0},`IdRegion`={1},`idPays`={2},`IdDomaine`={3},`IdContenance`={4},`IdCru`={5},`IdMillesime`={6},`IdVinif`={7},`IdAppelation`={8} WHERE Position_X = {9} AND Position_Y = {10} AND IdCasier={11};", IdType, IdRegion, IdPays, IdDomaine, IdContenance, IdCru, IdMillesime, IdType_vinification, IdAppelation, b.PosX, b.PosY, b.IdCasier);
+                com.ExecuteNonQuery();
+
+            }
+            finally
+            {
+                con.Close();
+            }
+
+                    
+        }
+
+
         public Bouteilles Lister()
         {
             Bouteilles liste = new Bouteilles();

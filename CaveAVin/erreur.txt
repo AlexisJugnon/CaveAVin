@@ -3,8 +3,6 @@
 
 Fonction recherche
 
-modifier bouteille
-
 Déplacer bouteille
 
 +ajout commentaire plus tard
