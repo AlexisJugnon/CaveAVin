@@ -9,119 +9,104 @@
 		
 		Title="WineFinder" Height="1000" Width="1000" ResizeMode="CanResize" Icon="Images/logoReduit.png" WindowStartupLocation="CenterOwner">
 
-    <Grid x:Name="AffichagePrincipal" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
+    <Grid x:Name="AffichagePrincipal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="90"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
 
-        <Rectangle Fill="#FF661141" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Grid.Row="0"/>
+        <Rectangle Fill="#FF661141" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0"/>
 
-        <Button x:Name="btnLogo" HorizontalAlignment="Left" VerticalAlignment="Center" Height="115" Width="111" Margin="174,0,0,0" Grid.Row="0" Background="#FF661141" BorderBrush="#FF661141" Click="btnLogo_Click">
-            <Image x:Name="logo" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Source=".\Images\logoBouteille.png" />
+        <Button x:Name="btnLogo" HorizontalAlignment="Left" VerticalAlignment="Center" Height="115" Width="111" Margin="125,0,0,0" Grid.Row="0" Background="#FF661141" BorderBrush="#FF661141" Click="btnLogo_Click">
+            <Image x:Name="logo" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Source=".\Images\logoBouteille.png" RenderTransformOrigin="0.28,0.471" />
         </Button>
 
 
         <Button x:Name="BT_rechercher" HorizontalAlignment="Right" VerticalAlignment="Center" Width="60" Margin="0,0,30,0" Height="60" Grid.Row="0" Background="#FF661141" BorderBrush="#FF661141" Click="BT_rechercher_Click">
-            <Image x:Name="chercher" HorizontalAlignment="Center"  VerticalAlignment="Center"  Source=".\Images\Chercher.png" />
+             <fa:ImageAwesome Icon="Search" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="45" />
         </Button>
 
+        <Button x:Name="MenuBase" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Margin="30,0,0,0" Height="60" Grid.Row="0" Background="#FF661141" BorderBrush="#FF661141" Click="AffichageMenu_Click">
+            <fa:ImageAwesome Icon="Bars" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="45" />
+        </Button>
 
-        <Menu x:Name="MenuBase" HorizontalAlignment="Left" Height="90" Margin="30,0,0,0" VerticalAlignment="Top" Background="#FF661141" Width="100" Foreground="#FF661141" Grid.RowSpan="2">
-            <MenuItem x:Name="Menu" Header="" Click="AffichageMenu_Click" Height="60" Width="60" Margin="13,15,0,0">
-                <MenuItem.Background>
-                    <ImageBrush ImageSource=".\Images\Menu.png"/>
-                </MenuItem.Background>
-            </MenuItem>
-        </Menu>
-
-
-        <Grid x:Name="AffichageMenuLateral" Grid.Row="1" Margin="0,0,0,0" Visibility="Hidden" MouseLeave="part" Background="#FFFCF4E3" Height="261" VerticalAlignment="Top" HorizontalAlignment="Left">
-
-            <Button x:Name="BT_RetourAccueil" Content="Accueil" HorizontalAlignment="Left" Margin="5,11,0,0" VerticalAlignment="Top" Width="144" Background="#FFFCF4E3" BorderBrush="{x:Null}" Height="51" Click="BT_RetourAccueil_Click" FontFamily="Californian FB" FontSize="20" FontWeight="Bold"/>
-
-            <Button x:Name="BT_AjoutCasier" Content="Ajout casier" HorizontalAlignment="Left" Margin="5,74,0,0" VerticalAlignment="Top" Width="151" Background="#FFFCF4E3" BorderBrush="{x:Null}" Height="51" FontSize="20" FontWeight="Bold" FontFamily="Californian FB" Click="BT_AjoutCasier_Click"/>
-
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="0,67,0,0" VerticalAlignment="Top" Width="166"/>
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="0,194,0,0" VerticalAlignment="Top" Width="166"/>
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="2" Margin="0,130,0,0" VerticalAlignment="Top" Width="166"/>
-
-            <Button x:Name="BT_Menu3" Content="Ma cave" HorizontalAlignment="Left" Margin="5,137,0,0" VerticalAlignment="Top" Width="146" Background="#FFFCF4E3" BorderBrush="{x:Null}" Height="52" Click="BT_Menu3_Click" FontFamily="Californian FB" FontSize="20" FontWeight="Bold"/>
-            <Button x:Name="BT_Menu4" Content="Rechercher" HorizontalAlignment="Left" Margin="5,201,0,0" VerticalAlignment="Top" Width="146" Background="#FFFCF4E3" BorderBrush="{x:Null}" Height="49" FontSize="20" FontFamily="Californian FB" FontWeight="Bold"/>
-        </Grid>
-
-
-        <Grid x:Name="AffichageAccueil" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0" UseLayoutRounding="False" IsHitTestVisible="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid x:Name="AffichageAccueil" Grid.Row="1" Visibility="Visible" UseLayoutRounding="False" IsHitTestVisible="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="130"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="230,50,230,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,50,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Rectangle Fill="#FF661141" Grid.Row="0" HorizontalAlignment="Stretch" Stroke="Black" VerticalAlignment="Stretch" Margin="0,0,0,0"/>
-                <Label x:Name="LeSaviezVous" Grid.Row="0" FontSize="20" Content="Le saviez-vous ?" HorizontalAlignment="Center" Margin="0,0,0,0" Foreground="White" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="1" FontSize="30" Background="white" x:Name="TB_SaviezVous" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto" IsEnabled="True" AcceptsReturn="True" Margin="0,0,0,0" Focusable="False"/>
+                <Rectangle Fill="#FF661141" Grid.Row="0" HorizontalAlignment="Stretch" Stroke="Black" VerticalAlignment="Stretch"/>
+                <Label x:Name="LeSaviezVous" Grid.Row="0" FontSize="40" Content="Le saviez-vous ?" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center" FontFamily="Californian FB" FontWeight="Bold"/>
+                <TextBox Grid.Row="1" FontSize="30" Background="white" x:Name="TB_SaviezVous" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto" IsEnabled="True" AcceptsReturn="True" Focusable="False"/>
             </Grid>
 
 
-            <Button x:Name="BT_VoirCasier" Margin="0,0,230,0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="86" Height="86" BorderBrush="#FF661141" Click="BT_VoirCasier_Click" Grid.Row="1" Background="#FF661141" Foreground="#FF661141">
+            <Button x:Name="BT_VoirCasier" HorizontalAlignment="Right" VerticalAlignment="Center" Width="80" Height="80" BorderBrush="#FF661141" Click="BT_VoirCasier_Click" Grid.Row="1" Grid.Column="1" Background="#FF661141" Foreground="#FF661141">
                 <Image Source=".\Images\VoirBouteille.png"/>
             </Button>
 
-            <Button x:Name="BT_VoirCave" HorizontalAlignment="Center" Margin="0,0,0,0"  Grid.Row="1" VerticalAlignment="Center" Width="86" Height="86" BorderBrush="#FF661141" Background="#FF661141" Foreground="#FF661141" Click="BT_VoirCave_Click">
+            <Button x:Name="BT_VoirCave" HorizontalAlignment="Center"  Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="80" Height="80" BorderBrush="#FF661141" Background="#FF661141" Foreground="#FF661141" Click="BT_VoirCave_Click">
                 <Image Source=".\Images\VoirCave.png" HorizontalAlignment="Center"/>
             </Button>
 
-            <Button x:Name="BT_GererCave" HorizontalAlignment="Left" Grid.Row="1" Margin="230,0,0,0" VerticalAlignment="Center" Width="86" Height="86" BorderBrush="#FF661141" Background="#FF661141" Foreground="#FF661141" Click="Bt_GererCave_Click">
+            <Button x:Name="BT_GererCave" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Width="80" Height="80" BorderBrush="#FF661141" Background="#FF661141" Foreground="#FF661141" Click="Bt_GererCave_Click">
                 <Image Source=".\Images\GererCave.png"/>
             </Button>
         </Grid>
 
 
-        <Grid x:Name="AffichageInterfaceCasier" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
+        <Grid x:Name="AffichageInterfaceCasier" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
-                    <Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="gridCasierColPrecedent" Width="100"/>
                 <ColumnDefinition x:Name="gridCasierColPrincipale" Width="*"/>
                 <ColumnDefinition x:Name="gridCasierColSuivant" Width="100"/>
                 <ColumnDefinition x:Name="gridCasierColForm" Width="0"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
                 <RowDefinition Height="90"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="90"/>
-                    </Grid.RowDefinitions>
+            </Grid.RowDefinitions>
 
-            <Label x:Name="lblNomCasier" Grid.ColumnSpan="3" Grid.Row="0" Content="&#xA;" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" FontFamily="Californian FB" FontSize="25" FontWeight="Bold"/>
+            <Label x:Name="lblNomCasier" Grid.ColumnSpan="3" Grid.Row="0" Content="&#xA;" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Californian FB" FontSize="25" FontWeight="Bold"/>
 
-            <Button x:Name="CasierPrecedent" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="90" Background="#FF661141" BorderBrush="#FF661141" Click="CasierPrecedent_Click">
-                <fa:ImageAwesome Icon="ChevronLeft" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="30" />
+            <Button x:Name="CasierPrecedent" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Background="#FF661141" BorderBrush="#FF661141" Click="CasierPrecedent_Click">
+                <fa:ImageAwesome Icon="ChevronLeft" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="25" />
             </Button>
 
-            <Button x:Name="CasierSuivant" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="60" Height="90" Background="#FF661141" BorderBrush="#FF661141" Click="CasierSuivant_Click">
-                <fa:ImageAwesome Icon="ChevronRight" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="30" />
-                    </Button>
-            <Button x:Name="BT_Plus" Grid.ColumnSpan="3" Grid.Row="2" HorizontalAlignment="Right" Height="60" Margin="0,0,10,0" VerticalAlignment="Center" Width="60" BorderThickness="0" Background="#FF661141" BorderBrush="#FF661141" Click="AjoutBouteille_Click">
+            <Button x:Name="CasierSuivant" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="50" Height="50" Background="#FF661141" BorderBrush="#FF661141" Click="CasierSuivant_Click">
+                <fa:ImageAwesome Icon="ChevronRight" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="25" />
+            </Button>
+            <Button x:Name="BT_Plus" Grid.ColumnSpan="4" Grid.Row="2" HorizontalAlignment="Right" Height="60" Margin="0,0,10,0" VerticalAlignment="Center" Width="60" BorderThickness="0" Background="#FF661141" BorderBrush="#FF661141" Click="AjoutBouteille_Click">
                 <fa:ImageAwesome Icon="Plus" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="30" />
-                    </Button>
+            </Button>
 
-            <Button x:Name="BT_Suppr" Grid.ColumnSpan="3" Grid.Row="2" HorizontalAlignment="Right" Height="60" Margin="0,0,80,0" VerticalAlignment="Center" Width="60" BorderThickness="0" Background="#FF661141" BorderBrush="#FF661141" Click="ToutSupprimer_Click">
+            <Button x:Name="BT_Suppr" Grid.ColumnSpan="4" Grid.Row="2" HorizontalAlignment="Right" Height="60" Margin="0,0,80,0" VerticalAlignment="Center" Width="60" BorderThickness="0" Background="#FF661141" BorderBrush="#FF661141" Click="ToutSupprimer_Click">
                 <fa:ImageAwesome Icon="TrashOutline" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="30" />
             </Button>
 
             <Grid x:Name="GridAffichageBouteille" Visibility="Visible" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="1" />
             <Border x:Name="AfficheDetailBouteille" Visibility="Hidden" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch" Background="#FFFCF4E3" Grid.RowSpan="3" Grid.Column="3">
                 <Grid x:Name="AffichageInfo">
-                <Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50" />
                         <RowDefinition Height="50" />
@@ -161,54 +146,74 @@
                     </Button>
                     <Button x:Name="btnFermerFicheDetail" HorizontalAlignment="Right" Height="50" Margin="0,0,10,0" VerticalAlignment="Center" Width="50" Background="#FF661141" BorderBrush="#FF661141" Grid.ColumnSpan="2" Grid.Row="10" Click="btnFermerFicheDetail_Click" >
                         <fa:ImageAwesome Icon="Close" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="30" />
-                </Button>
+                    </Button>
                     <Button x:Name="btnModifierFicheDetail" HorizontalAlignment="Right" Height="50" Margin="0,0,130,0" VerticalAlignment="Center" Width="50" Background="#FF661141" BorderBrush="#FF661141" Grid.ColumnSpan="2" Grid.Row="10" Click="btnModifierFicheDetail_Click">
                         <fa:ImageAwesome Icon="Edit" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="35" />
-                </Button>
+                    </Button>
                     <Button x:Name="btnDéplacerFicheDetail" HorizontalAlignment="Right" Height="50" Margin="0,0,190,0" VerticalAlignment="Center" Width="50" Background="#FF661141" BorderBrush="#FF661141" Grid.ColumnSpan="2" Grid.Row="10" Content="Déplacement bouteille" Click="btnDéplacerFicheDetail_Click"/>
 
                     <Grid Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="100" Grid.RowSpan="3" VerticalAlignment="Top" Width="100"/>
-            </Grid>
+                </Grid>
             </Border>
 
         </Grid>
 
         <Border x:Name="AffichageFicheAjoutBouteille" Grid.Row="1" Visibility="Hidden" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="430" Margin="10" Background="#FFFCF4E3">
 
-            <Grid Margin="0,0,0,0">
-                        <Label x:Name="lbl_Titre" Content="Ajouter des bouteilles" HorizontalAlignment="Left" Margin="144,10,0,0" VerticalAlignment="Top"/>
-                        <Label x:Name="lbl_Info1" Content="Type :" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.539,0.731"/>
-                        <Label x:Name="lbl_Info2" Content="Région :" HorizontalAlignment="Left" Margin="10,181,0,0" VerticalAlignment="Top"/>
-                        <Label x:Name="lbl_Info3" Content="Millésime :" HorizontalAlignment="Left" Margin="10,419,0,0" VerticalAlignment="Top"/>
-                        <Label x:Name="lbl_Info4" Content="Contenance :" HorizontalAlignment="Left" Margin="10,370,0,0" VerticalAlignment="Top"/>
-                        <Label x:Name="lbl_Info5" Content="Domaine :" HorizontalAlignment="Left" Margin="10,329,0,0" VerticalAlignment="Top"/>
-                        <Label x:Name="lbl_Info6" Content="Cru :" HorizontalAlignment="Left" Margin="10,276,0,0" VerticalAlignment="Top"/>
-                        <Label x:Name="lbl_Info7" Content="Vinification :" HorizontalAlignment="Left" Margin="10,470,0,0" VerticalAlignment="Top"/>
-                        <Label x:Name="lbl_Info" Content="Appellation :" HorizontalAlignment="Left" Margin="8,226,0,0" VerticalAlignment="Top"/>
-                        <Label x:Name="label9" Content="Pays :" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="90"/>
+                </Grid.RowDefinitions>
 
-                        <ComboBox x:Name="cb_Appelation_Ajout" HorizontalAlignment="Left" Margin="108,230,0,0" VerticalAlignment="Top" Width="263" IsEditable="True" BorderBrush="#FF661141"/>
-                        <ComboBox x:Name="cb_Vinification_Ajout" HorizontalAlignment="Left" Margin="108,470,0,0" VerticalAlignment="Top" Width="263" IsEditable="True" BorderBrush="#FF661141"/>
-                        <ComboBox x:Name="cb_Cru_Ajout" HorizontalAlignment="Left" Margin="108,280,0,0" VerticalAlignment="Top" Width="263" IsEditable="True" BorderBrush="#FF661141"/>
-                        <ComboBox x:Name="cb_Domaine_Ajout" HorizontalAlignment="Left" Margin="108,329,0,0" VerticalAlignment="Top" Width="263" IsEditable="True" BorderBrush="#FF661141"/>
-                <ComboBox x:Name="cb_Type_Ajout" HorizontalAlignment="Left" Margin="108,91,0,0" VerticalAlignment="Top" Width="263" IsEditable="True" BorderBrush="#FF661141"/>
-                        <ComboBox x:Name="cb_Region_Ajout" HorizontalAlignment="Left" Margin="108,185,0,0" VerticalAlignment="Top" Width="263" IsEditable="True" BorderBrush="#FF661141"/>
-                        <ComboBox x:Name="cb_Pays_Ajout" HorizontalAlignment="Left" Margin="108,138,0,0" VerticalAlignment="Top" Width="263" IsEditable="True" BorderBrush="#FF661141"/>
-                        <TextBox x:Name="cb_Contenance_Ajout" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" Margin="108,373,0,0" TextChanged="cb_Contenance_Ajout_TextChanged" BorderBrush="#FF661141"/>
-                        <TextBox x:Name="cb_Millesime_Ajout" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" Margin="108,422,0,0" TextChanged="cb_Millesime_Ajout_TextChanged" BorderBrush="#FF661141"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Label x:Name="lbl_Titre" Content="Ajouter des bouteilles" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Californian FB" FontSize="40" Foreground="#FF661141" Grid.Row="0" Grid.ColumnSpan="2"/>
+                <Label x:Name="lbl_Info1" Content="Type :" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+                <Label x:Name="lbl_Info2" Content="Région :" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
+                <Label x:Name="lbl_Info3" Content="Millésime :" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"/>
+                <Label x:Name="lbl_Info4" Content="Contenance :" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0"/>
+                <Label x:Name="lbl_Info5" Content="Domaine :" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0"/>
+                <Label x:Name="lbl_Info6" Content="Cru :" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0"/>
+                <Label x:Name="lbl_Info7" Content="Vinification :" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="7" Grid.Column="0"/>
+                <Label x:Name="lbl_Info" Content="Appellation :" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="8" Grid.Column="0"/>
+                <Label x:Name="label9" Content="Pays :" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="9" Grid.Column="0"/>
 
-                        <Button x:Name="Validation_ajout" HorizontalAlignment="Left" Margin="352,580,0,0" VerticalAlignment="Top" Width="60" Height="60" Background="#FF661141" BorderBrush="#FF661141" Click="ValidationAjout_Click">
-                            <fa:ImageAwesome Icon="Check" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="45" />
-                        </Button>
+                <ComboBox x:Name="cb_Appelation_Ajout" HorizontalAlignment="Stretch" Margin="10,0,10,0" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="1" Grid.Column="1"/>
+                <ComboBox x:Name="cb_Vinification_Ajout" HorizontalAlignment="Stretch" Margin="10,0,10,0" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="2" Grid.Column="1"/>
+                <ComboBox x:Name="cb_Cru_Ajout" HorizontalAlignment="Stretch" Margin="10,0,10,0" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="3" Grid.Column="1"/>
+                <ComboBox x:Name="cb_Domaine_Ajout" HorizontalAlignment="Stretch" Margin="10,0,10,0" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="4" Grid.Column="1"/>
+                <ComboBox x:Name="cb_Type_Ajout" HorizontalAlignment="Stretch" Margin="10,0,10,0" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="5" Grid.Column="1"/>
+                <ComboBox x:Name="cb_Region_Ajout" HorizontalAlignment="Stretch" Margin="10,0,10,0" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="6" Grid.Column="1"/>
+                <ComboBox x:Name="cb_Pays_Ajout" HorizontalAlignment="Stretch" Margin="10,0,10,0" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="7" Grid.Column="1"/>
+                <TextBox x:Name="cb_Contenance_Ajout" HorizontalAlignment="Stretch" Margin="10,0,10,0" VerticalAlignment="Center" TextWrapping="Wrap" TextChanged="cb_Contenance_Ajout_TextChanged" BorderBrush="#FF661141"  Grid.Row="8" Grid.Column="1"/>
+                <TextBox x:Name="cb_Millesime_Ajout" HorizontalAlignment="Stretch" Margin="10,0,10,0" VerticalAlignment="Center" TextWrapping="Wrap" TextChanged="cb_Millesime_Ajout_TextChanged" BorderBrush="#FF661141"  Grid.Row="9" Grid.Column="1"/>
 
-                        <Button x:Name="btnFermerFicheAjout" HorizontalAlignment="Left" Height="60" Margin="281,580,0,0" VerticalAlignment="Top" Width="60" Background="#FF661141" BorderBrush="#FF661141" Click="btnFermerFicheAjout_Click" >
-                            <fa:ImageAwesome Icon="Close" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="30" />
-                        </Button>
-                    </Grid>
+                <Button x:Name="Validation_ajout" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Width="50" Height="50" Background="#FF661141" BorderBrush="#FF661141" Click="ValidationAjout_Click" Grid.Row="11" Grid.ColumnSpan="2">
+                    <fa:ImageAwesome Icon="Check" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="35" />
+                </Button>
 
-                </Border>
+                <Button x:Name="btnFermerFicheAjout" HorizontalAlignment="Right" Height="50" Margin="0,0,80,0" VerticalAlignment="Center" Width="50" Background="#FF661141" BorderBrush="#FF661141" Click="btnFermerFicheAjout_Click" Grid.Row="11" Grid.ColumnSpan="2">
+                    <fa:ImageAwesome Icon="Close" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="35" />
+                </Button>
+            </Grid>
 
-        <Grid x:Name="AffichageRecherche" Grid.Row="1" Visibility="Visible"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        </Border>
+
+        <Grid x:Name="AffichageRecherche" Grid.Row="1" Visibility="Hidden"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid x:Name="OptionRecherche" Visibility="Visible"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70"/>
@@ -282,9 +287,7 @@
             </Grid>
         </Grid>
 
-        <Grid x:Name="AffichageGestionCave" Grid.Row="1" Visibility="Hidden"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0"/>
-
-        <Grid x:Name="AffichageAjoutCasier" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
+        <Grid x:Name="AffichageAjoutCasier" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2*"/>
@@ -298,7 +301,7 @@
                 <RowDefinition Height="100" />
             </Grid.RowDefinitions>
 
-            <Label x:Name="label1" Content="Ajout d'un casier" VerticalAlignment="Center"  HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="36" FontWeight="Bold" FontFamily="Californian FB"/>
+            <Label x:Name="label1" Content="Ajout d'un casier" VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" FontSize="36" FontWeight="Bold" FontFamily="Californian FB"/>
             <TextBlock x:Name="label2" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" FontSize="20">
                 Nom du casier :
             </TextBlock>
@@ -331,7 +334,7 @@
             <TextBox x:Name="commentaireBouteille" HorizontalAlignment="Left" Height="482" Margin="10,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="406"/>
         </Grid>
 
-        <Grid x:Name="AffichageListeCasier" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" >
+        <Grid x:Name="AffichageListeCasier" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             <Label x:Name="lblNomCave" Content="Ma Cave" HorizontalAlignment="Stretch" Height="100" Margin="0,20,0,0" VerticalAlignment="Top" FontFamily="Californian FB"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="60" FontWeight="Bold"/>
             <Grid x:Name="grdListeCasier" HorizontalAlignment="Stretch" Margin="50,150,50,50" VerticalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
@@ -347,6 +350,22 @@
                 <fa:ImageAwesome Icon="Edit" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="72" Height="58" />
             </Button>
         </Grid>
+
+        <Border x:Name="AffichageMenuLateral"  Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" BorderBrush="#FF661141" BorderThickness="2">
+            <Grid MouseLeave="part" Background="#FFFCF4E3">
+
+                <Button x:Name="BT_RetourAccueil" Content="Accueil" HorizontalAlignment="Left" Margin="5,11,0,0" VerticalAlignment="Top" Width="144" Background="#FFFCF4E3" BorderBrush="{x:Null}" Height="51" Click="BT_RetourAccueil_Click" FontFamily="Californian FB" FontSize="20" FontWeight="Bold"/>
+
+                <Button x:Name="BT_AjoutCasier" Content="Ajout casier" HorizontalAlignment="Left" Margin="5,74,0,0" VerticalAlignment="Top" Width="151" Background="#FFFCF4E3" BorderBrush="{x:Null}" Height="51" FontSize="20" FontWeight="Bold" FontFamily="Californian FB" Click="BT_AjoutCasier_Click"/>
+
+                <Border BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Stretch" Margin="0,067,0,0" VerticalAlignment="Top"/>
+                <Border BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Stretch" Margin="0,194,0,0" VerticalAlignment="Top"/>
+                <Border BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Stretch" Margin="0,130,0,0" VerticalAlignment="Top"/>
+
+                <Button x:Name="BT_Menu3" Content="Ma cave" HorizontalAlignment="Left" Margin="5,137,0,0" VerticalAlignment="Top" Width="146" Background="#FFFCF4E3" BorderBrush="{x:Null}" Height="52" Click="BT_Menu3_Click" FontFamily="Californian FB" FontSize="20" FontWeight="Bold"/>
+                <Button x:Name="BT_Menu4" Content="Rechercher" HorizontalAlignment="Left" Margin="5,201,0,0" VerticalAlignment="Top" Width="146" Background="#FFFCF4E3" BorderBrush="{x:Null}" Height="49" FontSize="20" FontFamily="Californian FB" FontWeight="Bold"/>
+            </Grid>
+        </Border>
 
     </Grid>
 

@@ -1467,7 +1467,6 @@ namespace CaveAVin
             AffichageInterfaceCasier.Visibility = Visibility.Hidden;
             GridAffichageBouteille.Visibility = Visibility.Hidden;
             AffichageListeCasier.Visibility = Visibility.Hidden;
-            AffichageGestionCave.Visibility = Visibility.Hidden;
             AjoutCommentaireSupression.Visibility = Visibility.Hidden;
             AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
             AffichageAjoutCasier.Visibility = Visibility.Hidden;
