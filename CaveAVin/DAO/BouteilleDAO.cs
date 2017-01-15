@@ -51,6 +51,57 @@ namespace DAO
             return b;
         }
 
+        public Bouteilles Chercher(Bouteille b)
+        {
+            Bouteilles liste = new Bouteilles();
+            String IdType = null;
+            if (b.IdType != 0) { IdType = b.IdType.ToString(); }
+            String IdRegion = null;
+            if (b.IdRegion != 0) { IdRegion = b.IdRegion.ToString(); }
+            String IdDomaine = null;
+            if (b.IdDomaine != 0) { IdDomaine = b.IdDomaine.ToString(); }
+            String IdContenance = null;
+            if (b.IdContenance != 0) { IdContenance = b.IdContenance.ToString(); }
+            String IdCru = null;
+            if (b.IdCru != 0) { IdCru = b.IdCru.ToString(); }
+            String IdMillesime = null;
+            if (b.IdMillesime != 0) { IdMillesime = b.IdMillesime.ToString(); }
+            String IdType_vinification = null;
+            if (b.IdType_vinification != 0) { IdType_vinification = b.IdType_vinification.ToString(); }
+            String IdAppelation = null;
+            if (b.IdAppelation != 0) { IdAppelation = b.IdAppelation.ToString(); }
+            String IdPays = null;
+            if (b.IdPays != 0) { IdPays = b.IdPays.ToString(); }
+
+            con.Open();
+            try
+            {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = "SELECT * FROM Bouteille Where ";
+                if (b.IdType != 0) com.CommandText += ", `IdType=`'"+IdType+"'AND ";
+                if (b.IdRegion != 0) com.CommandText += ", `IdRegion`'" + IdRegion + "'AND ";
+                if (b.IdDomaine != 0) com.CommandText += ", `IdDomaine`'" + IdDomaine + "'AND ";
+                if (b.IdContenance != 0) com.CommandText += ", `IdContenance`'" + IdContenance + "'AND ";
+                if (b.IdCru != 0) com.CommandText += ", `IdCru`'" + IdCru + "'AND ";
+                if (b.IdMillesime != 0) com.CommandText += ", `IdMillesime`'" + IdMillesime + "'AND ";
+                if (b.IdType_vinification != 0) com.CommandText += ", `IdVinif`'" + IdType + "'AND ";
+                if (b.IdAppelation != 0) com.CommandText += ", `IdAppelation`'" + IdType_vinification + "'AND ";
+                if (b.IdPays != 0) com.CommandText += ", `IdPays`'" + IdPays + "'AND ";
+                com.CommandText += "1 = 1;";
+                IDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    Bouteille bo = reader2Bouteille(reader);
+                    liste.Ajouter(bo);
+                }
+            }
+            finally
+            {
+                con.Close();
+            }
+            return liste;
+        }
+
         public Bouteille Chercher(int ligneIndex, int colonneIndex, int casier, int bue)
         {
             Bouteille b = null;

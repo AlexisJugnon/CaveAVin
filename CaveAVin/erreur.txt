@@ -1,16 +1,11 @@
- --Mettre textbox afin de mettre un commentaire lorsque l'on 
-	supprime plusieurs bouteille
-
 Fonction recherche
-
-Déplacer bouteille
-
-+ajout commentaire plus tard
-
-doc création et hébergement bdd
 
 suppression casier
 
 modification casier
+
+doc création et hébergement bdd
+
+ajout comm plus tard
 
 Portage sur windowPhone
