@@ -62,10 +62,10 @@
         </Grid>
 
 
-        <Grid x:Name="AffichageInterfaceCasier" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,116,1,17" Width="1635" Height="794">
+        <Grid x:Name="AffichageInterfaceCasier" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,116,1,17" Width="1635" Height="794">
 
             <Border x:Name="AfficheDetailBouteille" Visibility="Hidden" BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Left" Height="659" Margin="933,74,0,0" VerticalAlignment="Top" Width="429" Background="#FFFCF4E3">
-                <Grid x:Name="AffichageInfo" Visibility="Visible">
+                <Grid x:Name="AffichageInfo">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="59*"/>
                         <ColumnDefinition Width="155*"/>
@@ -156,7 +156,7 @@
         </Grid>
 
 
-        <Grid x:Name="AffichageFicheAjoutBouteille" Visibility="Visible" HorizontalAlignment="Left" Height="794" VerticalAlignment="Top" Width="1635" Margin="0,125,0,0">
+        <Grid x:Name="AffichageFicheAjoutBouteille" Visibility="Hidden" HorizontalAlignment="Left" Height="794" VerticalAlignment="Top" Width="1635" Margin="0,125,0,0">
 
             <Grid Margin="934,76,271,60">
 
@@ -216,7 +216,7 @@
             <Button x:Name="BT_Menu4" Content="Rechercher" HorizontalAlignment="Left" Margin="5,201,0,0" VerticalAlignment="Top" Width="146" Background="#FFFCF4E3" BorderBrush="{x:Null}" Height="49" FontSize="20" FontFamily="Californian FB" FontWeight="Bold"/>
         </Grid>
 
-        <Grid x:Name="AffichageRecherche" Visibility="Hidden"  HorizontalAlignment="Left" Height="791" VerticalAlignment="Top" Width="1635" Margin="0,126,0,0">
+        <Grid x:Name="AffichageRecherche" Visibility="Visible"  HorizontalAlignment="Left" Height="791" VerticalAlignment="Top" Width="1635" Margin="0,126,0,0">
             <Grid x:Name="OptionRecherche" Visibility="Visible" Margin="313,44,288,45">
                 <Label x:Name="lbl_Titre1" Content="Recherche de bouteille" Margin="396,10,395,0" VerticalAlignment="Top" Height="44" FontSize="22"/>
                 <Label x:Name="lbl_Info11" Content="Type :" Margin="315,91,663,0" VerticalAlignment="Top" RenderTransformOrigin="0.539,0.731" FontSize="18"/>
@@ -263,7 +263,7 @@
             </Grid>
         </Grid>
 
-        <Grid x:Name="AffichageGestionCave" Visibility="Hidden"  HorizontalAlignment="Left" Height="791" VerticalAlignment="Top" Width="1635" Margin="0,126,0,0"/>
+        <Grid x:Name="AffichageGestionCave" Visibility="Visible"  HorizontalAlignment="Left" Height="791" VerticalAlignment="Top" Width="1635" Margin="0,126,0,0"/>
 
         <Grid x:Name="AffichageAjoutCasier" Visibility="Hidden" HorizontalAlignment="Left" Height="791" VerticalAlignment="Top" Width="1635" Margin="0,126,0,0">
             <Label x:Name="label1" Content="  Ajout d'un casier" VerticalAlignment="Top" Margin="651,86,652,0" FontSize="36" FontWeight="Bold" FontFamily="Californian FB"/>
@@ -299,7 +299,12 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
             </Grid>
-
+            <Button x:Name="BT_Supprimer_Casier" HorizontalAlignment="Left" Margin="1521,676,0,0" VerticalAlignment="Top" Height="105" Width="104" Background="#FF661141" BorderBrush="#FF661141" Click="BT_Supprimer_Casier_Click">
+                <fa:ImageAwesome Icon="TrashOutline" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="63" Height="69" />
+            </Button>
+            <Button x:Name="BT_Modifier_Casier" HorizontalAlignment="Left" Height="106" Margin="1412,675,0,0" VerticalAlignment="Top" Width="104" Background="#FF661141" BorderBrush="#FF661141" Click="btnModifierCasier_Click">
+                <fa:ImageAwesome Icon="Edit" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="72" Height="58" />
+            </Button>
         </Grid>
 
     </Grid>

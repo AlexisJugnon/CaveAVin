@@ -8,7 +8,7 @@
         Title="Chargement" Height="300" Width="451" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
         <Frame Content="" HorizontalAlignment="Left" Height="79" VerticalAlignment="Top" Width="450" Background="#FF661141" Margin="0,0,-28,0"/>
-        <Label x:Name="label" Content="&#x9;&#x9;      Bienvenue sur WineFinder&#xA;&#x9;     Votre application de gestion de cave a vin&#xA;                 &#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xA;&#x9;&#x9;       Chargement en cours ..." HorizontalAlignment="Center" Height="220" Margin="1,19,0,61" VerticalAlignment="Center" Width="450" FontWeight="Bold" FontSize="14"/>
+        <Label x:Name="label" Content="&#x9;&#x9;      Bienvenue sur WineFinder&#xA;&#x9;     Votre application de gestion de cave a vin&#xA;                 &#xA;&#xA;&#x9;&#x9;       Chargement en cours ..." HorizontalAlignment="Center" Height="155" Margin="1,84,0,61" VerticalAlignment="Center" Width="450" FontWeight="Bold" FontSize="14"/>
         <Label x:Name="label1" Content="&#x9;&#x9;Créé par Cindy GONCALVES, Isabelle BARREAU, &#xA;&#x9;         Romain GUIDOT, Valerian DUVERGER, Alexis JUGNON" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,252,0,0" Width="450" Height="48"/>
     </Grid>
 </Window>
