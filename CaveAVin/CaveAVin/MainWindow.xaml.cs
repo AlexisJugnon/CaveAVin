@@ -132,7 +132,40 @@ namespace CaveAVin
             AjoutBouteille();
         }
 
+        /// <summary>
+        /// Recalcul la taille des cases
+        /// </summary>
+        private void RecalculailleGrille()
+        {
+            // Si on a une grille
+            if (gestionCasier.Any() && nCasierActuel > -1 && nCasierActuel < gestionCasier.Count())
+            {
+                // Obtention de la grille
+                var grille = gestionCasier[nCasierActuel];
 
+                // Récupération des hauteur et largeur d'affichage
+                var hauteur = GridAffichageBouteille.ActualHeight;
+                var largeur = GridAffichageBouteille.ActualWidth;
+
+                // Calcul des hauteur et largeur maximal possible pour une case
+                var hauteurMax = hauteur / (double)grille.RowDefinitions.Count;
+                var largeurMax = largeur / (double)grille.ColumnDefinitions.Count;
+
+                // On prend la plus petite valeur pour être sûr de ne pas dépasser de la zone d'affichage
+                var taille = Math.Min(hauteurMax, largeurMax);
+
+                // Récupération des cases
+                var children = grille.Children
+                                     .OfType<Button>();
+
+                // Application de la nouvelle taille
+                foreach (var child in children)
+                {
+                    child.Height = taille;
+                    child.Width = taille;
+                }
+            }
+        }
 
         /// <summary>
         /// Permet d'initialiser tous les casiers sous forme de grid pour pouvoir les afficher plus tard
@@ -155,12 +188,17 @@ namespace CaveAVin
             int nombreColonne, nombreLigne;
             int HeightBoutton, WidthBoutton;
 
-            int longueurMax = 648;
-            int largeurMax = longueurMax;
+            var longueurMax = 648;
+            var largeurMax = longueurMax;
 
             ColumnDefinition[] colonne;
             RowDefinition[] ligne;
-            
+
+            var imageBlanc = new BitmapImage(new Uri("../../../CaveAVin/Images/BlancCasier.png", UriKind.Relative));
+            var imageRouge = new BitmapImage(new Uri("../../../CaveAVin/Images/RougeCasier.png", UriKind.Relative));
+            var imageRose = new BitmapImage(new Uri("../../../CaveAVin/Images/RoséCasier.png", UriKind.Relative));
+            var imagePetillant = new BitmapImage(new Uri("../../../CaveAVin/Images/PétillantCasier.png", UriKind.Relative));
+            var imageVide = new BitmapImage(new Uri("../../../CaveAVin/Images/CaseVide.png", UriKind.Relative));
 
             for (int i = nbCasierTotalActuel; i < nbCasierTotal; i++)
             {
@@ -168,6 +206,7 @@ namespace CaveAVin
                 gestionCasier[i] = new Grid();
                 GridAffichageBouteille.Children.Add(gestionCasier[i]);
                 gestionCasier[i].VerticalAlignment = VerticalAlignment.Center;
+                gestionCasier[i].HorizontalAlignment = HorizontalAlignment.Center;
                 gestionCasier[i].Visibility = Visibility.Hidden;
 
                 nombreLigne = casier.LargeurX;
@@ -199,7 +238,6 @@ namespace CaveAVin
                 {
                     colonne[f] = new ColumnDefinition();
                     colonne[f].Width = GridLength.Auto;
-
                     gestionCasier[i].ColumnDefinitions.Add(colonne[f]);
                 }
 
@@ -209,7 +247,6 @@ namespace CaveAVin
                     ligne[f].Height = GridLength.Auto;
 
                     gestionCasier[i].RowDefinitions.Add(ligne[f]);
-
                 }
 
                 //Gère l'affichage des bouteilles dans le casier
@@ -219,13 +256,15 @@ namespace CaveAVin
                 {
                     for (int j = 0; j < nombreLigne; j++)
                     {
-                        button[k, j] = new Button();
+                        var buttonCourant = new Button();
+                        button[k, j] = buttonCourant;
 
                         gestionCasier[i].Children.Add(button[k, j]);
                         button[k, j].Visibility = Visibility.Visible;
                         button[k, j].Content = k + ", " + j;
                         button[k, j].Width = WidthBoutton;
                         button[k, j].Height = HeightBoutton;
+
                         Grid.SetRow(button[k, j], j);
                         Grid.SetColumn(button[k, j], k);
                         res = "";
@@ -241,33 +280,34 @@ namespace CaveAVin
 
                         var brush = new ImageBrush();
 
+
                         if (res == "Blanc")
                         {
-                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/BlancCasier.png", UriKind.Relative));
+                            brush.ImageSource = imageBlanc;
                             button[k, j].Background = brush;
                             button[k, j].Click += SelectionBouteille;
                         }
                         else if (res == "Rouge")
                         {
-                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/RougeCasier.png", UriKind.Relative));
+                            brush.ImageSource = imageRouge;
                             button[k, j].Background = brush;
                             button[k, j].Click += SelectionBouteille;
                         }
                         else if (res == "Rosé")
                         {
-                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/RoséCasier.png", UriKind.Relative));
+                            brush.ImageSource = imageRose;
                             button[k, j].Background = brush;
                             button[k, j].Click += SelectionBouteille;
                         }
                         else if (res == "Pétillant")
                         {
-                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/PétillantCasier.png", UriKind.Relative));
+                            brush.ImageSource = imagePetillant;
                             button[k, j].Background = brush;
                             button[k, j].Click += SelectionBouteille;
                         }
                         else
                         {
-                            brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/CaseVide.png", UriKind.Relative));
+                            brush.ImageSource = imageVide;
                             button[k, j].Background = brush;
                             button[k, j].Click += SelectBouteille;
                         }
@@ -351,7 +391,7 @@ namespace CaveAVin
         }
 
 
-
+        
         /// <summary>
         /// permet d'afficher le casier suivant ou précedent
         /// </summary>
@@ -360,10 +400,10 @@ namespace CaveAVin
             // Permet de gérer l'affichage des flêches pour la gestion des casiers
             #region GestionFleche
 
-            if (nbCasierTotal > 1)
-            {
-                MultiCasier.Visibility = Visibility.Visible;
-            }
+            //if (nbCasierTotal > 1)
+            //{
+            //    MultiCasier.Visibility = Visibility.Visible;
+            //}
 
             if (nCasierActuel == 0)
             {
@@ -387,6 +427,7 @@ namespace CaveAVin
             {
                 lblNomCasier.Content = req.SelStr1("Select NomCasier From Casier Where idCasier = " + nCasierActuel, "NomCasier");
                 gestionCasier[nCasierActuel].Visibility = Visibility.Visible;
+                RecalculailleGrille();
             }
 
         }
@@ -480,7 +521,28 @@ namespace CaveAVin
         /// </summary>
         private void Decaler()
         {
-            AffichageCasier.Margin = new Thickness(0, 30, 0, 50);
+            var maxWidth = AffichageInterfaceCasier.ActualWidth;
+
+            var tailleColBouton = 60;
+            var tailleMinColPrincipale = GridAffichageBouteille.ActualHeight;
+            var tailleColForm = Math.Min(maxWidth, 500);
+
+            var ecranTailleMini = tailleColBouton * 2 + tailleMinColPrincipale + tailleColForm;
+
+            if(ecranTailleMini < maxWidth)
+            {
+                gridCasierColPrecedent.Width = new GridLength(tailleColBouton);
+                gridCasierColSuivant.Width = new GridLength(tailleColBouton);
+            }
+            else
+            {
+                gridCasierColPrecedent.Width = new GridLength(0);
+                gridCasierColSuivant.Width = new GridLength(0);
+                gridCasierColPrincipale.Width = new GridLength(0);
+            }
+
+            //GridAffichageBouteille.Margin = new Thickness(0, 30, 0, 50);
+            gridCasierColForm.Width = new GridLength(tailleColForm);
         }
 
 
@@ -490,7 +552,11 @@ namespace CaveAVin
         /// </summary>
         private void ReDecaler()
         {
-            AffichageCasier.Margin = new Thickness(300, 30, 0, 0);
+            //GridAffichageBouteille.Margin = new Thickness(300, 30, 0, 0);
+            gridCasierColPrecedent.Width = new GridLength(100);
+            gridCasierColSuivant.Width = new GridLength(100);
+            gridCasierColPrincipale.Width = new GridLength(1, GridUnitType.Star);
+            gridCasierColForm.Width = new GridLength(0);
         }
 
 
@@ -610,7 +676,7 @@ namespace CaveAVin
         {
             AffichageAccueil.Visibility = Visibility.Hidden;
             AffichageInterfaceCasier.Visibility = Visibility.Visible;
-            AffichageCasier.Visibility = Visibility.Visible;
+            GridAffichageBouteille.Visibility = Visibility.Visible;
         }
 
 
@@ -694,7 +760,7 @@ namespace CaveAVin
         private void BT_AjoutCasier_Click(object sender, RoutedEventArgs e)
         {
             MasquerEcran();
-            MultiCasier.Visibility = Visibility.Hidden;
+            //MultiCasier.Visibility = Visibility.Hidden;
             AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
             AffichageMenuLateral.Visibility = Visibility.Hidden;
             AffichageAjoutCasier.Visibility = Visibility.Visible;
@@ -1010,7 +1076,7 @@ namespace CaveAVin
             AffichageRecherche.Visibility = Visibility.Visible;
             AffichageAccueil.Visibility = Visibility.Hidden;
             AffichageInterfaceCasier.Visibility = Visibility.Hidden;
-            MultiCasier.Visibility = Visibility.Hidden;
+            //MultiCasier.Visibility = Visibility.Hidden;
             AffichageMenuLateral.Visibility = Visibility.Hidden;
             AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
             AffichageRecherche.Visibility = Visibility.Visible;
@@ -1346,7 +1412,7 @@ namespace CaveAVin
             nCasierActuel = idLigne * 3 + idColonne;
             AffichageListeCasier.Visibility = Visibility.Hidden;
             AffichageInterfaceCasier.Visibility = Visibility.Visible;
-            AffichageCasier.Visibility = Visibility.Visible;
+            GridAffichageBouteille.Visibility = Visibility.Visible;
            
             for (int i = 0; i < gestionCasier.Length; i++)
             {
@@ -1374,7 +1440,7 @@ namespace CaveAVin
         {
             AffichageAccueil.Visibility = Visibility.Hidden;
             AffichageInterfaceCasier.Visibility = Visibility.Hidden;
-            AffichageCasier.Visibility = Visibility.Hidden;
+            GridAffichageBouteille.Visibility = Visibility.Hidden;
             AffichageListeCasier.Visibility = Visibility.Hidden;
             AffichageGestionCave.Visibility = Visibility.Hidden;
             AjoutCommentaireSupression.Visibility = Visibility.Hidden;
@@ -1409,7 +1475,7 @@ namespace CaveAVin
         private void Bt_GererCave_Click(object sender, RoutedEventArgs e)
         {
             MasquerEcran();
-            MultiCasier.Visibility = Visibility.Hidden;
+            //MultiCasier.Visibility = Visibility.Hidden;
             AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
             AffichageAjoutCasier.Visibility = Visibility.Visible;
         }
