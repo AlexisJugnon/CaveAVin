@@ -1338,24 +1338,25 @@ namespace CaveAVin
         private void InitialiseListeCasier()
         {
             DAO.CasierDAO daoCasier = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
-
+            grdListeCasier.Children.Clear();
             var casiers = daoCasier.Lister();
-            var nbLignes = (casiers.Lister().Length/3)+1;
-            grdListeCasier.RowDefinitions.Clear();
+            //var nbLignes = (casiers.Lister().Length/3)+1;
+            //grdListeCasier.RowDefinitions.Clear();
 
-            for (int i = 0; i < nbLignes; i++)
-            {
-                RowDefinition rowDefinition = new RowDefinition();
-                rowDefinition.Height = new GridLength(1, GridUnitType.Star);
-                grdListeCasier.RowDefinitions.Add(rowDefinition);
-            }
+            //for (int i = 0; i < nbLignes; i++)
+            //{
+            //    RowDefinition rowDefinition = new RowDefinition();
+            //    rowDefinition.Height = new GridLength(1, GridUnitType.Star);
+            //    grdListeCasier.RowDefinitions.Add(rowDefinition);
+            //}
 
             int index = 0;
 
             var converterColor = new BrushConverter();
             Brush couleur = (Brush)converterColor.ConvertFrom("#FF661141");
-            double largeurElement = grdListeCasier.Width / 3 - 20;
-            double hauteurElement = grdListeCasier.Height / nbLignes - 20;
+            //double largeurElement = grdListeCasier.Width / 3 - 20;
+            //double hauteurElement = grdListeCasier.Height / nbLignes - 20;
+            var taille = 200d;
 
             foreach (var casier in casiers.Lister())
             {
@@ -1366,8 +1367,8 @@ namespace CaveAVin
                 var nomCasier = new Button();
                 nomCasier.Click += CasierSelectione;
                 nomCasier.Content = casier;
-                nomCasier.Width = largeurElement;
-                nomCasier.Height = hauteurElement;
+                nomCasier.Width = taille;
+                nomCasier.Height = taille;
                 nomCasier.Margin = new Thickness(10);
                 nomCasier.VerticalAlignment = VerticalAlignment.Stretch;
                 nomCasier.HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -1377,8 +1378,8 @@ namespace CaveAVin
                 nomCasier.FontFamily = new FontFamily("CalifornianFB");
                 nomCasier.Foreground = Brushes.White;
                 nomCasier.Background = couleur;
-                Grid.SetColumn(nomCasier, idColonne);
-                Grid.SetRow(nomCasier, idLigne);
+                //Grid.SetColumn(nomCasier, idColonne);
+                //Grid.SetRow(nomCasier, idLigne);
                 grdListeCasier.Children.Add(nomCasier);
                 index++;
             }
