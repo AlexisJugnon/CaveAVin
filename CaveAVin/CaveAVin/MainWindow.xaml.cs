@@ -268,6 +268,7 @@ namespace CaveAVin
                         button[k, j].Content = k + ", " + j;
                         button[k, j].Width = WidthBoutton;
                         button[k, j].Height = HeightBoutton;
+                        buttonCourant.BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2b2404"));
 
                         Grid.SetRow(button[k, j], j);
                         Grid.SetColumn(button[k, j], k);
@@ -283,7 +284,6 @@ namespace CaveAVin
                         }
 
                         var brush = new ImageBrush();
-
 
                         if (res == "Blanc")
                         {
@@ -557,8 +557,8 @@ namespace CaveAVin
         private void ReDecaler()
         {
             //GridAffichageBouteille.Margin = new Thickness(300, 30, 0, 0);
-            gridCasierColPrecedent.Width = new GridLength(100);
-            gridCasierColSuivant.Width = new GridLength(100);
+            gridCasierColPrecedent.Width = GridLength.Auto;
+            gridCasierColSuivant.Width = GridLength.Auto;
             gridCasierColPrincipale.Width = new GridLength(1, GridUnitType.Star);
             gridCasierColForm.Width = new GridLength(0);
         }

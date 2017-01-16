@@ -18,7 +18,7 @@
 
         <Rectangle Fill="#FF661141" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0"/>
 
-        <Button x:Name="btnLogo" HorizontalAlignment="Left" VerticalAlignment="Center" Height="115" Width="111" Margin="125,0,0,0" Grid.Row="0" Background="#FF661141" BorderBrush="#FF661141" Click="btnLogo_Click">
+        <Button x:Name="btnLogo" HorizontalAlignment="Left" VerticalAlignment="Center" Height="115" Width="111" Margin="90,0,0,0" Grid.Row="0" Background="#FF661141" BorderBrush="#FF661141" Click="btnLogo_Click">
             <Image x:Name="logo" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Source=".\Images\logoBouteille.png" RenderTransformOrigin="0.28,0.471" />
         </Button>
 
@@ -31,7 +31,7 @@
             <fa:ImageAwesome Icon="Bars" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="45" />
         </Button>
 
-        <Grid x:Name="AffichageAccueil" Grid.Row="1" Visibility="Visible" UseLayoutRounding="False" IsHitTestVisible="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid x:Name="AffichageAccueil" Grid.Row="1" Visibility="Hidden" UseLayoutRounding="False" IsHitTestVisible="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -46,12 +46,14 @@
 
             <Grid Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,50,0,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Rectangle Fill="#FF661141" Grid.Row="0" HorizontalAlignment="Stretch" Stroke="#FF661141" VerticalAlignment="Stretch"/>
-                <Label x:Name="LeSaviezVous" Grid.Row="0" FontSize="40" Content="Le saviez-vous ?" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center" FontFamily="Californian FB" FontWeight="Bold"/>
-                <TextBox Grid.Row="1" FontSize="30" Background="white" x:Name="TB_SaviezVous" TextAlignment="Justify" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto" IsEnabled="True" AcceptsReturn="True" Focusable="False" BorderBrush="#FF661141"/>
+                <TextBlock x:Name="LeSaviezVous" Grid.Row="0" FontSize="40" HorizontalAlignment="Center" Foreground="White" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" TextAlignment="Center" FontFamily="Californian FB" FontWeight="Bold">
+                    Le saviez-vous ?
+                </TextBlock>
+                <TextBox Grid.Row="1" FontSize="30" Padding="15" Background="white" x:Name="TB_SaviezVous" TextAlignment="Justify" HorizontalAlignment="Stretch" TextWrapping="Wrap" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto" IsEnabled="True" AcceptsReturn="True" Focusable="False" BorderBrush="#FF661141"/>
             </Grid>
 
 
@@ -69,12 +71,12 @@
         </Grid>
 
 
-        <Grid x:Name="AffichageInterfaceCasier" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+        <Grid x:Name="AffichageInterfaceCasier" Grid.Row="1" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="gridCasierColPrecedent" Width="100"/>
+                <ColumnDefinition x:Name="gridCasierColPrecedent" Width="auto"/>
                 <ColumnDefinition x:Name="gridCasierColPrincipale" Width="*"/>
-                <ColumnDefinition x:Name="gridCasierColSuivant" Width="100"/>
+                <ColumnDefinition x:Name="gridCasierColSuivant" Width="auto"/>
                 <ColumnDefinition x:Name="gridCasierColForm" Width="0"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -85,11 +87,11 @@
 
             <Label x:Name="lblNomCasier" Grid.ColumnSpan="3" Grid.Row="0" Content="&#xA;" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Californian FB" FontSize="25" FontWeight="Bold"/>
 
-            <Button x:Name="CasierPrecedent" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="35" Height="50" Background="#FF661141" BorderBrush="#FF661141" Click="CasierPrecedent_Click">
+            <Button x:Name="CasierPrecedent" Grid.Row="1" Grid.Column="0" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="35" Height="50" Background="#FF661141" BorderBrush="#FF661141" Click="CasierPrecedent_Click">
                 <fa:ImageAwesome Icon="ChevronLeft" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="25" />
             </Button>
 
-            <Button x:Name="CasierSuivant" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="35" Height="50" Background="#FF661141" BorderBrush="#FF661141" Click="CasierSuivant_Click">
+            <Button x:Name="CasierSuivant" Grid.Row="1" Grid.Column="2" Margin="10,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="35" Height="50" Background="#FF661141" BorderBrush="#FF661141" Click="CasierSuivant_Click">
                 <fa:ImageAwesome Icon="ChevronRight" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="25" />
             </Button>
             <Button x:Name="BT_Plus" Grid.ColumnSpan="4" Grid.Row="2" HorizontalAlignment="Right" Height="60" Margin="0,0,10,0" VerticalAlignment="Center" Width="60" BorderThickness="0" Background="#FF661141" BorderBrush="#FF661141" Click="AjoutBouteille_Click">
