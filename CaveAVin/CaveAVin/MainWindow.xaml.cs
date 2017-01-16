@@ -197,7 +197,7 @@ namespace CaveAVin
 
             ColumnDefinition[] colonne;
             RowDefinition[] ligne;
-            
+
             var imageBlanc = new BitmapImage(new Uri("../../../CaveAVin/Images/BlancCasier.png", UriKind.Relative));
             var imageRouge = new BitmapImage(new Uri("../../../CaveAVin/Images/RougeCasier.png", UriKind.Relative));
             var imageRose = new BitmapImage(new Uri("../../../CaveAVin/Images/RoséCasier.png", UriKind.Relative));
@@ -344,7 +344,7 @@ namespace CaveAVin
         {
             float nb = float.Parse(((Button)sender).Tag.ToString());
 
-            int ligne = (int) nb;
+            int ligne = (int)nb;
 
             float coln = (nb - ligne) * 100;
             int col = 0;
@@ -354,7 +354,7 @@ namespace CaveAVin
             }
             else
             {
-                col = (int)coln+1;
+                col = (int)coln + 1;
             }
 
 
@@ -418,7 +418,7 @@ namespace CaveAVin
                 CasierPrecedent.Visibility = Visibility.Visible;
             }
 
-            if (nCasierActuel < nbCasierTotal-1)
+            if (nCasierActuel < nbCasierTotal - 1)
             {
                 CasierSuivant.Visibility = Visibility.Visible;
             }
@@ -450,7 +450,7 @@ namespace CaveAVin
                 l_ligne = Int32.Parse(sender.ToString().Substring(32, 1));
                 l_col = Int32.Parse(sender.ToString().Substring(35, 1));
 
-                ((Button)listeBouton[nCasierActuel].GetValue(ba_ligne, ba_col)).Opacity = 1.0 ;
+                ((Button)listeBouton[nCasierActuel].GetValue(ba_ligne, ba_col)).Opacity = 1.0;
 
                 ((Button)listeBouton[nCasierActuel].GetValue(l_ligne, l_col)).Opacity = 0.5;
 
@@ -467,12 +467,12 @@ namespace CaveAVin
                 var casierDao = new CasierDAO(DAO.BDD.Instance.Connexion);
                 var bouteilleDao = new BouteilleDAO(DAO.BDD.Instance.Connexion);
                 var casier = casierDao.Chercher(nCasierActuel);
-                var bouteille = bouteilleDao.Chercher(posi.X, posi.Y, posi.Casier,0);
+                var bouteille = bouteilleDao.Chercher(posi.X, posi.Y, posi.Casier, 0);
                 AfficherDetailBouteille(bouteille);
 
             }
             else
-            {      
+            {
                 int ligne = Int32.Parse(sender.ToString().Substring(32, 1));
                 int col = Int32.Parse(sender.ToString().Substring(35, 1));
                 Metier.Position posi = new Metier.Position(ligne, col);
@@ -480,7 +480,7 @@ namespace CaveAVin
                 bool existe = false;
                 foreach (Metier.Position pos in listeBouteilleSuppr)
                 {
-                    if (pos.X == ligne && pos.Y == col  && pos.Casier== nCasierActuel)
+                    if (pos.X == ligne && pos.Y == col && pos.Casier == nCasierActuel)
                     {
                         existe = true;
                         listeBouteilleSuppr.Remove(pos);
@@ -490,7 +490,7 @@ namespace CaveAVin
                 if (existe)
                 {
                     ((Button)listeBouton[nCasierActuel].GetValue(ligne, col)).Opacity = 1.0;
-                    
+
 
                 }
                 else
@@ -533,7 +533,7 @@ namespace CaveAVin
 
             var ecranTailleMini = tailleColBouton * 2 + tailleMinColPrincipale + tailleColForm;
 
-            if(ecranTailleMini < maxWidth)
+            if (ecranTailleMini < maxWidth)
             {
                 gridCasierColPrecedent.Width = new GridLength(tailleColBouton);
                 gridCasierColSuivant.Width = new GridLength(tailleColBouton);
@@ -658,7 +658,7 @@ namespace CaveAVin
                 lbl_Region.Text = bouteille.Region?.NomRegion;
                 lbl_Vinification.Text = bouteille.Type_vinification?.NomVinif;
                 DisplayFicheDetailBouteille(true);
-           }
+            }
         }
 
 
@@ -774,7 +774,7 @@ namespace CaveAVin
             AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
             AffichageMenuLateral.Visibility = Visibility.Hidden;
             AffichageAjoutCasier.Visibility = Visibility.Visible;
-            
+
         }
 
 
@@ -797,7 +797,7 @@ namespace CaveAVin
                 {
                     ligne = pos.X;
                     col = pos.Y;
-                    cas = pos.Casier;                 
+                    cas = pos.Casier;
                     req.delete(ligne, col, cas, "");
 
                     ((Button)listeBouton[cas].GetValue(ligne, col)).Opacity = 1.0;
@@ -913,14 +913,14 @@ namespace CaveAVin
 
             #region gestion combobox
 
-                DAO.TypeDAO daoType = new DAO.TypeDAO(DAO.BDD.Instance.Connexion);
-                string nomType = cb_Type_Ajout.Text;
+            DAO.TypeDAO daoType = new DAO.TypeDAO(DAO.BDD.Instance.Connexion);
+            string nomType = cb_Type_Ajout.Text;
+            t = daoType.Chercher(cb_Type_Ajout.Text);
+            if (t == null)
+            {
+                daoType.Créer(nomType);
                 t = daoType.Chercher(cb_Type_Ajout.Text);
-                if (t == null)
-                {
-                    daoType.Créer(nomType);
-                    t = daoType.Chercher(cb_Type_Ajout.Text);
-                }
+            }
 
             if (cb_Pays_Ajout.Text != "")
             {
@@ -1030,42 +1030,42 @@ namespace CaveAVin
             foreach (Metier.Position pos in listeBouteilleAjout)
             {
                 cas = daoCas.Chercher(pos.Casier);
-                    Metier.Bouteille b = new Metier.Bouteille(0, false, "", pos.X, pos.Y, cas, cru, m, c, d, r, tv, a, t,p);
-                    daoBou.Créer(b);
+                Metier.Bouteille b = new Metier.Bouteille(0, false, "", pos.X, pos.Y, cas, cru, m, c, d, r, tv, a, t, p);
+                daoBou.Créer(b);
 
                 ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Click -= SelectBouteille;
                 ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Opacity = 1.0;
 
                 if (nomType == "Blanc")
-                    {
-                        brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/BlancCasier.png", UriKind.Relative));
-                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Background = brush;
-                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Click += SelectionBouteille;
-                    }
-                    else if (nomType == "Rouge")
-                    {
-                        brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/RougeCasier.png", UriKind.Relative));
-                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Background = brush;
-                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Click += SelectionBouteille;
-                    }
-                    else if (nomType == "Rosé")
-                    {
-                        brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/RoséCasier.png", UriKind.Relative));
-                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Background = brush;
-                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Click += SelectionBouteille;
-                    }
-                    else if (nomType == "Pétillant")
-                    {
-                        brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/PétillantCasier.png", UriKind.Relative));
-                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Background = brush;
-                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Click += SelectionBouteille;
-                    }
-                    else
-                    {
-                        brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/CaseVide.png", UriKind.Relative));
-                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Background = brush;
-                        ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Click += SelectBouteille;
-                    }               
+                {
+                    brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/BlancCasier.png", UriKind.Relative));
+                    ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Background = brush;
+                    ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Click += SelectionBouteille;
+                }
+                else if (nomType == "Rouge")
+                {
+                    brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/RougeCasier.png", UriKind.Relative));
+                    ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Background = brush;
+                    ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Click += SelectionBouteille;
+                }
+                else if (nomType == "Rosé")
+                {
+                    brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/RoséCasier.png", UriKind.Relative));
+                    ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Background = brush;
+                    ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Click += SelectionBouteille;
+                }
+                else if (nomType == "Pétillant")
+                {
+                    brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/PétillantCasier.png", UriKind.Relative));
+                    ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Background = brush;
+                    ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Click += SelectionBouteille;
+                }
+                else
+                {
+                    brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/CaseVide.png", UriKind.Relative));
+                    ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Background = brush;
+                    ((Button)listeBouton[pos.Casier].GetValue(pos.X, pos.Y)).Click += SelectBouteille;
+                }
             }
             listeBouteilleAjout.Clear();
 
@@ -1083,11 +1083,11 @@ namespace CaveAVin
         {
             #region gère affichage
             MasquerEcran();
-            
+
             //AffichageAccueil.Visibility = Visibility.Hidden;
             //AffichageInterfaceCasier.Visibility = Visibility.Hidden;
             //MultiCasier.Visibility = Visibility.Hidden;
-           // AffichageMenuLateral.Visibility = Visibility.Hidden;
+            // AffichageMenuLateral.Visibility = Visibility.Hidden;
             //AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
             AffichageRecherche.Visibility = Visibility.Visible;
             OptionRecherche.Visibility = Visibility.Visible;
@@ -1274,7 +1274,7 @@ namespace CaveAVin
         private void largeurCasierAjout_TextChanged(object sender, TextChangedEventArgs e)
         {
             int res;
-            if(Int32.TryParse(largeurCasierAjout.Text,out res))
+            if (Int32.TryParse(largeurCasierAjout.Text, out res))
             {
 
             }
@@ -1369,9 +1369,9 @@ namespace CaveAVin
 
             foreach (var casier in casiers.Lister())
             {
-                int idColonne = index % 3;
-                int idLigne = index / 3;
-                
+                //int idColonne = index % 3;
+                //int idLigne = index / 3;
+
 
                 var nomCasier = new Button();
                 nomCasier.Click += CasierSelectione;
@@ -1384,9 +1384,10 @@ namespace CaveAVin
                 nomCasier.HorizontalContentAlignment = HorizontalAlignment.Center;
                 nomCasier.VerticalContentAlignment = VerticalAlignment.Center;
                 nomCasier.FontSize = 30;
-                nomCasier.FontFamily = new FontFamily("CalifornianFB");
+                nomCasier.FontFamily = new FontFamily("Californian FB");
                 nomCasier.Foreground = Brushes.White;
                 nomCasier.Background = couleur;
+                nomCasier.Tag = index;
                 //Grid.SetColumn(nomCasier, idColonne);
                 //Grid.SetRow(nomCasier, idLigne);
                 grdListeCasier.Children.Add(nomCasier);
@@ -1430,12 +1431,10 @@ namespace CaveAVin
         private void CasierSelectione(object sender, RoutedEventArgs e)
         {
             var casierBouton = (Button)sender;
-            var idColonne = Grid.GetColumn(casierBouton);
-            var idLigne = Grid.GetRow(casierBouton);
-            nCasierActuel = idLigne * 3 + idColonne;
+            nCasierActuel = (int)casierBouton.Tag;
             if (casierSuppr)
             {
-                
+
             }
             else if (casierModif)
             {
@@ -1443,27 +1442,28 @@ namespace CaveAVin
             }
             else
             {
-            AffichageListeCasier.Visibility = Visibility.Hidden;
-            AffichageInterfaceCasier.Visibility = Visibility.Visible;
-            GridAffichageBouteille.Visibility = Visibility.Visible;
-           
-            for (int i = 0; i < gestionCasier.Length; i++)
-            {
-                var casier = gestionCasier[i];
+                AffichageListeCasier.Visibility = Visibility.Hidden;
+                AffichageInterfaceCasier.Visibility = Visibility.Visible;
+                GridAffichageBouteille.Visibility = Visibility.Visible;
+
+                for (int i = 0; i < gestionCasier.Length; i++)
+                {
+                    var casier = gestionCasier[i];
 
                     if (casier != null)
-                {
-                    casier.Visibility = Visibility.Hidden;
+                    {
+                        casier.Visibility = Visibility.Hidden;
+                    }
                 }
-            }
 
-            var casierCourant = gestionCasier[nCasierActuel];
+                var casierCourant = gestionCasier[nCasierActuel];
                 if (casierCourant != null)
                 {
-                casierCourant.Visibility = Visibility.Visible;
+                    casierCourant.Visibility = Visibility.Visible;
+                }
+                RecalculailleGrille();
+                AfficherBouteille();
             }
-            AfficherBouteille();
-        }
         }
 
 
@@ -1611,7 +1611,7 @@ namespace CaveAVin
                 }
             }
 
-            if ((lbl_Millesime.Text != "")&& (lbl_Millesime.Text != null))
+            if ((lbl_Millesime.Text != "") && (lbl_Millesime.Text != null))
             {
                 DAO.MillesimeDAO daoMil = new DAO.MillesimeDAO(DAO.BDD.Instance.Connexion);
                 int nomMil = Int32.Parse(lbl_Millesime.Text);
@@ -1658,11 +1658,11 @@ namespace CaveAVin
             cas = daoCas.Chercher(nCasierActuel);
             Metier.Bouteille b = new Metier.Bouteille(1, false, "", l_ligne, l_col, cas, cru, m, c, d, r, tv, a, t, p);
             daoBou.Modifier(b);
-            }
+        }
 
         private void btnDéplacerFicheDetail_Click(object sender, RoutedEventArgs e)
         {
-            if(deplacer == false)
+            if (deplacer == false)
             {
                 deplacer = true;
             }
@@ -1683,7 +1683,7 @@ namespace CaveAVin
                 ((Button)listeBouton[l_cas_dep].GetValue(l_ligne_dep, l_col_dep)).Opacity = 0.5;
 
                 DAO.BouteilleDAO daoBout = new DAO.BouteilleDAO(DAO.BDD.Instance.Connexion);
-                daoBout.Deplacer(l_ligne,l_col,l_cas,l_ligne_dep,l_col_dep,l_cas_dep);
+                daoBout.Deplacer(l_ligne, l_col, l_cas, l_ligne_dep, l_col_dep, l_cas_dep);
                 l_ligne = l_ligne_dep;
                 l_col = l_col_dep;
                 l_cas = l_cas_dep;
@@ -1708,7 +1708,7 @@ namespace CaveAVin
 
         private void btnModifierCasier_Click(object sender, RoutedEventArgs e)
         {
-            if(!casierModif)
+            if (!casierModif)
             {
                 casierModif = true;
             }
@@ -1720,7 +1720,7 @@ namespace CaveAVin
 
         private void BT_Supprimer_Casier_Click(object sender, RoutedEventArgs e)
         {
-            if(!casierSuppr)
+            if (!casierSuppr)
             {
                 casierSuppr = true;
             }
