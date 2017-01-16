@@ -69,7 +69,7 @@
         </Grid>
 
 
-        <Grid x:Name="AffichageInterfaceCasier" Grid.Row="1" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid x:Name="AffichageInterfaceCasier" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="gridCasierColPrecedent" Width="100"/>
@@ -289,7 +289,7 @@
             </Grid>
         </Grid>
 
-        <Grid x:Name="AffichageAjoutCasier" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid x:Name="AffichageAjoutCasier" Grid.Row="1" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2*"/>
