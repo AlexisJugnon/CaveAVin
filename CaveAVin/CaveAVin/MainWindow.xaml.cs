@@ -528,7 +528,7 @@ namespace CaveAVin
             var maxWidth = AffichageInterfaceCasier.ActualWidth;
 
             var tailleColBouton = 60;
-            var tailleMinColPrincipale = GridAffichageBouteille.ActualHeight;
+            var tailleMinColPrincipale = 300;
             var tailleColForm = Math.Min(maxWidth, 500);
 
             var ecranTailleMini = tailleColBouton * 2 + tailleMinColPrincipale + tailleColForm;
@@ -537,16 +537,18 @@ namespace CaveAVin
             {
                 gridCasierColPrecedent.Width = new GridLength(tailleColBouton);
                 gridCasierColSuivant.Width = new GridLength(tailleColBouton);
+                gridCasierColForm.Width = new GridLength(tailleColForm);
+                RecalculailleGrille();
             }
             else
             {
                 gridCasierColPrecedent.Width = new GridLength(0);
                 gridCasierColSuivant.Width = new GridLength(0);
                 gridCasierColPrincipale.Width = new GridLength(0);
+                gridCasierColForm.Width = new GridLength(1, GridUnitType.Star);
             }
 
             //GridAffichageBouteille.Margin = new Thickness(0, 30, 0, 50);
-            gridCasierColForm.Width = new GridLength(tailleColForm);
         }
 
 
@@ -557,10 +559,12 @@ namespace CaveAVin
         private void ReDecaler()
         {
             //GridAffichageBouteille.Margin = new Thickness(300, 30, 0, 0);
+            gridCasierColForm.Width = new GridLength(0);
             gridCasierColPrecedent.Width = GridLength.Auto;
             gridCasierColSuivant.Width = GridLength.Auto;
+            gridCasierColPrincipale.Width = new GridLength(AffichageInterfaceCasier.ActualWidth - 120, GridUnitType.Pixel);
+            RecalculailleGrille();
             gridCasierColPrincipale.Width = new GridLength(1, GridUnitType.Star);
-            gridCasierColForm.Width = new GridLength(0);
         }
 
 
@@ -1689,16 +1693,17 @@ namespace CaveAVin
 
         private void btnFermerFicheDetail_Click(object sender, RoutedEventArgs e)
         {
-            ReDecaler();
             AfficheDetailBouteille.Visibility = Visibility.Hidden;
             ((Button)listeBouton[l_cas].GetValue(l_ligne, l_col)).Opacity = 1.0;
+            ReDecaler();
+            RecalculailleGrille();
         }
 
         private void btnFermerFicheAjout_Click(object sender, RoutedEventArgs e)
         {
-            ReDecaler();
             AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
             ((Button)listeBouton[l_cas].GetValue(l_ligne, l_col)).Opacity = 1.0;
+            ReDecaler();
         }
 
         private void btnModifierCasier_Click(object sender, RoutedEventArgs e)

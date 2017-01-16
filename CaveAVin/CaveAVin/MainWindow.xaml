@@ -161,14 +161,12 @@
                     </Grid>
                 </ScrollViewer>
             </Border>
-
-        </Grid>
-
-        <Border x:Name="AffichageFicheAjoutBouteille" Grid.Row="1" Visibility="Hidden" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="430" Margin="10" Background="#FFFCF4E3">
+            
+            <Border x:Name="AffichageFicheAjoutBouteille" Visibility="Hidden" BorderBrush="Black" BorderThickness="1" Grid.Column="3" Grid.RowSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Background="#FFFCF4E3">
             <ScrollViewer Grid.Row="1" Name="sVAjoutBouteille" VerticalScrollBarVisibility="Auto">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
@@ -179,7 +177,7 @@
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -218,6 +216,9 @@
                 </Grid>
             </ScrollViewer>
         </Border>
+
+        </Grid>
+
 
         <Grid x:Name="AffichageRecherche" Grid.Row="1" Visibility="Hidden"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
