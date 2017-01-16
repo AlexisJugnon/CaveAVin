@@ -91,7 +91,7 @@ namespace DAO
                 IDataReader reader = com.ExecuteReader();
                 while (reader.Read())
                 {
-                    Bouteille bo = reader2Bouteille(reader);
+                    Bouteille bo = reader2BouteilleFull(reader);
                     liste.Ajouter(bo);
                 }
             }

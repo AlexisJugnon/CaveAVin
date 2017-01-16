@@ -4,8 +4,8 @@ suppression casier
 
 modification casier
 
+ajout casier n'importe ou
+
 doc création et hébergement bdd
 
 ajout comm plus tard
-
-Portage sur windowPhone
