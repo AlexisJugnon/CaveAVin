@@ -681,6 +681,7 @@ namespace CaveAVin
             AffichageAccueil.Visibility = Visibility.Hidden;
             AffichageInterfaceCasier.Visibility = Visibility.Visible;
             GridAffichageBouteille.Visibility = Visibility.Visible;
+            RecalculailleGrille();
         }
 
 
