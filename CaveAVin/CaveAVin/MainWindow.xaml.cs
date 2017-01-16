@@ -204,7 +204,8 @@ namespace CaveAVin
             var imagePetillant = new BitmapImage(new Uri("../../../CaveAVin/Images/PétillantCasier.png", UriKind.Relative));
             var imageVide = new BitmapImage(new Uri("../../../CaveAVin/Images/CaseVide.png", UriKind.Relative));
 
-            for (int i = nbCasierTotalActuel; i < nbCasierTotal; i++)
+            for (int i = nbCasierTotalActuel; i < 2; i++)
+            //for (int i = nbCasierTotalActuel; i < nbCasierTotal; i++)
             {
                 var casier = casiers[i];
                 gestionCasier[i] = new Grid();
@@ -1078,13 +1079,13 @@ namespace CaveAVin
         private void BT_rechercher_Click(object sender, RoutedEventArgs e)
         {
             #region gère affichage
-
-            AffichageRecherche.Visibility = Visibility.Visible;
-            AffichageAccueil.Visibility = Visibility.Hidden;
-            AffichageInterfaceCasier.Visibility = Visibility.Hidden;
+            MasquerEcran();
+            
+            //AffichageAccueil.Visibility = Visibility.Hidden;
+            //AffichageInterfaceCasier.Visibility = Visibility.Hidden;
             //MultiCasier.Visibility = Visibility.Hidden;
-            AffichageMenuLateral.Visibility = Visibility.Hidden;
-            AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
+           // AffichageMenuLateral.Visibility = Visibility.Hidden;
+            //AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
             AffichageRecherche.Visibility = Visibility.Visible;
             OptionRecherche.Visibility = Visibility.Visible;
 
@@ -1200,9 +1201,10 @@ namespace CaveAVin
         private void validerAjoutComm_Click(object sender, RoutedEventArgs e)
         {
             AjoutCommentaireSupression.Visibility = Visibility.Hidden;
-            ReDecaler();
             AffichageInterfaceCasier.Visibility = Visibility.Visible;
-            
+            GridAffichageBouteille.Visibility = Visibility.Visible;
+            ReDecaler();
+
             var brush = new ImageBrush();
             brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/CaseVide.png", UriKind.Relative));
             ((Button)listeBouton[nCasierActuel].GetValue(l_ligne, l_col)).Background = brush;
@@ -1722,6 +1724,11 @@ namespace CaveAVin
             {
 
             }
+        }
+
+        private void AffichagePrincipal_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            RecalculailleGrille();
         }
 
 
