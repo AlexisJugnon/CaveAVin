@@ -7,7 +7,7 @@
 		xmlns:fa="http://schemas.fontawesome.io/icons/"
 		mc:Ignorable="d"
 		
-		Title="WineFinder" Height="1000" Width="1000" ResizeMode="CanResize" Icon="Images/logoReduit.png" WindowStartupLocation="CenterOwner">
+		Title="WineFinder" Height="1390" Width="1000" ResizeMode="CanResize" Icon="Images/logoReduit.png" WindowStartupLocation="CenterOwner">
 
     <Grid x:Name="AffichagePrincipal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SizeChanged="AffichagePrincipal_SizeChanged">
         <Grid.RowDefinitions>
@@ -71,7 +71,7 @@
         </Grid>
 
 
-        <Grid x:Name="AffichageInterfaceCasier" Grid.Row="1" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+        <Grid x:Name="AffichageInterfaceCasier" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="gridCasierColPrecedent" Width="auto"/>
@@ -161,61 +161,61 @@
                     </Grid>
                 </ScrollViewer>
             </Border>
-            
+
             <Border x:Name="AffichageFicheAjoutBouteille" Visibility="Hidden" BorderBrush="Black" BorderThickness="1" Grid.Column="3" Grid.RowSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Background="#FFFCF4E3">
-            <ScrollViewer Grid.Row="1" Name="sVAjoutBouteille" VerticalScrollBarVisibility="Auto">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="50"/>
-                    </Grid.RowDefinitions>
+                <ScrollViewer Grid.Row="1" Name="sVAjoutBouteille" VerticalScrollBarVisibility="Auto">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="2*"/>
-                    </Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Label x:Name="lbl_Titre" Content="Ajouter des bouteilles" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Californian FB" FontSize="40" Foreground="#FF661141" Grid.Row="0" Grid.ColumnSpan="2"/>
-                    <Label x:Name="lbl_Info1" Content="Type :" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
-                    <Label x:Name="lbl_Info2" Content="Région :" HorizontalAlignment="Left" Margin="10,10,0,14" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"/>
-                    <Label x:Name="lbl_Info3" Content="Millésime :" HorizontalAlignment="Left" Margin="10,10,0,14" VerticalAlignment="Center" Grid.Row="8" Grid.Column="0"/>
-                    <Label x:Name="lbl_Info4" Content="Contenance :" HorizontalAlignment="Left" Margin="10,10,0,14" VerticalAlignment="Center" Grid.Row="7" Grid.Column="0"/>
-                    <Label x:Name="lbl_Info5" Content="Domaine :" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0"/>
-                    <Label x:Name="lbl_Info6" Content="Cru :" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0"/>
-                    <Label x:Name="lbl_Info7" Content="Vinification :" Margin="10,10,0,14" VerticalAlignment="Center" Grid.Row="9" Grid.Column="0"/>
-                    <Label x:Name="lbl_Info" Content="Appellation :" HorizontalAlignment="Left" Margin="10,10,0,14" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0"/>
-                    <Label x:Name="label9" Content="Pays :" HorizontalAlignment="Left" Margin="10,10,0,14" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
+                        <Label x:Name="lbl_Titre" Content="Ajouter des bouteilles" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Californian FB" FontSize="40" Foreground="#FF661141" Grid.Row="0" Grid.ColumnSpan="2"/>
+                        <Label x:Name="lbl_Info1" Content="Type :" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+                        <Label x:Name="lbl_Info2" Content="Région :" HorizontalAlignment="Left" Margin="10,10,0,14" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"/>
+                        <Label x:Name="lbl_Info3" Content="Millésime :" HorizontalAlignment="Left" Margin="10,10,0,14" VerticalAlignment="Center" Grid.Row="8" Grid.Column="0"/>
+                        <Label x:Name="lbl_Info4" Content="Contenance :" HorizontalAlignment="Left" Margin="10,10,0,14" VerticalAlignment="Center" Grid.Row="7" Grid.Column="0"/>
+                        <Label x:Name="lbl_Info5" Content="Domaine :" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0"/>
+                        <Label x:Name="lbl_Info6" Content="Cru :" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0"/>
+                        <Label x:Name="lbl_Info7" Content="Vinification :" Margin="10,10,0,14" VerticalAlignment="Center" Grid.Row="9" Grid.Column="0"/>
+                        <Label x:Name="lbl_Info" Content="Appellation :" HorizontalAlignment="Left" Margin="10,10,0,14" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0"/>
+                        <Label x:Name="label9" Content="Pays :" HorizontalAlignment="Left" Margin="10,10,0,14" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
 
-                    <ComboBox x:Name="cb_Appelation_Ajout" HorizontalAlignment="Stretch" Margin="10,14" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="4" Grid.Column="1"/>
-                    <ComboBox x:Name="cb_Vinification_Ajout" HorizontalAlignment="Stretch" Margin="10,14" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="9" Grid.Column="1"/>
-                    <ComboBox x:Name="cb_Cru_Ajout" HorizontalAlignment="Stretch" Margin="10,16,10,12" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="6" Grid.Column="1"/>
-                    <ComboBox x:Name="cb_Domaine_Ajout" HorizontalAlignment="Stretch" Margin="10,16,10,12" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="5" Grid.Column="1"/>
-                    <ComboBox x:Name="cb_Type_Ajout" HorizontalAlignment="Stretch" Margin="10,12,10,16" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="1" Grid.Column="1"/>
-                    <ComboBox x:Name="cb_Region_Ajout" HorizontalAlignment="Stretch" Margin="10,14" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="3" Grid.Column="1"/>
-                    <ComboBox x:Name="cb_Pays_Ajout" HorizontalAlignment="Stretch" Margin="10,14" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="2" Grid.Column="1"/>
-                    <TextBox x:Name="cb_Contenance_Ajout" HorizontalAlignment="Stretch" Margin="10,18,10,14" VerticalAlignment="Center" TextWrapping="Wrap" TextChanged="cb_Contenance_Ajout_TextChanged" BorderBrush="#FF661141"  Grid.Row="7" Grid.Column="1"/>
-                    <TextBox x:Name="cb_Millesime_Ajout" HorizontalAlignment="Stretch" Margin="10,18,10,14" VerticalAlignment="Center" TextWrapping="Wrap" TextChanged="cb_Millesime_Ajout_TextChanged" BorderBrush="#FF661141"  Grid.Row="8" Grid.Column="1"/>
+                        <ComboBox x:Name="cb_Appelation_Ajout" HorizontalAlignment="Stretch" Margin="10,14" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="4" Grid.Column="1"/>
+                        <ComboBox x:Name="cb_Vinification_Ajout" HorizontalAlignment="Stretch" Margin="10,14" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="9" Grid.Column="1"/>
+                        <ComboBox x:Name="cb_Cru_Ajout" HorizontalAlignment="Stretch" Margin="10,16,10,12" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="6" Grid.Column="1"/>
+                        <ComboBox x:Name="cb_Domaine_Ajout" HorizontalAlignment="Stretch" Margin="10,16,10,12" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="5" Grid.Column="1"/>
+                        <ComboBox x:Name="cb_Type_Ajout" HorizontalAlignment="Stretch" Margin="10,12,10,16" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="1" Grid.Column="1"/>
+                        <ComboBox x:Name="cb_Region_Ajout" HorizontalAlignment="Stretch" Margin="10,14" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="3" Grid.Column="1"/>
+                        <ComboBox x:Name="cb_Pays_Ajout" HorizontalAlignment="Stretch" Margin="10,14" VerticalAlignment="Center" IsEditable="True" BorderBrush="#FF661141" Grid.Row="2" Grid.Column="1"/>
+                        <TextBox x:Name="cb_Contenance_Ajout" HorizontalAlignment="Stretch" Margin="10,18,10,14" VerticalAlignment="Center" TextWrapping="Wrap" TextChanged="cb_Contenance_Ajout_TextChanged" BorderBrush="#FF661141"  Grid.Row="7" Grid.Column="1"/>
+                        <TextBox x:Name="cb_Millesime_Ajout" HorizontalAlignment="Stretch" Margin="10,18,10,14" VerticalAlignment="Center" TextWrapping="Wrap" TextChanged="cb_Millesime_Ajout_TextChanged" BorderBrush="#FF661141"  Grid.Row="8" Grid.Column="1"/>
 
-                    <Button x:Name="Validation_ajout" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Width="50" Height="50" Background="#FF661141" BorderBrush="#FF661141" Click="ValidationAjout_Click" Grid.Row="11" Grid.ColumnSpan="2">
-                        <fa:ImageAwesome Icon="Check" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="35" />
-                    </Button>
+                        <Button x:Name="Validation_ajout" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Width="50" Height="50" Background="#FF661141" BorderBrush="#FF661141" Click="ValidationAjout_Click" Grid.Row="11" Grid.ColumnSpan="2">
+                            <fa:ImageAwesome Icon="Check" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="35" />
+                        </Button>
 
-                    <Button x:Name="btnFermerFicheAjout" HorizontalAlignment="Right" Height="50" Margin="0,0,80,0" VerticalAlignment="Center" Width="50" Background="#FF661141" BorderBrush="#FF661141" Click="btnFermerFicheAjout_Click" Grid.Row="11" Grid.ColumnSpan="2">
-                        <fa:ImageAwesome Icon="Close" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="35" />
-                    </Button>
-                </Grid>
-            </ScrollViewer>
-        </Border>
+                        <Button x:Name="btnFermerFicheAjout" HorizontalAlignment="Right" Height="50" Margin="0,0,80,0" VerticalAlignment="Center" Width="50" Background="#FF661141" BorderBrush="#FF661141" Click="btnFermerFicheAjout_Click" Grid.Row="11" Grid.ColumnSpan="2">
+                            <fa:ImageAwesome Icon="Close" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="35" />
+                        </Button>
+                    </Grid>
+                </ScrollViewer>
+            </Border>
 
         </Grid>
 
@@ -272,7 +272,7 @@
                     </Button>
                 </Grid>
             </ScrollViewer>
-            
+
             <Grid x:Name="Res_Recherche_Grid" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="90"/>
@@ -301,8 +301,8 @@
         </Grid>
 
 
-        <Grid x:Name="AffichageAjoutCasier" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <ScrollViewer Grid.Row="1" Name="sVAffichageAjoutCasier" VerticalScrollBarVisibility="Auto">
+        <Grid x:Name="AffichageAjoutCasier" Grid.Row="1" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ScrollViewer Name="sVAffichageAjoutCasier" VerticalScrollBarVisibility="Auto">
                 <Grid Grid.Row="1" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -313,31 +313,36 @@
                         <RowDefinition Height="100" />
                         <RowDefinition Height="100" />
                         <RowDefinition Height="100"/>
-                        <RowDefinition Height="*" />
                         <RowDefinition Height="100" />
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="122"/>
                     </Grid.RowDefinitions>
 
-                    <Label x:Name="label1" Content="Ajout d'un casier" VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" FontSize="36" FontWeight="Bold" FontFamily="Californian FB"/>
-                    <TextBlock x:Name="label2" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" FontSize="20">
+                    <Label x:Name="label1" Content="Gestion d'un casier" VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Row="0" FontSize="36" FontWeight="Bold" FontFamily="Californian FB" Grid.Column="1" Margin="23,48,306,49" Height="54" Width="332"/>
+                    <TextBlock x:Name="label2" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="7,40,0,1" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" FontSize="20" Height="60" Width="287">
                 Nom du casier :
                     </TextBlock>
-                    <TextBlock x:Name="label3" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" FontSize="20">
+                    <TextBlock x:Name="label3" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="7,39,0,0" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" FontSize="20" Height="62" Width="287">
                 Hauteur (nombre de case) :
                     </TextBlock>
-                    <TextBlock x:Name="label4" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" FontSize="20">
+                    <TextBlock x:Name="label4" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="7,32,0,1" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" FontSize="20" Height="68" Width="287">
                 Largeur (nombre de case) :
                     </TextBlock>
 
-                    <TextBox x:Name="nomCasierAjout" HorizontalAlignment="Stretch" Height="37" Margin="0,0,10,0" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" />
-                    <TextBox x:Name="hauteurCasierAjout" HorizontalAlignment="Stretch" Height="37" Margin="0,0,10,0" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" TextChanged="hauteurCasierAjout_TextChanged"/>
-                    <TextBox x:Name="largeurCasierAjout" HorizontalAlignment="Stretch" Height="37" Margin="0,0,10,0" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" TextChanged="largeurCasierAjout_TextChanged"/>
+                    <TextBox x:Name="nomCasierAjout" HorizontalAlignment="Stretch" Height="36" Margin="9,40,-7,25" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" />
+                    <TextBox x:Name="hauteurCasierAjout" HorizontalAlignment="Stretch" Height="36" Margin="9,39,-7,26" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" TextChanged="hauteurCasierAjout_TextChanged"/>
+                    <TextBox x:Name="largeurCasierAjout" HorizontalAlignment="Stretch" Height="36" Margin="9,38,-7,27" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4" TextChanged="largeurCasierAjout_TextChanged"/>
 
-                    <Button x:Name="BT_AjouterCasier" HorizontalAlignment="Right" Margin="0,0,100,0" VerticalAlignment="Center" Width="80" Height="80" Background="#FF661141" BorderBrush="#FF661141"  Grid.ColumnSpan="2" Grid.Row="5" Click="AjoutCasier_Click">
+                    <Button x:Name="BT_AjouterCasier" HorizontalAlignment="Right" Margin="0,5,5,16" VerticalAlignment="Center" Width="80" Height="80" Background="#FF661141" BorderBrush="#FF661141" Grid.Row="5" Click="AjoutCasier_Click" Grid.Column="1">
                         <fa:ImageAwesome Icon="Plus" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="50" />
                     </Button>
-                    <Button x:Name="BT_AnnulerAjoutCasier" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Width="80" Height="80" Background="#FF661141" BorderBrush="#FF661141" Grid.ColumnSpan="2" Grid.Row="5" Click="annulAjoutCasier_Click">
+                    <Button x:Name="BT_AnnulerAjoutCasier" HorizontalAlignment="Right" Margin="0,318,5,-276" VerticalAlignment="Center" Width="80" Height="80" Background="#FF661141" BorderBrush="#FF661141" Grid.Row="8" Click="annulAjoutCasier_Click" Grid.Column="1">
                         <fa:ImageAwesome Icon="Close" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="50" />
                     </Button>
+                    <TextBlock x:Name="label7" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Center" Grid.Column="0" FontSize="24" TextDecorations="Underline" Grid.Row="1" Height="90" Width="311"><Run Text="Ajout d'un"/><Run Text=" "/><Run Text="casier :"/></TextBlock>
+                    <TextBlock x:Name="label7_Copy" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="10,10,0,1" VerticalAlignment="Center" Grid.Column="0" FontSize="24" TextDecorations="Underline" Grid.Row="6" Height="90" Width="311"><Run Text="Modifier "/><Run Text="un"/><Run Text=" "/><Run Text="casier :"/></TextBlock>
                 </Grid>
             </ScrollViewer>
         </Grid>
@@ -345,19 +350,19 @@
 
 
         <Grid x:Name="AjoutCommentaireSupression" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Stretch" Margin="20,20,20,20" VerticalAlignment="Stretch" >
-            
+
             <Border BorderBrush="#FF661141" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFFCF4E3"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="4*"/>
                     <RowDefinition Height="*"/>
-                   
+
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    
+
                 </Grid.ColumnDefinitions>
 
                 <TextBlock x:Name="label" TextWrapping="WrapWithOverflow" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" FontWeight="Bold" Grid.Row="0">
