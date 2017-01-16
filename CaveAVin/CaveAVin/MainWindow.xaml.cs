@@ -751,7 +751,8 @@ namespace CaveAVin
         /// <param name="e"></param>
         private void BT_Supprimer_Click(object sender, RoutedEventArgs e)
         {
-            AfficheDetailBouteille.Visibility = Visibility.Hidden;
+            MasquerEcran();
+            //AfficheDetailBouteille.Visibility = Visibility.Hidden;
             AjoutCommentaireSupression.Visibility = Visibility.Visible;
         }
 
@@ -1200,6 +1201,8 @@ namespace CaveAVin
         {
             AjoutCommentaireSupression.Visibility = Visibility.Hidden;
             ReDecaler();
+            AffichageInterfaceCasier.Visibility = Visibility.Visible;
+            
             var brush = new ImageBrush();
             brush.ImageSource = new BitmapImage(new Uri("../../../CaveAVin/Images/CaseVide.png", UriKind.Relative));
             ((Button)listeBouton[nCasierActuel].GetValue(l_ligne, l_col)).Background = brush;
