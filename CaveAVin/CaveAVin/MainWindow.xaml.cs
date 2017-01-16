@@ -204,8 +204,7 @@ namespace CaveAVin
             var imagePetillant = new BitmapImage(new Uri("../../../CaveAVin/Images/PétillantCasier.png", UriKind.Relative));
             var imageVide = new BitmapImage(new Uri("../../../CaveAVin/Images/CaseVide.png", UriKind.Relative));
 
-            for (int i = nbCasierTotalActuel; i < 2; i++)
-            //for (int i = nbCasierTotalActuel; i < nbCasierTotal; i++)
+            for (int i = nbCasierTotalActuel; i < nbCasierTotal; i++)
             {
                 var casier = casiers[i];
                 gestionCasier[i] = new Grid();
