@@ -83,6 +83,21 @@ namespace DAO
             }
         }
 
+        public void Modifier(string nom , int nbLigne, int nbColonne)
+        {
+                con.Open();
+            try {
+                IDbCommand com = con.CreateCommand();
+                com.CommandText = String.Format("UPDATE `Casier` SET `Largeur_X`={0},`Largeur_Y`={1} WHERE NomCasier='{2}';", nbLigne, nbColonne, nom);
+                com.ExecuteNonQuery();
+
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         public Casiers Lister()
         {
             Casiers liste = new Casiers();

@@ -142,7 +142,7 @@ namespace CaveAVin
         private void RecalculailleGrille()
         {
             // Si on a une grille
-            if (gestionCasier.Any() && nCasierActuel > -1 && nCasierActuel < gestionCasier.Count())
+            if (gestionCasier.Any() && nCasierActuel > -1 && nCasierActuel < gestionCasier.Count() && gestionCasier[nCasierActuel] != null)
             {
                 // Obtention de la grille
                 var grille = gestionCasier[nCasierActuel];
@@ -685,6 +685,7 @@ namespace CaveAVin
             AffichageAccueil.Visibility = Visibility.Hidden;
             AffichageInterfaceCasier.Visibility = Visibility.Visible;
             GridAffichageBouteille.Visibility = Visibility.Visible;
+            gestionCasier[0].Visibility = Visibility.Visible;
             RecalculailleGrille();
         }
 
@@ -774,7 +775,15 @@ namespace CaveAVin
             AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
             AffichageMenuLateral.Visibility = Visibility.Hidden;
             AffichageAjoutCasier.Visibility = Visibility.Visible;
-            
+
+            DAO.CasierDAO daoCas = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
+            Metier.Casiers listeCas = daoCas.Lister();
+            foreach (Metier.Casier c in listeCas.Lister())
+            {
+                cb_listeModifcasier.Items.Add(c.Nom);
+            }
+            cb_listeModifcasier.SelectedIndex = 0;
+
         }
 
 
@@ -815,7 +824,7 @@ namespace CaveAVin
             else
             {
                 if (courante != null)
-                    ((Button)listeBouton[courante.Casier - 1].GetValue(courante.X, courante.Y)).Opacity = 1.0;
+                    ((Button)listeBouton[courante.Casier].GetValue(courante.X, courante.Y)).Opacity = 1.0;
                 AfficheDetailBouteille.Visibility = Visibility.Hidden;
                 ReDecaler();
                 supprimer = true;
@@ -1512,6 +1521,15 @@ namespace CaveAVin
             //MultiCasier.Visibility = Visibility.Hidden;
             AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
             AffichageAjoutCasier.Visibility = Visibility.Visible;
+
+            DAO.CasierDAO daoCas = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
+            Metier.Casiers listeCas = daoCas.Lister();
+            foreach (Metier.Casier c in listeCas.Lister())
+            {
+                cb_listeModifcasier.Items.Add(c.Nom);
+            }
+            cb_listeModifcasier.SelectedIndex = 0;
+
         }
 
 
@@ -1735,6 +1753,154 @@ namespace CaveAVin
             RecalculailleGrille();
         }
 
+        private void ModifierCasier_Click(object sender, RoutedEventArgs e)
+        {
+            int emplacement = cb_listeModifcasier.SelectedIndex;
+            DAO.CasierDAO daoCas = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
+            daoCas.Modifier(cb_listeModifcasier.Text, Int32.Parse(hauteurCasierModif.Text), Int32.Parse(largeurCasierModif.Text));
+
+            MasquerEcran();
+            AffichageAccueil.Visibility = Visibility.Visible;
+
+
+            var imageBlanc = new BitmapImage(new Uri("../../../CaveAVin/Images/BlancCasier.png", UriKind.Relative));
+            var imageRouge = new BitmapImage(new Uri("../../../CaveAVin/Images/RougeCasier.png", UriKind.Relative));
+            var imageRose = new BitmapImage(new Uri("../../../CaveAVin/Images/RoséCasier.png", UriKind.Relative));
+            var imagePetillant = new BitmapImage(new Uri("../../../CaveAVin/Images/PétillantCasier.png", UriKind.Relative));
+            var imageVide = new BitmapImage(new Uri("../../../CaveAVin/Images/CaseVide.png", UriKind.Relative));
+
+            var casiers = daoCas.Lister().Lister();
+
+            var casier = casiers[emplacement];
+
+            int nombreColonne, nombreLigne;
+            int HeightBoutton, WidthBoutton;
+
+            var longueurMax = 648;
+            var largeurMax = longueurMax;
+
+            ColumnDefinition[] colonne;
+            RowDefinition[] ligne;
+
+            GridAffichageBouteille.Children.Remove(gestionCasier[emplacement]);
+            gestionCasier[emplacement] = new Grid();
+
+            listeBouton.Remove(button);
+
+            GridAffichageBouteille.Children.Add(gestionCasier[emplacement]);
+            gestionCasier[emplacement].VerticalAlignment = VerticalAlignment.Center;
+            gestionCasier[emplacement].HorizontalAlignment = HorizontalAlignment.Center;
+            gestionCasier[emplacement].Visibility = Visibility.Hidden;
+
+            nombreLigne = casier.LargeurX;
+            nombreColonne = casier.LargeurY;
+
+            if (nombreColonne > nombreLigne)
+            {
+                WidthBoutton = (int)((longueurMax)) / nombreColonne;
+                HeightBoutton = WidthBoutton;
+            }
+            else if (nombreColonne < nombreLigne)
+            {
+                HeightBoutton = (int)((longueurMax)) / nombreLigne;
+                WidthBoutton = HeightBoutton;
+            }
+            else
+            {
+                WidthBoutton = (int)((longueurMax)) / nombreColonne;
+                HeightBoutton = (int)((longueurMax)) / nombreLigne;
+            }
+
+            colonne = new ColumnDefinition[nombreColonne];
+            ligne = new RowDefinition[nombreLigne];
+
+            for (int f = 0; f < nombreColonne; f++)
+            {
+                colonne[f] = new ColumnDefinition();
+                colonne[f].Width = GridLength.Auto;
+                gestionCasier[emplacement].ColumnDefinitions.Add(colonne[f]);
+            }
+
+            for (int f = 0; f < nombreLigne; f++)
+            {
+                ligne[f] = new RowDefinition();
+                ligne[f].Height = GridLength.Auto;
+
+                gestionCasier[emplacement].RowDefinitions.Add(ligne[f]);
+            }
+
+            //Gère l'affichage des bouteilles dans le casier
+            string res;
+            button = new Button[nombreColonne, nombreLigne];
+            for (int k = 0; k < nombreColonne; k++)
+            {
+                for (int j = 0; j < nombreLigne; j++)
+                {
+                    var buttonCourant = new Button();
+                    button[k, j] = buttonCourant;
+
+                    gestionCasier[emplacement].Children.Add(button[k, j]);
+                    button[k, j].Visibility = Visibility.Visible;
+                    button[k, j].Content = k + ", " + j;
+                    button[k, j].Width = WidthBoutton;
+                    button[k, j].Height = HeightBoutton;
+                    buttonCourant.BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2b2404"));
+
+                    Grid.SetRow(button[k, j], j);
+                    Grid.SetColumn(button[k, j], k);
+                    res = "";
+                    try
+                    {
+                        res = req.SelStr1("SELECT NomType From Type natural join Bouteille where idCasier =" + casier.Id +
+                        " and Bouteille.Position_X = " + k + " and Bouteille.Position_Y = " + j + " and Bue = 0;", "NomType");
+                    }
+                    catch
+                    {
+
+                    }
+
+                    var brush = new ImageBrush();
+
+                    if (res == "Blanc")
+                    {
+                        brush.ImageSource = imageBlanc;
+                        button[k, j].Background = brush;
+                        button[k, j].Click += SelectionBouteille;
+                    }
+                    else if (res == "Rouge")
+                    {
+                        brush.ImageSource = imageRouge;
+                        button[k, j].Background = brush;
+                        button[k, j].Click += SelectionBouteille;
+                    }
+                    else if (res == "Rosé")
+                    {
+                        brush.ImageSource = imageRose;
+                        button[k, j].Background = brush;
+                        button[k, j].Click += SelectionBouteille;
+                    }
+                    else if (res == "Pétillant")
+                    {
+                        brush.ImageSource = imagePetillant;
+                        button[k, j].Background = brush;
+                        button[k, j].Click += SelectionBouteille;
+                    }
+                    else
+                    {
+                        brush.ImageSource = imageVide;
+                        button[k, j].Background = brush;
+                        button[k, j].Click += SelectBouteille;
+                    }
+                    if (j < 10)
+                        button[k, j].Tag = k + ",0" + j;
+                    else
+                        button[k, j].Tag = k + "," + j;
+                    button[k, j].Background = brush;
+                }
+            }
+            listeBouton.Add(button);
+        }
+
 
 
         /// <summary>
@@ -1753,7 +1919,10 @@ namespace CaveAVin
 
             #endregion
 
-            Metier.Type t;
+            Res_Recherche_Bue.Items.Clear();
+            Res_Recherche_NonBue.Items.Clear();
+
+            Metier.Type t = null;
             Metier.Pays p = null;
             Metier.Region r = null;
             Metier.Domaine d = null;
@@ -1765,13 +1934,11 @@ namespace CaveAVin
 
             #region gestion combobox
 
-            DAO.TypeDAO daoType = new DAO.TypeDAO(DAO.BDD.Instance.Connexion);
-            string nomType = lbl_Categorie.Text;
-            t = daoType.Chercher(lbl_Categorie.Text);
-            if (t == null)
+            if (cb_Type_Recherche.Text != "")
             {
-                daoType.Créer(nomType);
-                t = daoType.Chercher(lbl_Categorie.Text);
+                DAO.TypeDAO daoType = new DAO.TypeDAO(DAO.BDD.Instance.Connexion);
+                string nomType = cb_Type_Recherche.Text;
+                t = daoType.Chercher(cb_Type_Recherche.Text);
             }
 
             if (lbl_Pays.Text != "")
@@ -1779,11 +1946,6 @@ namespace CaveAVin
                 DAO.PaysDAO daoPays = new DAO.PaysDAO(DAO.BDD.Instance.Connexion);
                 string nomPays = lbl_Pays.Text;
                 p = daoPays.Chercher(lbl_Pays.Text);
-                if (p == null)
-                {
-                    daoPays.Créer(nomPays);
-                    p = daoPays.Chercher(lbl_Pays.Text);
-                }
             }
 
 
@@ -1792,11 +1954,6 @@ namespace CaveAVin
                 DAO.RegionDAO daoReg = new DAO.RegionDAO(DAO.BDD.Instance.Connexion);
                 string nomRegion = lbl_Region.Text;
                 r = daoReg.Chercher(lbl_Region.Text);
-                if (r == null)
-                {
-                    daoReg.Créer(nomRegion);
-                    r = daoReg.Chercher(lbl_Region.Text);
-                }
             }
 
             if (lbl_Domaine.Text != "")
@@ -1804,11 +1961,6 @@ namespace CaveAVin
                 DAO.DomaineDAO daoDom = new DAO.DomaineDAO(DAO.BDD.Instance.Connexion);
                 string nomDomaine = lbl_Domaine.Text;
                 d = daoDom.Chercher(lbl_Domaine.Text);
-                if (d == null)
-                {
-                    daoDom.Créer(nomDomaine);
-                    d = daoDom.Chercher(lbl_Domaine.Text);
-                }
             }
 
             if (lbl_Appelation.Text != "")
@@ -1816,11 +1968,6 @@ namespace CaveAVin
                 DAO.AppelationDAO daoApp = new DAO.AppelationDAO(DAO.BDD.Instance.Connexion);
                 string nomApp = lbl_Appelation.Text;
                 a = daoApp.Chercher(lbl_Appelation.Text);
-                if (a == null)
-                {
-                    daoApp.Créer(nomApp);
-                    a = daoApp.Chercher(lbl_Appelation.Text);
-                }
             }
 
             if ((lbl_Contenance.Text != "") && (lbl_Contenance.Text != null))
@@ -1828,11 +1975,6 @@ namespace CaveAVin
                 DAO.ContenanceDAO daoCon = new DAO.ContenanceDAO(DAO.BDD.Instance.Connexion);
                 int nomCon = Int32.Parse(lbl_Contenance.Text);
                 c = daoCon.Chercher(nomCon, "");
-                if (c == null)
-                {
-                    daoCon.Créer(nomCon, "");
-                    c = daoCon.Chercher(nomCon, "");
-                }
             }
 
             if ((lbl_Millesime.Text != "") && (lbl_Millesime.Text != null))
@@ -1840,11 +1982,6 @@ namespace CaveAVin
                 DAO.MillesimeDAO daoMil = new DAO.MillesimeDAO(DAO.BDD.Instance.Connexion);
                 int nomMil = Int32.Parse(lbl_Millesime.Text);
                 m = daoMil.Chercher(nomMil, "");
-                if (m == null)
-                {
-                    daoMil.Créer(nomMil);
-                    m = daoMil.Chercher(nomMil, "");
-                }
             }
 
             if (lbl_Cru.Text != "")
@@ -1852,11 +1989,6 @@ namespace CaveAVin
                 DAO.CruDAO daoCru = new DAO.CruDAO(DAO.BDD.Instance.Connexion);
                 string nomCru = lbl_Cru.Text;
                 cru = daoCru.Chercher(lbl_Cru.Text);
-                if (cru == null)
-                {
-                    daoCru.Créer(nomCru);
-                    cru = daoCru.Chercher(lbl_Cru.Text);
-                }
             }
 
             if (lbl_Vinification.Text != "")
@@ -1864,11 +1996,6 @@ namespace CaveAVin
                 DAO.Type_vinificationDAO daoVinif = new DAO.Type_vinificationDAO(DAO.BDD.Instance.Connexion);
                 string nomVinif = lbl_Vinification.Text;
                 tv = daoVinif.Chercher(lbl_Vinification.Text);
-                if (tv == null)
-                {
-                    daoVinif.Créer(nomVinif);
-                    tv = daoVinif.Chercher(lbl_Vinification.Text);
-                }
             }
 
             #endregion
@@ -1882,10 +2009,21 @@ namespace CaveAVin
             cas = daoCas.Chercher(nCasierActuel);
             Metier.Bouteille b = new Metier.Bouteille(1, false, "", l_ligne, l_col, cas, cru, m, c, d, r, tv, a, t, p);
             Metier.Bouteilles bs = daoBou.Chercher(b);
-            //foreach ( Metier.Bouteille x in bs )
-            //{
 
-            //}
+            OptionRecherche.Visibility = Visibility.Hidden;
+            Res_Recherche_Grid.Visibility = Visibility.Visible;
+
+            foreach ( Metier.Bouteille x in bs.Lister() )
+            {
+                string affiche = x.Type.NomType;
+                if (x.Millesime != null) { affiche += ", Millésime " + x.Millesime.NomMillesime; }
+                if (x.Region != null) { affiche += ", " + x.Region.NomRegion; }
+
+                if (x.Bue == false)
+                    Res_Recherche_NonBue.Items.Add(affiche);
+                else
+                    Res_Recherche_Bue.Items.Add(affiche);
+            }
         }
     }
 }

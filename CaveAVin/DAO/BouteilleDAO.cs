@@ -77,21 +77,21 @@ namespace DAO
             try
             {
                 IDbCommand com = con.CreateCommand();
-                com.CommandText = "SELECT * FROM Bouteille Where ";
-                if (b.IdType != 0) com.CommandText += ", `IdType=`'"+IdType+"'AND ";
-                if (b.IdRegion != 0) com.CommandText += ", `IdRegion`'" + IdRegion + "'AND ";
-                if (b.IdDomaine != 0) com.CommandText += ", `IdDomaine`'" + IdDomaine + "'AND ";
-                if (b.IdContenance != 0) com.CommandText += ", `IdContenance`'" + IdContenance + "'AND ";
-                if (b.IdCru != 0) com.CommandText += ", `IdCru`'" + IdCru + "'AND ";
-                if (b.IdMillesime != 0) com.CommandText += ", `IdMillesime`'" + IdMillesime + "'AND ";
-                if (b.IdType_vinification != 0) com.CommandText += ", `IdVinif`'" + IdType + "'AND ";
-                if (b.IdAppelation != 0) com.CommandText += ", `IdAppelation`'" + IdType_vinification + "'AND ";
-                if (b.IdPays != 0) com.CommandText += ", `IdPays`'" + IdPays + "'AND ";
+                com.CommandText = "SELECT * FROM Bouteille LEFT JOIN Casier ON(Bouteille.IdCasier = Casier.idCasier) LEFT JOIN Type ON(Bouteille.IdType = Type.idType) LEFT JOIN Region ON(Bouteille.IdRegion = Region.IdRegion) LEFT JOIN Pays ON(Bouteille.IdPays = Pays.idPays) LEFT JOIN Domaine ON(Bouteille.IdPays = Pays.idPays) LEFT JOIN Contenance ON(Bouteille.IdContenance = Contenance.idContenance) LEFT JOIN Cru ON(Bouteille.IdCru = Cru.idCru) LEFT JOIN Millesime ON(Bouteille.IdMillesime = Millesime.idMillesime) LEFT JOIN Type_vinification ON(Bouteille.IdVinif = Type_vinification.IdVinif) LEFT JOIN Appelation ON(Bouteille.IdAppelation = Appelation.idAppelation)  Where ";
+                if (b.IdType != 0) com.CommandText += " Bouteille.`IdType` = " + IdType+" AND ";
+                if (b.IdRegion != 0) com.CommandText += " `Bouteille.IdRegion` = '" + IdRegion + "' AND ";
+                if (b.IdDomaine != 0) com.CommandText += " `Bouteille.IdDomaine`= '" + IdDomaine + "' AND ";
+                if (b.IdContenance != 0) com.CommandText += " `Bouteille.IdContenance` = '" + IdContenance + "' AND ";
+                if (b.IdCru != 0) com.CommandText += " `Bouteille.IdCru` = '" + IdCru + "' AND ";
+                if (b.IdMillesime != 0) com.CommandText += " `Bouteille.IdMillesime` = '" + IdMillesime + "' AND ";
+                if (b.IdType_vinification != 0) com.CommandText += " `Bouteille.IdVinif` = '" + IdType + "' AND ";
+                if (b.IdAppelation != 0) com.CommandText += " `Bouteille.IdAppelation` = '" + IdType_vinification + "' AND ";
+                if (b.IdPays != 0) com.CommandText += " `Bouteille.IdPays` = '" + IdPays + "' AND ";
                 com.CommandText += "1 = 1;";
                 IDataReader reader = com.ExecuteReader();
                 while (reader.Read())
                 {
-                    Bouteille bo = reader2BouteilleFull(reader);
+                    Bouteille bo = reader2BouteilleRecherche(reader);
                     liste.Ajouter(bo);
                 }
             }
@@ -628,6 +628,100 @@ namespace DAO
             bouteille.Type_vinification = vinificationDao.Chercher(idType_vinification);
             bouteille.Appelation = appelationDao.Chercher(idAppelation);
             bouteille.Pays = paysDao.Chercher(idPays);
+            return bouteille;
+        }
+
+        private Bouteille reader2BouteilleRecherche(IDataReader reader)
+        {
+            Bouteille bouteille = new Bouteille();
+            bouteille.Texte = reader[1].ToString();
+            bouteille.Id = Convert.ToInt32(reader[0]);
+            bouteille.PosX = Convert.ToInt32(reader[3]);
+            bouteille.PosY = Convert.ToInt32(reader[4]);
+            bouteille.Bue = Convert.ToBoolean(reader[2]);
+
+            Casier c = new Casier();
+            c.Id = Convert.ToInt32(reader[5]);
+            c.Nom = reader[16].ToString();
+            bouteille.Casier = c;
+
+            Metier.Type t = new Metier.Type();
+            t.Id = Convert.ToInt32(reader[6]);
+            t.NomType = reader[21].ToString();
+            bouteille.Type = t;
+
+            try
+            {
+                Region r = new Region();
+                r.Id = Convert.ToInt32(reader[7]);
+                r.NomRegion = reader[24].ToString();
+                bouteille.Region = r;
+            }
+            catch { }
+
+            try
+            {
+                Pays p = new Pays();
+            p.Id = Convert.ToInt32(reader[8]);
+            p.NomPays = reader[26].ToString();
+            bouteille.Pays = p;
+        }
+            catch { }
+
+            try
+            {
+                Domaine d = new Domaine();
+            d.Id = Convert.ToInt32(reader[9]);
+            d.NomDomaine = reader[28].ToString();
+            bouteille.Domaine = d;
+                        }
+            catch { }
+
+            try
+            {
+                Contenance co = new Contenance();
+            co.Id = Convert.ToInt32(reader[10]);
+            co.Valeur = Convert.ToInt32(reader[30]);
+            bouteille.Contenance = co;
+                }
+            catch { }
+
+            try
+            {
+                Cru cr = new Cru();
+            cr.Id = Convert.ToInt32(reader[11]);
+            cr.NomCru = reader[32].ToString();
+            bouteille.Cru = cr;
+                }
+            catch { }
+
+            try
+            {
+                Millesime m = new Millesime();
+            m.Id = Convert.ToInt32(reader[12]);
+            m.NomMillesime = reader[34].ToString();
+            bouteille.Millesime = m;
+                }
+            catch { }
+
+            try
+            {
+                Type_vinification tv = new Type_vinification();
+            tv.Id = Convert.ToInt32(reader[13]);
+            tv.NomVinif = reader[36].ToString();
+            bouteille.Type_vinification = tv;
+                }
+            catch { }
+
+            try
+            {
+                Appelation a = new Appelation();
+            a.Id = Convert.ToInt32(reader[14]);
+            a.NomAppelation = reader[38].ToString();
+            bouteille.Appelation = a;
+                }
+            catch { }
+
             return bouteille;
         }
 

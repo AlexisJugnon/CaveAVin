@@ -2,7 +2,7 @@ Fonction recherche
 
 suppression casier
 
-modification casier
+modification casier opi + correct bug
 
 ajout casier n'importe ou
 
