@@ -1104,11 +1104,14 @@ namespace CaveAVin
             #endregion
 
             cb_Type_Recherche.Items.Clear();
+            cb_Pays_Recherche.Items.Clear();
             cb_Region_Recherche.Items.Clear();
             cb_Domaine_Recherche.Items.Clear();
+            cb_Appelation_Recherche.Items.Clear();
+            cb_Contenance_Recherche.Items.Clear();
+            cb_Millesime_Recherche.Items.Clear();
             cb_Cru_Recherche.Items.Clear();
             cb_Vinification_Recherche.Items.Clear();
-            cb_Appelation_Recherche.Items.Clear();
 
             DAO.TypeDAO daoTyp = new DAO.TypeDAO(DAO.BDD.Instance.Connexion);
             Metier.Types listeTyp = daoTyp.Lister();
@@ -1941,61 +1944,61 @@ namespace CaveAVin
                 t = daoType.Chercher(cb_Type_Recherche.Text);
             }
 
-            if (lbl_Pays.Text != "")
+            if (cb_Pays_Recherche.Text != "")
             {
                 DAO.PaysDAO daoPays = new DAO.PaysDAO(DAO.BDD.Instance.Connexion);
-                string nomPays = lbl_Pays.Text;
-                p = daoPays.Chercher(lbl_Pays.Text);
+                string nomPays = cb_Pays_Recherche.Text;
+                p = daoPays.Chercher(cb_Pays_Recherche.Text);
             }
 
 
-            if (lbl_Region.Text != "")
+            if (cb_Region_Recherche.Text != "")
             {
                 DAO.RegionDAO daoReg = new DAO.RegionDAO(DAO.BDD.Instance.Connexion);
-                string nomRegion = lbl_Region.Text;
-                r = daoReg.Chercher(lbl_Region.Text);
+                string nomRegion = cb_Region_Recherche.Text;
+                r = daoReg.Chercher(cb_Region_Recherche.Text);
             }
 
-            if (lbl_Domaine.Text != "")
+            if (cb_Domaine_Recherche.Text != "")
             {
                 DAO.DomaineDAO daoDom = new DAO.DomaineDAO(DAO.BDD.Instance.Connexion);
-                string nomDomaine = lbl_Domaine.Text;
-                d = daoDom.Chercher(lbl_Domaine.Text);
+                string nomDomaine = cb_Domaine_Recherche.Text;
+                d = daoDom.Chercher(cb_Domaine_Recherche.Text);
             }
 
-            if (lbl_Appelation.Text != "")
+            if (cb_Appelation_Recherche.Text != "")
             {
                 DAO.AppelationDAO daoApp = new DAO.AppelationDAO(DAO.BDD.Instance.Connexion);
-                string nomApp = lbl_Appelation.Text;
-                a = daoApp.Chercher(lbl_Appelation.Text);
+                string nomApp = cb_Appelation_Recherche.Text;
+                a = daoApp.Chercher(cb_Appelation_Recherche.Text);
             }
 
-            if ((lbl_Contenance.Text != "") && (lbl_Contenance.Text != null))
+            if ((cb_Contenance_Recherche.Text != "") && (lbl_Contenance.Text != null))
             {
                 DAO.ContenanceDAO daoCon = new DAO.ContenanceDAO(DAO.BDD.Instance.Connexion);
-                int nomCon = Int32.Parse(lbl_Contenance.Text);
+                int nomCon = Int32.Parse(cb_Contenance_Recherche.Text);
                 c = daoCon.Chercher(nomCon, "");
             }
 
-            if ((lbl_Millesime.Text != "") && (lbl_Millesime.Text != null))
+            if ((cb_Millesime_Recherche.Text != "") && (lbl_Millesime.Text != null))
             {
                 DAO.MillesimeDAO daoMil = new DAO.MillesimeDAO(DAO.BDD.Instance.Connexion);
-                int nomMil = Int32.Parse(lbl_Millesime.Text);
+                int nomMil = Int32.Parse(cb_Millesime_Recherche.Text);
                 m = daoMil.Chercher(nomMil, "");
             }
 
-            if (lbl_Cru.Text != "")
+            if (cb_Cru_Recherche.Text != "")
             {
                 DAO.CruDAO daoCru = new DAO.CruDAO(DAO.BDD.Instance.Connexion);
-                string nomCru = lbl_Cru.Text;
-                cru = daoCru.Chercher(lbl_Cru.Text);
+                string nomCru = cb_Cru_Recherche.Text;
+                cru = daoCru.Chercher(cb_Cru_Recherche.Text);
             }
 
-            if (lbl_Vinification.Text != "")
+            if (cb_Vinification_Recherche.Text != "")
             {
                 DAO.Type_vinificationDAO daoVinif = new DAO.Type_vinificationDAO(DAO.BDD.Instance.Connexion);
-                string nomVinif = lbl_Vinification.Text;
-                tv = daoVinif.Chercher(lbl_Vinification.Text);
+                string nomVinif = cb_Vinification_Recherche.Text;
+                tv = daoVinif.Chercher(cb_Vinification_Recherche.Text);
             }
 
             #endregion
@@ -2007,8 +2010,8 @@ namespace CaveAVin
             var brush = new ImageBrush();
 
             cas = daoCas.Chercher(nCasierActuel);
-            Metier.Bouteille b = new Metier.Bouteille(1, false, "", l_ligne, l_col, cas, cru, m, c, d, r, tv, a, t, p);
-            Metier.Bouteilles bs = daoBou.Chercher(b);
+            Metier.Bouteille boutca = new Metier.Bouteille(1, false, "", l_ligne, l_col, cas, cru, m, c, d, r, tv, a, t, p);
+            Metier.Bouteilles bs = daoBou.Chercher(boutca);
 
             OptionRecherche.Visibility = Visibility.Hidden;
             Res_Recherche_Grid.Visibility = Visibility.Visible;
@@ -2018,6 +2021,8 @@ namespace CaveAVin
                 string affiche = x.Type.NomType;
                 if (x.Millesime != null) { affiche += ", Millésime " + x.Millesime.NomMillesime; }
                 if (x.Region != null) { affiche += ", " + x.Region.NomRegion; }
+                if (x.Bue == false) { affiche += " dans le casier " + x.Casier.Nom + " a la ligne " + x.PosX + " a la colonne "+ x.PosY; }
+                else { affiche += " : " +x.Texte; }
 
                 if (x.Bue == false)
                     Res_Recherche_NonBue.Items.Add(affiche);

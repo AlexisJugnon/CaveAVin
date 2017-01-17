@@ -11,6 +11,6 @@
         <Label Content="Bienvenue sur WineFinder" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" FontFamily="Californian FB" FontSize="20" Foreground="#FFF0F0F0"/>
         <Label Content="Votre application de gestion de cave a vin" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40,0,0" FontFamily="Californian FB" FontSize="20" Foreground="#FFF0F0F0"/>
         <Label x:Name="label" Content="Chargement en cours ..." HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
-        <Label x:Name="label1" Content="&#x9;&#x9;Créé par Cindy GONCALVES, Isabelle BARREAU, &#xA;&#x9;         Romain GUIDOT, Valerian DUVERGER, Alexis JUGNON" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,252,0,0" Width="450" Height="48"/>
+        <Label x:Name="label1" Content="&#x9;&#x9;Créée par Cindy GONCALVES, Isabelle BARREAU, &#xA;&#x9;         Romain GUIDOT, Valerian DUVERGER, Alexis JUGNON" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,252,0,0" Width="450" Height="48"/>
     </Grid>
 </Window>

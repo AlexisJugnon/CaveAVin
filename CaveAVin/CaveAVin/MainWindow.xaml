@@ -223,7 +223,7 @@
         <Grid x:Name="AffichageRecherche" Grid.Row="1" Visibility="Visible"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
             <ScrollViewer Grid.Row="1" Name="sVChercher" VerticalScrollBarVisibility="Auto">
-                <Grid x:Name="OptionRecherche" Visibility="Visible"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid x:Name="OptionRecherche" Visibility="Hidden"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="50"/>
@@ -273,7 +273,7 @@
                 </Grid>
             </ScrollViewer>
 
-            <Grid x:Name="Res_Recherche_Grid" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid x:Name="Res_Recherche_Grid" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="90"/>
                     <RowDefinition Height="*"/>

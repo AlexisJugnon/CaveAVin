@@ -79,14 +79,14 @@ namespace DAO
                 IDbCommand com = con.CreateCommand();
                 com.CommandText = "SELECT * FROM Bouteille LEFT JOIN Casier ON(Bouteille.IdCasier = Casier.idCasier) LEFT JOIN Type ON(Bouteille.IdType = Type.idType) LEFT JOIN Region ON(Bouteille.IdRegion = Region.IdRegion) LEFT JOIN Pays ON(Bouteille.IdPays = Pays.idPays) LEFT JOIN Domaine ON(Bouteille.IdPays = Pays.idPays) LEFT JOIN Contenance ON(Bouteille.IdContenance = Contenance.idContenance) LEFT JOIN Cru ON(Bouteille.IdCru = Cru.idCru) LEFT JOIN Millesime ON(Bouteille.IdMillesime = Millesime.idMillesime) LEFT JOIN Type_vinification ON(Bouteille.IdVinif = Type_vinification.IdVinif) LEFT JOIN Appelation ON(Bouteille.IdAppelation = Appelation.idAppelation)  Where ";
                 if (b.IdType != 0) com.CommandText += " Bouteille.`IdType` = " + IdType+" AND ";
-                if (b.IdRegion != 0) com.CommandText += " `Bouteille.IdRegion` = '" + IdRegion + "' AND ";
-                if (b.IdDomaine != 0) com.CommandText += " `Bouteille.IdDomaine`= '" + IdDomaine + "' AND ";
-                if (b.IdContenance != 0) com.CommandText += " `Bouteille.IdContenance` = '" + IdContenance + "' AND ";
-                if (b.IdCru != 0) com.CommandText += " `Bouteille.IdCru` = '" + IdCru + "' AND ";
-                if (b.IdMillesime != 0) com.CommandText += " `Bouteille.IdMillesime` = '" + IdMillesime + "' AND ";
-                if (b.IdType_vinification != 0) com.CommandText += " `Bouteille.IdVinif` = '" + IdType + "' AND ";
-                if (b.IdAppelation != 0) com.CommandText += " `Bouteille.IdAppelation` = '" + IdType_vinification + "' AND ";
-                if (b.IdPays != 0) com.CommandText += " `Bouteille.IdPays` = '" + IdPays + "' AND ";
+                if (b.IdRegion != 0) com.CommandText += " Bouteille.`IdRegion` = '" + IdRegion + "' AND ";
+                if (b.IdDomaine != 0) com.CommandText += " Bouteille.`IdDomaine`= '" + IdDomaine + "' AND ";
+                if (b.IdContenance != 0) com.CommandText += " Bouteille.`IdContenance` = '" + IdContenance + "' AND ";
+                if (b.IdCru != 0) com.CommandText += " Bouteille.`IdCru` = '" + IdCru + "' AND ";
+                if (b.IdMillesime != 0) com.CommandText += " Bouteille.`IdMillesime` = '" + IdMillesime + "' AND ";
+                if (b.IdType_vinification != 0) com.CommandText += " Bouteille.`IdVinif` = '" + IdType + "' AND ";
+                if (b.IdAppelation != 0) com.CommandText += " Bouteille.`IdAppelation` = '" + IdType_vinification + "' AND ";
+                if (b.IdPays != 0) com.CommandText += " Bouteille.`IdPays` = '" + IdPays + "' AND ";
                 com.CommandText += "1 = 1;";
                 IDataReader reader = com.ExecuteReader();
                 while (reader.Read())
