@@ -220,7 +220,7 @@
         </Grid>
 
 
-        <Grid x:Name="AffichageRecherche" Grid.Row="1" Visibility="Visible"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid x:Name="AffichageRecherche" Grid.Row="1" Visibility="Hidden"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
             <ScrollViewer Grid.Row="1" Name="sVChercher" VerticalScrollBarVisibility="Auto">
                 <Grid x:Name="OptionRecherche" Visibility="Hidden"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -301,7 +301,7 @@
         </Grid>
 
 
-        <Grid x:Name="AffichageAjoutCasier" Grid.Row="1" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid x:Name="AffichageAjoutCasier" Grid.Row="1" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ScrollViewer Name="sVAffichageAjoutCasier" VerticalScrollBarVisibility="Auto">
                 <Grid Grid.Row="1" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
@@ -315,16 +315,12 @@
                         <RowDefinition Height="100"/>
                         <RowDefinition Height="100" />
                         <RowDefinition Height="100"/>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="100" />
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="100"/>
+
+ 
                     </Grid.RowDefinitions>
 
-                    <Label x:Name="label1" Content="Gestion d'un casier" VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Row="0" FontSize="36" FontWeight="Bold" FontFamily="Californian FB" Grid.Column="1" Margin="23,48,306,48" Height="54" Width="332"/>
-                    <TextBlock x:Name="label2" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="10,31,0,10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="7" FontSize="20" Height="60" Width="287">
+                    <Label x:Name="label1" Content="Ajout d'un casier" VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Row="0" FontSize="36" FontWeight="Bold" FontFamily="Californian FB" Grid.Column="1" Margin="23,48,306,48" Height="54" Width="332"/>
+                    <TextBlock x:Name="label2" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="10,31,0,10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" FontSize="20" Height="60" Width="287">
                 Nom du casier :
                     </TextBlock>
                     <TextBlock x:Name="label3" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="7,42,0,96" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" FontSize="20" Height="62" Width="287" Grid.RowSpan="2">
@@ -341,19 +337,8 @@
                     <Button x:Name="BT_AjouterCasier" HorizontalAlignment="Right" Margin="0,10,5,10" VerticalAlignment="Center" Width="80" Height="80" Background="#FF661141" BorderBrush="#FF661141" Grid.Row="5" Click="AjoutCasier_Click" Grid.Column="1">
                         <fa:ImageAwesome Icon="Plus" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="50" />
                     </Button>
-                    <Button x:Name="BT_AnnulerAjoutCasier" HorizontalAlignment="Right" Margin="0,18,5,3" VerticalAlignment="Center" Width="80" Height="80" Background="#FF661141" BorderBrush="#FF661141" Grid.Row="11" Click="annulAjoutCasier_Click" Grid.Column="1">
+                    <Button x:Name="BT_AnnulerAjoutCasier" HorizontalAlignment="Right" Margin="0,10,90,10" VerticalAlignment="Center" Width="80" Height="80" Background="#FF661141" BorderBrush="#FF661141" Grid.Row="5" Click="annulAjoutCasier_Click" Grid.Column="1">
                         <fa:ImageAwesome Icon="Close" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="50" />
-                    </Button>
-                    <TextBlock x:Name="label7" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="10,12,0,98" VerticalAlignment="Center" Grid.Column="0" FontSize="24" TextDecorations="Underline" Grid.Row="1" Height="90" Width="311" Grid.RowSpan="2"><Run Text="Ajout d'un"/><Run Text=" "/><Run Text="casier :"/></TextBlock>
-                    <TextBlock x:Name="label7_Copy" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Center" Grid.Column="0" FontSize="24" TextDecorations="Underline" Grid.Row="6" Height="84" Width="311"><Run Text="Modifier "/><Run Text="un"/><Run Text=" "/><Run Text="casier :"/></TextBlock>
-                    <ComboBox x:Name="cb_listeModifcasier" Grid.Column="1" HorizontalAlignment="Left" Margin="23,31,0,0" Grid.Row="7" VerticalAlignment="Top" Height="40" FontSize="20"/>
-                    <TextBlock x:Name="label2_Copy" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="10,31,0,10" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" FontSize="20" Height="60" Width="287"><Run Text="Nom du casier :"/></TextBlock>
-                    <TextBlock x:Name="label3_Copy" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="10,10,0,29" VerticalAlignment="Center" Grid.Column="0" Grid.Row="8" FontSize="20" Height="62" Width="287"><Run Text="Hauteur (nombre de case) :"/></TextBlock>
-                    <TextBlock x:Name="label4_Copy" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="10,10,0,23" VerticalAlignment="Center" Grid.Column="0" Grid.Row="9" FontSize="20" Height="68" Width="287"><Run Text="Largeur (nombre de case) :"/></TextBlock>
-                    <TextBox x:Name="hauteurCasierModif" HorizontalAlignment="Stretch" Height="36" Margin="10,24,-8,41" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="1" Grid.Row="8" TextChanged="hauteurCasierAjout_TextChanged" FontSize="20"/>
-                    <TextBox x:Name="largeurCasierModif" HorizontalAlignment="Stretch" Height="36" Margin="10,26,-8,39" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="1" Grid.Row="9" TextChanged="largeurCasierAjout_TextChanged" FontSize="20"/>
-                    <Button x:Name="BT_ModifierCasier" HorizontalAlignment="Right" Margin="0,10,6,11" VerticalAlignment="Center" Width="80" Height="80" Background="#FF661141" BorderBrush="#FF661141" Grid.Row="10" Click="ModifierCasier_Click" Grid.Column="1">
-                        <fa:ImageAwesome Icon="Edit" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFF6F6F6" Width="72" Height="50" />
                     </Button>
 
                 </Grid>

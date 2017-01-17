@@ -776,14 +776,6 @@ namespace CaveAVin
             AffichageMenuLateral.Visibility = Visibility.Hidden;
             AffichageAjoutCasier.Visibility = Visibility.Visible;
 
-            DAO.CasierDAO daoCas = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
-            Metier.Casiers listeCas = daoCas.Lister();
-            foreach (Metier.Casier c in listeCas.Lister())
-            {
-                cb_listeModifcasier.Items.Add(c.Nom);
-            }
-            cb_listeModifcasier.SelectedIndex = 0;
-
         }
 
 
@@ -1261,6 +1253,10 @@ namespace CaveAVin
             AfficherBouteille();
             AffichageAjoutCasier.Visibility = Visibility.Hidden;
             AffichageAccueil.Visibility = Visibility.Visible;
+
+            nomCasierAjout.Text = "";
+            hauteurCasierAjout.Text = "";
+            largeurCasierAjout.Text = "";
         }
 
 
@@ -1525,14 +1521,6 @@ namespace CaveAVin
             AffichageFicheAjoutBouteille.Visibility = Visibility.Hidden;
             AffichageAjoutCasier.Visibility = Visibility.Visible;
 
-            DAO.CasierDAO daoCas = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
-            Metier.Casiers listeCas = daoCas.Lister();
-            foreach (Metier.Casier c in listeCas.Lister())
-            {
-                cb_listeModifcasier.Items.Add(c.Nom);
-            }
-            cb_listeModifcasier.SelectedIndex = 0;
-
         }
 
 
@@ -1756,155 +1744,6 @@ namespace CaveAVin
             RecalculailleGrille();
         }
 
-        private void ModifierCasier_Click(object sender, RoutedEventArgs e)
-        {
-            int emplacement = cb_listeModifcasier.SelectedIndex;
-            DAO.CasierDAO daoCas = new DAO.CasierDAO(DAO.BDD.Instance.Connexion);
-            daoCas.Modifier(cb_listeModifcasier.Text, Int32.Parse(hauteurCasierModif.Text), Int32.Parse(largeurCasierModif.Text));
-
-            MasquerEcran();
-            AffichageAccueil.Visibility = Visibility.Visible;
-
-
-            var imageBlanc = new BitmapImage(new Uri("../../../CaveAVin/Images/BlancCasier.png", UriKind.Relative));
-            var imageRouge = new BitmapImage(new Uri("../../../CaveAVin/Images/RougeCasier.png", UriKind.Relative));
-            var imageRose = new BitmapImage(new Uri("../../../CaveAVin/Images/RoséCasier.png", UriKind.Relative));
-            var imagePetillant = new BitmapImage(new Uri("../../../CaveAVin/Images/PétillantCasier.png", UriKind.Relative));
-            var imageVide = new BitmapImage(new Uri("../../../CaveAVin/Images/CaseVide.png", UriKind.Relative));
-
-            var casiers = daoCas.Lister().Lister();
-
-            var casier = casiers[emplacement];
-
-            int nombreColonne, nombreLigne;
-            int HeightBoutton, WidthBoutton;
-
-            var longueurMax = 648;
-            var largeurMax = longueurMax;
-
-            ColumnDefinition[] colonne;
-            RowDefinition[] ligne;
-
-            GridAffichageBouteille.Children.Remove(gestionCasier[emplacement]);
-            gestionCasier[emplacement] = new Grid();
-
-            listeBouton.Remove(button);
-
-            GridAffichageBouteille.Children.Add(gestionCasier[emplacement]);
-            gestionCasier[emplacement].VerticalAlignment = VerticalAlignment.Center;
-            gestionCasier[emplacement].HorizontalAlignment = HorizontalAlignment.Center;
-            gestionCasier[emplacement].Visibility = Visibility.Hidden;
-
-            nombreLigne = casier.LargeurX;
-            nombreColonne = casier.LargeurY;
-
-            if (nombreColonne > nombreLigne)
-            {
-                WidthBoutton = (int)((longueurMax)) / nombreColonne;
-                HeightBoutton = WidthBoutton;
-            }
-            else if (nombreColonne < nombreLigne)
-            {
-                HeightBoutton = (int)((longueurMax)) / nombreLigne;
-                WidthBoutton = HeightBoutton;
-            }
-            else
-            {
-                WidthBoutton = (int)((longueurMax)) / nombreColonne;
-                HeightBoutton = (int)((longueurMax)) / nombreLigne;
-            }
-
-            colonne = new ColumnDefinition[nombreColonne];
-            ligne = new RowDefinition[nombreLigne];
-
-            for (int f = 0; f < nombreColonne; f++)
-            {
-                colonne[f] = new ColumnDefinition();
-                colonne[f].Width = GridLength.Auto;
-                gestionCasier[emplacement].ColumnDefinitions.Add(colonne[f]);
-            }
-
-            for (int f = 0; f < nombreLigne; f++)
-            {
-                ligne[f] = new RowDefinition();
-                ligne[f].Height = GridLength.Auto;
-
-                gestionCasier[emplacement].RowDefinitions.Add(ligne[f]);
-            }
-
-            //Gère l'affichage des bouteilles dans le casier
-            string res;
-            button = new Button[nombreColonne, nombreLigne];
-            for (int k = 0; k < nombreColonne; k++)
-            {
-                for (int j = 0; j < nombreLigne; j++)
-                {
-                    var buttonCourant = new Button();
-                    button[k, j] = buttonCourant;
-
-                    gestionCasier[emplacement].Children.Add(button[k, j]);
-                    button[k, j].Visibility = Visibility.Visible;
-                    button[k, j].Content = k + ", " + j;
-                    button[k, j].Width = WidthBoutton;
-                    button[k, j].Height = HeightBoutton;
-                    buttonCourant.BorderBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2b2404"));
-
-                    Grid.SetRow(button[k, j], j);
-                    Grid.SetColumn(button[k, j], k);
-                    res = "";
-                    try
-                    {
-                        res = req.SelStr1("SELECT NomType From Type natural join Bouteille where idCasier =" + casier.Id +
-                        " and Bouteille.Position_X = " + k + " and Bouteille.Position_Y = " + j + " and Bue = 0;", "NomType");
-                    }
-                    catch
-                    {
-
-                    }
-
-                    var brush = new ImageBrush();
-
-                    if (res == "Blanc")
-                    {
-                        brush.ImageSource = imageBlanc;
-                        button[k, j].Background = brush;
-                        button[k, j].Click += SelectionBouteille;
-                    }
-                    else if (res == "Rouge")
-                    {
-                        brush.ImageSource = imageRouge;
-                        button[k, j].Background = brush;
-                        button[k, j].Click += SelectionBouteille;
-                    }
-                    else if (res == "Rosé")
-                    {
-                        brush.ImageSource = imageRose;
-                        button[k, j].Background = brush;
-                        button[k, j].Click += SelectionBouteille;
-                    }
-                    else if (res == "Pétillant")
-                    {
-                        brush.ImageSource = imagePetillant;
-                        button[k, j].Background = brush;
-                        button[k, j].Click += SelectionBouteille;
-                    }
-                    else
-                    {
-                        brush.ImageSource = imageVide;
-                        button[k, j].Background = brush;
-                        button[k, j].Click += SelectBouteille;
-                    }
-                    if (j < 10)
-                        button[k, j].Tag = k + ",0" + j;
-                    else
-                        button[k, j].Tag = k + "," + j;
-                    button[k, j].Background = brush;
-                }
-            }
-            listeBouton.Add(button);
-        }
-
-
 
         /// <summary>
         /// 
@@ -2021,7 +1860,7 @@ namespace CaveAVin
                 string affiche = x.Type.NomType;
                 if (x.Millesime != null) { affiche += ", Millésime " + x.Millesime.NomMillesime; }
                 if (x.Region != null) { affiche += ", " + x.Region.NomRegion; }
-                if (x.Bue == false) { affiche += " dans le casier " + x.Casier.Nom + " a la ligne " + x.PosX + " a la colonne "+ x.PosY; }
+                if (x.Bue == false) { affiche += " dans le casier " + x.Casier.Nom + " à la ligne " + x.PosX + " et à la colonne "+ x.PosY; }
                 else { affiche += " : " +x.Texte; }
 
                 if (x.Bue == false)
